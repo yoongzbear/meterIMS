@@ -1,0 +1,1 @@
+<p class="text-center text-body-secondary">© 2024 HACKOTTO</p>
