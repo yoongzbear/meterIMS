@@ -45,6 +45,7 @@ $row = mysqli_fetch_array($result);
     <th>No</th>
     <th>Serial Number</th>
     <th>Meter Status</th>
+    <th>Meter Detail</th>
     </tr>
 
 <?php
@@ -57,6 +58,7 @@ while ($row2 = mysqli_fetch_array($result2)) {
         <td>' . $num . '</td>
         <td>' . $row2["serial_num"] . '</td>
         <td>' . $row2["meter_status"] . '</td>
+        <td class="serial_num"><a href="meterInfo.php?serial_num=' .$row2["serial_num"]. '"><button>Meter Detail</button></a></td>
     </tr>';
     $num++;
 }
