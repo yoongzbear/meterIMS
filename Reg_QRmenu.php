@@ -1,5 +1,5 @@
 <?php
-include('secure.php');
+include('secure_Reg.php');
 ?>
 <p>Scan Batch QR</p>
 <button onclick="window.location.href= '';">Store Arrival</button>
