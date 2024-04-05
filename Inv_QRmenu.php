@@ -1,5 +1,5 @@
 <?php
-include('secure.php');
+include('secure_Inv.php');
 ?>
 <p>Generate QR</p>
 <button onclick="window.location.href= '';">Batch & Indi Meter</button>
