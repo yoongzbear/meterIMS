@@ -3,9 +3,86 @@
 include ('connection.php');
 ?>
 
-<!--the search bar-->
-<label>Search for the any keyword:</lable>
-<input type="search" onkeyup="search_trac()" id="searchbar" name="search" placeholder="Search...">
+<label for="searchbar">Search for:</label>
+<!-- Dropdown list for search options -->
+<select id="searchOptions" onchange="enableSearch()">
+    <!-- Placeholder option -->
+    <option value="" disabled selected>Please select</option>
+    <!-- Options for search criteria -->
+    <option value="batch">Batch</option>
+    <option value="origin">Origin</option>
+    <option value="destination">Destination</option>
+    <option value="shipOutDate">Ship Out Date</option>
+    <option value="arrivalDate">Arrival Date</option>
+    <option value="status">Status</option>
+</select>
+<!-- Input field for user's search query -->
+<input type="search" onkeyup="search_trac()" id="searchbar" name="search" placeholder="Search..." disabled>
+
+<script>
+
+    // Function to enable/disable search input based on dropdown selection
+    function enableSearch() {
+        let dropdown = document.getElementById('searchOptions');
+        let input = document.getElementById('searchbar');
+
+       
+        if (dropdown.value !== "") {
+            input.disabled = false;
+            input.focus(); // Set focus to the input field for user convenience
+        } else {
+            input.disabled = true;
+        }
+    }
+
+    // Function to perform search based on user input
+    function search_trac() {
+        let input = document.getElementById('searchbar').value.toLowerCase();
+        let option = document.getElementById('searchOptions').value;
+
+        // Get all table rows
+        let rows = document.querySelectorAll('.track');
+
+        // Loop through each table row
+        rows.forEach(row => {
+            let cellText = '';
+            // Check if a valid option is selected from dropdown
+            if(option !== '') {
+                // If yes, find the text content of the cell in the corresponding column
+                cellText = row.querySelector('td:nth-child(' + (getColumnIndex(option) + 1) + ')');
+                if(cellText){
+                    cellText = cellText.innerText.toLowerCase(); // Convert to lowercase for case-insensitive matching
+                }
+            }
+            // Determine whether to display or hide the row based on search criteria
+            let display = (option === '' || (cellText && cellText.includes(input))) ? '' : 'none';
+            row.style.display = display;
+        });
+    }
+
+    // Function to map dropdown option to corresponding table column index
+    function getColumnIndex(option) {
+        switch(option) {
+            case 'batch':
+                return 1;
+            case 'origin':
+                return 2;
+            case 'destination':
+                return 3;
+            case 'shipOutDate':
+                return 4; 
+            case 'arrivalDate':
+                return 5; 
+            case 'status':
+                return 6; 
+            default:
+                return 1; 
+        }
+    }
+</script>
+
+
+
 
 <div>
     <table id="list">
@@ -72,17 +149,5 @@ include ('connection.php');
     </table>
 </div>
 
-<script>
-
-    function search_trac() {
-        let input = document.getElementById('searchbar').value.toLowerCase();
-        let rows = document.querySelectorAll('.track');
-
-        rows.forEach(row => {
-            let display = row.innerText.toLowerCase().includes(input) ? '' : 'none';
-            row.style.display = display;
-        });
-    }
-</script>
 
 
