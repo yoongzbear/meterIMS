@@ -1,6 +1,6 @@
 <?php
-//include ('secure_Inv.php');
-include ('connection.php');
+include 'secure_Inv.php';
+include 'connection.php';
 ?>
 
 <label for="searchbar">Search for:</label>
