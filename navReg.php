@@ -4,10 +4,10 @@
       </div>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="home.php" class="nav-link">Home</a></li>
+        <li><a href="reg_home.php" class="nav-link">Home</a></li>
         <li><a href="Reg_QRmenu.php" class="nav-link">Scan QRcode</a></li>
-        <li><a href="forecast.php" class="nav-link">View Inventory Level</a></li>
-        <li><a href=".php" class="nav-link">View Meter Warranty</a></li>
+        <li><a href="" class="nav-link">View Inventory Level</a></li>
+        <li><a href="" class="nav-link">View Meter Warranty</a></li>
         
       </ul>
 
