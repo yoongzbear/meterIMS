@@ -1,3 +1,15 @@
+<?php
+        //include ('secure.php');
+        include('connection.php');
+        //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
+        $serial_num = $_GET['serial_num'];
+        $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN region_store ON batch.store_id = region_store.store_id WHERE serial_num = '$serial_num'";
+        $result = mysqli_query($connection, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        $batch_id = $row['batch_id'];
+        ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,21 +34,13 @@ include 'navInv.php';
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home - Inventory Management Department'>Home</a></li>
     <li class="breadcrumb-item"><a href="mov_track_view.php" title='Meter Tracking Page'>Meter Tracking</a></li>
-    <li class="breadcrumb-item "><a href="batch_view.php" title='Meter Tracking Page'>Batch Detail</a></li>
+    <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Meter Tracking Page'>Batch Detail</a></li>
     <li class="breadcrumb-item active" aria-current="page">Meter Info</li>
   </ol>
 </nav>
 
 
     <?php
-        //include ('secure.php');
-        include('connection.php');
-        //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
-        $serial_num = $_GET['serial_num'];
-        $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN region_store ON batch.store_id = region_store.store_id WHERE serial_num = '$serial_num'";
-        $result = mysqli_query($connection, $sql);
-        $row = mysqli_fetch_assoc($result);
-
         //type, model, size, age, mileage, manufacturer, manu year, status, install date, install address, location of store
         echo "<h1>Meter Info</h1>";
         echo "<table><th colspan=2><h2>" . $row['serial_num'] . "</h2></th>
