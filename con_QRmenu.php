@@ -31,7 +31,7 @@ include 'navCon.php';
 </nav>
 
 <p>Scan Batch QR</p>
-<button onclick="window.location.href= 'meterInstallForm.php';">Installation Proof</button>
+<button onclick="window.location.href= 'meterInstall.php';">Installation Proof</button>
 
 
 </body>
