@@ -50,10 +50,10 @@ include 'navCon.php';
                     <input type='text' name='serial_num' value='$serial_num' readonly>
                     <br>
                     <label for='installDate'>Installation Date:</label>
-                    <input type='date' id='installDate' name='installDate'>
+                    <input type='date' id='installDate' name='installDate' required>
                     <br>
                     <label for='installAdd'>Installation Address:</label>
-                    <input type='text' id='installAdd' name='installAdd'>
+                    <input type='text' id='installAdd' name='installAdd' required>
                     <br>
                     <input type='submit' value='Submit'>
                 </form>
