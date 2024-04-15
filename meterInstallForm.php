@@ -1,6 +1,6 @@
-<?php 
+<!--<?php 
 include 'secure_Con.php';
-?>
+?>-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,6 @@ include 'secure_Con.php';
 <header>
 <?php 
 include 'header.php';
-include 'navCon.php';
 ?>
 
 </header>
