@@ -30,7 +30,7 @@ include 'navInv.php';
 
 
 <p>Generate QR</p>
-<button onclick="window.location.href= '';">Batch & Indi Meter</button>
+<button onclick="window.location.href= '';">Receive Meter</button>
 
 <p>Scan Batch QR </p>
 <button onclick="window.location.href= '';">Ship Out</button>
