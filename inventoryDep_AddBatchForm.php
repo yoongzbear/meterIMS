@@ -23,7 +23,36 @@ quantity use count from batch id
 */
 
 	include ('connection.php');
+	include 'secure_Inv.php';
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTTO Aqua</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+<?php 
+include 'header.php';
+include 'navInv.php';
+?>
+
+</header>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Receive Meter</li>
+
+  </ol>
+</nav>
 
 <script>
 	function confirmation() {
@@ -38,39 +67,71 @@ quantity use count from batch id
 
 <html>
 <!--Form to insert details of the meters in batch-->
-<div class="content">
-    <h3 class="header">Create New Batch</h3>
+<div class="col align-self-center">
+    <h3>Create New Batch</h3>
+	<hr>
+
     <form action="inventoryDep_AddBatch.php" method="post">
-        <table>
-			<tr>
-				<td>Meter Type</td>
-				<td><input type="text" name="meter_type" required></td>
-			</tr>
-			<tr>
-				<td>Meter Model</td>
-				<td><input type="text" name="meter_model" required></td>
-			</tr>
-			<tr>
-				<td>Meter Size</td>
-				<td><input type="number" name="meter_size" required></td> <!--positive number validation-->
-			</tr>
-			<tr>
-				<td>Manufacturer Name</td>
-				<td>
-					<select name="manu_id">
-						<option value="" disabled selected>Please Select Manufacturer</option>
-						<?php
-							$sqlManu="SELECT * FROM manufacturer";
-							$data = mysqli_query($connection,$sqlManu);
-							while($manu = mysqli_fetch_array($data)){
-								echo "<option value='$manu[manu_id]'>$manu[manu_name]</option>";
-							}
-						?>
-					</select>
-				</td>
-			</tr>
-		</table>
-		<button onclick="confirmation();" type="submit">Add Meter</button>
+
+<div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <label class="col-form-label">Meter Type : </label>
+  </div>
+  <div class="col-auto">
+  	<input class="form-control form-control-sm" type="text" name="meter_type" required>
+  </div>
+</div>
+<br>
+
+<div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <label class="col-form-label">Meter Model : </label>
+  </div>
+  <div class="col-auto">
+  	<input class="form-control form-control-sm" type="text" name="meter_model" required>
+  </div>
+</div>
+<br>
+
+<div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <label class="col-form-label">Meter Size : </label>
+  </div>
+  <div class="col-auto">
+  	<input class="form-control form-control-sm" type="number" name="meter_size" min='0' required> <!--positive number validation-->
+  </div>
+</div>
+<br>
+		
+<div class="row g-3 align-items-center">
+  <div class="col-auto">
+    <label class="col-form-label">Manufacturer Name : </label>
+  </div>
+  <div class="col-auto">
+  <select class="form-select" name="manu_id">
+	<option value="" disabled selected>Please Select Manufacturer</option>
+		<?php
+			$sqlManu="SELECT * FROM manufacturer";
+			$data = mysqli_query($connection,$sqlManu);
+			while($manu = mysqli_fetch_array($data)){
+			echo "<option value='$manu[manu_id]'>$manu[manu_name]</option>";
+			}
+		?>
+	</select>
+</div>
+</div>
+				
+				
+					
+<br>				
+		<button onclick="confirmation();" type="submit" class="btn btn-success">Add Meter</button>
 	</form>
 </div>
+
+</body>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>	
+
 </html>
