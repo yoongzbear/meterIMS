@@ -5,6 +5,7 @@ body{
     flex-direction: column;
 }
 
+
 .header-container {
     display: flex;
     padding: 20px;
@@ -23,8 +24,7 @@ h1{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-
-footer{
+footer {
     background-color: rgb(234, 232, 232);
     padding: 5px;
     text-align: center;
@@ -82,21 +82,7 @@ footer{
 }
 
 /*login*/
-.enter{
-    width: 70%;
-    justify-content: center;
-}
 
-.login-container{
-    width: 50%;
-    margin: auto;
-    padding: 10px;
-    background-color: #afe5fc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(36, 35, 35, 0.1);
-    margin-bottom: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-}
 
 @media screen and (max-width: 600px) {
     .login-container, .login-container-md {
@@ -120,13 +106,13 @@ footer{
     font-weight: bold;
 }
 
-/*column for sub-navigation*/
+/*column for menu*/
 .col{
     padding: 20px;
 }
 
-.col a:hover {
-    background-color: grey; /* Change link color on hover as needed */
+.row a:hover {
+    background-color: grey; 
 }
 
 .btn.btn-primary{
@@ -140,4 +126,11 @@ footer{
         height: 100%;
     }
     
+}
+
+
+/* content of pages */
+
+.content{
+    display: contents;
 }

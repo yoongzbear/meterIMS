@@ -25,30 +25,33 @@ include 'nav.php';
   </ol>
 </nav>
 
-    <div class='login-container'>
-        <form method="post" action="loginProcess.php">
+<div class="modal modal-sheet position-static d-block bg-body-secondary" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h2 class="fw-bold mb-0 fs-2">Please Log In</h2>
+      </div>
 
-        <h2>Please Log in</h2>
-        <p>Log in to access your account and get start with water meter.</p>
-            <div class="enter">
-              <label>User Name</label>
-              <input type="text" class="form-control" name= "username" placeholder="Enter your username" require>
-            
-            </div>
-            <br>
-
-            <div class="enter">
-              <label >Password</label>
-              <input type="password" class="form-control" name="password" placeholder="Enter your password" require>
-            </div>
-            <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">Remember me</label>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-light">Log in</button>
+      <div class="modal-body p-5 pt-0">
+        <form method='post' action="loginProcess.php">
+          <div class="form-floating mb-3">
+          <input type="text" class="form-control" name= "username" placeholder="Enter your username" required>
+          <label for="floatingInput">User Name</label>
+          </div>
+          <div class="form-floating mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
+            <label for="floatingPassword">Password</label>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Log in</button>
+       
+          <small class="text-body-secondary">By clicking Log in, you agree to the terms of use.</small>
+          <hr class="my-4">
+          
         </form>
+      </div>
     </div>
+  </div>
+</div>
 
 </body>
 
