@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 01, 2024 at 03:31 PM
+-- Generation Time: Apr 16, 2024 at 12:27 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `lab_result` (
   PRIMARY KEY (`test_id`),
   KEY `serial_num` (`serial_num`),
   KEY `defect_id` (`defect_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,8 @@ CREATE TABLE IF NOT EXISTS `meter` (
 
 INSERT INTO `meter` (`serial_num`, `install_date`, `age`, `mileage`, `batch_id`, `meter_status`, `install_address`, `manufactured_year`, `manu_id`) VALUES
 ('AIS17BA0000001', NULL, 6.5, 41417, 1, 'IN STORE', NULL, 2017, 1),
-('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1);
+('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1),
+('AIS17BA0000003', '2024-04-02', 6.5, 41417, 1, 'INSTALLED', 'subang jaya, 47669, selangor', 2017, 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,9 @@ CREATE TABLE IF NOT EXISTS `warranty` (
   `receive_date` date NOT NULL,
   `check_date` date DEFAULT NULL,
   `warranty_status` varchar(12) DEFAULT NULL,
+  `test_id` int DEFAULT NULL,
   PRIMARY KEY (`warranty_id`),
+  KEY `test_id` (`test_id`),
   KEY `serial_num` (`serial_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -275,7 +278,8 @@ ALTER TABLE `region_store`
 -- Constraints for table `warranty`
 --
 ALTER TABLE `warranty`
-  ADD CONSTRAINT `warranty_ibfk_1` FOREIGN KEY (`serial_num`) REFERENCES `meter` (`serial_num`);
+  ADD CONSTRAINT `warranty_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `lab_result` (`test_id`),
+  ADD CONSTRAINT `warranty_ibfk_2` FOREIGN KEY (`serial_num`) REFERENCES `meter` (`serial_num`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
