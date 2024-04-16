@@ -143,7 +143,7 @@ include 'header.php';
 </div>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='inv_mag_home.php'" >Back</button>
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='inventoryDep_AddBatchForm.php'" title='Go Back To Create New Batch Page'>Back</button>
 </div>
 	
 <br>
