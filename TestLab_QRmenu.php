@@ -30,10 +30,9 @@ include 'navLab.php';
 </nav>
 
 
-<p>Scan Batch QR</p>
-<button onclick="window.location.href= '';">Store Arrival</button>
-<button onclick="window.location.href= '';">Ship Out</button>
-
+<p>Scan Meter QR</p>
+<button onclick="window.location.href= 'meterTest.php';">Meter Test Result Form</button>
+</body>
 
 </body>
 
