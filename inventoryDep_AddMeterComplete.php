@@ -130,7 +130,7 @@ include 'header.php';
 			while($rowMeter = mysqli_fetch_assoc($resultMeter)){
 				echo 
 					'<thread><tr>
-						<td>'.$num.'</td>
+						<th scope="row">'.$num.'</th>
 						<td>'.$rowMeter["serial_num"].'</td>
 					</tr></thread>'
 					;
