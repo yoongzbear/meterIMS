@@ -30,23 +30,34 @@ include 'navInv.php';
   </ol>
 </nav>
 
+<div class="col align-self-center">
+    <div class="row align-items-start">
+        <div class="col-6 col-lg-4">
 
+        <!-- Dropdown list for search options -->
+        <div class="form-floating">
+            <select class="form-select" id="searchOptions" onchange="enableSearch()">
+            <!-- Placeholder option -->
+            <option value="" disabled selected>Please select</option>
+            <!-- Options for search criteria -->
+            <option value="batch">Batch</option>
+            <option value="origin">Origin</option>
+            <option value="destination">Destination</option>
+            <option value="shipOutDate">Ship Out Date</option>
+            <option value="arrivalDate">Arrival Date</option>
+            <option value="status">Status</option>
+            </select>
+            <label for="searchbar">Search with select :</label>
+  
+        </div>
+        </div>
 
-<label for="searchbar">Search for:</label>
-<!-- Dropdown list for search options -->
-<select id="searchOptions" onchange="enableSearch()">
-    <!-- Placeholder option -->
-    <option value="" disabled selected>Please select</option>
-    <!-- Options for search criteria -->
-    <option value="batch">Batch</option>
-    <option value="origin">Origin</option>
-    <option value="destination">Destination</option>
-    <option value="shipOutDate">Ship Out Date</option>
-    <option value="arrivalDate">Arrival Date</option>
-    <option value="status">Status</option>
-</select>
-<!-- Input field for user's search query -->
-<input type="search" onkeyup="search_trac()" id="searchbar" name="search" placeholder="Search..." disabled>
+        <div class='col-sm-6 col-lg-8'>
+        <!-- Input field for user's search query -->
+        <input class="form-control" style="width:60%;" type="search" onkeyup="search_trac()" id="searchbar" name="search" placeholder="Search..." disabled>
+        </div>
+    
+    </div>
 
 <script>
 
@@ -111,12 +122,13 @@ include 'navInv.php';
 </script>
 
 
-
-
-<div>
-    <table id="list">
-        <tr>
-            <th>No</th>
+    <br>
+    <br>
+    <div class="row">
+    <table id="list" class="table table-striped table-info">
+        <thread>
+        <tr class="table-primary" scope="col">
+            <th>No.</th>
             <th>Batch ID</th>
             <th>Origin</th>
             <th>Destination</th>
@@ -125,6 +137,7 @@ include 'navInv.php';
             <th>Status</th>
             <th>Batch Detail</th>
         </tr>
+        </thread>
 
         <?php
         $sql = "SELECT * FROM movement";
@@ -153,8 +166,9 @@ include 'navInv.php';
             $destination_region = $row3 ? $row3["region"] : "";
 
             echo '
+            <thread>
             <tr class="track">
-                <td>' . $num . '</td>
+                <th scope="row">' . $num . '</th>
                 <td>' . $row["batch_id"] . '</td>
                 <td>' . $origin_region . '</td>
                 <td>' . $destination_region . '</td>
@@ -169,13 +183,14 @@ include 'navInv.php';
                 
                 echo '</td>
             
-                <td class="batchID"><a href="batch_view.php?batch_id=' . $batch_id . '"><button>Batch Detail</button></a></td>
-            </tr>';
+                <td class="batchID"><a href="batch_view.php?batch_id=' . $batch_id . '"><button class="btn btn-info btn-sm">Batch Detail</button></a></td>
+            </tr></thread>';
             $num++;
         }
         ?>
 
     </table>
+    </div>
 </div>
 
 </body>
@@ -185,4 +200,3 @@ include 'navInv.php';
 </footer>	
 
 </html>
-
