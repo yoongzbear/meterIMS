@@ -28,12 +28,24 @@ include 'navInv.php';
   </ol>
 </nav>
 
+<div class="container text-center">
+  <div class="row">
+    <h4>Generate QR</h4>
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
+    </div>    
+  </div>
+<br>
 
-<p>Generate QR</p>
-<button onclick="window.location.href= '';">Receive Meter</button>
+  <div class="row">
+    <h4>Scan Batch QR</h4>
+    <div class='col'>
+      <a button type="button" class="btn btn-primary btn-lg" href="">Ship Out</a>
+    </div>
+  </div>
 
-<p>Scan Batch QR </p>
-<button onclick="window.location.href= '';">Ship Out</button>
+</div>
+
 
 </body>
 
