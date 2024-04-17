@@ -32,52 +32,56 @@ include 'navInv.php';
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home - Inventory Management Department'>Home</a></li>
+    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
     <li class="breadcrumb-item"><a href="mov_track_view.php" title='Meter Tracking Page'>Meter Tracking</a></li>
-    <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Meter Tracking Page'>Batch Detail</a></li>
+    <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Batch Detail Page'>Batch Detail</a></li>
     <li class="breadcrumb-item active" aria-current="page">Meter Info</li>
   </ol>
 </nav>
 
+<div class="col align-self-center">
 
     <?php
         //type, model, size, age, mileage, manufacturer, manu year, status, install date, install address, location of store
-        echo "<h1>Meter Info</h1>";
-        echo "<table><th colspan=2><h2>" . $row['serial_num'] . "</h2></th>
+        echo "<div class='col align-self-center'>
+        <h2 class='fs-1 text-uppercase'>Meter Info</h2>
+        <hr class='border border-success border-2 opacity-50'>";
+        echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>
+        
             <tr>
-                <td>Type:</td>
+                <th>Type:</th>
                 <td>" . $row['meter_type'] . "</td>
             </tr>
             <tr>
-                <td>Model:</td>
+                <th>Model:</th>
                 <td>" . $row['meter_model'] . "</td>
             </tr>
             <tr>
-                <td>Size:</td>
+                <th>Size:</th>
                 <td>" . $row['meter_size'] . "</td>
             </tr>
             <tr>
-                <td>Age:</td>
+                <th>Age:</th>
                 <td>" . $row['age'] . "</td>
             </tr>
             <tr>
-                <td>Mileage:</td>
+                <th>Mileage:</th>
                 <td>" . $row['mileage'] . "</td>
             </tr>
             <tr>
-                <td>Manufacturer:</td>
+                <th>Manufacturer:</th>
                 <td>" . $row['manu_name'] . "</td>
             </tr>
             <tr>
-                <td>Manufacture Year:</td>
+                <th>Manufacture Year:</th>
                 <td>" . $row['manufactured_year'] . "</td>
             </tr>
             <tr>
-                <td>Status:</td>
+                <th>Status:</th>
                 <td>" . $row['meter_status'] . "</td>
             </tr>
             <tr>
-                <td>Region Store:</td>
+                <th>Region Store:</th>
                 <td>" . $row['region'] . "</td>
             </tr>
             ";
@@ -91,7 +95,17 @@ include 'navInv.php';
                 <td>Install Address:</td>
                 <td>" . $row['install_address'] . "</td>
             </tr>";}
-        echo "</table>";
+        echo "</table></div>";
     ?>
+
+    
+<br>
+<div class="d-grid gap-2 col-6 mx-auto">
+<button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?batch_id=<?= $batch_id; ?>'" title='Back To Batch Detail'>Back</button>
+</div>
+<br>
+
+</div>
+
 </body>
 </html>

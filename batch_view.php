@@ -37,42 +37,65 @@ include 'navInv.php';
   </ol>
 </nav>
 
-<label>The information about the batch ID :</label> <?php echo $batchid; ?><br><br>
-<button class="back" onclick="window.location='mov_track_view.php'">Back</button>
-<table>
+<label class="fs-2 font-monospace"><b>The Information About The Batch ID : </b>
+<?php 
+echo $batchid; 
+?>
+</label>
+<br>
+
+<table class='table table-dark table-striped'>
+<thread>
     <tr>
-        <th>Infomation</th>
-        <th>Description</th>
+        <th scope="col">Infomation</th>
+        <th scope="col">Description</th>
     </tr>
+</thread>
+    <thread>
     <tr>
-        <td>Store</td>
+        <th scope="row">Store</th>
         <td><?php echo $row["region"]; ?></td>
     </tr>
+    </thread>
+
+    <thread>
     <tr>
-        <td>Meter Type</td>
+        <th scope="row">Meter Type</th>
         <td><?php echo $row["meter_type"]; ?></td>
     </tr>
+    </thread>
+    <thread>
     <tr>
-        <td>Meter Model</td>
+        <th scope="row">Meter Model</th>
         <td><?php echo $row["meter_model"]; ?></td>
     </tr>
+    </thread>
+    <thread>
+
     <tr>
-        <td>Meter Size</td>
+        <th scope="row">Meter Size</th>
         <td><?php echo $row["meter_size"]; ?></td>
     </tr>
+    </thread>
+    <thread>
+
     <tr>
-        <td>Quantity</td>
+        <th scope="row">Quantity</th>
         <td><?php echo $row["quantity"]; ?></td>
     </tr>
+    </thread>
 </table>
+<hr class="border border-danger border-2 opacity-50">
 
-<table>
+<table class="table table-dark table-striped-columns">
+    <thread>
     <tr>
-    <th>No</th>
-    <th>Serial Number</th>
-    <th>Meter Status</th>
-    <th>Meter Detail</th>
+    <th scope="col">No</th>
+    <th scope="col">Serial Number</th>
+    <th scope="col">Meter Status</th>
+    <th scope="col">Meter Detail</th>
     </tr>
+    </thread>
 
 <?php
 $sql2 = "SELECT serial_num, meter_status FROM meter WHERE batch_id=$batchid";
@@ -80,16 +103,23 @@ $result2 = mysqli_query($connection, $sql2);
 $num=1;  
 while ($row2 = mysqli_fetch_array($result2)) {
     echo '
+    <thread>
     <tr>
-        <td>' . $num . '</td>
+        <th scope="row">' . $num . '</th>
         <td>' . $row2["serial_num"] . '</td>
         <td>' . $row2["meter_status"] . '</td>
-        <td class="serial_num"><a href="meterInfo.php?serial_num=' .$row2["serial_num"]. '"><button>Meter Detail</button></a></td>
-    </tr>';
+        <td class="serial_num"><a href="meterInfo.php?serial_num=' .$row2["serial_num"]. '"><button class="btn btn-info btn-sm">Meter Detail</button></a></td>
+    </tr></thread>';
     $num++;
 }
 ?>
 </table>
+
+<br>
+<div class="d-grid gap-2 col-6 mx-auto">
+<button class="back btn btn-dark" type="button" onclick="window.location.href='mov_track_view.php'" title='Back To Meter Tracking'>Back</button>
+</div>
+<br>
 
 </body>
 
