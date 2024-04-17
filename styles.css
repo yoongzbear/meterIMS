@@ -81,16 +81,6 @@ footer {
     }
 }
 
-/*login*/
-
-
-@media screen and (max-width: 600px) {
-    .login-container, .login-container-md {
-        width: 85%;
-    }
-}
-
-
 /*nav*/
 .btn.btn-light {
     background-color: white;
@@ -107,9 +97,7 @@ footer {
 }
 
 /*column for menu*/
-.col{
-    padding: 20px;
-}
+
 
 .row a:hover {
     background-color: grey; 
@@ -126,11 +114,4 @@ footer {
         height: 100%;
     }
     
-}
-
-
-/* content of pages */
-
-.content{
-    display: contents;
 }
