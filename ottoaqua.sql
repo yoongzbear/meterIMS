@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 16, 2024 at 12:27 PM
+-- Generation Time: Apr 17, 2024 at 01:26 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -30,21 +30,21 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `batch`;
 CREATE TABLE IF NOT EXISTS `batch` (
   `batch_id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int NOT NULL,
+  `location_id` int NOT NULL,
   `meter_type` varchar(100) NOT NULL,
   `meter_model` varchar(100) NOT NULL,
   `meter_size` int NOT NULL,
   `quantity` int NOT NULL,
   PRIMARY KEY (`batch_id`),
-  KEY `store_id` (`store_id`)
+  KEY `location_id` (`location_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `batch`
 --
 
-INSERT INTO `batch` (`batch_id`, `store_id`, `meter_type`, `meter_model`, `meter_size`, `quantity`) VALUES
-(1, 2, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 15, 10);
+INSERT INTO `batch` (`batch_id`, `location_id`, `meter_type`, `meter_model`, `meter_size`, `quantity`) VALUES
+(1, 3, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 15, 10);
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,32 @@ CREATE TABLE IF NOT EXISTS `lab_result` (
   PRIMARY KEY (`test_id`),
   KEY `serial_num` (`serial_num`),
   KEY `defect_id` (`defect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+CREATE TABLE IF NOT EXISTS `location` (
+  `location_id` int NOT NULL AUTO_INCREMENT,
+  `location_name` varchar(20) NOT NULL,
+  `username` varchar(16) NOT NULL,
+  PRIMARY KEY (`location_id`),
+  KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`location_id`, `location_name`, `username`) VALUES
+(1, 'Air Selangor Inv', 'paola'),
+(2, 'Air Selangor Lab', 'wendy'),
+(3, 'Kuala Lumpur', 'yuna'),
+(4, 'Subang Jaya', 'alya');
 
 -- --------------------------------------------------------
 
@@ -73,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `lab_result` (
 DROP TABLE IF EXISTS `manufacturer`;
 CREATE TABLE IF NOT EXISTS `manufacturer` (
   `manu_id` int NOT NULL AUTO_INCREMENT,
-  `manu_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `manu_name` varchar(100) NOT NULL,
   PRIMARY KEY (`manu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -115,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `meter` (
 INSERT INTO `meter` (`serial_num`, `install_date`, `age`, `mileage`, `batch_id`, `meter_status`, `install_address`, `manufactured_year`, `manu_id`) VALUES
 ('AIS17BA0000001', NULL, 6.5, 41417, 1, 'IN STORE', NULL, 2017, 1),
 ('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1),
-('AIS17BA0000003', '2024-04-02', 6.5, 41417, 1, 'INSTALLED', 'subang jaya, 47669, selangor', 2017, 1);
+('AIS17BA0000003', NULL, 6.5, 12127, 1, 'INSTALLED', '127, Jalan Neo, Kuala Lumpur', 2017, 1);
 
 -- --------------------------------------------------------
 
@@ -140,31 +165,7 @@ CREATE TABLE IF NOT EXISTS `movement` (
 --
 
 INSERT INTO `movement` (`tracking_id`, `origin`, `destination`, `ship_date`, `arrival_date`, `batch_id`) VALUES
-(1, 1, 2, '2024-03-31', '2024-04-02', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `region_store`
---
-
-DROP TABLE IF EXISTS `region_store`;
-CREATE TABLE IF NOT EXISTS `region_store` (
-  `store_id` int NOT NULL AUTO_INCREMENT,
-  `region` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `username` varchar(16) DEFAULT NULL,
-  PRIMARY KEY (`store_id`),
-  KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `region_store`
---
-
-INSERT INTO `region_store` (`store_id`, `region`, `username`) VALUES
-(1, 'Air Selangor', 'paola'),
-(2, 'Kuala Lumpur', 'yuna'),
-(3, 'Petaling', 'alya');
+(1, 1, 3, '2024-04-01', '2024-04-02', 1);
 
 -- --------------------------------------------------------
 
@@ -175,9 +176,9 @@ INSERT INTO `region_store` (`store_id`, `region`, `username`) VALUES
 DROP TABLE IF EXISTS `useraccount`;
 CREATE TABLE IF NOT EXISTS `useraccount` (
   `username` varchar(16) NOT NULL,
-  `password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `emp_type` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `emp_type` varchar(25) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -246,7 +247,7 @@ INSERT INTO `warranty_defect` (`defect_id`, `defect`) VALUES
 -- Constraints for table `batch`
 --
 ALTER TABLE `batch`
-  ADD CONSTRAINT `batch_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `region_store` (`store_id`);
+  ADD CONSTRAINT `batch_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`);
 
 --
 -- Constraints for table `lab_result`
@@ -254,6 +255,12 @@ ALTER TABLE `batch`
 ALTER TABLE `lab_result`
   ADD CONSTRAINT `lab_result_ibfk_1` FOREIGN KEY (`serial_num`) REFERENCES `meter` (`serial_num`),
   ADD CONSTRAINT `lab_result_ibfk_2` FOREIGN KEY (`defect_id`) REFERENCES `warranty_defect` (`defect_id`);
+
+--
+-- Constraints for table `location`
+--
+ALTER TABLE `location`
+  ADD CONSTRAINT `location_ibfk_1` FOREIGN KEY (`username`) REFERENCES `useraccount` (`username`);
 
 --
 -- Constraints for table `meter`
@@ -267,12 +274,6 @@ ALTER TABLE `meter`
 --
 ALTER TABLE `movement`
   ADD CONSTRAINT `movement_ibfk_1` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`);
-
---
--- Constraints for table `region_store`
---
-ALTER TABLE `region_store`
-  ADD CONSTRAINT `region_store_ibfk_1` FOREIGN KEY (`username`) REFERENCES `useraccount` (`username`);
 
 --
 -- Constraints for table `warranty`
