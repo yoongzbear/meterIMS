@@ -54,7 +54,7 @@ include 'header.php';
         });
     </script>
 
-    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
 
 </div>
