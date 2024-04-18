@@ -41,7 +41,7 @@ include 'header.php';
     <form id="meterForm" action="meterInstallForm.php" method="post" style="display:none;">
         <label for="serial_num">Meter Serial Number:</label>
         <input type="text" id="outputData" name="serial_num" readonly>
-        <p>is this the right serial number meter?</p>
+        <p>Is this the right serial number meter?</p>
         <input type="submit" value="Yes">
         <button id="btn-cancel">No</button>
     </form>
