@@ -15,6 +15,14 @@
 		$meter_size = $row["meter_size"];
 		$quantity = $row["quantity"];
 	}
+
+	//Check if there are meters associated with the batch
+	$sqlMeterCount = "SELECT COUNT(*) AS meter_count FROM meter WHERE batch_id = '$batch_id'";
+	$resultMeterCount = mysqli_query($connection, $sqlMeterCount);
+	if ($resultMeterCount) {
+		$rowMeterCount = mysqli_fetch_assoc($resultMeterCount);
+		$meterCount = $rowMeterCount['meter_count'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +44,36 @@ include 'header.php';
 </header>
 
 <script>
-function setNumberDecimal(event) {
-    this.value = parseFloat(this.value).toFixed(2);
-}
+	function setNumberDecimal(event) {
+		this.value = parseFloat(this.value).toFixed(2);
+	}
+
+	function confirmCancel() {
+		var inputs = document.getElementsByTagName("input");
+		var hasValue = false;
+		for (var i = 0; i < inputs.length; i++) {
+			if (inputs[i].value.trim() !== "") {
+				hasValue = true;
+				break;
+			}
+		}
+		if (hasValue) {
+			var confirmation = confirm("You have entered data. Are you sure you want to cancel?");
+			if (confirmation) {
+				clearInputs();
+				window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
+			}
+		} else {
+			window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
+		}
+	}
+
+	function clearInputs() {
+		var inputs = document.getElementsByTagName("input");
+		for (var i = 0; i < inputs.length; i++) {
+			inputs[i].value = "";
+		}
+	}
 </script>
 
 <html>
@@ -112,8 +147,12 @@ function setNumberDecimal(event) {
 			</table>
 			<br>
 			<div class="buttons float-end">
-				<button type="submit" class="btn btn-success">Add Meter</button>
-				<button class="btn btn-outline-secondary" onclick="window.location.href='inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';">Cancel</button>
+				<button type="submit">Add Meter</button>
+				<?php if ($meterCount > 0) { ?>
+					<button type="button" onclick="confirmCancel();">Cancel</button>
+				<?php } else { ?>
+					<button type="button" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
+				<?php } ?>
 			</div>
 			
 		</form>
