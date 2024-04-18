@@ -73,41 +73,41 @@ include 'navInv.php';
 
     <form action="inventoryDep_AddBatch.php" method="post">
 
-<div class="row g-3 align-items-center">
-  <div class="col-auto">
+<div class="row">
+  <div class="col">
     <label class="col-form-label">Meter Type : </label>
   </div>
-  <div class="col-auto">
+  <div class="col">
   	<input class="form-control form-control-sm" type="text" name="meter_type" required>
   </div>
 </div>
 <br>
 
-<div class="row g-3 align-items-center">
-  <div class="col-auto">
+<div class="row">
+  <div class="col">
     <label class="col-form-label">Meter Model : </label>
   </div>
-  <div class="col-auto">
+  <div class="col">
   	<input class="form-control form-control-sm" type="text" name="meter_model" required>
   </div>
 </div>
 <br>
 
-<div class="row g-3 align-items-center">
-  <div class="col-auto">
+<div class="row">
+  <div class="col">
     <label class="col-form-label">Meter Size : </label>
   </div>
-  <div class="col-auto">
+  <div class="col">
   	<input class="form-control form-control-sm" type="number" name="meter_size" min='0' required> <!--positive number validation-->
   </div>
 </div>
 <br>
 		
-<div class="row g-3 align-items-center">
-  <div class="col-auto">
+<div class="row">
+  <div class="col">
     <label class="col-form-label">Manufacturer Name : </label>
   </div>
-  <div class="col-auto">
+  <div class="col">
   <select class="form-select" name="manu_id">
 	<option value="" disabled selected>Please Select Manufacturer</option>
 		<?php
@@ -119,9 +119,7 @@ include 'navInv.php';
 		?>
 	</select>
 </div>
-</div>
-				
-				
+</div>				
 					
 <br>				
 		<button onclick="confirmation();" type="submit" class="btn btn-success">Add Meter</button>

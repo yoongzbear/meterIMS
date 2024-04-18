@@ -30,7 +30,6 @@ include 'navInv.php';
   </ol>
 </nav>
 
-<div class="col align-self-center">
     <div class="row align-items-start">
         <div class="col-6 col-lg-4">
 
@@ -154,16 +153,16 @@ include 'navInv.php';
             $arrival_date = $row["arrival_date"];
 
             // Fetch region for origin
-            $sql2 = "SELECT * FROM region_store WHERE store_id = '$origin'";
+            $sql2 = "SELECT * FROM location WHERE location_id = '$origin'";
             $result2 = mysqli_query($connection, $sql2);
             $row2 = mysqli_fetch_array($result2);
-            $origin_region = $row2 ? $row2["region"] : "";
+            $origin_region = $row2 ? $row2["location_name"] : "";
 
             // Fetch region for destination
-            $sql3 = "SELECT * FROM region_store WHERE store_id = '$destination'";
+            $sql3 = "SELECT * FROM location WHERE location_id = '$destination'";
             $result3 = mysqli_query($connection, $sql3);
             $row3 = mysqli_fetch_array($result3);
-            $destination_region = $row3 ? $row3["region"] : "";
+            $destination_region = $row3 ? $row3["location_name"] : "";
 
             echo '
             <thread>
@@ -191,7 +190,6 @@ include 'navInv.php';
 
     </table>
     </div>
-</div>
 
 </body>
 

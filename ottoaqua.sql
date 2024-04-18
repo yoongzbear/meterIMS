@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 17, 2024 at 01:26 AM
+-- Generation Time: Apr 17, 2024 at 09:55 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -56,8 +56,9 @@ DROP TABLE IF EXISTS `lab_result`;
 CREATE TABLE IF NOT EXISTS `lab_result` (
   `test_id` int NOT NULL AUTO_INCREMENT,
   `serial_num` varchar(15) NOT NULL,
-  `test_date` date NOT NULL,
-  `result` varchar(6) NOT NULL,
+  `receive_date` date NOT NULL,
+  `test_date` date DEFAULT NULL,
+  `result` varchar(6) DEFAULT NULL,
   `defect_id` int DEFAULT NULL,
   PRIMARY KEY (`test_id`),
   KEY `serial_num` (`serial_num`),
@@ -203,13 +204,11 @@ DROP TABLE IF EXISTS `warranty`;
 CREATE TABLE IF NOT EXISTS `warranty` (
   `warranty_id` int NOT NULL AUTO_INCREMENT,
   `serial_num` varchar(15) NOT NULL,
-  `receive_date` date NOT NULL,
-  `check_date` date DEFAULT NULL,
   `warranty_status` varchar(12) DEFAULT NULL,
   `test_id` int DEFAULT NULL,
   PRIMARY KEY (`warranty_id`),
-  KEY `test_id` (`test_id`),
-  KEY `serial_num` (`serial_num`)
+  KEY `serial_num` (`serial_num`),
+  KEY `test_id` (`test_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -279,8 +278,8 @@ ALTER TABLE `movement`
 -- Constraints for table `warranty`
 --
 ALTER TABLE `warranty`
-  ADD CONSTRAINT `warranty_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `lab_result` (`test_id`),
-  ADD CONSTRAINT `warranty_ibfk_2` FOREIGN KEY (`serial_num`) REFERENCES `meter` (`serial_num`);
+  ADD CONSTRAINT `warranty_ibfk_1` FOREIGN KEY (`serial_num`) REFERENCES `meter` (`serial_num`),
+  ADD CONSTRAINT `warranty_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `lab_result` (`test_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

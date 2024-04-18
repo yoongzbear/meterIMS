@@ -1,9 +1,9 @@
 <?php
-        //include ('secure.php');
+        //include ('secure_Inv.php');
         include('connection.php');
         //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
         $serial_num = $_GET['serial_num'];
-        $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN region_store ON batch.store_id = region_store.store_id WHERE serial_num = '$serial_num'";
+        $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
 
@@ -82,7 +82,7 @@ include 'navInv.php';
             </tr>
             <tr>
                 <th>Region Store:</th>
-                <td>" . $row['region'] . "</td>
+                <td>" . $row['location_name'] . "</td>
             </tr>
             ";
         if ($row['install_date'] != NULL) {
