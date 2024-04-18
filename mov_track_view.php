@@ -30,7 +30,6 @@ include 'navInv.php';
   </ol>
 </nav>
 
-<div class="col align-self-center">
     <div class="row align-items-start">
         <div class="col-6 col-lg-4">
 
@@ -191,7 +190,6 @@ include 'navInv.php';
 
     </table>
     </div>
-</div>
 
 </body>
 
