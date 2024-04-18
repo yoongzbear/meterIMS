@@ -1,5 +1,5 @@
 <?php
-        //include ('secure.php');
+        //include ('secure_Inv.php');
         include('connection.php');
         //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
         $serial_num = $_GET['serial_num'];
