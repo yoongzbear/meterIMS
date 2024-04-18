@@ -55,14 +55,32 @@ include 'navInv.php';
 </nav>
 
 <script>
-	function confirmation() {
-		var confirmProceed = confirm("Please make sure the information are correct before proceed to add meter. You are not allowed to modify the information after this.");
-		if (confirmProceed) {
-			window.location.href = 'inventoryDep_AddBatch.php';
-		} else {
-			return false;
-		}
-	}
+	function validateForm() {
+        //Get the values of required fields
+        var meter_type = document.forms["addBatch"]["meter_type"].value;
+        var meter_model = document.forms["addBatch"]["meter_model"].value;
+        var meter_size = document.forms["addBatch"]["meter_size"].value;
+		var manu_id = document.forms["addBatch"]["manu_id"].value;
+
+        //Check if all required fields are filled
+        if (meter_type == "" || meter_model == "" || meter_size == "" || manu_id == "") {
+            alert("Please fill in all required fields.");
+            return false; //Prevent form submission
+        }
+        return true; //Allow form submission
+    }
+
+    function confirmation() {
+        var confirmProceed = confirm("Please make sure the information are correct before proceed to add meter. You are not allowed to modify the information after this.");
+        if (confirmProceed) {
+            //Validate the form before proceeding
+            if (validateForm()) {
+                window.location.href = 'inventoryDep_AddBatch.php';
+            }
+        } else {
+            return false;
+        }
+    }
 </script>
 
 <html>
@@ -71,7 +89,7 @@ include 'navInv.php';
     <h3>Create New Batch</h3>
 	<hr>
 
-    <form action="inventoryDep_AddBatch.php" method="post">
+    <form action="inventoryDep_AddBatch.php" name="addBatch" method="post">
 
 <div class="row">
   <div class="col">
@@ -98,7 +116,17 @@ include 'navInv.php';
     <label class="col-form-label">Meter Size : </label>
   </div>
   <div class="col">
-  	<input class="form-control form-control-sm" type="number" name="meter_size" min='0' required> <!--positive number validation-->
+  	<select name="meter_size" required>
+		<option value="" disabled selected>Please Select Meter Size</option>
+		<option value="15">15</option>
+		<option value="20">20</option>
+		<option value="25">25</option>
+		<option value="40">40</option>
+		<option value="50">50</option>
+		<option value="80">80</option>
+		<option value="100">100</option>
+		<option value="150">150</option>
+	</select>
   </div>
 </div>
 <br>
