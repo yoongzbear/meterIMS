@@ -1,0 +1,145 @@
+<?php
+	include('secure.php');
+	include('connection.php');
+	$batch_id = $_GET['Batch_ID'];
+	
+	//To get Batch Info
+	$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
+	$result = mysqli_query($connection, $sqlBatchInfo);
+	
+	if ($result) {
+		$row = mysqli_fetch_assoc($result);
+
+		// Fetch data from the database
+		$meter_type = $row["meter_type"];
+		$meter_model = $row["meter_model"];
+		$meter_size = $row["meter_size"];
+		$quantity = $row["quantity"];
+	}
+	
+	//To get Meter in Batch
+	$sqlMeterList = "SELECT * FROM meter WHERE batch_id = '$batch_id'";
+	$resultMeter = mysqli_query($connection, $sqlMeterList);
+	
+	if ($resultMeter) {
+		$rowMeter = mysqli_fetch_assoc($resultMeter);
+
+		// Fetch data from the database
+		$manu_id = $rowMeter["manu_id"];
+	}
+	
+	//To get Tracking Info
+	$sqlTrackingInfo = "SELECT * FROM movement WHERE batch_id = '$batch_id'";
+	$resultTrack = mysqli_query($connection, $sqlTrackingInfo);
+	
+	if ($resultTrack) {
+		$row = mysqli_fetch_assoc($resultTrack);
+
+		//Fetch data from the database
+		$tracking_id = $row["tracking_id"];
+		$origin = $row["origin"];
+		$destination = $row["destination"];
+		$ship_date = $row["ship_date"];
+	}
+	
+	//Select origin location name
+	$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
+	$resultOrigin = mysqli_query($connection, $sqlOriginName);
+	
+	if ($resultOrigin) {
+		$row = mysqli_fetch_assoc($resultOrigin);
+
+		//Fetch data from the database
+		$origin_name = $row["location_name"];
+	}
+	
+	//Select destination location name
+	$sqlDestinationName = "SELECT location_name FROM location WHERE location_id = '$destination'";
+	$resultDestination = mysqli_query($connection, $sqlDestinationName);
+	
+	if ($resultDestination) {
+		$row = mysqli_fetch_assoc($resultDestination);
+
+		//Fetch data from the database
+		$destination_name = $row["location_name"];
+	}
+?>
+
+<html>
+	<head><title>Meter Shipping</title></head>
+	<!--Show Current Batch Info-->
+	<h3>Batch Meter Information</h3>
+	<table>
+		<tr colspan = "2">
+			<td>
+				<div id="qrcode">
+					<script src = "qrcode.js"></script>
+					<script src = "qrGeneratorBatch.js"></script>
+					<script>makeCode(); </script>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Meter Type</td>
+			<td><?php echo $meter_type; ?></td>
+		</tr>
+		<tr>
+			<td>Meter Model</td>
+			<td><?php echo $meter_model; ?></td>
+		</tr>
+		<tr>
+			<td>Meter Size</td>
+			<td><?php echo $meter_size; ?></td>
+		</tr>
+		<tr>
+			<!--Show Current Total Meter for Current Batch-->
+			<td>Meter Quantity</td>
+			<td><?php echo $quantity; ?></td>
+		</tr>
+	</table>
+	
+	<!--Show Shipping Info-->
+	<h3>Shipping Information</h3>
+	<table>
+		<tr>
+			<td>Tracking ID</td>
+			<td><?php echo $tracking_id; ?></td>
+		</tr>
+		<tr>
+			<td>Origin</td>
+			<td><?php echo $origin_name; ?></td>
+		</tr>
+		<tr>
+			<td>Destination</td>
+			<td><?php echo $destination_name; ?></td>
+		</tr>
+		<tr>
+			<td>Ship Date</td>
+			<td><?php echo $ship_date; ?></td>
+		</tr>
+	</table>
+	
+	<!--Show Meter List for the Batch-->
+	<h3>List of Meters in the batch</h3>
+	<table>
+		<tr>
+			<td>No.</td>
+			<td>Meter ID</td>
+		</tr>
+		
+		<?php
+			$num = 1;
+			//Reset data seek pointer to the beginning
+			mysqli_data_seek($resultMeter, 0);
+			while($rowMeter = mysqli_fetch_assoc($resultMeter)){
+				echo 
+					'<tr>
+						<td>'.$num.'</td>
+						<td>'.$rowMeter["serial_num"].'</td>
+					</tr>';
+				$num++;
+			}
+		?>
+	</table>
+	<button class="back" onclick="window.location.href='index.php'">Back</button>
+</html>
