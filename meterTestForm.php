@@ -1,6 +1,4 @@
-<?php 
-include 'secure_TestLab.php';
-?>
+<?php include 'secure_TestLab.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,16 +16,54 @@ include 'secure_TestLab.php';
         include('connection.php');
         $serial_num = $_POST['serial_num'];
 
-        $sqlMeter = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
+        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
         $resultMeter = mysqli_query($connection, $sqlMeter);
         $rowMeter = mysqli_fetch_assoc($resultMeter);
 
         $sqlDefect = "SELECT * FROM warranty_defect";
         $resultDefect = mysqli_query($connection, $sqlDefect);
 
-        echo "<form id='meterForm' action='submitMeterTest.php' method='post'>
-        <label for='serial_num'>Meter Serial Number:</label>
-        <input type='text' name='serial_num' value='$serial_num' readonly>
+        echo "<div class='col align-self-center'>
+        <h2 class='fs-1 text-uppercase'>Meter Info</h2>
+        <hr class='border border-success border-2 opacity-50'>";
+        echo "<table class='table'><th colspan=2><h3>" . $rowMeter['serial_num'] . "</h3></th>
+        
+            <tr>
+                <th>Type:</th>
+                <td>" . $rowMeter['meter_type'] . "</td>
+            </tr>
+            <tr>
+                <th>Model:</th>
+                <td>" . $rowMeter['meter_model'] . "</td>
+            </tr>
+            <tr>
+                <th>Size:</th>
+                <td>" . $rowMeter['meter_size'] . "</td>
+            </tr>
+            <tr>
+                <th>Age:</th>
+                <td>" . $rowMeter['age'] . "</td>
+            </tr>
+            <tr>
+                <th>Mileage:</th>
+                <td>" . $rowMeter['mileage'] . "</td>
+            </tr>
+            <tr>
+                <th>Manufacture Year:</th>
+                <td>" . $rowMeter['manufactured_year'] . "</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>" . $rowMeter['meter_status'] . "</td>
+            </tr>
+            <tr>
+                <th>Region Store:</th>
+                <td>" . $rowMeter['location_name'] . "</td>
+            </tr></table>
+            ";
+
+        echo "<form id='meterForm' action='submitMeterTest.php' method='post'>        
+        <input type='hidden' name='serial_num' value='$serial_num' readonly>
         <br>
         <label for='testResult'>Test Result:</label>
         <select id='testResult' name='testResult' required onchange='toggleDefectField()'> <!-- Added onchange event -->
@@ -56,9 +92,11 @@ include 'secure_TestLab.php';
             if (testResult === 'PASS') {
                 defectLabel.style.display = 'none';
                 defectSelect.style.display = 'none';
+                defectSelect.required = false;
             } else {
                 defectLabel.style.display = 'block';
                 defectSelect.style.display = 'block';
+                defectSelect.required = true;
             }
         }
       </script>

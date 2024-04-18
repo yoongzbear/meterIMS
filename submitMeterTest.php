@@ -15,31 +15,27 @@ $rowMeter = mysqli_fetch_assoc($resultMeter);
 //function to update warranty status
 function updateWarrantyStatus($serial_num, $testResult, $defect, $lastTestId) {
     include('connection.php');
-    $sqlWarranty = "SELECT *, YEAR(receive_date) AS receive_year FROM warranty INNER JOIN meter ON warranty.serial_num = meter.serial_num WHERE warranty.serial_num = '$serial_num'";
+    $sqlWarranty = "SELECT *, YEAR(lab_result.receive_date) AS receive_year FROM warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num INNER JOIN meter ON warranty.serial_num = meter.serial_num WHERE warranty.serial_num = '$serial_num'";
     $resultWarranty = mysqli_query($connection, $sqlWarranty);
     $rowWarranty = mysqli_fetch_assoc($resultWarranty);
-    $yearDiff = $rowWarranty['receive_year'] - $rowWarranty['manufactured_year']; //difference is 2-3 years, i set it as 3 years
+    $yearDiff = $rowWarranty['receive_year'] - $rowWarranty['manufactured_year']; 
     if ($rowWarranty) {
         if ($testResult == 'FAIL' && $defect != '0' && $yearDiff <= 3) {
-            $sqlUpdateWarranty = "UPDATE warranty SET check_date = CURDATE(), warranty_status = 'CAN CLAIM', test_id = '$lastTestId' WHERE warranty_id = ( SELECT warranty_id FROM ( SELECT warranty_id FROM warranty WHERE serial_num = '$serial_num' ORDER BY receive_date DESC, warranty_id DESC LIMIT 1 ) AS subquery );";            
+            $sqlUpdateWarranty = "UPDATE warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num SET lab_result.test_date = CURDATE(), warranty.warranty_status = 'CAN CLAIM', warranty.test_id = '$lastTestId' WHERE warranty.warranty_id = ( SELECT warranty_id FROM ( SELECT warranty.warranty_id FROM warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num WHERE warranty.serial_num = '$serial_num' ORDER BY lab_result.receive_date DESC, warranty.warranty_id DESC LIMIT 1 ) AS subquery );";            
         } else {
-            $sqlUpdateWarranty = "UPDATE warranty SET check_date = CURDATE(), warranty_status = 'CANNOT CLAIM', test_id = '$lastTestId' WHERE warranty_id = ( SELECT warranty_id FROM ( SELECT warranty_id FROM warranty WHERE serial_num = '$serial_num' ORDER BY receive_date DESC, warranty_id DESC LIMIT 1 ) AS subquery );";           
+            $sqlUpdateWarranty = "UPDATE warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num SET lab_result.test_date = CURDATE(), warranty.warranty_status = 'CANNOT CLAIM', warranty.test_id = '$lastTestId' WHERE warranty.warranty_id = ( SELECT warranty_id FROM ( SELECT warranty.warranty_id FROM warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num WHERE warranty.serial_num = '$serial_num' ORDER BY lab_result.receive_date DESC, warranty.warranty_id DESC LIMIT 1 ) AS subquery );";           
         }
-        if(mysqli_query($connection, $sqlUpdateWarranty)) {
-            echo "Warranty status and check date updated successfully.";
-        } else {
-            echo "Error updating warranty status and check date: " . mysqli_error($connection);
-        }
+        mysqli_query($connection, $sqlUpdateWarranty);
     } 
 }
 
-if ($testResult == 'FAIL') {
+if ($testResult == 'FAIL' && $defect != '0') {
     $sqlLab = "INSERT INTO lab_result (serial_num, test_date, result, defect_id) VALUES ('$serial_num',  CURDATE(), '$testResult', '$defect')";
 } else {
     $sqlLab = "INSERT INTO lab_result (serial_num, test_date, result) VALUES ('$serial_num', CURDATE(), '$testResult')";
 }
 
-$sqlMeterUpdate = "UPDATE meter SET meter_status = 'TESTED' WHERE serial_num = '$serial_num'";
+$sqlMeterUpdate = "UPDATE meter SET install_date = NULL, meter_status = 'TESTED' WHERE serial_num = '$serial_num'";
 
 if (mysqli_query($connection, $sqlLab)) {
     // Retrieve the last inserted ID

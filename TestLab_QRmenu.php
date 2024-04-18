@@ -29,11 +29,11 @@ include 'navLab.php';
   </ol>
 </nav>
 
+<p>Scan Batch QR</p>
+<button onclick="window.location.href= 'receiveBatchTest.php';">Receive Batch for Warranty Test</button>
 
 <p>Scan Meter QR</p>
 <button onclick="window.location.href= 'meterTest.php';">Meter Test Result Form</button>
-</body>
-
 </body>
 
 <footer>

@@ -34,7 +34,7 @@ include 'header.php';
         include('connection.php');
         $serial_num = $_POST['serial_num'];
 
-        $sqlMeter = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
+        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num';";
         $resultMeter = mysqli_query($connection, $sqlMeter);
         $rowMeter = mysqli_fetch_assoc($resultMeter);
         if ($rowMeter['meter_status'] == 'INSTALLED') {
@@ -43,11 +43,43 @@ include 'header.php';
             </script>";
             exit();
         } else {
-            echo $serial_num;
-            echo "<form id='meterForm' action='submitMeterInstallation.php' method='post'>
-                    <label for='serial_num'>Meter Serial Number:</label>
-                    <input type='text' name='serial_num' value='$serial_num' readonly>
-                    <br>
+            echo "<div class='col align-self-center'>
+            <h2 class='fs-1 text-uppercase'>Meter Info</h2>
+            <hr class='border border-success border-2 opacity-50'>";
+            echo "<table class='table'><th colspan=2><h3>" . $rowMeter['serial_num'] . "</h3></th>
+            
+                <tr>
+                    <th>Type:</th>
+                    <td>" . $rowMeter['meter_type'] . "</td>
+                </tr>
+                <tr>
+                    <th>Model:</th>
+                    <td>" . $rowMeter['meter_model'] . "</td>
+                </tr>
+                <tr>
+                    <th>Size:</th>
+                    <td>" . $rowMeter['meter_size'] . "</td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td>" . $rowMeter['age'] . "</td>
+                </tr>
+                <tr>
+                    <th>Mileage:</th>
+                    <td>" . $rowMeter['mileage'] . "</td>
+                </tr>                
+                <tr>
+                    <th>Manufacture Year:</th>
+                    <td>" . $rowMeter['manufactured_year'] . "</td>
+                </tr>
+                <tr>
+                    <th>Region Store:</th>
+                    <td>" . $rowMeter['location_name'] . "</td>
+                </tr></table>
+                ";
+
+            echo "<form id='meterForm' action='submitMeterInstallation.php' method='post'>    
+                    <input type='hidden' id='serial_num' name='serial_num' value='$serial_num'>                
                     <label for='installDate'>Installation Date:</label>
                     <input type='date' id='installDate' name='installDate' required>
                     <br>

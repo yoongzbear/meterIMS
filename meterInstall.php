@@ -34,14 +34,13 @@ include 'header.php';
     <h3>Meter Installation Form</h3>
     <p class="fst-italic">Please scan the QR code on the water meter after installation.</p>
     <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas> <br>
-    <!--is there a way to set the size without it expanding-->
     <button type="button" id="btn-scan-qr" class="btn btn-light text-dark">Scan QR</button>
     <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark">Cancel Scan</button>
     
     <form id="meterForm" action="meterInstallForm.php" method="post" style="display:none;">
         <label for="serial_num">Meter Serial Number:</label>
         <input type="text" id="outputData" name="serial_num" readonly>
-        <p>Is this the right serial number meter?</p>
+        <p>Is this the right meter serial number?</p>
         <input type="submit" value="Yes">
         <button id="btn-cancel">No</button>
     </form>
