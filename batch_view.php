@@ -3,8 +3,8 @@ include ('secure_Inv.php');
 include ('connection.php');
 
 $batchid = $_GET["batch_id"];
-$sql = "SELECT batch.*, region_store.* FROM batch
-        JOIN region_store ON batch.store_id = region_store.store_id
+$sql = "SELECT batch.*, location.* FROM batch
+        JOIN location ON batch.location_id = location.location_id
         WHERE batch.batch_id = $batchid";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_array($result);
@@ -54,7 +54,7 @@ echo $batchid;
     <thread>
     <tr>
         <th scope="row">Store</th>
-        <td><?php echo $row["region"]; ?></td>
+        <td><?php echo $row["location_name"]; ?></td>
     </tr>
     </thread>
 
