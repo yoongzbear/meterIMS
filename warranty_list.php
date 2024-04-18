@@ -29,7 +29,7 @@ $num = 1;
             <td><?php echo $row["meter_size"]; ?></td>
             <td><?php echo $row["meter_model"]; ?></td>
             <td><?php echo $row["install_address"]; ?></td>
-            <td><button onclick="window.location.href= '';">Send to Install</button></td>
+            <td><button onclick="window.location.href= '';">Install New Meter</button></td>
         </tr>
     <?php endwhile; ?>
 </table>
