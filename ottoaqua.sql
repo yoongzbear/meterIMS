@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 17, 2024 at 09:55 AM
+-- Generation Time: Apr 18, 2024 at 12:41 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `batch` (
   `quantity` int NOT NULL,
   PRIMARY KEY (`batch_id`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `batch`
@@ -129,7 +129,9 @@ CREATE TABLE IF NOT EXISTS `meter` (
   `install_address` varchar(150) DEFAULT NULL,
   `manufactured_year` int NOT NULL,
   `manu_id` int NOT NULL,
+  `location_id` int DEFAULT NULL,
   PRIMARY KEY (`serial_num`),
+  KEY `location_id` (`location_id`),
   KEY `batch_id` (`batch_id`),
   KEY `manu_id` (`manu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -138,10 +140,10 @@ CREATE TABLE IF NOT EXISTS `meter` (
 -- Dumping data for table `meter`
 --
 
-INSERT INTO `meter` (`serial_num`, `install_date`, `age`, `mileage`, `batch_id`, `meter_status`, `install_address`, `manufactured_year`, `manu_id`) VALUES
-('AIS17BA0000001', NULL, 6.5, 41417, 1, 'IN STORE', NULL, 2017, 1),
-('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1),
-('AIS17BA0000003', NULL, 6.5, 12127, 1, 'INSTALLED', '127, Jalan Neo, Kuala Lumpur', 2017, 1);
+INSERT INTO `meter` (`serial_num`, `install_date`, `age`, `mileage`, `batch_id`, `meter_status`, `install_address`, `manufactured_year`, `manu_id`, `location_id`) VALUES
+('AIS17BA0000001', NULL, 6.5, 41417, 1, 'IN STORE', NULL, 2017, 1, NULL),
+('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1, NULL),
+('AIS17BA0000003', '2024-04-01', 6.5, 12127, 1, 'INSTALLED', '127, Jalan Neo, Kuala Lumpur', 2017, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -159,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `movement` (
   `batch_id` int NOT NULL,
   PRIMARY KEY (`tracking_id`),
   KEY `batch_id` (`batch_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `movement`
@@ -265,8 +267,9 @@ ALTER TABLE `location`
 -- Constraints for table `meter`
 --
 ALTER TABLE `meter`
-  ADD CONSTRAINT `meter_ibfk_1` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
-  ADD CONSTRAINT `meter_ibfk_2` FOREIGN KEY (`manu_id`) REFERENCES `manufacturer` (`manu_id`);
+  ADD CONSTRAINT `meter_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`),
+  ADD CONSTRAINT `meter_ibfk_3` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
+  ADD CONSTRAINT `meter_ibfk_4` FOREIGN KEY (`manu_id`) REFERENCES `manufacturer` (`manu_id`);
 
 --
 -- Constraints for table `movement`
