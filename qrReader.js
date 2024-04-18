@@ -8,10 +8,11 @@ const btnScanQR = document.getElementById("btn-scan-qr");
 const btnCancelScan = document.getElementById("btn-cancel-scan");
 let scanning = false;
 
+
 //qr code callback function (called by library when qr is detected)
 qr.callback = result => {
     if (result){
-        outputData.value = result;
+        outputData.value = result; // Set the scanned Meter ID
         console.log("Read Data: "+result);
         scanning = false;
 
@@ -19,8 +20,9 @@ qr.callback = result => {
             track.stop();
         });
 
-        canvasElement.hidden = true;
-        btnScanQR.hidden = false;
+        canvasElement.hidden = true; // Hide the canvas
+        btnScanQR.hidden = false; // Show the scan button again if needed
+        document.getElementById("meterForm").style.display = "block"; // Display the form
     }
 }
 
