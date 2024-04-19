@@ -37,6 +37,7 @@ include 'navReg.php';
 <button onclick="window.location.href= '';">Installation Departure</button>
 <button onclick="window.location.href= '';">Testing Departure</button>
 <button onclick="window.location.href= 'RegDep_Scan_View_meter_info.php';">View Meter Info</button>
+<button onclick="window.location.href='regWarrantyUpdate.php';">Warranty Update</button>
 
 
 </body>
