@@ -5,7 +5,7 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="lab_home.php" class="nav-link">Home</a></li>
-        <li><a href="TestLab_QRmenu.php" class="nav-link">Meter Test</a></li>
+        <li><a href="TestLab_QRmenu.php" class="nav-link">Meter QR</a></li>
       </ul>
 
 		<div class="col-md-3 text-end">
