@@ -56,6 +56,10 @@ include('connection.php');
                 <th>Location:</th>
                 <td>" . $row['location_name'] . "</td>
             </tr>
+            <tr>
+                <th>Assigned Region Store:</th>
+                <td>" . $location_name. "</td>
+            </tr>
             ";
         if ($row['install_date'] != NULL) {
             //if the meter is installed
