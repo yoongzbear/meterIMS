@@ -43,6 +43,12 @@ include 'navInv.php';
       <a button type="button" class="btn btn-primary btn-lg" href="">Ship Out</a>
     </div>
   </div>
+<br>
+
+    <h4>Scan meter QR</h4>
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
+    </div>    
 
 </div>
 
