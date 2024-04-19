@@ -102,7 +102,8 @@ include 'navInv.php';
                 <th>Location:</th>
                 <td>" . $row['location_name'] . "</td>
             </tr>
-                <th>Region Store (From):</th>
+            <tr>
+                <th>Assigned Region Store:</th>
                 <td>" . $location_name. "</td>
             </tr>
             ";
