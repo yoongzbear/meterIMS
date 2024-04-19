@@ -9,6 +9,24 @@ include('connection.php');
         $row = mysqli_fetch_assoc($result);
         
         $batch_id = $row['batch_id'];
+
+ $sql1 = "SELECT meter.location_id, location.location_name FROM meter JOIN location ON meter.location_id = location.location_id WHERE serial_num = '$serial_num'";
+        $result1 = mysqli_query($connection, $sql1);
+        
+        // Check if any result is returned
+        if ($result1) {
+            $row1 = mysqli_fetch_assoc($result1);
+            if ($row1 !== null) {
+                // Location information is available
+                $location_name = $row1['location_name'];
+            } else {
+                // No location information available
+                $location_name = "The meter hasn't been assigned to a region store";
+            }
+        } else {
+            // Handle query execution error
+            echo "Error: " . mysqli_error($connection);
+        }
         ?>
 
 
