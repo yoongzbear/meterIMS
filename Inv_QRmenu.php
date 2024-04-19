@@ -50,6 +50,13 @@ include 'navInv.php';
       <a button type="button" class="btn btn-primary btn-lg" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
     </div>    
 
+    <div class="row">
+    <h4>Send to Lab</h4>
+    <div class='col'>
+      <a button type="button" class="btn btn-primary btn-lg" href="invInitialTest.php">Initial Ship Out</a>
+    </div>
+  </div>
+
 </div>
 
 

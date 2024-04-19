@@ -32,6 +32,8 @@ include 'navCon.php';
 
 <p>Scan Batch QR</p>
 <button onclick="window.location.href= 'meterInstall.php';">Installation Proof</button>
+<p>Meter Uninstallation</p>
+<button onclick="window.location.href= 'conMeterUninstall.php';">Meter Uninstallation</button>
 
 
 </body>

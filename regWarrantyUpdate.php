@@ -16,20 +16,22 @@ if(ISSET($_POST['serialnum'])){
     $locationquery = "SELECT location_id FROM `location` WHERE username = '$_SESSION[username]'";
     $locationrun = mysqli_query($connection, $locationquery);
     $location = mysqli_fetch_assoc($locationrun);
-    $meterquery = "UPDATE meter SET meter_status = 'SENT FOR WARRANTY' WHERE serial_num = '$serialnum'";
-    $meterresult = mysqli_query($connection, $meterquery);
+    $updatedmeterquantity = "UPDATE batch SET quantity = quantity - 1 WHERE batch_id = (SELECT batch_id FROM meter WHERE serial_num = '$serialnum')";
+    $updatedmeterquantityrun = mysqli_query($connection, $updatedmeterquantity);
     $batchquery = "INSERT INTO batch VALUES (DEFAULT, '$location[location_id]', '$meterinfo[meter_type]', '$meterinfo[meter_model]', '$meterinfo[meter_size]', 1)";
     $batchresult = mysqli_query($connection, $batchquery);
     $batchidquery = "SELECT batch_id FROM batch ORDER BY batch_id DESC LIMIT 1";
     $batchidrun = mysqli_query($connection, $batchidquery);
     $batchid = mysqli_fetch_assoc($batchidrun);
+    $meterquery = "UPDATE meter SET meter_status = 'SENT FOR WARRANTY', batch_id = $batchid[batch_id] WHERE serial_num = '$serialnum'";
+    $meterresult = mysqli_query($connection, $meterquery);
     $movementquery = "INSERT INTO movement VALUES (DEFAULT, $location[location_id], 2, (CURRENT_DATE), NULL, $batchid[batch_id])";
     $warrantyquery = "INSERT INTO warranty VALUES (DEFAULT, '$serialnum', NULL, NULL)";
     $movementrun = mysqli_query($connection, $movementquery);
     $warrantyrun = mysqli_query($connection, $warrantyquery);
     if($batchresult && $meterresult && $movementquery){
-        echo "<script>alert('Meter sent to lab successfully!');</script>";
-        header("Refresh:0");
+        echo "<script>alert('Meter sent to lab successfully! You will be redirected to another window to print the new Batch QR for warranty claim.');</script>";
+        echo "<script>window.open('regWarrantyBatchID.php?Batch_ID=$batchid[batch_id]')</script>";
     } else {
         echo "<script>alert('Failed to send meter to lab!');</script>";
         header("Refresh:0");
@@ -82,7 +84,7 @@ if(ISSET($_POST['serialnum'])){
             <h3 class="text-center">Please confirm that the Serial Number is correct.</h3>
             <form method="POST" name="serialNumForm" class="text-center">
                 <label>Meter ID:</label>
-                <input type="text" id="outputData" name="serialnum" placeholder="Meter ID" required readonly>
+                <input type="text" id="outputData" name="serialnum" placeholder="Serial Number" required readonly>
                 <button type="submit" class="btn btn-success m-2 pt-1 pb-1">Send to lab</button>
             </form>
         </div>
