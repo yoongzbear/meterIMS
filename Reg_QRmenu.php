@@ -36,6 +36,7 @@ include 'navReg.php';
 <P>Scan Meter QR</P>
 <button onclick="window.location.href= '';">Installation Departure</button>
 <button onclick="window.location.href= '';">Testing Departure</button>
+<button onclick="window.location.href= 'RegDep_Scan_View_meter_info.php';">View Meter Info</button>
 
 
 </body>
