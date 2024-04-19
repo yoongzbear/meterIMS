@@ -22,6 +22,7 @@ qr.callback = result => {
 
         canvasElement.hidden = true; // Hide the canvas
         btnScanQR.hidden = false; // Show the scan button again if needed
+        btnCancelScan.hidden = true; // Hide the cancel button
         document.getElementById("meterForm").style.display = "block"; // Display the form
     }
 }
@@ -31,6 +32,7 @@ btnCancelScan.onclick = () => {
     scanning = false;
     canvasElement.hidden = true;
     btnScanQR.hidden = false;
+    btnCancelScan.hidden = true;
 
     video.srcObject.getTracks().forEach(track => {
         track.stop();
@@ -45,6 +47,7 @@ btnScanQR.onclick = () => {
     .then(function(stream) {
         scanning = true;
         btnScanQR.hidden = true;
+        btnCancelScan.hidden = false;
         canvasElement.hidden = false;
         video.setAttribute("playsinline", true); //for safari to prevent going fullscreen
         video.srcObject = stream;
