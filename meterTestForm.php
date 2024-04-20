@@ -16,6 +16,15 @@
         include('connection.php');
         $serial_num = $_POST['serial_num'];
 
+        //sql to see if already has a failed result - cannot be tested anymore - if fail, cannot see form
+        $sqlLab = "SELECT * FROM lab_result WHERE serial_num = '$serial_num' AND result = 'FAIL'";
+        $resultLab = mysqli_query($connection, $sqlLab);
+        if (mysqli_num_rows($resultLab) > 0) {
+            echo "<script>alert('Meter has failed the test before, cannot be tested again.');
+            window.location.href='meterTest.php';
+            </script>";
+        }
+
         $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
         $resultMeter = mysqli_query($connection, $sqlMeter);
         $rowMeter = mysqli_fetch_assoc($resultMeter);
