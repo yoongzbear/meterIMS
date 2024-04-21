@@ -1,12 +1,6 @@
 <?php
-//print list of past meter tests
-//maybe like summary - date tested, result
-//serial number, meter info
-//received date, tested date, result, if fail show defect
-
-        include ('secure_TestLab.php');
+        include ('secure_Inv.php');
         include('connection.php');
-        //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
         $serial_num = $_GET['serial_num'];
         $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id WHERE serial_num = '$serial_num'";
         $result = mysqli_query($connection, $sql);
@@ -24,7 +18,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meter Info</title>
+    <title>Meter Result</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -34,14 +28,14 @@
 
 <?php 
 include 'header.php';
-include 'navLab.php';
+include 'navInv.php';
 ?>
 
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <!--kena change this for test lab
+    <!--kena change this for inv
     <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
     <li class="breadcrumb-item"><a href="mov_track_view.php" title='Meter Tracking Page'>Meter Tracking</a></li>
     <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Batch Detail Page'>Batch Detail</a></li>
@@ -96,23 +90,24 @@ include 'navLab.php';
 
         <table>
             <tr><th>No</th>
-            <th>Date Tested</th>
-            <th>Result</th></tr>
-            <th>Result Detail</th>
+            <th>Test Date</th>
+            <th>Result</th>
+            <th>Result Detail</th></tr>
         <?php
         
         while($rowTest = mysqli_fetch_array($resultTest)) {
             echo '<tr>
-                <td>'.$num.'</td>
-                <td>'.$rowTest['receive_date'].'</td>';
+                <td>'.$num.'</td>';
             //can color the font of the result? if not tested yet = grey, if pass = green, if fail = red
             if ($rowTest['result'] == NULL) {
-                echo '<td>Not tested yet</td>';
+                echo '<td>N/A</td>
+                <td>Not tested yet</td>';
             } else {
-                echo '<td>'.$rowTest['result'].'</td>';            
+                echo '<td>'.$rowTest['test_date'].'</td>
+                <td>'.$rowTest['result'].'</td>';            
             }
             echo '
-            <td class="serial_num"><a href="resultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
+            <td class="serial_num"><a href="invResultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
             $num++;
         }
         echo "</table>";

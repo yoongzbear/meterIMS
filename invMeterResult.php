@@ -1,4 +1,4 @@
-<?php include 'secure_TestLab.php'; ?>
+<?php include 'secure_Inv.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,7 @@
     <button id="btn-scan-qr">Scan QR</button>
     <button id="btn-cancel-scan">Cancel Scan</button>
 
-    <form id="meterForm" action="viewMeterResult.php" method="get" style="display:none;">
+    <form id="meterForm" action="invViewMeterResult.php" method="get" style="display:none;">
         <label for="serial_num">Meter Serial Number:</label>
         <input type="text" id="outputData" name="serial_num" readonly>
         <p>Is this the right meter serial number?</p>

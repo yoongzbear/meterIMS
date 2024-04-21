@@ -48,14 +48,8 @@ include 'navInv.php';
     <h4>Scan meter QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="invMeterResult.php">View Meter Result</a>
     </div>    
-
-    <div class="row">
-    <h4>Send to Lab</h4>
-    <div class='col'>
-      <a button type="button" class="btn btn-primary btn-lg" href="invInitialTest.php">Initial Ship Out</a>
-    </div>
-  </div>
 
 </div>
 

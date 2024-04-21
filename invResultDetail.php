@@ -1,5 +1,5 @@
 <?php
-include 'secure_TestLab.php';
+include 'secure_Inv.php';
 include 'connection.php';
 
 $test_id = $_GET['test_id'];

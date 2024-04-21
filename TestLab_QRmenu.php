@@ -34,7 +34,7 @@ include 'navLab.php';
 
 <p>Scan Meter QR</p>
 <button onclick="window.location.href= 'meterTest.php';">Meter Test Result Form</button>
-<button onclick="window.location.href= 'meterResult.php';">Meter Test Results</button>
+<button onclick="window.location.href= 'labMeterResult.php';">Meter Test Results</button>
 </body>
 
 <footer>
