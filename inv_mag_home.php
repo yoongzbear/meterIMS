@@ -12,6 +12,8 @@ $name = $_SESSION['name'];
     <title>OTTO Aqua</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
 
 <body>
@@ -30,9 +32,25 @@ include 'navInv.php';
   </ol>
 </nav>
 
-<h2>Welcome <?php echo $name ;?>!</h2>
- 
-<h3>Air Selangor Inventory Department Features</h3>
+<div class="container text-center mb-4">
+  <h2 class="display-2">Welcome <?php echo $name ;?>!</h2>
+</div>
+
+<div class="container-fluid mb-2">
+  <div class="d-flex align-items-center ">
+    <div class='d-flex align-items-center'>
+      <i class="bi bi-chevron-double-left" style="font-size: 40px;margin-left:20px;"></i>
+    </div>
+    <div class='d-flex align-items-center'>  
+      <h3 style="font-size: 38px;">Air Selangor Inventory Department<large class="text-warning"> Features</large></h3>
+    </div>
+    <div class='d-flex align-items-center'>  
+      <i class="bi bi-chevron-double-right" style="font-size: 40px;"></i>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
 <!-- START THE FEATURETTES -->
   <div class="row featurette">
     <div class="col-md-7">
@@ -99,11 +117,12 @@ include 'navInv.php';
     </div>
   </div>
 <!-- /END THE FEATURETTES -->
-
-</body>
+</div>
 
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
+
+</body>
 
 </html>
