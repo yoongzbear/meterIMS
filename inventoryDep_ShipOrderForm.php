@@ -21,6 +21,7 @@ ENDIF
 
 // generate qr
 	include ('connection.php');
+	$current_date = date('Y-m-d');
 ?>
 
 <script>
@@ -112,7 +113,7 @@ ENDIF
             </tr>
 			<tr>
 				<td>Ship Out Date</td>
-				<td><input type="date" name="ship_date" required></td> <!--validate date-->
+				<td><input type="date" name="ship_date" value="<?php echo $current_date; ?>" readonly></td>
 			</tr>
         </table>
 		<button class="submit" onclick="submitForm();" type="button">Scan Meter</button>
