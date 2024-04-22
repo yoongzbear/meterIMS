@@ -66,7 +66,7 @@
                     }
                 ?>
             </table>
-            <details class="mb-4">
+            <details>
             <summary><strong>Legend</strong></summary>
             <p class="mt-1">Quantities marked in red needs replenishing.</p>
             </details>
