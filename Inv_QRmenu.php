@@ -45,7 +45,7 @@ include 'navInv.php';
   </div>
 <br>
 
-    <h4>Scan meter QR</h4>
+    <h4>Scan Meter QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
       <a button type="button" class="btn btn-primary btn-lg" href="invMeterResult.php">View Meter Result</a>
