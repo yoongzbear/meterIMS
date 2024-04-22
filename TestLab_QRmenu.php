@@ -31,6 +31,7 @@ include 'navLab.php';
 
 <p>Scan Batch QR</p>
 <button onclick="window.location.href= 'receiveBatchTest.php';">Receive Batch for Warranty Test</button>
+<button onclick="window.location.href= 'LabDep_Scan_to_Inv.php';">Head to inventory department after initial testing</button>
 
 <p>Scan Meter QR</p>
 <button onclick="window.location.href= 'meterTest.php';">Meter Test Result Form</button>
