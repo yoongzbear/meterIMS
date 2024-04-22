@@ -110,24 +110,26 @@ include 'navInv.php';
         if ($row['install_date'] != NULL) {
             //if the meter is installed
             echo "<tr>
-                <td>Install Date:</td>
+                <th>Install Date:</th>
                 <td>" . $row['install_date'] . "</td>
             </tr>
             <tr>
-                <td>Install Address:</td>
+                <th>Install Address:</th>
                 <td>" . $row['install_address'] . "</td>
             </tr>";}
         echo "</table></div>";
     ?>
 
     
-<br>
-<div class="d-grid gap-2 col-6 mx-auto">
+<div class="d-grid gap-2 col-6 mx-auto mb-4">
 <button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?batch_id=<?= $batch_id; ?>'" title='Back To Batch Detail'>Back</button>
 </div>
-<br>
 
 </div>
+
+<footer>
+    <?php include "footer.php"?>
+</footer>
 
 </body>
 </html>
