@@ -49,7 +49,7 @@ include 'navInv.php';
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
     <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
-	<li class="breadcrumb-item active" aria-current="page">Receive Meter</li>
+	<li class="breadcrumb-item active" aria-current="page">Receive Meter - Create New Batch</li>
 
   </ol>
 </nav>
@@ -83,15 +83,18 @@ include 'navInv.php';
     }
 </script>
 
+
 <html>
+
 <!--Form to insert details of the meters in batch-->
-<div class="col align-self-center">
-    <h3>Create New Batch</h3>
-	<hr>
+<div class="col-md-4 align-self-center">
 
-    <form action="inventoryDep_AddBatch.php" name="addBatch" method="post">
 
-<div class="row">
+  <form action="inventoryDep_AddBatch.php" name="addBatch" method="post">
+  <h3>Create New Batch</h3>
+  <hr>
+
+<div class="row mb-4">
   <div class="col">
     <label class="col-form-label">Meter Type : </label>
   </div>
@@ -99,9 +102,8 @@ include 'navInv.php';
   	<input class="form-control form-control-sm" type="text" name="meter_type" required>
   </div>
 </div>
-<br>
 
-<div class="row">
+<div class="row mb-4">
   <div class="col">
     <label class="col-form-label">Meter Model : </label>
   </div>
@@ -109,14 +111,13 @@ include 'navInv.php';
   	<input class="form-control form-control-sm" type="text" name="meter_model" required>
   </div>
 </div>
-<br>
 
-<div class="row">
+<div class="row mb-4">
   <div class="col">
     <label class="col-form-label">Meter Size : </label>
   </div>
   <div class="col">
-  	<select name="meter_size" required>
+  	<select class="form-select" name="meter_size" required>
 		<option value="" disabled selected>Please Select Meter Size</option>
 		<option value="15">15</option>
 		<option value="20">20</option>
@@ -129,9 +130,8 @@ include 'navInv.php';
 	</select>
   </div>
 </div>
-<br>
 		
-<div class="row">
+<div class="row mb-4">
   <div class="col">
     <label class="col-form-label">Manufacturer Name : </label>
   </div>
@@ -146,18 +146,17 @@ include 'navInv.php';
 			}
 		?>
 	</select>
-</div>
+  </div>
 </div>				
-					
-<br>				
+
 		<button onclick="confirmation();" type="submit" class="btn btn-success">Add Meter</button>
 	</form>
 </div>
 
-</body>
-
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
+
+</body>
 
 </html>
