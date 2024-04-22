@@ -1,5 +1,5 @@
 <?php
-        //include ('secure_Inv.php');
+        include ('secure_Inv.php');
         include('connection.php');
         //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
         $serial_num = $_GET['serial_num'];
@@ -117,9 +117,9 @@ include 'navInv.php';
                 <th>Install Address:</th>
                 <td>" . $row['install_address'] . "</td>
             </tr>";}
-        echo "</table></div>";
+        echo "</table>";
     ?>
-
+</div>
     
 <div class="d-grid gap-2 col-6 mx-auto mb-4">
 <button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?batch_id=<?= $batch_id; ?>'" title='Back To Batch Detail'>Back</button>

@@ -1,6 +1,6 @@
-<!--<?php 
+<?php 
 include 'secure_Con.php';
-?>-->
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,10 +25,13 @@ include 'header.php';
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="con_home.php" title='Home Page - Contractor'>Home</a></li>
     <li class="breadcrumb-item"><a href="con_QRmenu.php" title='Meter Installation Page'>Meter Installation</a></li>
+    <li class="breadcrumb-item"><a href="meterInstall.php" title='Scan QR Page'>Scan QR - Meter Installation</a></li>
     <li class="breadcrumb-item active" aria-current="page">Meter Install Form</li>
 
   </ol>
 </nav>
+
+<div class='col align-self-center'>
 
     <?php
         include('connection.php');
@@ -43,10 +46,10 @@ include 'header.php';
             </script>";
             exit();
         } else {
-            echo "<div class='col align-self-center'>
+            echo "
             <h2 class='fs-1 text-uppercase'>Meter Info</h2>
             <hr class='border border-success border-2 opacity-50'>";
-            echo "<table class='table'><th colspan=2><h3>" . $rowMeter['serial_num'] . "</h3></th>
+            echo "<table class='table mb-4'><th colspan=2><h3>" . $rowMeter['serial_num'] . "</h3></th>
             
                 <tr>
                     <th>Type:</th>
@@ -80,22 +83,25 @@ include 'header.php';
 
             echo "<form id='meterForm' action='submitMeterInstallation.php' method='post'>    
                     <input type='hidden' id='serial_num' name='serial_num' value='$serial_num'>                
-                    <label for='installDate'>Installation Date:</label>
-                    <input type='date' id='installDate' name='installDate' required>
-                    <br>
-                    <label for='installAdd'>Installation Address:</label>
-                    <input type='text' id='installAdd' name='installAdd' required>
-                    <br>
-                    <input type='submit' value='Submit'>
+                    <label for='installDate'>Installation Date : </label>
+                    <input type='date' class='form-control mb-4'
+                    id='installDate' name='installDate' required>
+                    <label for='installAdd'>Installation Address : </label>
+                    <input type='text' class='form-control mb-4' id='installAdd' name='installAdd' required>
+                    <input type='submit' style='width:20%;' class='btn btn-primary mb-4' value='Submit'>
+
                 </form>
+
+                
             ";
         }
     ?>
-
-</body>
+</div>
 
 <footer>
 	<?php include 'footer.php';?>
-</footer>	
+</footer>
+
+</body>
 
 </html>

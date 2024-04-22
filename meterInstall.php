@@ -16,6 +16,7 @@ include 'secure_Con.php';
 <header>
 <?php 
 include 'header.php';
+include 'navCon.php';
 ?>
 
 </header>
@@ -24,7 +25,7 @@ include 'header.php';
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="con_home.php" title='Home Page - Contractor'>Home</a></li>
     <li class="breadcrumb-item"><a href="con_QRmenu.php" title='Meter Installation Page'>Meter Installation</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Meter Installation</li>
+    <li class="breadcrumb-item active" aria-current="page">Scan QR - Meter Installation</li>
 
   </ol>
 </nav>
@@ -34,16 +35,22 @@ include 'header.php';
     <h3>Meter Installation Form</h3>
     <p class="fst-italic">Please scan the QR code on the water meter after installation.</p>
     <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas> <br>
-    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark">Scan QR</button>
-    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark">Cancel Scan</button>
-    
-    <form id="meterForm" action="meterInstallForm.php" method="post" style="display:none;">
-        <label for="serial_num">Meter Serial Number:</label>
-        <input type="text" id="outputData" name="serial_num" readonly>
-        <p>Is this the right meter serial number?</p>
-        <input type="submit" value="Yes">
-        <button id="btn-cancel">No</button>
-    </form>
+    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
+    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
+
+    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="meterInstallForm.php" method="post" style="display:none;">
+            <form id="meterSubmitForm" action="meterInstallForm.php" method="post">
+                <div class="modal-body p-4 text-center">
+                    <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter serial number?</h5>
+                    <p class="mb-0">Meter Serial Number:</p>
+                    <input type="text" id="outputData" name="serial_num" readonly>
+                </div>
+                <div class="modal-footer flex-nowrap p-0">
+                    <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                    <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
+                </div>
+            </form>
+    </div>
 
     <script>
         //redirect to the meter install page if cancelled after scanning
@@ -57,10 +64,11 @@ include 'header.php';
     <script src="qrReader.js"></script>
 
 </div>
-</body>
 
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
+
+</body>
 
 </html>
