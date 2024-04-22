@@ -27,7 +27,7 @@ meter_complaint_model.fit(X_train, y_meter_complaint_train)
 meter_leak_model.fit(X_train, y_meter_leak_train)
 
 y_pred_faulty_program = faulty_program_model.predict(X_test)
-mse_faulty_program = mean_squared_error(y_faulty_program_test, y_pred_faulty_program)
+mse_faulty_program = mean_squared_error(y_faulty_program_test, y_pred_faulty_program) #could be used in the future to test accuracy of the model
 
 y_pred_meter_complaint = meter_complaint_model.predict(X_test)
 mse_meter_complaint = mean_squared_error(y_meter_complaint_test, y_pred_meter_complaint)
