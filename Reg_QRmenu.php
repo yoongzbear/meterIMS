@@ -10,6 +10,7 @@ include 'secure_Reg.php';
     <title>OTTO Aqua</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -29,21 +30,42 @@ include 'navReg.php';
   </ol>
 </nav>
 
+<div class="container text-center">
+<h4>Scan Batch QR</h4>
+  <div class="row justify-content-around mb-5">
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href=".php">Store Arrival</a>
+    </div>
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href=".php">Ship Out</a>
+    </div>
+  </div>
 
-<p>Scan Batch QR</p>
-<button onclick="window.location.href= '';">Store Arrival</button>
-<button onclick="window.location.href= '';">Ship Out</button>
-<P>Scan Meter QR</P>
-<button onclick="window.location.href= '';">Installation Departure</button>
-<button onclick="window.location.href= '';">Testing Departure</button>
-<button onclick="window.location.href= 'RegDep_Scan_View_meter_info.php';">View Meter Info</button>
-<button onclick="window.location.href='regWarrantyUpdate.php';">Warranty Update</button>
+  <h4>Scan Meter QR</h4>
+  <div class="row justify-content-around">
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg mb-3" href=".php">Installation Departure</a>
+    </div>
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg mb-3" href=".php">Testing Departure</a>
+    </div>
+  </div>  
+  <div class="row justify-content-around mb-5">
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href="RegDep_Scan_View_meter_info.php">View Meter Info</a>
+    </div>
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href="regWarrantyUpdate.php">Warranty Update</a>
+    </div>
+    </div>    
+  </div>
 
-
-</body>
+</div>
 
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
+
+</body>
 
 </html>

@@ -29,35 +29,33 @@ include 'navInv.php';
 </nav>
 
 <div class="container text-center">
-  <div class="row">
+  <div class="row mb-5">
     <h4>Generate QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
     </div>    
   </div>
-<br>
 
-  <div class="row">
+  <div class="row mb-5">
     <h4>Scan Batch QR</h4>
     <div class='col'>
       <a button type="button" class="btn btn-primary btn-lg" href="">Ship Out</a>
     </div>
   </div>
-<br>
 
+  <div class="row mb-5">
     <h4>Scan Meter QR</h4>
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
+      <a button type="button" class="btn btn-primary btn-lg mb-3" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
       <a button type="button" class="btn btn-primary btn-lg" href="invMeterResult.php">View Meter Result</a>
     </div>    
-
+  </div>
 </div>
-
-
-</body>
 
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
+
+</body>
 
 </html>

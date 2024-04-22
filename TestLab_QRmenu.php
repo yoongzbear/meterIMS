@@ -29,17 +29,32 @@ include 'navLab.php';
   </ol>
 </nav>
 
-<p>Scan Batch QR</p>
-<button onclick="window.location.href= 'receiveBatchTest.php';">Receive Batch for Warranty Test</button>
-<button onclick="window.location.href= 'LabDep_Scan_to_Inv.php';">Head to inventory department after initial testing</button>
+<div class="container text-center">
+  <div class="row justify-content-around mb-5">
+    <h4>Scan Batch QR</h4>
+    <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href="receiveBatchTest.php">Receive Batch for Warranty Test</a>
+      </div>
+      <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href="LabDep_Scan_to_Inv.php">Send to Inventory Department</a>
+    </div>    
+  </div>
 
-<p>Scan Meter QR</p>
-<button onclick="window.location.href= 'meterTest.php';">Meter Test Result Form</button>
-<button onclick="window.location.href= 'labMeterResult.php';">Meter Test Results</button>
-</body>
+  <div class="row justify-content-around mb-5">
+    <h4>Scan Meter QR</h4>
+    <div class='col'>
+      <a button type="button" class="btn btn-primary btn-lg mb-3" href="meterTest.php">Meter Test Result Form</a>
+      </div>
+      <div class="col">
+      <a button type="button" class="btn btn-primary btn-lg" href="labMeterResult.php">Meter Test Result</a>
+    </div>
+  </div>
+</div>
 
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
+
+</body>
 
 </html>
