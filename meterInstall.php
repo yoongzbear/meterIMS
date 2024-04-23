@@ -34,7 +34,7 @@ include 'navCon.php';
 
     <h3>Meter Installation Form</h3>
     <p class="fst-italic">Please scan the QR code on the water meter after installation.</p>
-    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas> <br>
+    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
     <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
     <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
 
@@ -42,7 +42,7 @@ include 'navCon.php';
             <form id="meterSubmitForm" action="meterInstallForm.php" method="post">
                 <div class="modal-body p-4 text-center">
                     <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter serial number?</h5>
-                    <p class="mb-0">Meter Serial Number:</p>
+                    <p class="mb-0">Meter Serial Number : </p>
                     <input type="text" id="outputData" name="serial_num" readonly>
                 </div>
                 <div class="modal-footer flex-nowrap p-0">
