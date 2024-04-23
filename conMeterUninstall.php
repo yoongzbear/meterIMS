@@ -3,24 +3,27 @@ include 'secure_Con.php';
 include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
-    $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
-    $statuscheckrun = mysqli_query($connection, $statuscheckquery);
-    $statuscheckrow = mysqli_fetch_assoc($statuscheckrun);
-    if($statuscheckrow['meter_status'] == 'UNINSTALLED'){
-        echo "<script>alert('Error: Meter is already uninstalled!');</script>";
-        header("Refresh:0");
-        exit();
-    }
     try{
-    $meterinfoquery = "UPDATE meter SET meter_status = 'UNINSTALLED' WHERE serial_num = '$serialnum'";
-    $meterinforun = mysqli_query($connection, $meterinfoquery);
-    if($meterinforun){
-        echo "<script>alert('Meter uninstalled successfully!');</script>";
-        header("Refresh:0");
-    } else {
-        echo "<script>alert('Failed to uninstall meter!');</script>";
-        header("Refresh:0");
-    }
+        $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
+        $statuscheckrun = mysqli_query($connection, $statuscheckquery);
+        $statuscheckrow = mysqli_fetch_assoc($statuscheckrun);
+        if(mysqli_num_rows($statuscheckrun) == 0){
+            throw new Exception();
+        }
+        if($statuscheckrow['meter_status'] == 'UNINSTALLED'){
+            echo "<script>alert('Error: Meter is already uninstalled!');</script>";
+            header("Refresh:0");
+            exit();
+        }
+        $meterinfoquery = "UPDATE meter SET meter_status = 'UNINSTALLED' WHERE serial_num = '$serialnum'";
+        $meterinforun = mysqli_query($connection, $meterinfoquery);
+        if($meterinforun){
+            echo "<script>alert('Meter uninstalled successfully!');</script>";
+            header("Refresh:0");
+        } else {
+            echo "<script>alert('Failed to uninstall meter!');</script>";
+            header("Refresh:0");
+        }
 }
     catch(Exception $e){
         echo "<script>alert('Error: Invalid Serial Number. Please try again.');</script>";
