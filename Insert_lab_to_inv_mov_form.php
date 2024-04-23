@@ -1,6 +1,6 @@
 <?php
-//include ('secure_TestLab.php'); 
-$batch_id = $_POST['batch_id'];
+include ('secure_TestLab.php'); 
+$batch_id = $_GET['batch_id'];
 
 ?>
 <form method="post" action="Insert_lab_to_inv_mov_process.php">
