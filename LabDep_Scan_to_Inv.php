@@ -47,7 +47,7 @@ include 'connection.php';
         </div>
         <div id="meterForm" class="col-lg-12 mt-5" style="display: none; width: 50%; margin:auto;">
             <h3 class="text-center">Is this the right batch id ?</h3>
-            <form method="POST" name="batch_id" class="text-center" action="Insert_lab_to_inv_mov_form.php">
+            <form method="POST" name="batch_id" class="text-center" action="check_batch_exist_labTOinv.php">
                 <label>Batch ID:</label>
                 <input type="text" id="outputData" name="batch_id" required readonly>
                 <button type="submit" class="btn btn-success m-2 pt-1 pb-1">Yes</button>
