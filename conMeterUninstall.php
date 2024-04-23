@@ -72,8 +72,8 @@ if(ISSET($_POST['serialnum'])){
             <h2 class="text-center">Meter Uninstallation</h2>
             <p class="text-center mb-4">Please scan the QR code on the meter to mark it as uninstalled.</p>
             <canvas hidden="" id="qr-canvas"></canvas>
-            <button class= "btn btn-dark" id="btn-scan-qr" type="button">Click here to scan</button>
-            <button class="btn btn-dark mt-4" id="btn-cancel-scan" type="button" hidden="">Click here to cancel scanning</button>
+            <button class= "btn btn-dark" id="btn-scan-qr" type="button">Click to Scan</button>
+            <button class="btn btn-dark mt-4" id="btn-cancel-scan" type="button" hidden="">Click to Cancel Scanning</button>
         </div>
 
         <div id="meterForm" class="col-lg-12 mt-5 border border-warning shadow mb-4 rounded" style="display: none; width: 50%; margin:auto;">
