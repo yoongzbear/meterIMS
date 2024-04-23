@@ -32,7 +32,7 @@ include 'navCon.php';
 
 <div class="container text-center">
   <div class="row mb-5">
-    <h4>Scan Batch QR</h4>
+    <h4>Scan Meter QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="meterInstall.php">Installation Proof</a>
     </div>    
