@@ -7,7 +7,7 @@ if(ISSET($_POST['serialnum'])){
     $statuscheckrun = mysqli_query($connection, $statuscheckquery);
     $statuscheckrow = mysqli_fetch_assoc($statuscheckrun);
     if($statuscheckrow['meter_status'] == 'UNINSTALLED'){
-        echo "<script>alert('Meter is already uninstalled!');</script>";
+        echo "<script>alert('Error: Meter is already uninstalled!');</script>";
         header("Refresh:0");
         exit();
     }

@@ -3,6 +3,14 @@ include 'secure_Reg.php';
 include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
+    $warrantycheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
+    $warrantycheckrun = mysqli_query($connection, $warrantycheckquery);
+    $warrantycheck = mysqli_fetch_assoc($warrantycheckrun);
+    if($warrantycheck['meter_status'] == 'SENT FOR WARRANTY'){
+        echo "<script>alert('Error: Meter has already been sent for warranty.');</script>";
+        header("Refresh:0");
+        exit();
+    }
     try{
     $meterinfoquery = "SELECT batch.meter_type, batch.meter_model, batch.meter_size FROM batch, meter WHERE meter.batch_id = batch.batch_id AND meter.serial_num = '$serialnum'";
     $meterinforun = mysqli_query($connection, $meterinfoquery);
@@ -39,6 +47,7 @@ if(ISSET($_POST['serialnum'])){
     if($batchresult && $meterresult && $movementquery){
         echo "<script>alert('Meter sent to lab successfully! You will be redirected to another window to print the new Batch QR for warranty claim.');</script>";
         echo "<script>window.open('regWarrantyBatchID.php?Batch_ID=$batchid[batch_id]')</script>";
+        header("Refresh:250");
     } else {
         echo "<script>alert('Failed to send meter to lab!');</script>";
         header("Refresh:0");
