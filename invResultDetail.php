@@ -3,7 +3,7 @@ include 'secure_Inv.php';
 include 'connection.php';
 
 $test_id = $_GET['test_id'];
-$sql = "SELECT * FROM lab_result LEFT JOIN warranty_defect on lab_result.defect_id = warranty_defect.defect_id WHERE lab_result.test_id = 22;";
+$sql = "SELECT * FROM lab_result LEFT JOIN warranty_defect on lab_result.defect_id = warranty_defect.defect_id WHERE lab_result.test_id = '$test_id';";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -17,13 +17,23 @@ echo "<div class='col align-self-center'>
                 <td>" . $row['receive_date'] . "</td>
             </tr>
             <tr>
-                <th>Test Date:</th>
-                <td>" . $row['test_date'] . "</td>
-            </tr>
+                <th>Test Date:</th>";
+                if ($row['test_date'] == NULL) {
+                    echo "<td>N/A</td>";
+                } else {
+                    echo "<td>" . $row['test_date'] . "</td>";
+                }
+            echo "</tr>
             <tr>
-                <th>Result:</th>
-                <td>" . $row['result'] . "</td>
-            </tr>
+                <th>Result:</th>";
+                if ($row['result'] == 'PASS') {
+                    echo "<td style='color: green;'>" . $row['result'] . "</td>";
+                } else if ($row['result'] == 'FAIL') {
+                    echo "<td style='color: red;'>" . $row['result'] . "</td>";
+                } else {
+                    echo "<td>NOT TESTED</td>";
+                }
+            echo "</tr>
             ";
         if ($row['result'] == 'FAIL') {
             echo "<tr>

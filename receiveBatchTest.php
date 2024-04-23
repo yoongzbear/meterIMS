@@ -41,7 +41,7 @@ include 'navLab.php';
                 <div class="modal-body p-4 text-center">
                     <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter batch ID?</h5>
                     <p class="mb-0">Meter Batch ID : </p>
-                    <input type="text" id="outputData" name="serial_num" readonly>
+                    <input type="text" id="outputData" name="batch_id" readonly>
                 </div>
                 <div class="modal-footer flex-nowrap p-0">
                     <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>

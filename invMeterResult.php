@@ -1,8 +1,4 @@
-<?php 
-include ('secure_Inv.php'); 
-include('connection.php');
-
-?>
+<?php include ('secure_Inv.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +28,6 @@ include 'navInv.php';
   </ol>
 </nav>
 
-
 <div class="col align-self-center">
 
 <h3>View Meter Result</h3>
@@ -57,7 +52,6 @@ include 'navInv.php';
 </div>
 
     <script>
-
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
@@ -73,5 +67,4 @@ include 'navInv.php';
 </footer>	
 
 </body>
-
 </html>

@@ -1,5 +1,29 @@
 <?php 
 include 'secure_Con.php';
+include 'connection.php';
+if(ISSET($_POST['serial_num'])){
+    $serial_num = $_POST['serial_num'];
+    try{
+        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num';";
+        $resultMeter = mysqli_query($connection, $sqlMeter);
+        $rowMeter = mysqli_fetch_assoc($resultMeter);
+        if (mysqli_num_rows($resultMeter) == 0) {
+            throw new Exception();
+        }
+        if ($rowMeter['meter_status'] == 'INSTALLED') {
+            echo "<script>alert('Meter is already installed! You are not allowed to fill in the form for an installed meter.');
+            window.location.href='meterInstall.php';
+            </script>";
+            exit();
+        }
+}
+    catch(Exception $e){
+        echo "<script>alert('Error: Invalid Serial Number. Please try again.');
+        window.location.href='meterInstall.php';
+        </script>";
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,69 +57,45 @@ include 'header.php';
 
 <div class='col align-self-center'>
 
-    <?php
-        include('connection.php');
-        $serial_num = $_POST['serial_num'];
-
-        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num';";
-        $resultMeter = mysqli_query($connection, $sqlMeter);
-        $rowMeter = mysqli_fetch_assoc($resultMeter);
-        if ($rowMeter['meter_status'] == 'INSTALLED') {
-            echo "<script>alert('Meter is already installed! You are not allowed to fill in the form for an installed meter.');
-            window.location.href='meterInstall.php';
-            </script>";
-            exit();
-        } else {
-            echo "
-            <h2 class='fs-1 text-uppercase'>Meter Info</h2>
-            <hr class='border border-success border-2 opacity-50'>";
-            echo "<table class='table mb-4'><th colspan=2><h3>" . $rowMeter['serial_num'] . "</h3></th>
-            
-                <tr>
-                    <th>Type:</th>
-                    <td>" . $rowMeter['meter_type'] . "</td>
-                </tr>
-                <tr>
-                    <th>Model:</th>
-                    <td>" . $rowMeter['meter_model'] . "</td>
-                </tr>
-                <tr>
-                    <th>Size:</th>
-                    <td>" . $rowMeter['meter_size'] . "</td>
-                </tr>
-                <tr>
-                    <th>Age:</th>
-                    <td>" . $rowMeter['age'] . "</td>
-                </tr>
-                <tr>
-                    <th>Mileage:</th>
-                    <td>" . $rowMeter['mileage'] . "</td>
-                </tr>                
-                <tr>
-                    <th>Manufacture Year:</th>
-                    <td>" . $rowMeter['manufactured_year'] . "</td>
-                </tr>
-                <tr>
-                    <th>Region Store:</th>
-                    <td>" . $rowMeter['location_name'] . "</td>
-                </tr></table>
-                ";
-
-            echo "<form id='meterForm' action='submitMeterInstallation.php' method='post'>    
-                    <input type='hidden' id='serial_num' name='serial_num' value='$serial_num'>                
-                    <label for='installDate'>Installation Date : </label>
-                    <input type='date' class='form-control mb-4'
-                    id='installDate' name='installDate' required>
-                    <label for='installAdd'>Installation Address : </label>
-                    <input type='text' class='form-control mb-4' id='installAdd' name='installAdd' required>
-                    <input type='submit' style='width:20%;' class='btn btn-primary mb-4' value='Submit'>
-
-                </form>
-
-                
-            ";
-        }
-    ?>
+<h2 class='fs-1 text-uppercase'>Meter Info</h2>
+<hr class='border border-success border-2 opacity-50'>
+<table class='table mb-4'><th colspan=2><h3><?php echo $rowMeter['serial_num'];?></h3></th>
+    <tr>
+        <th>Type:</th>
+        <td><?php echo $rowMeter['meter_type'];?></td>
+    </tr>
+    <tr>
+        <th>Model:</th>
+        <td><?php echo $rowMeter['meter_model'];?></td>
+    </tr>
+    <tr>
+        <th>Size:</th>
+        <td><?php echo $rowMeter['meter_size'];?></td>
+        </tr>
+        <tr>
+            <th>Age:</th>
+            <td><?php echo $rowMeter['age'];?></td>
+        </tr>
+        <tr>
+            <th>Mileage:</th>
+            <td><?php echo $rowMeter['mileage'];?></td>
+        </tr>                
+        <tr>
+            <th>Manufacture Year:</th>
+            <td><?php echo $rowMeter['manufactured_year'];?></td>
+        </tr>
+        <tr>
+            <th>Region Store:</th>
+            <td><?php echo $rowMeter['location_name'];?></td>
+        </tr></table>
+        <form id='meterForm' action='submitMeterInstallation.php' method='post'>    
+            <input type='hidden' id='serial_num' name='serial_num' value='$serial_num'>                
+            <label for='installDate'>Installation Date : </label>
+            <input type='date' class='form-control mb-4'id='installDate' name='installDate' required>
+            <label for='installAdd'>Installation Address : </label>
+            <input type='text' class='form-control mb-4' id='installAdd' name='installAdd' required>
+            <input type='submit' style='width:20%;' class='btn btn-primary mb-4' value='Submit'>
+        </form>
 </div>
 
 <footer>

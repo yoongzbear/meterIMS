@@ -1,17 +1,29 @@
 <?php
-        include ('secure_Inv.php');
-        include('connection.php');
-        $serial_num = $_GET['serial_num'];
+include 'connection.php';
+include 'secure_Inv.php';
+if(ISSET($_GET['serial_num'])){
+    $serial_num = $_GET['serial_num'];
+    try{
         $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id WHERE serial_num = '$serial_num'";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
+        if (mysqli_num_rows($result) == 0) {
+            throw new Exception();
+        }
 
         //sql to get the test results
         $sqlTest = "SELECT * FROM lab_result WHERE serial_num = '$serial_num';";
         $resultTest = mysqli_query($connection, $sqlTest);        
-
+        
         $num = 1;
-        ?>
+    }
+    catch(Exception $e){
+        echo "<script>alert('Error: Invalid Serial Number. Please try again.');
+        window.location.href='invMeterResult.php';
+        </script>";
+        exit();
+    }
+} ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,49 +56,43 @@ include 'navInv.php';
 </nav>
 
 <div class="col align-self-center">
-
-    <?php
-        //type, model, size, age, mileage, manufacturer, manu year, status, install date, install address, location of store
-        echo "<div class='col align-self-center'>
+    <div class='col align-self-center'>
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
         <hr class='border border-success border-2 opacity-50'>";
-        echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>
-        
+        <table class='table'><th colspan=2><h3><?php echo $row['serial_num'];?></h3></th>
             <tr>
                 <th>Type:</th>
-                <td>" . $row['meter_type'] . "</td>
+                <td><?php echo $row['meter_type'];?></td>
             </tr>
             <tr>
                 <th>Model:</th>
-                <td>" . $row['meter_model'] . "</td>
+                <td><?php echo $row['meter_model'];?></td>
             </tr>
             <tr>
                 <th>Size:</th>
-                <td>" . $row['meter_size'] . "</td>
+                <td><?php echo $row['meter_size'];?></td>
             </tr>
             <tr>
                 <th>Age:</th>
-                <td>" . $row['age'] . "</td>
+                <td><?php echo $row['age'];?></td>
             </tr>
             <tr>
                 <th>Mileage:</th>
-                <td>" . $row['mileage'] . "</td>
+                <td><?php echo $row['mileage'];?></td>
             </tr>
             <tr>
                 <th>Manufacturer:</th>
-                <td>" . $row['manu_name'] . "</td>
+                <td><?php echo $row['manu_name'];?></td>
             </tr>
             <tr>
                 <th>Manufacture Year:</th>
-                <td>" . $row['manufactured_year'] . "</td>
+                <td><?php echo $row['manufactured_year'];?></td>
             </tr>
             <tr>
                 <th>Status:</th>
-                <td>" . $row['meter_status'] . "</td>
+                <td><?php echo $row['meter_status'];?></td>
             </tr>
-            ";
-        echo "</table></div>";
-        ?>
+        </table></div>
 
         <table>
             <tr><th>No</th>
@@ -98,24 +104,22 @@ include 'navInv.php';
         while($rowTest = mysqli_fetch_array($resultTest)) {
             echo '<tr>
                 <td>'.$num.'</td>';
-            //can color the font of the result? if not tested yet = grey, if pass = green, if fail = red
             if ($rowTest['result'] == NULL) {
                 echo '<td>N/A</td>
-                <td>Not tested yet</td>';
+                <td>NOT TESTED</td>';
             } else {
-                echo '<td>'.$rowTest['test_date'].'</td>
-                <td>'.$rowTest['result'].'</td>';            
+                echo '<td>'.$rowTest['test_date'].'</td>';            
+                if ($rowTest['result'] == 'PASS') {
+                    echo "<td style='color: green;'>" . $rowTest['result'] . "</td>";
+                } else if ($rowTest['result'] == 'FAIL') {
+                    echo "<td style='color: red;'>" . $rowTest['result'] . "</td>";
+                }
             }
-            echo '
-            <td class="serial_num"><a href="invResultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
+            echo '<td class="serial_num"><a href="invResultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
             $num++;
         }
         echo "</table>";
     ?>
-
-    
-<br>
-
 </div>
 
 </body>
