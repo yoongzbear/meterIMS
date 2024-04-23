@@ -46,7 +46,7 @@ include 'connection.php';
         </div>
         <div id="meterForm" class="col-lg-12 mt-5" style="display: none; width: 50%; margin:auto;">
             <h3 class="text-center">Is this the right serial number for the meter?</h3>
-            <form method="POST" name="serial_num" class="text-center" action="RegDep_view_meter_info.php">
+            <form method="POST" name="serial_num" class="text-center" action="reg_check_serial_num_view_meterInfo.php">
                 <label>Meter Serial Number:</label>
                 <input type="text" id="outputData" name="serial_num" required readonly>
                 <button type="submit" class="btn btn-success m-2 pt-1 pb-1">Yes</button>
