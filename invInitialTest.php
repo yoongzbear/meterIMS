@@ -53,13 +53,13 @@ if(ISSET($_POST['batchID'])){
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Home</li>
         <li class="breadcrumb-item active" aria-current="page">QRCode</li>
-        <li class="breadcrumb-item active" aria-current="page">Initial Ship Out</li>
+        <li class="breadcrumb-item active" aria-current="page">Initial Ship Out To Lab</li>
     </ol>
     </nav>
     <section id="meteruninstall">
         <div class="container col-lg-12 text-center" id="qrscanner">
             <h2 class="text-center">Send Batch to Lab</h2>
-            <p class="text-center mb-4">Please scan the QR code for the batch to send it to lab for initial testiing.</p>
+            <p class="text-center mb-4">Please scan the QR code for the batch to send it to lab for initial testing.</p>
             <canvas hidden="" id="qr-canvas"></canvas>
             <button class= "btn btn-dark" id="btn-scan-qr" type="button">Click here to scan</button>
             <button class="btn btn-dark mt-4" id="btn-cancel-scan" type="button" hidden="">Click here to cancel scanning</button>

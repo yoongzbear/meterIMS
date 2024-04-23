@@ -39,6 +39,7 @@ include 'navInv.php';
   <div class="row mb-5">
     <h4>Scan Batch QR</h4>
     <div class='col'>
+      <a button type="button" class="btn btn-primary btn-lg mb-3" href="invInitialTest.php">Initial Ship Out To Lab</a>
       <a button type="button" class="btn btn-primary btn-lg" href="">Ship Out</a>
     </div>
   </div>
