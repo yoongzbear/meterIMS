@@ -42,7 +42,7 @@ include 'navInv.php';
     <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
 
     <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="InvDep_view_meter_info.php" method="post" style="display:none;">
-            <form id="meterSubmitForm" action="InvDep_view_meter_info.php" method="post">
+            <form id="meterSubmitForm" action="inv_check_serial_num_view_meterInfo.php" method="post">
                 <div class="modal-body p-4 text-center">
                     <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter serial number?</h5>
                     <p class="mb-0">Meter Serial Number : </p>
