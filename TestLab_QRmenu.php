@@ -33,7 +33,7 @@ include 'navLab.php';
   <div class="row justify-content-around mb-5">
     <h4>Scan Batch QR</h4>
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="receiveBatchTest.php">Receive Batch for Warranty Test</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="receiveBatchTest.php">Receive for Testing</a>
       </div>
       <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="LabDep_Scan_to_Inv.php">Send to Inventory Department</a>

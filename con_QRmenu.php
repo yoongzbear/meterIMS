@@ -34,16 +34,12 @@ include 'navCon.php';
   <div class="row mb-5">
     <h4>Scan Meter QR</h4>
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="meterInstall.php">Installation Proof</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="meterInstall.php">Meter Installation</a>
     </div>    
   </div>
-
-  <div class="row mb-5">
-    <h4>Meter Uninstallation</h4>
     <div class='col'>
       <a button type="button" class="btn btn-primary btn-lg" href="conMeterUninstall.php">Meter Uninstallation</a>
     </div>
-  </div>
 </div>
 
 <footer>

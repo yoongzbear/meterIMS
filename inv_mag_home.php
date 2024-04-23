@@ -54,9 +54,10 @@ include 'navInv.php';
 <!-- START THE FEATURETTES -->
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">Register new meters received from manufacturers.</h2>
-      <p class="lead">Generate new meter QR codes and assign meters into a new batch.</p>
+      <h2 class="featurette-heading fw-normal lh-1">Register meters received</h2>
+      <p class="lead">Generate new meter QR codes received from manufacturers and assign meters into a new batch. Assign passed meters into batches as well after testing at the Test Lab</p>
       <p>Quick access to register new meters <a href="inventoryDep_AddBatchForm.php">here</a>.</p>
+      <p>Quick access to receive passed meters <a href="">here</a>.</p>
     </div>
       <div class="col-md-5">
         <img src="imgs/create-a-qr-code.png" width="100%" height="100%">
@@ -67,10 +68,10 @@ include 'navInv.php';
 
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading fw-normal lh-1">Ship out meter batches.</h2>
+      <h2 class="featurette-heading fw-normal lh-1">Ship out meter batches</h2>
         <p class="lead">Scan the batch's QR code to record the batch movement to Test Lab or Region Stores.</p>
-        <p>Quick access to ship out meters to Test Lab <a href="">here</a>.</p>
-        <p>Quick access to ship out meters to Region Store <a href="">here</a>.</p>
+        <p>Quick access to ship out meters to Test Lab for initial testing <a href="invInitialTest.php">here</a>.</p>
+        <p>Quick access to ship out meters to Region Store <a href="inventoryDep_ShipOrderForm">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">
@@ -81,7 +82,7 @@ include 'navInv.php';
 
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">View water meter information.</h2>
+      <h2 class="featurette-heading fw-normal lh-1">View water meter information</h2>
         <p class="lead">Scan meter's QR code to view their information or view their past lab tests' results.</p>
         <p>Quick access to view meter's information <a href="InvDep_Scan_View_meter_info.php">here</a>.</p>
         <p>Quick access to view meter's lab test result <a href="invMeterResult.php">here</a>.</p>
@@ -95,7 +96,7 @@ include 'navInv.php';
 
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading fw-normal lh-1">Make forecast on water meter demand.</h2>
+      <h2 class="featurette-heading fw-normal lh-1">Make forecast on water meter demand</h2>
         <p class="lead">Enter the water meter demand history and let the system generate a forecast for future meter demand.</p>
         <p>Quick access to meter forecast <a href="">here</a>.</p>
     </div>
@@ -108,7 +109,7 @@ include 'navInv.php';
 
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">View meter's current movement.</h2>
+      <h2 class="featurette-heading fw-normal lh-1">View meter's current movement</h2>
         <p class="lead">Track the movement of all meters in their batches. The details of the batch can also be viewed along with the list of meters in the batch.</p>
         <p>Quick access to view meter movement tracking <a href="mov_track_view.php">here</a>.</p>
     </div>

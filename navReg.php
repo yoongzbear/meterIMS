@@ -7,7 +7,7 @@
         <li><a href="reg_home.php" class="nav-link">Home</a></li>
         <li><a href="Reg_QRmenu.php" class="nav-link">Scan QRcode</a></li>
         <li><a href="regInvLevel.php" class="nav-link">View Inventory Level</a></li>
-        <li><a href="" class="nav-link">View Meter Warranty</a></li>
+        <li><a href="warranty_list.php" class="nav-link">View Meter Warranty</a></li>
         
       </ul>
 

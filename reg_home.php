@@ -2,6 +2,12 @@
 include 'secure_Reg.php';
 include 'connection.php';
 $name = $_SESSION['name'];
+$username = $_SESSION['username'];
+
+//sql to get region store of the user
+$sql = "SELECT location_name FROM location WHERE username = '$username'";
+$result = mysqli_query($connection, $sql);
+$row = mysqli_fetch_assoc($result);
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +40,7 @@ include 'navReg.php';
 
 <div class="container text-center mb-4">
   <h2 class="display-2">Welcome <?php echo $name ;?>!</h2>
+  <h3 class="display-6">Region Store: <?php echo $row['location_name'];?></h3>
 </div>
 
 <div class="container-fluid mb-2">
@@ -42,7 +49,7 @@ include 'navReg.php';
       <i class="bi bi-chevron-double-left" style="font-size: 40px;margin-left:20px;"></i>
     </div>
     <div class='d-flex align-items-center'>  
-      <h3 style="font-size: 38px;">Air Selangor Inventory Department<large class="text-warning"> Features</large></h3>
+      <h3 style="font-size: 38px;">Air Selangor Region Store<large class="text-warning"> Features</large></h3>
     </div>
     <div class='d-flex align-items-center'>  
       <i class="bi bi-chevron-double-right" style="font-size: 40px;"></i>
@@ -51,15 +58,15 @@ include 'navReg.php';
 </div>
 
 <div class="container-fluid">
-<!-- START THE FEATURETTES -->
+<!--START THE FEATURETTES-->
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">Register new meters received from manufacturers.</h2>
-      <p class="lead">Generate new meter QR codes and assign meters into a new batch.</p>
-      <p>Quick access to register new meters <a href="inventoryDep_AddBatchForm.php">here</a>.</p>
+      <h2 class="featurette-heading fw-normal lh-1">Receive meter batch after arrival</h2>
+      <p class="lead">Scan the batch's QR code received to record the meters at <?php echo $row['location_name'];?> Region Store.</p>
+      <p>Quick access to receive meters <a href=".php">here</a>.</p>
     </div>
       <div class="col-md-5">
-        <img src="imgs/create-a-qr-code.png" width="100%" height="100%">
+        <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">
       </div>
   </div>
 
@@ -67,13 +74,13 @@ include 'navReg.php';
 
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading fw-normal lh-1">Ship out meter batches.</h2>
-        <p class="lead">Scan the batch's QR code to record the batch movement to Test Lab or Region Stores.</p>
-        <p>Quick access to ship out meters to Test Lab <a href="">here</a>.</p>
-        <p>Quick access to ship out meters to Region Store <a href="">here</a>.</p>
+      <h2 class="featurette-heading fw-normal lh-1">Record meter's departure from region store</h2>
+        <p class="lead">Scan the meter's QR code to record the meter departure for installation at premises and for warranty testing.</p>
+        <p>Quick access to send out meter for installation <a href="">here</a>.</p>
+        <p>Quick access to send out meter for warranty testing <a href="regWarrantyUpdate.php">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">
+      <img src="imgs/scan-qr2.jpg" width="100%" height="100%">
     </div>
   </div>
 
@@ -81,13 +88,12 @@ include 'navReg.php';
 
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">View water meter information.</h2>
-        <p class="lead">Scan meter's QR code to view their information or view their past lab tests' results.</p>
-        <p>Quick access to view meter's information <a href="InvDep_Scan_View_meter_info.php">here</a>.</p>
-        <p>Quick access to view meter's lab test result <a href="invMeterResult.php">here</a>.</p>
+      <h2 class="featurette-heading fw-normal lh-1">Ship meters out</h2>
+        <p class="lead">Insert meters' shipping information to other Region Stores or Inventory Department.</p>
+        <p>Quick access to ship out meter form <a href="">here</a>.</p>
     </div>
     <div class="col-md-5">
-      <img src="imgs/scan-qr.jpg" width="100%" height="100%">
+      <img src="imgs/ship-box.jpg" width="100%" height="100%">
     </div>
   </div>
 
@@ -95,9 +101,9 @@ include 'navReg.php';
 
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading fw-normal lh-1">Make forecast on water meter demand.</h2>
-        <p class="lead">Enter the water meter demand history and let the system generate a forecast for future meter demand.</p>
-        <p>Quick access to meter forecast <a href="">here</a>.</p>
+      <h2 class="featurette-heading fw-normal lh-1">View meter inventory level</h2>
+        <p class="lead">Check the meter inventory level at <?php echo $row['location_name'];?> Region Store. Meter models that needs to be ordered urgently are flagged.</p>
+        <p>Quick access to meter inventory level list <a href="regInvLevel.php">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/demand-forecast.png" width="100%" height="100%">
@@ -108,15 +114,28 @@ include 'navReg.php';
 
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">View meter's current movement.</h2>
-        <p class="lead">Track the movement of all meters in their batches. The details of the batch can also be viewed along with the list of meters in the batch.</p>
-        <p>Quick access to view meter movement tracking <a href="mov_track_view.php">here</a>.</p>
+      <h2 class="featurette-heading fw-normal lh-1">View meter warranty list</h2>
+        <p class="lead">View the required meter replacement for old meters with claimable warranty. Scan the new meter's QR code for replacement.</p>
+        <p>Quick access to meter warranty list <a href="warranty_list.php">here</a>.</p>
     </div>
     <div class="col-md-5">
-      <img src="imgs/movement-track.png" width="100%" height="100%">
+      <img src="imgs/water-meter.jpg" width="100%" height="100%">
     </div>
   </div>
-<!-- /END THE FEATURETTES -->
+
+<hr class="featurette-divider">
+
+  <div class="row featurette">
+    <div class="col-md-7 order-md-2">
+      <h2 class="featurette-heading fw-normal lh-1">View water meter information</h2>
+        <p class="lead">Scan meter's QR code to view their information.</p>
+        <p>Quick access to view meter's information <a href="RegDep_Scan_View_meter_info.php">here</a>.</p>
+    </div>
+    <div class="col-md-5 order-md-1">
+      <img src="imgs/scan-qr.jpg" width="100%" height="100%">
+    </div>
+  </div>
+<!--END THE FEATURETTES-->
 </div>
 
 <footer>

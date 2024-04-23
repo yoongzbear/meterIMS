@@ -46,16 +46,13 @@ include 'navReg.php';
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg mb-3" href=".php">Installation Departure</a>
     </div>
-    <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg mb-3" href=".php">Testing Departure</a>
-    </div>
   </div>  
   <div class="row justify-content-around mb-5">
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="RegDep_Scan_View_meter_info.php">View Meter Info</a>
     </div>
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="regWarrantyUpdate.php">Warranty Update</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="regWarrantyUpdate.php">Warranty Testing</a>
     </div>
     </div>    
   </div>

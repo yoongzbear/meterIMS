@@ -22,7 +22,6 @@ $name = $_SESSION['name'];
 include 'header.php';
 include 'navCon.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -42,7 +41,7 @@ include 'navCon.php';
       <i class="bi bi-chevron-double-left" style="font-size: 40px;margin-left:20px;"></i>
     </div>
     <div class='d-flex align-items-center'>  
-      <h3 style="font-size: 38px;">Air Selangor Inventory Department<large class="text-warning"> Features</large></h3>
+      <h3 style="font-size: 38px;">Air Selangor Contractor<large class="text-warning"> Features</large></h3>
     </div>
     <div class='d-flex align-items-center'>  
       <i class="bi bi-chevron-double-right" style="font-size: 40px;"></i>
@@ -51,15 +50,15 @@ include 'navCon.php';
 </div>
 
 <div class="container-fluid">
-<!-- START THE FEATURETTES -->
+<!--START THE FEATURETTES-->
   <div class="row featurette">
     <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">Register new meters received from manufacturers.</h2>
-      <p class="lead">Generate new meter QR codes and assign meters into a new batch.</p>
-      <p>Quick access to register new meters <a href="inventoryDep_AddBatchForm.php">here</a>.</p>
+      <h2 class="featurette-heading fw-normal lh-1">Install meters at premises</h2>
+      <p class="lead">Scan the installed meter's QR code and fill in the installation proof form.</p>
+      <p>Quick access to meter installation form <a href="meterInstall.php">here</a>.</p>
     </div>
       <div class="col-md-5">
-        <img src="imgs/create-a-qr-code.png" width="100%" height="100%">
+        <img src="imgs/meter-install.jpg" width="100%" height="100%">
       </div>
   </div>
 
@@ -67,56 +66,15 @@ include 'navCon.php';
 
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading fw-normal lh-1">Ship out meter batches.</h2>
-        <p class="lead">Scan the batch's QR code to record the batch movement to Test Lab or Region Stores.</p>
-        <p>Quick access to ship out meters to Test Lab <a href="">here</a>.</p>
-        <p>Quick access to ship out meters to Region Store <a href="">here</a>.</p>
+      <h2 class="featurette-heading fw-normal lh-1">Uninstall meters for warranty testing</h2>
+        <p class="lead">Scan the uninstalled meter's QR code and fill in the uninstallation form.</p>
+        <p>Quick access to meter uninstallation form <a href="conMeterUninstall.php">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">
+      <img src="imgs/meter-uninstall.jpg" width="100%" height="100%">
     </div>
   </div>
-
-<hr class="featurette-divider">
-
-  <div class="row featurette">
-    <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">View water meter information.</h2>
-        <p class="lead">Scan meter's QR code to view their information or view their past lab tests' results.</p>
-        <p>Quick access to view meter's information <a href="InvDep_Scan_View_meter_info.php">here</a>.</p>
-        <p>Quick access to view meter's lab test result <a href="invMeterResult.php">here</a>.</p>
-    </div>
-    <div class="col-md-5">
-      <img src="imgs/scan-qr.jpg" width="100%" height="100%">
-    </div>
-  </div>
-
-<hr class="featurette-divider">
-
-  <div class="row featurette">
-    <div class="col-md-7 order-md-2">
-      <h2 class="featurette-heading fw-normal lh-1">Make forecast on water meter demand.</h2>
-        <p class="lead">Enter the water meter demand history and let the system generate a forecast for future meter demand.</p>
-        <p>Quick access to meter forecast <a href="">here</a>.</p>
-    </div>
-    <div class="col-md-5 order-md-1">
-      <img src="imgs/demand-forecast.png" width="100%" height="100%">
-    </div>
-  </div>
-
-<hr class="featurette-divider">
-
-  <div class="row featurette">
-    <div class="col-md-7">
-      <h2 class="featurette-heading fw-normal lh-1">View meter's current movement.</h2>
-        <p class="lead">Track the movement of all meters in their batches. The details of the batch can also be viewed along with the list of meters in the batch.</p>
-        <p>Quick access to view meter movement tracking <a href="mov_track_view.php">here</a>.</p>
-    </div>
-    <div class="col-md-5">
-      <img src="imgs/movement-track.png" width="100%" height="100%">
-    </div>
-  </div>
-<!-- /END THE FEATURETTES -->
+<!--END THE FEATURETTES-->
 </div>
 
 <footer>
