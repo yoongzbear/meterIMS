@@ -3,7 +3,7 @@ include ('secure_Reg.php');
 include('connection.php');
 
         //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
-        $serial_num = $_POST['serial_num'];
+        $serial_num = $_GET['serial_num'];
         $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
