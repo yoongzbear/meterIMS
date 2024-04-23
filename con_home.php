@@ -59,7 +59,7 @@ include 'navCon.php';
       <p>Quick access to register new meters <a href="inventoryDep_AddBatchForm.php">here</a>.</p>
     </div>
       <div class="col-md-5">
-        <img src="imgs/create-a-qr-code.png" width="700px" height="500px">
+        <img src="imgs/create-a-qr-code.png" width="100%" height="100%">
       </div>
   </div>
 
@@ -73,7 +73,7 @@ include 'navCon.php';
         <p>Quick access to ship out meters to Region Store <a href="">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <img src="imgs/scan-delivery-box.jpg" width="700px" height="500px">
+      <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">
     </div>
   </div>
 
@@ -87,7 +87,7 @@ include 'navCon.php';
         <p>Quick access to view meter's lab test result <a href="invMeterResult.php">here</a>.</p>
     </div>
     <div class="col-md-5">
-      <img src="imgs/scan-qr.jpg" width="500px" height="500px">
+      <img src="imgs/scan-qr.jpg" width="100%" height="100%">
     </div>
   </div>
 
@@ -100,7 +100,7 @@ include 'navCon.php';
         <p>Quick access to meter forecast <a href="">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
-      <img src="imgs/demand-forecast.png" width="700px" height="500px">
+      <img src="imgs/demand-forecast.png" width="100%" height="100%">
     </div>
   </div>
 
@@ -113,7 +113,7 @@ include 'navCon.php';
         <p>Quick access to view meter movement tracking <a href="mov_track_view.php">here</a>.</p>
     </div>
     <div class="col-md-5">
-      <img src="imgs/movement-track.png" width="700px" height="500px">
+      <img src="imgs/movement-track.png" width="100%" height="100%">
     </div>
   </div>
 <!-- /END THE FEATURETTES -->
