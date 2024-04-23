@@ -12,7 +12,7 @@ if(isset($_POST['serial_num'])) {
     // Check if the query returned any rows
     if(mysqli_num_rows($result) > 0) {
         // serial num exists
-        header("Location:RegDep_view_meter_info.php?serial_num= $serial_num");
+        header("Location:RegDep_view_meter_info.php?serial_num=$serial_num");
         exit();
     } else {
         // serial num does not exist
