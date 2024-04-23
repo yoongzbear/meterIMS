@@ -1,5 +1,5 @@
 <?php
-//include ('secure_TestLab.php'); 
+include ('secure_TestLab.php'); 
 include('connection.php');
 
 
