@@ -31,13 +31,13 @@ include 'navCon.php';
 </nav>
 
 <div class="container text-center">
-  <div class="row mb-5">
+  <div class="row">
     <h4>Scan Meter QR</h4>
-    <div class="col">
+    <div class="col mb-4">
       <a button type="button" class="btn btn-primary btn-lg" href="meterInstall.php">Meter Installation</a>
     </div>    
   </div>
-    <div class='col'>
+    <div class='col mb-4'>
       <a button type="button" class="btn btn-primary btn-lg" href="conMeterUninstall.php">Meter Uninstallation</a>
     </div>
 </div>

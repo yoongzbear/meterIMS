@@ -43,7 +43,7 @@ include 'navLab.php';
   <div class="row justify-content-around mb-5">
     <h4>Scan Meter QR</h4>
     <div class='col'>
-      <a button type="button" class="btn btn-primary btn-lg mb-3" href="meterTest.php">Meter Test Result Form</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="meterTest.php">Meter Test Result Form</a>
       </div>
       <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="labMeterResult.php">Meter Test Result</a>
