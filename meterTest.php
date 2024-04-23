@@ -1,4 +1,4 @@
-<?php include 'secure_TestLab.php';?>
+<?php include 'secure_TestLab.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,21 +6,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meter Test Result</title>
-</head>
-<body>
-    <h1>Meter Test Result Form</h1>
-    <p>Please scan the QR code on the water meter to enter the test result.</p>
-    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas>
-    <button id="btn-scan-qr">Scan QR</button>
-    <button id="btn-cancel-scan">Cancel Scan</button>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <form id="meterForm" action="meterTestForm.php" method="post" style="display:none;">
-        <label for="serial_num">Meter Serial Number:</label>
-        <input type="text" id="outputData" name="serial_num" readonly>
-        <p>Is this the right meter serial number?</p>
-        <input type="submit" value="Yes">
-        <button id="btn-cancel">No</button>
-    </form>
+</head>
+
+<body>
+<header>
+<?php 
+include 'header.php';
+include 'navLab.php';
+?>
+
+</header>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
+    <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='Meter QR Page'>Meter QR</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Scan QR - Meter Test Result Form</li>
+  </ol>
+</nav>
+
+<div class="col align-self-center">
+
+    <h3>Meter Test Result Form</h3>
+    <p class="fst-italic">Please scan the QR code on the water meter to enter the test result.</p>
+    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
+    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
+    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
+
+    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="meterTestForm.php" method="post" style="display:none;">
+            <form id="meterForm" action="meterTestForm.php" method="post">
+                <div class="modal-body p-4 text-center">I
+                    <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter serial number?</h5>
+                    <p class="mb-0">Meter Serial Number : </p>
+                    <input type="text" id="outputData" name="serial_num" readonly>
+                </div>
+                <div class="modal-footer flex-nowrap p-0">
+                    <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                    <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
+                </div>
+            </form>
+    </div>
+</div>
 
     <script>
         //redirect to the view meter test page if cancelled after scanning
@@ -32,5 +61,10 @@
 
     <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>
+
 </body>
 </html>
