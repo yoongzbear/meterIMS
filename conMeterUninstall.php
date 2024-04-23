@@ -76,12 +76,12 @@ if(ISSET($_POST['serialnum'])){
             <button class="btn btn-dark mt-4" id="btn-cancel-scan" type="button" hidden="">Click here to cancel scanning</button>
         </div>
 
-        <div id="meterForm" class="col-lg-12 mt-5 border border-warning shadow" style="display: none; width: 50%; margin:auto;">
+        <div id="meterForm" class="col-lg-12 mt-5 border border-warning shadow mb-4 rounded" style="display: none; width: 50%; margin:auto;">
             <h3 class="text-center">Please confirm that the Serial Number is correct.</h3>
             <form method="POST" name="serialNumForm" class="text-center">
                 <label>Meter ID : </label>
-                <input type="text" id="outputData" name="serialnum" placeholder="Serial Number" required readonly>
-                <button type="submit" class="btn btn-success m-2 pt-1 pb-1">Mark as uninstalled</button>
+                <input type="text" id="outputData" name="serialnum" placeholder="Serial Number" required readonly><br>
+                <button type="submit" class="btn btn-success m-2 pt-1 pb-1 mt-4">Mark as uninstalled</button>
             </form>
         </div>
         
