@@ -1,29 +1,28 @@
 <?php
-/* 
-Enter meter info (after they receive the meter) (paola)
-
-get id from qr
-
-IF action = generateQr: //from vendors
-	GENERATE qrBatch; //generate during shipping
-	SET numMeter = 0;
-
-	//assume 1 box/batch can only hv 50 meters	//button (continue?)
-	WHILE button completed not clicked: 
-		GENERATE qrMeter;
-		form to insert meter info
-		//assign in database
-		SET qrBatch = qrBatch; 
-	END WHILE
+	include('secure_Inv.php');
+	include('connection.php');
+	$manu_id = $_GET['manu_id'];
+	$batch_id = $_GET['Batch_ID'];
+	$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
+	$result = mysqli_query($connection, $sqlBatchInfo);
 	
-	SHOW summary of the meter for this batch - not sure
-ENDIF
+	if ($result) {
+		$row = mysqli_fetch_assoc($result);
 
-quantity use count from batch id
-*/
+		// Fetch data from the database
+		$meter_type = $row["meter_type"];
+		$meter_model = $row["meter_model"];
+		$meter_size = $row["meter_size"];
+		$quantity = $row["quantity"];
+	}
 
-	include ('connection.php');
-	include 'secure_Inv.php';
+	//Check if there are meters associated with the batch
+	$sqlMeterCount = "SELECT COUNT(*) AS meter_count FROM meter WHERE batch_id = '$batch_id'";
+	$resultMeterCount = mysqli_query($connection, $sqlMeterCount);
+	if ($resultMeterCount) {
+		$rowMeterCount = mysqli_fetch_assoc($resultMeterCount);
+		$meterCount = $rowMeterCount['meter_count'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -40,123 +39,132 @@ quantity use count from batch id
 <header>
 <?php 
 include 'header.php';
-include 'navInv.php';
 ?>
 
 </header>
 
-<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
-	<li class="breadcrumb-item active" aria-current="page">Receive Meter - Create New Batch</li>
-
-  </ol>
-</nav>
-
 <script>
-	function validateForm() {
-        //Get the values of required fields
-        var meter_type = document.forms["addBatch"]["meter_type"].value;
-        var meter_model = document.forms["addBatch"]["meter_model"].value;
-        var meter_size = document.forms["addBatch"]["meter_size"].value;
-		var manu_id = document.forms["addBatch"]["manu_id"].value;
+	function setNumberDecimal(event) {
+		this.value = parseFloat(this.value).toFixed(2);
+	}
 
-        //Check if all required fields are filled
-        if (meter_type == "" || meter_model == "" || meter_size == "" || manu_id == "") {
-            alert("Please fill in all required fields.");
-            return false; //Prevent form submission
-        }
-        return true; //Allow form submission
-    }
+	function confirmCancel() {
+		var inputs = document.getElementsByTagName("input");
+		var hasValue = false;
+		for (var i = 0; i < inputs.length; i++) {
+			if (inputs[i].value.trim() !== "") {
+				hasValue = true;
+				break;
+			}
+		}
+		if (hasValue) {
+			var confirmation = confirm("You have entered data. Are you sure you want to cancel?");
+			if (confirmation) {
+				clearInputs();
+				window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
+			}
+		} else {
+			window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
+		}
+	}
 
-    function confirmation() {
-        var confirmProceed = confirm("Please make sure the information are correct before proceed to add meter. You are not allowed to modify the information after this.");
-        if (confirmProceed) {
-            //Validate the form before proceeding
-            if (validateForm()) {
-                window.location.href = 'inventoryDep_AddBatch.php';
-            }
-        } else {
-            return false;
-        }
-    }
+	function clearInputs() {
+		var inputs = document.getElementsByTagName("input");
+		for (var i = 0; i < inputs.length; i++) {
+			inputs[i].value = "";
+		}
+	}
 </script>
 
-
 <html>
-
-<!--Form to insert details of the meters in batch-->
-<div class="col-md-4 align-self-center">
-
-
-  <form action="inventoryDep_AddBatch.php" name="addBatch" method="post">
-  <h3>Create New Batch</h3>
-  <hr>
-
-<div class="row mb-4">
-  <div class="col">
-    <label class="col-form-label">Meter Type : </label>
-  </div>
-  <div class="col">
-  	<input class="form-control form-control-sm" type="text" name="meter_type" required>
-  </div>
-</div>
-
-<div class="row mb-4">
-  <div class="col">
-    <label class="col-form-label">Meter Model : </label>
-  </div>
-  <div class="col">
-  	<input class="form-control form-control-sm" type="text" name="meter_model" required>
-  </div>
-</div>
-
-<div class="row mb-4">
-  <div class="col">
-    <label class="col-form-label">Meter Size : </label>
-  </div>
-  <div class="col">
-  	<select class="form-select" name="meter_size" required>
-		<option value="" disabled selected>Please Select Meter Size</option>
-		<option value="15">15</option>
-		<option value="20">20</option>
-		<option value="25">25</option>
-		<option value="40">40</option>
-		<option value="50">50</option>
-		<option value="80">80</option>
-		<option value="100">100</option>
-		<option value="150">150</option>
-	</select>
-  </div>
-</div>
+		<!--Show Current Batch Info-->
 		
-<div class="row mb-4">
-  <div class="col">
-    <label class="col-form-label">Manufacturer Name : </label>
-  </div>
-  <div class="col">
-  <select class="form-select" name="manu_id">
-	<option value="" disabled selected>Please Select Manufacturer</option>
-		<?php
-			$sqlManu="SELECT * FROM manufacturer";
-			$data = mysqli_query($connection,$sqlManu);
-			while($manu = mysqli_fetch_array($data)){
-			echo "<option value='$manu[manu_id]'>$manu[manu_name]</option>";
-			}
-		?>
-	</select>
-  </div>
-</div>				
+		<div class="container">
+      <div class="row align-items-start">
+        <div class="col">
+		
+		<h3>Current Batch Information</h3>
+		<hr>
 
-		<button onclick="confirmation();" type="submit" class="btn btn-success">Add Meter</button>
-	</form>
-</div>
+		<table class="table table-borderless">
+			<tr colspan = "2">
+				<td>
+					<div id="qrcode">
+						<script src = "qrcode.js"></script>
+						<script src = "qrGeneratorBatch.js"></script>
+						<script>makeCode(); </script>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">Meter Type</th>
+				<td><?php echo $meter_type; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Meter Model</th>
+				<td><?php echo $meter_model; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Meter Size</th>
+				<td><?php echo $meter_size; ?></td>
+			</tr>
+			<tr>
+				<!--Show Current Total Meter for Current Batch-->
+				<th scope="row">Current Meter Quantity</th>
+				<td><?php echo $quantity; ?></td>
+			</tr>
+		</table>
+		</div>
+        
+		<div class="col">
+        
+		<h3>Add Meter Information</h3>
+		<hr>
+
+		<form action="inventoryDep_AddMeter.php" method="get">
+			<table class="table table-borderless">
+				<input type="hidden" name="batch_id" value="<?php echo $batch_id;?>">
+				<input type="hidden" name="manu_id" value="<?php echo $manu_id;?>">
+				<tr class="table-primary">
+					<td>Meter Serial Number</td>
+					<td><input class="form-control form-control-sm" type="text" name="Meter_ID" placeholder="AIS17BA00XXXXX" required></td>
+				</tr>
+				
+				<tr class="table-primary">
+					<td>Age</td>
+					<td><input class="form-control form-control-sm" type="number" onchange="setNumberDecimal" name="age" step="0.1" min="0" placeholder="0.0" required></td>
+				</tr>
+				
+				<tr class="table-primary">
+					<td>Mileage</td>
+					<td><input class="form-control form-control-sm" type="number" name="mileage" min="1" required></td>
+				</tr>
+				
+				<tr class="table-primary">
+					<td>Manufactured Year</td>
+					<td><input class="form-control form-control-sm" type="number" name="manufactured_year" maxlength="4" pattern="\d{4}" required></td> 
+				</tr>
+			</table>
+			<br>
+			<div class="buttons float-end">
+				<button type="submit" class="btn btn-success">Add Meter</button>
+				<?php if ($meterCount > 0) { ?>
+					<button type="button" class="btn btn-outline-secondary" onclick="confirmCancel();">Cancel</button>
+				<?php } else { ?>
+					<button type="button" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
+				<?php } ?>
+			</div>
+			
+		</form>
+
+		</div>
+      </div>
+    </div>
+
+</body>
 
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
-
-</body>
 
 </html>

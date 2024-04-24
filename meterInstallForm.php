@@ -94,7 +94,7 @@ include 'header.php';
             <input type='date' class='form-control mb-4'id='installDate' name='installDate' required>
             <label for='installAdd'>Installation Address : </label>
             <input type='text' class='form-control mb-4' id='installAdd' name='installAdd' required>
-            <input type='submit' style='width:20%;' class='btn btn-primary mb-4' value='Submit'>
+            <input type='submit' style='width:20%;' class='btn btn-primary mb-4 btn-submit' value='Submit'>
         </form>
 </div>
 

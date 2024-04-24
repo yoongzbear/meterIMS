@@ -40,26 +40,23 @@ if(ISSET($_GET['serial_num'])){
 
 <?php 
 include 'header.php';
-include 'navLab.php';
 ?>
 
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <!--kena change this for test lab
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-    <li class="breadcrumb-item"><a href="mov_track_view.php" title='Meter Tracking Page'>Meter Tracking</a></li>
-    <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Batch Detail Page'>Batch Detail</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Meter Info</li>-->
+  <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
+    <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='Meter Test Page'>Meter Test</a></li>
+    <li class="breadcrumb-item"><a href="meterTest.php" title='Scan QR Page'>Scan QR - View Meter Result</a></li>
+    <li class="breadcrumb-item active" aria-current="page">View Meter Result</li>
   </ol>
 </nav>
 
-<div class="col align-self-center">
-    <div class='col align-self-center'>
+<div class="col align-self-center" style='width:50%;'>
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
-        <hr class='border border-success border-2 opacity-50'>";
-        <table class='table'><th colspan=2><h3><?php echo $row['serial_num'];?></h3></th>
+        <hr class='border border-success border-2 opacity-50'>
+        <table class='table mb-4'><th colspan=2><h3><?php echo $row['serial_num'];?></h3></th>
             <tr>
                 <th>Type:</th>
                 <td><?php echo $row['meter_type'];?></td>
@@ -92,10 +89,11 @@ include 'navLab.php';
                 <th>Status:</th>
                 <td><?php echo $row['meter_status'];?></td>
             </tr>
-        </table></div>
-
-        <table>
-            <tr><th>No</th>
+        </table>
+<hr>
+<h3>Test Results</h3>
+        <table class="table mb-4">
+            <tr><th>No.</th>
             <th>Test Date</th>
             <th>Result</th>
             <th>Result Detail</th></tr>
@@ -103,7 +101,7 @@ include 'navLab.php';
         
         while($rowTest = mysqli_fetch_array($resultTest)) {
             echo '<tr>
-                <td>'.$num.'</td>';
+                <th>'.$num.'</th>';
             if ($rowTest['result'] == NULL) {
                 echo '<td>N/A</td>
                 <td>NOT TESTED</td>';
@@ -121,5 +119,14 @@ include 'navLab.php';
         echo "</table>";
     ?>
 </div>
+
+<div class="d-grid col-6 mx-auto mb-4">
+<button class="back btn btn-dark" type="button" onclick="window.location.href='labMeterResult.php'" title='Back To Scan QR'>Back</button>
+</div>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>
+
 </body>
 </html>

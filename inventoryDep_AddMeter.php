@@ -59,7 +59,7 @@ include 'header.php';
 
 
 <!--To show if the meter is added succesfully-->
-<div class="col align-self-center">
+<div class="col align-self-center mb-4">
     <div id="success" style="display:none;">
         <h3>Meter Added Successfully</h3>
 		<?php
