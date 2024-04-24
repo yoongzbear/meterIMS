@@ -4,10 +4,7 @@
 	$batch_id = $_GET['Batch_ID'];
 	
 	//To get Batch Info
-	$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch
-					INNER JOIN meter ON meter.batch_id = batch.batch_id
-					INNER JOIN movement ON movement.batch_id = batch.batch_id
-					WHERE batch_id = '$batch_id'";
+	$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
 	$result = mysqli_query($connection, $sqlBatchInfo);
 	
 	if ($result) {
@@ -18,7 +15,27 @@
 		$meter_model = $row["meter_model"];
 		$meter_size = $row["meter_size"];
 		$quantity = $row["quantity"];
-		$manu_id = $row["manu_id"];
+	}
+	
+	//To get Meter in Batch
+	$sqlMeterList = "SELECT * FROM meter WHERE batch_id = '$batch_id'";
+	$resultMeter = mysqli_query($connection, $sqlMeterList);
+	
+	if ($resultMeter) {
+		$rowMeter = mysqli_fetch_assoc($resultMeter);
+
+		// Fetch data from the database
+		$manu_id = $rowMeter["manu_id"];
+	}
+	
+	//To get Tracking Info
+	$sqlTrackingInfo = "SELECT * FROM movement WHERE batch_id = '$batch_id'";
+	$resultTrack = mysqli_query($connection, $sqlTrackingInfo);
+	
+	if ($resultTrack) {
+		$row = mysqli_fetch_assoc($resultTrack);
+
+		//Fetch data from the database
 		$tracking_id = $row["tracking_id"];
 		$origin = $row["origin"];
 		$destination = $row["destination"];
@@ -113,8 +130,8 @@
 		<?php
 			$num = 1;
 			//Reset data seek pointer to the beginning
-			mysqli_data_seek($result, 0);
-			while($rowMeter = mysqli_fetch_assoc($result)){
+			mysqli_data_seek($resultMeter, 0);
+			while($rowMeter = mysqli_fetch_assoc($resultMeter)){
 				echo 
 					'<tr>
 						<td>'.$num.'</td>
