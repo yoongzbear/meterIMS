@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 
-prediction_year = sys.argv #prediction year from php (if this got error try sys.argv[1])
+prediction_year = sys.argv[1] #prediction year from php (if this got error try sys.argv[1])
 
 #dataset
 dataset = pd.read_csv('dataset/meterdemand.csv')
