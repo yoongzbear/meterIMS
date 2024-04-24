@@ -33,7 +33,7 @@ include 'navInv.php';
     <h4>Generate QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
-      <a button type="button" class="btn btn-primary btn-lg" href="inv_ReceiveScanPassMeterQR.php">Receive Pass Meter</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="inv_ReceiveScanPassBatchQR.php">Receive Pass Meter</a>
     </div>    
   </div>
 
