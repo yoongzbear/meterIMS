@@ -30,7 +30,8 @@ include 'navInv.php';
   </ol>
 </nav>
 
-    <div class="row align-items-start">
+<div class="container">
+    <div class="row mb-4">
         <div class="col-6 col-lg-4">
 
         <!-- Dropdown list for search options -->
@@ -120,11 +121,8 @@ include 'navInv.php';
     }
 </script>
 
-
-    <br>
-    <br>
-    <div class="row">
-    <table id="list" class="table table-striped table-info">
+    <div class="row mb-4">
+    <table id="list" class="table table-striped table-info mx-4">
         <thread>
         <tr class="table-primary" scope="col">
             <th>No.</th>
@@ -189,6 +187,7 @@ include 'navInv.php';
         ?>
 
     </table>
+    </div>
     </div>
 
 <footer>
