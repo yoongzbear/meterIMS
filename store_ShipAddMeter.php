@@ -1,7 +1,7 @@
 <?php
     include ('secure.php');
     include ('connection.php');
-    $newBatch_id = $_GET['batch_id'];
+    $newBatch_id = $_GET['Batch_ID'];
     $serial_num = $_GET['Meter_ID'];
     $meterQuantity = $_GET['meterQuantity'];
 	
