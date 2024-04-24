@@ -15,9 +15,9 @@
     <p>Please scan the QR code on the water meter</p>
     <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas>
     <button id="btn-scan-qr">Scan QR</button>
-    <button id="btn-cancel-scan" style="display: none;">Cancel Scan</button>
+    <button id="btn-cancel-scan" hidden="">Cancel Scan</button>
 
-    <form id="meterForm" action="store_ShipAddMeter.php" method="get" style="display:none;">
+    <form id="meterForm" action="store_ShipMeterCheckQR.php" method="get" style="display:none;">
         <label for="serial_num">Meter Serial Number:</label>
         <input type="text" id="outputData" name="Meter_ID" readonly>
         <p>is this the right serial number meter?</p>
