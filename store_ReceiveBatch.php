@@ -13,10 +13,8 @@
 	$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
 	$resultTrack = mysqli_query($connection, $sqlTrack);
 	
-	//To get Batch and Tracking Info
-	$sqlBatchInfo = "SELECT batch.*, movement.* FROM batch 
-					JOIN movement ON movement.batch_id = batch.batch_id
-					WHERE batch_id = '$batch_id'";
+	//To get Batch Info
+	$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
 	$result = mysqli_query($connection, $sqlBatchInfo);
 	
 	if ($result) {
@@ -27,15 +25,25 @@
 		$meter_model = $row["meter_model"];
 		$meter_size = $row["meter_size"];
 		$quantity = $row["quantity"];
-		$tracking_id = $row["tracking_id"];
-		$origin = $row["origin"];
-		$destination = $row["destination"];
-		$ship_date = $row["ship_date"];
 	}
 	
 	//To get Meter in Batch
 	$sqlMeterList = "SELECT * FROM meter WHERE batch_id = '$batch_id'";
 	$resultMeter = mysqli_query($connection, $sqlMeterList);
+	
+	//To get Tracking Info
+	$sqlTrackingInfo = "SELECT * FROM movement WHERE batch_id = '$batch_id'";
+	$resultTrack = mysqli_query($connection, $sqlTrackingInfo);
+	
+	if ($resultTrack) {
+		$row = mysqli_fetch_assoc($resultTrack);
+
+		//Fetch data from the database
+		$tracking_id = $row["tracking_id"];
+		$origin = $row["origin"];
+		$destination = $row["destination"];
+		$ship_date = $row["ship_date"];
+	}
 	
 	//Select origin location name
 	$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
