@@ -151,7 +151,7 @@ include 'header.php';
 				<?php if ($meterCount > 0) { ?>
 					<button type="button" class="btn btn-outline-secondary" onclick="confirmCancel();">Cancel</button>
 				<?php } else { ?>
-					<button type="button" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
+					<button type="button" class="btn btn-outline-secondary" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
 				<?php } ?>
 			</div>
 			
