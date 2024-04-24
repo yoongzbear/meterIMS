@@ -17,7 +17,7 @@
     <button id="btn-scan-qr">Scan QR</button>
     <button id="btn-cancel-scan" hidden="">Cancel Scan</button>
 
-    <form id="meterForm" action="invDep_ShipAddMeter.php" method="get" style="display:none;">
+    <form id="meterForm" action="inv_ShipMeterCheckQR.php" method="get" style="display:none;">
         <label for="serial_num">Meter Serial Number:</label>
         <input type="text" id="outputData" name="Meter_ID" readonly>
         <p>is this the right serial number meter?</p>
