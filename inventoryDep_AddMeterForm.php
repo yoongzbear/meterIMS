@@ -158,11 +158,11 @@ include 'header.php';
 			</table>
 			<br>
 			<div class="buttons float-end">
-				<button type="submit">Add Meter</button>
+				<button type="submit" class="btn btn-success">Add Meter</button>
 				<?php if ($meterCount > 0) { ?>
-					<button type="button" onclick="confirmCancel();">Cancel</button>
+					<button type="button" class="btn btn-outline-secondary" onclick="confirmCancel();">Cancel</button>
 				<?php } else { ?>
-					<button type="button" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
+					<button type="button" class="btn btn-outline-secondary" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
 				<?php } ?>
 			</div>
 			
