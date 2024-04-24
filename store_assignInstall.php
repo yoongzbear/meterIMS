@@ -1,26 +1,46 @@
 <?php
 	//include('secure_Inv.php');
 	include('connection.php');
-	$serial_num = $_GET['Meter_ID'];
+	if(isset($_GET['Meter_ID'])){
+		$serial_num = $_GET['Meter_ID'];
 	
-	//To get Meter in Batch
-	$sql = "SELECT batch.*, meter.*, manufacturer.* FROM meter 
-					INNER JOIN batch ON meter.batch_id = batch.batch_id 
-					INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id
-					WHERE serial_num = '$serial_num'";
-	$result = mysqli_query($connection, $sql);
-	
-	if ($result) {
-		$row = mysqli_fetch_assoc($result);
+		//To check if the QR scanned is Meter QR
+		$sqlMeterInfo = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
+		$result = mysqli_query($connection, $sqlMeterInfo);
+		
+		if(mysqli_num_rows($result)>0){
+			
+			//Update Meter Status
+			$sqlUpdate = "UPDATE meter SET meter_status = 'ASSIGNED' WHERE serial_num = '$serial_num'";
+			$resultUpdate = mysqli_query($connection,$sqlUpdate);
+			
+			if($resultUpdate){
+				echo "<script>alert('Meter assigned successfully!');</script>";
+			}
+			
+			//To get Meter in Batch
+			$sql = "SELECT batch.*, meter.*, manufacturer.* FROM meter 
+							INNER JOIN batch ON meter.batch_id = batch.batch_id 
+							INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id
+							WHERE serial_num = '$serial_num'";
+			$result = mysqli_query($connection, $sql);
+			
+			if ($result) {
+				$row = mysqli_fetch_assoc($result);
 
-		// Fetch data from the database
-		$meter_type = $row["meter_type"];
-		$meter_model = $row["meter_model"];
-		$meter_size = $row["meter_size"];
-		$age = $row["age"];
-		$mileage = $row["mileage"];
-		$manu_name = $row["manu_name"];
-		echo "<script>alert('Meter assigned successfully!');</script>";
+				// Fetch data from the database
+				$meter_type = $row["meter_type"];
+				$meter_model = $row["meter_model"];
+				$meter_size = $row["meter_size"];
+				$age = $row["age"];
+				$mileage = $row["mileage"];
+				$manu_name = $row["manu_name"];
+			}
+		}else{
+			echo "<script>alert('Invalid Meter QR. Please try again.');</script>";
+			echo "<script>window.location.href='store_assignInstallForm.php';</script>";
+			exit();
+		}
 	}
 ?>
 
