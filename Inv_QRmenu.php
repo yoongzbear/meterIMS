@@ -33,6 +33,7 @@ include 'navInv.php';
     <h4>Generate QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="inv_ReceiveScanPassMeterQR.php">Receive Pass Meter</a>
     </div>    
   </div>
 
@@ -40,7 +41,7 @@ include 'navInv.php';
     <h4>Scan Batch QR</h4>
     <div class='col'>
       <a button type="button" class="btn btn-primary btn-lg mb-3" href="invInitialTest.php">Initial Ship Out To Lab</a>
-      <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_AddBatchForm.php">Ship Out</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_ShipOrderForm.php">Ship Out</a>
     </div>
   </div>
 
