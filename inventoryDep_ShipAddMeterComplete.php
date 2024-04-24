@@ -1,5 +1,5 @@
 <?php
-	include('secure.php');
+	//include('secure.php');
 	include('connection.php');
 	$batch_id = $_GET['Batch_ID'];
 	
