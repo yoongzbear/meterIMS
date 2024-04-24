@@ -53,7 +53,7 @@ echo $batchid;
 </thread>
     <thread>
     <tr>
-        <th scope="row">Store</th>
+        <th scope="row">Location</th>
         <td><?php echo $row["location_name"]; ?></td>
     </tr>
     </thread>
