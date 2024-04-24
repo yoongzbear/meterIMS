@@ -53,25 +53,25 @@ if(ISSET($_POST['batchID'])){
     </header>
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
-        <li class="breadcrumb-item active" aria-current="page">QRCode</li>
-        <li class="breadcrumb-item active" aria-current="page">Initial Ship Out To Lab</li>
+    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Initial Ship Out To Lab</li>
     </ol>
     </nav>
     <section id="meteruninstall">
-        <div class="container col-lg-12 text-center" id="qrscanner">
+        <div class="container col-lg-12 text-center mb-4" id="qrscanner">
             <h2 class="text-center">Send Batch to Lab</h2>
             <p class="text-center mb-4">Please scan the QR code for the batch to send it to lab for initial testing.</p>
             <canvas hidden="" id="qr-canvas"></canvas>
-            <button class= "btn btn-dark" id="btn-scan-qr" type="button">Click here to scan</button>
-            <button class="btn btn-dark mt-4" id="btn-cancel-scan" type="button" hidden="">Click here to cancel scanning</button>
+            <button class= "btn btn-dark" id="btn-scan-qr" type="button">Click to Scan</button>
+            <button class="btn btn-dark mt-4" id="btn-cancel-scan" type="button" hidden="">Click to Cancel Scanning</button>
         </div>
-        <div id="meterForm" class="col-lg-12 mt-5" style="display: none; width: 50%; margin:auto;">
-            <h3 class="text-center">Please confirm that the Batch ID is correct.</h3>
+        <div id="meterForm" class="col-lg-12 mt-5 border border-warning shadow mb-4 rounded" style="display: none; width: 50%; margin:auto;">
+            <h3 class="text-center">Please Confirm that the Batch ID is Correct.</h3>
             <form method="POST" name="batchIDForm" class="text-center">
-                <label>Batch ID:</label>
-                <input type="text" id="outputData" name="batchID" placeholder="Batch ID" required readonly>
-                <button type="submit" class="btn btn-success m-2 pt-1 pb-1">Send to lab</button>
+                <label>Batch ID : </label>
+                <input type="text" id="outputData" name="batchID" placeholder="Batch ID" required readonly><br>
+                <button type="submit" class="btn btn-success m-2 pt-1 pb-1 mt-4">Send to lab</button>
             </form>
         </div>
     </section>

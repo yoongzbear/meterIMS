@@ -55,7 +55,7 @@ include 'navInv.php';
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
-            window.location.href = 'meterResult.php';
+            window.location.href = 'invMeterResult.php';
         });
     </script>
 
