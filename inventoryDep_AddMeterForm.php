@@ -142,7 +142,18 @@ include 'header.php';
 				
 				<tr class="table-primary">
 					<td>Manufactured Year</td>
-					<td><input class="form-control form-control-sm" type="number" name="manufactured_year" maxlength="4" pattern="\d{4}" required></td> 
+					<td>
+						<select name="manufactured_year" required>
+							<?php
+							$currentYear = date('Y');
+
+							//Loop to generate options for past 50 years
+							for($i = $currentYear; $i >= $currentYear - 50; $i--) {
+								echo "<option value=\"$i\">$i</option>";
+							}
+							?>
+						</select>
+					</td> 
 				</tr>
 			</table>
 			<br>
