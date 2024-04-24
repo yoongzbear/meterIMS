@@ -1,30 +1,29 @@
 <?php
-    include ('secure_Inv.php');
-    include ('connection.php');
-    $batch_id = $_GET['batch_id'];
-    $serial_num = $_GET['Meter_ID'];
-    $age = $_GET['age'];
-    $mileage = $_GET['mileage'];
-    $manufactured_year = $_GET['manufactured_year'];
-    $manu_id = $_GET['manu_id'];
-
-
-    $sqlMeter = "INSERT INTO meter (serial_num, age, mileage, batch_id, meter_status, manufactured_year, manu_id)
-                VALUES ('$serial_num', '$age', '$mileage', '$batch_id', 'IN STORE', '$manufactured_year', '$manu_id')";
-    $result = mysqli_query($connection, $sqlMeter);
+	include('secure_Inv.php');
+	include('connection.php');
+	$manu_id = $_GET['manu_id'];
+	$batch_id = $_GET['Batch_ID'];
+	$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
+	$result = mysqli_query($connection, $sqlBatchInfo);
 	
-	// Count the number of records in the meter table with the given batch_id
-    $sqlCountQuantity = "SELECT * FROM meter WHERE batch_id = $batch_id";
-    $quantityResult = mysqli_query($connection, $sqlCountQuantity);
-	if ($quantityResult){
-		$rowCount = mysqli_num_rows($quantityResult);
-		
-		//Update Batch Info with meter quantity
-		$sqlUpdateQuantity = "UPDATE `batch` SET `quantity` = '$rowCount' WHERE `batch_id` = '$batch_id'";
-		$resultUpdate = mysqli_query($connection, $sqlUpdateQuantity);
+	if ($result) {
+		$row = mysqli_fetch_assoc($result);
+
+		// Fetch data from the database
+		$meter_type = $row["meter_type"];
+		$meter_model = $row["meter_model"];
+		$meter_size = $row["meter_size"];
+		$quantity = $row["quantity"];
+	}
+
+	//Check if there are meters associated with the batch
+	$sqlMeterCount = "SELECT COUNT(*) AS meter_count FROM meter WHERE batch_id = '$batch_id'";
+	$resultMeterCount = mysqli_query($connection, $sqlMeterCount);
+	if ($resultMeterCount) {
+		$rowMeterCount = mysqli_fetch_assoc($resultMeterCount);
+		$meterCount = $rowMeterCount['meter_count'];
 	}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,107 +44,122 @@ include 'header.php';
 </header>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("addAnother").addEventListener("click", function() {
-			window.location.href = "inventoryDep_AddMeterForm.php?Batch_ID=<?php echo $batch_id; ?>&manu_id=<?php echo $manu_id; ?>";
-		});
+	function setNumberDecimal(event) {
+		this.value = parseFloat(this.value).toFixed(2);
+	}
 
+	function confirmCancel() {
+		var inputs = document.getElementsByTagName("input");
+		var hasValue = false;
+		for (var i = 0; i < inputs.length; i++) {
+			if (inputs[i].value.trim() !== "") {
+				hasValue = true;
+				break;
+			}
+		}
+		if (hasValue) {
+			var confirmation = confirm("You have entered data. Are you sure you want to cancel?");
+			if (confirmation) {
+				clearInputs();
+				window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
+			}
+		} else {
+			window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
+		}
+	}
 
-        document.getElementById("complete").addEventListener("click", function() {
-            window.location.href = "inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>";
-        });
-    });
+	function clearInputs() {
+		var inputs = document.getElementsByTagName("input");
+		for (var i = 0; i < inputs.length; i++) {
+			inputs[i].value = "";
+		}
+	}
 </script>
 
-
-<!--To show if the meter is added succesfully-->
-<div class="col align-self-center mb-4">
-    <div id="success" style="display:none;">
-        <h3>Meter Added Successfully</h3>
-		<?php
-			//To select the meter information
-			$sqlShowMeter = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
-			$resultSelect = mysqli_query($connection, $sqlShowMeter);
-			if ($resultSelect) {
-				$row = mysqli_fetch_assoc($resultSelect);
-
-				// Fetch data from the database
-				$serial_num = $row["serial_num"];
-				$age = $row["age"];
-				$mileage = $row["mileage"];
-				$manufactured_year = $row["manufactured_year"];
-				$manu_id = $row["manu_id"];
-			}
-			
-			//To show the manufacturer name
-			$sqlShowManuName = "SELECT * FROM manufacturer WHERE manu_id = '$manu_id'";
-			$resultSelectManu = mysqli_query($connection, $sqlShowManuName);
-			if ($resultSelect) {
-				$rowManu = mysqli_fetch_assoc($resultSelectManu);
-
-				// Fetch data from the database
-				$manu_name = $rowManu["manu_name"];
-			}
-		?>
+<html>
+		<!--Show Current Batch Info-->
+		
+		<div class="container">
+      <div class="row align-items-start">
+        <div class="col">
+		
+		<h3>Current Batch Information</h3>
+		<hr>
 
 		<table class="table table-borderless">
 			<tr colspan = "2">
 				<td>
 					<div id="qrcode">
 						<script src = "qrcode.js"></script>
-						<script src = "qrGeneratorMeter.js"></script>
+						<script src = "qrGeneratorBatch.js"></script>
 						<script>makeCode(); </script>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<th scope="row">Meter Serial Number</th>
-				<td><?php echo $serial_num; ?></td>
+				<th scope="row">Meter Type</th>
+				<td><?php echo $meter_type; ?></td>
 			</tr>
-			
 			<tr>
-				<th scope="row">Age</th>
-				<td><?php echo $age; ?></td>
+				<th scope="row">Meter Model</th>
+				<td><?php echo $meter_model; ?></td>
 			</tr>
-			
 			<tr>
-				<th scope="row">Mileage</th>
-				<td><?php echo $mileage; ?></td>
+				<th scope="row">Meter Size</th>
+				<td><?php echo $meter_size; ?></td>
 			</tr>
-			
 			<tr>
-				<th scope="row">Manufacturer Name</th>
-				<td><?php echo $manu_name; ?></td>
-			</tr>
-			
-			<tr>
-				<th scope="row">Manufactured Year</th>
-				<td><?php echo $manufactured_year; ?></td>
+				<!--Show Current Total Meter for Current Batch-->
+				<th scope="row">Current Meter Quantity</th>
+				<td><?php echo $quantity; ?></td>
 			</tr>
 		</table>
+		</div>
+        
+		<div class="col">
+        
+		<h3>Add Meter Information</h3>
+		<hr>
+
+		<form action="inventoryDep_AddMeter.php" method="get">
+			<table class="table table-borderless">
+				<input type="hidden" name="batch_id" value="<?php echo $batch_id;?>">
+				<input type="hidden" name="manu_id" value="<?php echo $manu_id;?>">
+				<tr class="table-primary">
+					<td>Meter Serial Number</td>
+					<td><input class="form-control form-control-sm" type="text" name="Meter_ID" placeholder="AIS17BA00XXXXX" required></td>
+				</tr>
+				
+				<tr class="table-primary">
+					<td>Age</td>
+					<td><input class="form-control form-control-sm" type="number" onchange="setNumberDecimal" name="age" step="0.1" min="0" placeholder="0.0" required></td>
+				</tr>
+				
+				<tr class="table-primary">
+					<td>Mileage</td>
+					<td><input class="form-control form-control-sm" type="number" name="mileage" min="1" required></td>
+				</tr>
+				
+				<tr class="table-primary">
+					<td>Manufactured Year</td>
+					<td><input class="form-control form-control-sm" type="number" name="manufactured_year" maxlength="4" pattern="\d{4}" required></td> 
+				</tr>
+			</table>
+			<br>
+			<div class="buttons float-end">
+				<button type="submit" class="btn btn-success">Add Meter</button>
+				<?php if ($meterCount > 0) { ?>
+					<button type="button" class="btn btn-outline-secondary" onclick="confirmCancel();">Cancel</button>
+				<?php } else { ?>
+					<button type="button" class="btn btn-outline-secondary" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
+				<?php } ?>
+			</div>
+			
+		</form>
+
+		</div>
+      </div>
     </div>
-    
-    <div id="fail" style="display:none;">
-        <h3>Message</h3>
-        <h2>Failed To Add</h2>
-    </div>
-
-    <div id="buttons" style="display:none;">
-        <button id="addAnother" class="btn btn-success">Add More Meter</button>
-        <button id="complete" class="btn btn-outline-success">Complete</button>
-    </div>
-</div>
-
-
-<?php
-    if($result == true) {
-        echo "<script>document.getElementById('success').style.display = 'block';</script>";
-        echo "<script>document.getElementById('buttons').style.display = 'block';</script>";
-    } else {
-        echo "<script>document.getElementById('fail').style.display = 'block';</script>";
-    }
-?>
-
 
 </body>
 
