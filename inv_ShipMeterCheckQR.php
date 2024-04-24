@@ -3,7 +3,7 @@ include 'secure_Reg.php';
 include 'connection.php';
 
 if(isset($_GET['Meter_ID'])) {
-    $batch_id = $_GET['Batch_ID'];
+    $batch_id = $_GET['batch_id'];
     $serial_num = $_GET['Meter_ID'];
     $meterQuantity = $_GET['meterQuantity'];
 
