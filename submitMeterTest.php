@@ -33,12 +33,12 @@ if ($testResult == 'FAIL') {
     $sqlBatch = "UPDATE batch INNER JOIN meter ON batch.batch_id = meter.batch_id SET batch.quantity = batch.quantity - 1, meter.batch_id = NULL WHERE meter.serial_num = '$serial_num'";
     mysqli_query($connection, $sqlBatch);
     if ($defect != '0') {
-        $sqlLab = "UPDATE lab_result SET defect_id = '$defect', test_date = CURDATE(), result = 'FAIL' WHERE serial_num = '$serial_num';";
+        $sqlLab = "UPDATE lab_result SET defect_id = '$defect', test_date = CURDATE(), result = 'FAIL' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
     } else {
-        $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'FAIL' WHERE serial_num = '$serial_num';";
+        $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'FAIL' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
     }
 } else {
-    $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'PASS' WHERE serial_num = '$serial_num';";
+    $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'PASS' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
 }
 
 $sqlMeterUpdate = "UPDATE meter SET install_date = NULL, meter_status = 'TESTED' WHERE serial_num = '$serial_num'";
