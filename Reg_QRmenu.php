@@ -34,17 +34,17 @@ include 'navReg.php';
 <h4>Scan Batch QR</h4>
   <div class="row justify-content-around mb-5">
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href=".php">Store Arrival</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="store_ReceiveOrderScanBatchQR.php">Store Arrival</a>
     </div>
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href=".php">Ship Out</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="store_ShipOrderForm.php">Ship Out</a>
     </div>
   </div>
 
   <h4>Scan Meter QR</h4>
   <div class="row justify-content-around">
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg mb-3" href=".php">Installation Departure</a>
+      <a button type="button" class="btn btn-primary btn-lg mb-3" href="store_assignInstallForm.php">Installation Departure</a>
     </div>
   </div>  
   <div class="row justify-content-around mb-5">
