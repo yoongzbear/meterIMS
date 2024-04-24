@@ -74,6 +74,7 @@
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
 			echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
+			exit();
 		}
 	}
 ?>
