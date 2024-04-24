@@ -11,7 +11,7 @@
 		if(mysqli_num_rows($result)>0){
 			
 			//Update Meter Status
-			$sqlUpdate = "UPDATE meter SET meter_status = 'ASSIGNED' WHERE serial_num = '$serial_num'";
+			$sqlUpdate = "UPDATE meter SET meter_status = 'TO BE INSTALLED' WHERE serial_num = '$serial_num'";
 			$resultUpdate = mysqli_query($connection,$sqlUpdate);
 			
 			if($resultUpdate){
