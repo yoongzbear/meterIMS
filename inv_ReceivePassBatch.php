@@ -92,7 +92,7 @@ include 'navInv.php';
 			}
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
-			echo "<script>window.location.href='inv_ReceiveScanPassMeterQR.php';</script>";
+			echo "<script>window.location.href='inv_ReceiveScanPassBatchQR.php';</script>";
 			exit();
 		}
 	}
@@ -182,7 +182,7 @@ include 'navInv.php';
 	</table>
 
 <div class="d-grid gap-2 col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='inv_ReceiveScanPassBatch.php'" title='Back To Scan QR'>Back</button>
+<button class="back btn btn-dark" type="button" onclick="window.location.href='inv_ReceiveScanPassBatchQR.php'" title='Back To Scan QR'>Back</button>
 </div>
 
 </div>
