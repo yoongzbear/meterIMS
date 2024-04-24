@@ -6,7 +6,9 @@ if(ISSET($_POST['batchID'])){
     try{
     $movementquery = "INSERT INTO movement VALUES (DEFAULT, 1, 2, (CURRENT_DATE), NULL, $batchID)";
     $movementrun = mysqli_query($connection, $movementquery);
-    if($movementrun){
+    $update_status= "UPDATE meter SET meter_status = 'IN TRANSIT' WHERE batch_id =$batchID";
+    $update_status_run= mysqli_query($connection,$update_status);
+    if($movementrun && $update_status_run){
         echo "<script>alert('Batch sent to lab successfully!');</script>";
         header("Refresh:0");
     } else {
