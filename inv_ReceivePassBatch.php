@@ -61,6 +61,7 @@
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
 			echo "<script>window.location.href='inv_ReceiveScanPassMeterQR.php';</script>";
+			exit();
 		}
 	}
 ?>
