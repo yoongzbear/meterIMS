@@ -20,9 +20,37 @@ ENDIF
 
 
 // generate qr
+	include 'secure_Inv.php';
 	include ('connection.php');
 	$current_date = date('Y-m-d');
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Shipping</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+<?php 
+include 'header.php';
+include 'navInv.php';
+?>
+
+</header>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Ship Out Form</li>
+
+  </ol>
+</nav>
 
 <script>
     function validateForm() {
@@ -54,25 +82,25 @@ ENDIF
     }
 </script>
 
-<html>
-<head><title>Meter Shipping</title></head>
-<div class="content">
-    <h3 class="header">Ship Meter Batch</h3>
+<div class="col align-self-center">
+
+<h3>Ship Meter Batch</h3>
+<hr class="border border-success border-2 opacity-50">
 	<form class="form" action="invDep_ShipAddBatch.php" method="post" name="shipOrderForm">
 
-        <table>
+        <table class="table table-borderless mb-4">
 			<!--Meter Information-->
 			<tr>
-				<td>Meter Type</td>
-				<td><input type="text" name="meter_type" required></td>
+				<th>Meter Type :</th>
+				<td><input type="text" class="form-control" name="meter_type" required></td>
 			</tr>
 			<tr>
-				<td>Meter Model</td>
-				<td><input type="text" name="meter_model" required></td>
+				<th>Meter Model :</th>
+				<td><input type="text" class="form-control" name="meter_model" required></td>
 			</tr>
 			<tr>
-				<td>Meter Size</td> <!--Drop Down-->
-				<td><select name="meter_size" required>
+				<th>Meter Size :</th> <!--Drop Down-->
+				<td><select class="form-select" name="meter_size" required>
 						<option value="" disabled selected>Please Select Meter Size</option>
 						<option value="15">15</option>
 						<option value="20">20</option>
@@ -89,18 +117,18 @@ ENDIF
 			<!--Shipping details-->
 			<input type="hidden" name="origin" value="1" readonly>
             <tr>
-                <td>Number of Meters Needed</td>
-                <td><input type="number" name="meterQuantity" required></td>
+                <th>Number of Meters Needed :</th>
+                <td><input class="form-control" type="number" name="meterQuantity" required></td>
             </tr>
 			<tr>
-                <td>Origin</td>
+                <th>Origin :</th>
                 <td>Air Selangor</td>
             </tr>
 			<tr>
-                <td>Destination</td>
+                <th>Destination :</th>
                 <td>
-					<select name="destination" required>
-						<option value="" disabled selected>Please Select Destination Region Store</option>
+					<select class="form-select" name="destination" required>
+						<option class="form-select" value="" disabled selected>Please Select Destination Region Store</option>
 						<?php
 							$sqlStore="SELECT * FROM location WHERE location_id != 1 AND location_id != 2";
 							$data = mysqli_query($connection,$sqlStore);
@@ -112,12 +140,18 @@ ENDIF
 				</td>
             </tr>
 			<tr>
-				<td>Ship Out Date</td>
-				<td><input type="date" name="ship_date" value="<?php echo $current_date; ?>" readonly></td>
+				<th>Ship Out Date</th>
+				<td><input class="form-control" type="date" name="ship_date" value="<?php echo $current_date; ?>" readonly></td>
 			</tr>
         </table>
-		<button class="submit" onclick="submitForm();" type="button">Scan Meter</button>
+		<button class="submit btn btn-outline-success mb-4" onclick="submitForm();" type="button">Scan Meter</button>
 		<!--After submit, show confirm msg, start scanning, buttons-->
     </form>
 </div>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>	
+
+</body>
 </html>

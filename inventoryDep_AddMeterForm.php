@@ -143,7 +143,7 @@ include 'header.php';
 				<tr class="table-primary">
 					<td>Manufactured Year</td>
 					<td>
-						<select name="manufactured_year" required>
+						<select class="form-control" name="manufactured_year" required>
 							<?php
 							$currentYear = date('Y');
 

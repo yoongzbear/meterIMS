@@ -1,6 +1,8 @@
-<?php
-	$meterQuantity = $_GET['meterQuantity'];
-	$batch_id = $_GET['Batch_ID'];
+<?php 
+include ('secure_Inv.php'); 
+$meterQuantity = $_GET['meterQuantity'];
+$batch_id = $_GET['Batch_ID'];
+
 ?>
 
 <!DOCTYPE html>
@@ -9,28 +11,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meter Shipping</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Meter Shipping Form</h1>
-    <p>Please scan the QR code on the water meter</p>
-    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas>
-    <button id="btn-scan-qr">Scan QR</button>
-    <button id="btn-cancel-scan" hidden="">Cancel Scan</button>
 
-    <form id="meterForm" action="inv_ShipMeterCheckQR.php" method="get" style="display:none;">
-        <label for="serial_num">Meter Serial Number:</label>
-        <input type="text" id="outputData" name="Meter_ID" readonly>
-        <p>is this the right serial number meter?</p>
-		
-		<!--Send shipping info-->
-		<input type="hidden" name="meterQuantity" value="<?php echo $meterQuantity;?>" readonly>
-		<input type="hidden" name="batch_id" value="<?php echo $batch_id;?>" readonly>
-		
-        <input type="submit" value="Yes">
-        <button id="btn-cancel">No</button>
-    </form>
+<body>
+<header>
+<?php 
+include 'header.php';
+?>
+
+</header>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+    <li class="breadcrumb-item"><a href="inventoryDep_ShipOrderForm.php" title='Ship Out Form Page'>Ship Out Form</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Scan QR - Meter Shipping Form</li>
+
+  </ol>
+</nav>
+
+<div class="col align-self-center">
+
+    <h3>Meter Shipping Form</h3>
+    <p class="fst-italic">Please scan the QR code on the water meter</p>
+    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
+    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
+    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
+
+    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="inv_ShipMeterCheckQR.php" method="get" style="display:none;">
+        <form id="meterForm" action="inv_ShipMeterCheckQR.php" method="get">
+                <div class="modal-body p-4 text-center">
+                    <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right Serial Number Meter?</h5>
+                    <p class="mb-0">Meter Serial Number : </p>
+                    <input type="text" id="outputData" name="Meter_ID" readonly>
+                    <!--Send shipping info-->
+                    <input type="hidden" name="meterQuantity" value="<?php echo $meterQuantity;?>" readonly>
+                    <input type="hidden" name="batch_id" value="<?php echo $batch_id;?>" readonly>
+
+                </div>
+                <div class="modal-footer flex-nowrap p-0">
+                    <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                    <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
+                </div>
+            </form>
+    </div>
+</div>
+
+<div class="mb-4 d-grid gap-2 col-6 mx-auto" style="width:10%;">
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='inventoryDep_ShipOrderForm.php'" title='Back To Ship Out Form Page'>Back</button>
+</div>
 
     <script>
+
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
@@ -40,5 +75,11 @@
 
     <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>	
+
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 <?php
-include 'secure_Reg.php';
+include 'secure_Inv.php';
 include 'connection.php';
 
 if(isset($_GET['Meter_ID'])) {
