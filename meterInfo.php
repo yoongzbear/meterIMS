@@ -61,7 +61,7 @@ include 'navInv.php';
 
     <?php
         //type, model, size, age, mileage, manufacturer, manu year, status, install date, install address, location of store
-        echo "<div class='col align-self-center'>
+        echo "
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
         <hr class='border border-success border-2 opacity-50'>";
         echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>
@@ -119,7 +119,6 @@ include 'navInv.php';
             </tr>";}
         echo "</table>";
     ?>
-</div>
     
 <div class="d-grid gap-2 col-6 mx-auto mb-4">
 <button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?batch_id=<?= $batch_id; ?>'" title='Back To Batch Detail'>Back</button>

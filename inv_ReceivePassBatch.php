@@ -1,5 +1,37 @@
+<?php 
+include ('secure_Inv.php'); 
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Receiving</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+<?php 
+include 'header.php';
+include 'navInv.php';
+?>
+
+</header>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+	<li class="breadcrumb-item"><a href="inv_ReceiveScanPassMeterQR.php" title='Scan QR Page'>Scan QR - Batch Receiving Form</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Batch Receiving Form</li>
+
+  </ol>
+</nav>
+
 <?php
-	include('secure.php');
 	include('connection.php');
 	
 	if(isset($_GET['Batch_ID'])){
@@ -66,11 +98,11 @@
 	}
 ?>
 
-<html>
-	<head><title>Meter Receiving</title></head>
 	<!--Show Current Batch Info-->
+	<div class="col align-self-center">
+
 	<h3>Batch Meter Information</h3>
-	<table>
+	<table class="table mb-4">
 		<tr colspan = "2">
 			<td>
 				<div id="qrcode">
@@ -81,55 +113,57 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Meter Type</td>
+			<th>Meter Type</th>
 			<td><?php echo $meter_type; ?></td>
 		</tr>
 		<tr>
-			<td>Meter Model</td>
+			<th>Meter Model</th>
 			<td><?php echo $meter_model; ?></td>
 		</tr>
 		<tr>
-			<td>Meter Size</td>
+			<th>Meter Size</th>
 			<td><?php echo $meter_size; ?></td>
 		</tr>
 		<tr>
 			<!--Show Current Total Meter for Current Batch-->
-			<td>Meter Quantity</td>
+			<th>Meter Quantity</th>
 			<td><?php echo $quantity; ?></td>
 		</tr>
 	</table>
 	
+	<hr>
 	<!--Show Shipping Info-->
 	<h3>Shipping Information</h3>
-	<table>
+	<table class="table mb-4">
 		<tr>
-			<td>Tracking ID</td>
+			<th>Tracking ID</th>
 			<td><?php echo $tracking_id; ?></td>
 		</tr>
 		<tr>
-			<td>Origin</td>
+			<th>Origin</th>
 			<td><?php echo $origin_name; ?></td>
 		</tr>
 		<tr>
-			<td>Destination</td>
+			<th>Destination</th>
 			<td>Air Selangor Inventory Department</td>
 		</tr>
 		<tr>
-			<td>Ship Date</td>
+			<th>Ship Date</th>
 			<td><?php echo $ship_date; ?></td>
 		</tr>
 		<tr>
-			<td>Arrival Date</td>
+			<th>Arrival Date</th>
 			<td><?php echo $current_date; ?></td>
 		</tr>
 	</table>
 	
+	<hr>
 	<!--Show Meter List for the Batch-->
 	<h3>List of Meters in the batch</h3>
-	<table>
+	<table class="table mb-4">
 		<tr>
-			<td>No.</td>
-			<td>Meter ID</td>
+			<th>No.</th>
+			<th>Meter ID</th>
 		</tr>
 		
 		<?php
@@ -139,12 +173,24 @@
 			while($rowMeter = mysqli_fetch_assoc($resultMeter)){
 				echo 
 					'<tr>
-						<td>'.$num.'</td>
+						<th>'.$num.'</th>
 						<td>'.$rowMeter["serial_num"].'</td>
 					</tr>';
 				$num++;
 			}
 		?>
 	</table>
-	<button class="back" onclick="window.location.href='index.php'">Back</button>
+
+<div class="d-grid gap-2 col-6 mx-auto mb-4">
+<button class="back btn btn-dark" type="button" onclick="window.location.href='inv_ReceiveScanPassBatch.php'" title='Back To Scan QR'>Back</button>
+</div>
+
+</div>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>	
+
+</body>
+
 </html>
