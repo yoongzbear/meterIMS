@@ -54,23 +54,27 @@ include 'navInv.php';
 
 <script>
     function validateForm() {
-		//Get the values of meter batch details fields
-        var meter_type = document.forms["shipOrderForm"]["meter_type"].value;
-        var meter_model = document.forms["shipOrderForm"]["meter_model"].value;
-        var meter_size = document.forms["shipOrderForm"]["meter_size"].value;
-		
-        //Get the values of shipping details fields
-        var meterQuantity = document.forms["shipOrderForm"]["meterQuantity"].value;
-        var destination = document.forms["shipOrderForm"]["destination"].value;
-        var shipDate = document.forms["shipOrderForm"]["ship_date"].value;
+		//Get the value of meter details field
+		var meterDetails = document.forms["shipOrderForm"]["meter_details"].value;
 
-        //Check if all required fields are filled
-        if (meter_type == "" || meter_model == "" || meter_size == "" || meterQuantity == "" || destination == "" || shipDate == "") {
-            alert("Please fill in all fields.");
-            return false; //Prevent form submission
-        }
-        return true; //Allow form submission
-    }
+		//Split the selected value into separate variables
+		var meterDetailsArray = meterDetails.split("|");
+		var meterType = meterDetailsArray[0];
+		var meterModel = meterDetailsArray[1];
+		var meterSize = meterDetailsArray[2];
+
+		//Get the values of shipping details fields
+		var meterQuantity = document.forms["shipOrderForm"]["meterQuantity"].value;
+		var destination = document.forms["shipOrderForm"]["destination"].value;
+		var shipDate = document.forms["shipOrderForm"]["ship_date"].value;
+
+		//Check if all required fields are filled
+		if (meterDetails == "" || meterQuantity == "" || destination == "" || shipDate == "") {
+			alert("Please fill in all fields.");
+			return false; 
+		}
+		return true; 
+	}
 
     function submitForm() {
         if (validateForm()) {
@@ -89,29 +93,22 @@ include 'navInv.php';
 	<form class="form" action="invDep_ShipAddBatch.php" method="post" name="shipOrderForm">
 
         <table class="table table-borderless mb-4">
-			<!--Meter Information-->
 			<tr>
-				<th>Meter Type :</th>
-				<td><input type="text" class="form-control" name="meter_type" required></td>
-			</tr>
-			<tr>
-				<th>Meter Model :</th>
-				<td><input type="text" class="form-control" name="meter_model" required></td>
-			</tr>
-			<tr>
-				<th>Meter Size :</th> <!--Drop Down-->
-				<td><select class="form-select" name="meter_size" required>
-						<option value="" disabled selected>Please Select Meter Size</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-						<option value="25">25</option>
-						<option value="40">40</option>
-						<option value="50">50</option>
-						<option value="80">80</option>
-						<option value="100">100</option>
-						<option value="150">150</option>
+				<td>Meter Details</td>
+				<td><select name="meter_details" required>
+						<option value="" disabled selected>Please Select Meter Type, Model and Size</option>
+						<?php
+						$sqlMeter = "SELECT DISTINCT meter_type, meter_model, meter_size FROM batch";
+						$resultMeter = mysqli_query($connection, $sqlMeter);
+						while ($rowMeter = mysqli_fetch_assoc($resultMeter)) {
+							$meterType = $rowMeter['meter_type'];
+							$meterModel = $rowMeter['meter_model'];
+							$meterSize = $rowMeter['meter_size'];
+							echo "<option value='$meterType|$meterModel|$meterSize'>$meterType, $meterModel, $meterSize</option>";
+						}
+						?>
 					</select>
-				</td> <!--positive number validation-->
+				</td>
 			</tr>
 			
 			<!--Shipping details-->
