@@ -63,7 +63,7 @@ include 'navReg.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">Receive meter batch after arrival</h2>
       <p class="lead">Scan the batch's QR code received to record the meters at <?php echo $row['location_name'];?> Region Store.</p>
-      <p>Quick access to receive meters <a href=".php">here</a>.</p>
+      <p>Quick access to receive meters <a href="store_ReceiveOrderScanBatchQR.php">here</a>.</p>
     </div>
       <div class="col-md-5">
         <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">

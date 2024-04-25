@@ -57,7 +57,7 @@ include 'navInv.php';
       <h2 class="featurette-heading fw-normal lh-1">Register meters received</h2>
       <p class="lead">Generate new meter QR codes received from manufacturers and assign meters into a new batch. Assign passed meters into batches as well after testing at the Test Lab</p>
       <p>Quick access to register new meters <a href="inventoryDep_AddBatchForm.php">here</a>.</p>
-      <p>Quick access to receive passed meters <a href="">here</a>.</p>
+      <p>Quick access to receive passed meters <a href="inv_ReceiveScanPassBatchQR">here</a>.</p>
     </div>
       <div class="col-md-5">
         <img src="imgs/create-a-qr-code.png" width="100%" height="100%">
@@ -97,7 +97,7 @@ include 'navInv.php';
   <div class="row featurette">
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">Make forecast on water meter demand</h2>
-        <p class="lead">Enter the water meter demand history and let the system generate a forecast for future meter demand.</p>
+        <p class="lead">Enter the water meter demand history dataset and let the system generate a forecast for future meter demand.</p>
         <p>Quick access to meter forecast <a href="">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
@@ -125,5 +125,4 @@ include 'navInv.php';
 </footer>	
 
 </body>
-
 </html>

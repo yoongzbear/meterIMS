@@ -35,7 +35,7 @@ include 'navInv.php';
       <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
       </div>
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="inv_ReceiveScanPassBatchQR.php">Receive Pass Batch</a>
+      <a button type="button" class="btn btn-primary btn-lg" href="inv_ReceiveScanPassBatchQR.php">Receive Passed Batch</a>
     </div>    
   </div>
 
