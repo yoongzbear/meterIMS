@@ -21,7 +21,7 @@ ENDIF
 
 // generate qr
 	include ('connection.php');
-	include ('secure.php');
+	include ('secure_Reg.php');
 	$location_id = $_SESSION['locationID'];
 	
 	//Get location name from locationID
