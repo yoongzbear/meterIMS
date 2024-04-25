@@ -19,7 +19,6 @@ $row = mysqli_fetch_assoc($result);
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 </head>
 
 <body>
@@ -28,7 +27,6 @@ $row = mysqli_fetch_assoc($result);
 include 'header.php';
 include 'navReg.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -76,7 +74,7 @@ include 'navReg.php';
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">Record meter's departure from region store</h2>
         <p class="lead">Scan the meter's QR code to record the meter departure for installation at premises and for warranty testing.</p>
-        <p>Quick access to send out meter for installation <a href="">here</a>.</p>
+        <p>Quick access to send out meter for installation <a href="store_assignInstallForm">here</a>.</p>
         <p>Quick access to send out meter for warranty testing <a href="regWarrantyUpdate.php">here</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
@@ -90,7 +88,7 @@ include 'navReg.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">Ship meters out</h2>
         <p class="lead">Insert meters' shipping information to other Region Stores or Inventory Department.</p>
-        <p>Quick access to ship out meter form <a href="">here</a>.</p>
+        <p>Quick access to ship out meter form <a href="store_ShipOrderForm">here</a>.</p>
     </div>
     <div class="col-md-5">
       <img src="imgs/ship-box.jpg" width="100%" height="100%">
@@ -143,5 +141,4 @@ include 'navReg.php';
 </footer>	
 
 </body>
-
 </html>
