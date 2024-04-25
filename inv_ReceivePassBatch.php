@@ -47,9 +47,13 @@ include 'navInv.php';
 		if(mysqli_num_rows($result)>0){
 			$current_date = date('Y-m-d');
 	
+			//Update Batch Location
+			$sqlBatchLocation = "UPDATE batch SET location_id = 1 WHERE batch_id = '$batch_id'";
+			$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
+			
 			//Update Meter Location
-			$sqlMeterLocation = "UPDATE batch SET location_id = 1 WHERE batch_id = '$batch_id'";
-			$resultMovement = mysqli_query($connection, $sqlMeterLocation);
+			$sqlMeterLocation = "UPDATE meter SET location_id = 1, meter_status = 'IN STOCK' WHERE batch_id = '$batch_id'";
+			$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
 			
 			//Update Tracking Info
 			$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
