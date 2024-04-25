@@ -3,8 +3,10 @@
 	include('connection.php');
 	$batch_id = $_GET['Batch_ID'];
 	
-	//To get Batch Info
-	$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
+	//To get Batch and Meter Info
+	$sqlBatchInfo = "SELECT batch.*, meter.* FROM batch 
+					INNER JOIN meter ON batch.batch_id = meter.batch_id
+					WHERE batch.batch_id = '$batch_id'";
 	$result = mysqli_query($connection, $sqlBatchInfo);
 	
 	if ($result) {
@@ -15,16 +17,6 @@
 		$meter_model = $row["meter_model"];
 		$meter_size = $row["meter_size"];
 		$quantity = $row["quantity"];
-	}
-	
-	//To get Meter in Batch
-	$sqlMeterList = "SELECT * FROM meter WHERE batch_id = '$batch_id'";
-	$resultMeter = mysqli_query($connection, $sqlMeterList);
-	
-	if ($resultMeter) {
-		$rowMeter = mysqli_fetch_assoc($resultMeter);
-
-		// Fetch data from the database
 		$manu_id = $rowMeter["manu_id"];
 	}
 	
@@ -37,6 +29,7 @@
         // Fetch data from the database
         $manu_name = $rowManu["manu_name"];
     }
+	echo "<script>alert('Batch Created Successfully!');</script>";
 ?>
 
 <!DOCTYPE html>
@@ -126,8 +119,8 @@ include 'header.php';
 		<?php
 			$num = 1;
 			//Reset data seek pointer to the beginning
-			mysqli_data_seek($resultMeter, 0);
-			while($rowMeter = mysqli_fetch_assoc($resultMeter)){
+			mysqli_data_seek($result, 0);
+			while($rowMeter = mysqli_fetch_assoc($result)){
 				echo 
 					'<thread><tr>
 						<th scope="row">'.$num.'</th>
