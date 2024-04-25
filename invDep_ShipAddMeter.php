@@ -94,6 +94,8 @@
 		<div id="success" style="display:none;">
 			<h2>Meter Added Successfully!</h2>
 			<?php
+				echo "<script>alert('Meter Added Successfully!');</script>";
+				
 				//To select the meter information
 				$sqlShowMeter = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
 				$resultSelect = mysqli_query($connection, $sqlShowMeter);
