@@ -1,3 +1,36 @@
+<?php
+include "secure_Reg.php";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Shipping</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<header>
+<?php 
+include 'header.php'; 
+include 'navReg.php';
+?>
+
+</header>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
+	<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Ship Out - Ship Meter Batch</li>
+
+  </ol>
+</nav>
+
 <?php /* 
 -	Inventory department, region store: 
 scan batch ship out, write which store its going to 
@@ -21,7 +54,6 @@ ENDIF
 
 // generate qr
 	include ('connection.php');
-	include ('secure_Reg.php');
 	$location_id = $_SESSION['locationID'];
 	
 	//Get location name from locationID
@@ -65,25 +97,24 @@ ENDIF
     }
 </script>
 
-<html>
-<head><title>Meter Shipping</title></head>
-<div class="content">
+<div class="col align-self-center mb-4">
     <h3 class="header">Ship Meter Batch</h3>
+	<hr class="border border-success border-2 opacity-50">
 	<form class="form" action="store_ShipAddBatch.php" method="post" name="shipOrderForm">
 
-        <table>
+        <table class="table table-borderless mb-4">
 			<!--Meter Information-->
 			<tr>
-				<td>Meter Type</td>
-				<td><input type="text" name="meter_type" required></td>
+				<th>Meter Type:</th>
+				<td><input class="form-control" type="text" name="meter_type" required></td>
 			</tr>
 			<tr>
-				<td>Meter Model</td>
-				<td><input type="text" name="meter_model" required></td>
+				<th>Meter Model:</th>
+				<td><input class="form-control" type="text" name="meter_model" required></td>
 			</tr>
 			<tr>
-				<td>Meter Size</td> <!--Drop Down-->
-				<td><select name="meter_size" required>
+				<th>Meter Size:</th> <!--Drop Down-->
+				<td><select class="form-select" name="meter_size" required>
 						<option value="" disabled selected>Please Select Meter Size</option>
 						<option value="15">15</option>
 						<option value="20">20</option>
@@ -98,19 +129,19 @@ ENDIF
 			</tr>
 			
 			<!--Shipping details-->
-			<input type="hidden" name="origin" value="<?php echo $location_id; ?>" readonly>
+			<input class="form-control" type="hidden" name="origin" value="<?php echo $location_id; ?>" readonly>
             <tr>
-                <td>Number of Meters Needed</td>
-                <td><input type="number" name="meterQuantity" required></td>
+                <th>Number of Meters Needed:</th>
+                <td><input class="form-control" type="number" name="meterQuantity" required></td>
             </tr>
 			<tr>
-                <td>Origin</td>
+                <th>Origin:</th>
                 <td><?php echo $storeName ;?></td>
             </tr>
 			<tr>
-                <td>Destination</td>
+                <th>Destination:</th>
                 <td>
-					<select name="destination" required>
+					<select class="form-select" name="destination" required>
 						<option value="" disabled selected>Please Select Destination Region Store</option>
 						<?php
 							$sqlStore="SELECT * FROM location WHERE location_id != 1 AND location_id != 2 AND location_id != '$location_id'";
@@ -123,12 +154,18 @@ ENDIF
 				</td>
             </tr>
 			<tr>
-				<td>Ship Out Date</td>
-				<td><input type="date" name="ship_date" placeholder="<?php echo $current_date; ?>" value="<?php echo $current_date; ?>" readonly></td> <!--validate date-->
+				<th>Ship Out Date:</th>
+				<td><input class="form-control" type="date" name="ship_date" placeholder="<?php echo $current_date; ?>" value="<?php echo $current_date; ?>" readonly></td> <!--validate date-->
 			</tr>
         </table>
-		<button class="submit" onclick="submitForm();" type="button">Scan Meter</button>
+		<button class="submit btn btn-outline-success mb-4" onclick="submitForm();" type="button">Scan Meter</button>
 		<!--After submit, show confirm msg, start scanning, buttons-->
     </form>
 </div>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>	
+
+</body>
 </html>
