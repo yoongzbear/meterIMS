@@ -69,7 +69,7 @@ include 'header.php';
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
-            window.location.href = 'inventoryDep_ShipOrderScanMeterQR.php?Batch_ID=$batch_id&meterQuantity=$meterQuantity';
+            window.location.href = 'inventoryDep_ShipOrderScanMeterQR.php?Batch_ID=<?php echo $batch_id; ?>&meterQuantity=<?php echo $meterQuantity; ?>';
         });
     </script>
 
