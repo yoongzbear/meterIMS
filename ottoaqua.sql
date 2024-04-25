@@ -141,8 +141,8 @@ CREATE TABLE IF NOT EXISTS `meter` (
 --
 
 INSERT INTO `meter` (`serial_num`, `install_date`, `age`, `mileage`, `batch_id`, `meter_status`, `install_address`, `manufactured_year`, `manu_id`, `location_id`) VALUES
-('AIS17BA0000001', NULL, 6.5, 41417, 1, 'IN STORE', NULL, 2017, 1, NULL),
-('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1, NULL),
+('AIS17BA0000001', NULL, 6.5, 41417, 1, 'IN STORE', NULL, 2017, 1, 3),
+('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1, 3),
 ('AIS17BA0000003', '2024-04-01', 6.5, 12127, 1, 'INSTALLED', '127, Jalan Neo, Kuala Lumpur', 2017, 1, 3);
 
 -- --------------------------------------------------------
