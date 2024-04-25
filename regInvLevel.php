@@ -82,7 +82,7 @@
             const minStock = [38066,72,75,36,50,27,52,35];
             const size = [15,20,25,40,50,80,100,150];
             for(let i=0; i<size.length; i++){
-                if(document.getElementById(size[i]).innerText < (minStock[i]*0.2)){
+                if(document.getElementById(size[i]).innerText < (minStock[i]*0.8)){
                     document.getElementById(size[i]).style.backgroundColor = "lightcoral";
                     document.getElementById(size[i]).style.color = "white";
                 }
