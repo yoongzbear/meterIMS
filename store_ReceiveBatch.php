@@ -37,15 +37,22 @@ include 'header.php';
 		$batch_id = $_GET['Batch_ID'];
 		
 		//To check if the QR scanned is Batch QR
-		$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
+		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch
+						INNER JOIN meter ON batch.batch_id = meter.batch_id
+						INNER JOIN movement ON batch.batch_id = movement.batch_id
+						WHERE batch.batch_id = '$batch_id'";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
 			$current_date = date('Y-m-d');
 	
+			//Update Batch Location
+			$sqlBatchLocation = "UPDATE batch SET location_id = '$location_id' WHERE batch_id = '$batch_id'";
+			$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
+
 			//Update Meter Location
-			$sqlMeterLocation = "UPDATE batch SET location_id = '$location_id' WHERE batch_id = '$batch_id'";
-			$resultMovement = mysqli_query($connection, $sqlMeterLocation);
+			$sqlMeterLocation = "UPDATE meter SET location_id = '$location_id', meter_status = 'IN STORE' WHERE batch_id = '$batch_id'";
+			$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
 			
 			//Update Tracking Info
 			$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
@@ -60,20 +67,6 @@ include 'header.php';
 				$meter_model = $row["meter_model"];
 				$meter_size = $row["meter_size"];
 				$quantity = $row["quantity"];
-			}
-			
-			//To get Meter in Batch
-			$sqlMeterList = "SELECT * FROM meter WHERE batch_id = '$batch_id'";
-			$resultMeter = mysqli_query($connection, $sqlMeterList);
-			
-			//To get Tracking Info
-			$sqlTrackingInfo = "SELECT * FROM movement WHERE batch_id = '$batch_id'";
-			$resultTrack = mysqli_query($connection, $sqlTrackingInfo);
-			
-			if ($resultTrack) {
-				$row = mysqli_fetch_assoc($resultTrack);
-
-				//Fetch data from the database
 				$tracking_id = $row["tracking_id"];
 				$origin = $row["origin"];
 				$destination = $row["destination"];
