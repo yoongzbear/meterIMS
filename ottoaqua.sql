@@ -231,14 +231,21 @@ CREATE TABLE IF NOT EXISTS `warranty_defect` (
 --
 
 INSERT INTO `warranty_defect` (`defect_id`, `defect`) VALUES
-(1, 'INACCURATE METER READING'),
-(2, 'PHYSICAL DAMAGE'),
-(3, 'LEAKING THROUGH INDICATING DEVICE & PULSE OUTPUT'),
-(4, 'LEAKING AT ANY PART OF METER BODY'),
-(5, 'UNCALIBERATED METER'),
-(6, 'IMPROPER INSTALLATION'),
-(7, 'OLD METER'),
-(8, 'METER STUCK');
+(1, 'Digit jumping at indicating device or totalizer'),
+(2, 'Indicating device/totalizer crack naturally'),
+(3, 'Leaking through indicating device, totalizer or register window'),
+(4, 'No meter serial number'),
+(5, 'Unidentified meter serial number'),
+(6, 'Duplication of meter serial number'),
+(7, 'Gear drive train failure due to manufacturing defect'),
+(8, 'Leaking at any part of meter body and/or indicating device/totalizer'),
+(10, 'Pinch hole at upper and/or lower body of water meter'),
+(11, 'Threading defects'),
+(12, 'Condensation inside counter register'),
+(13, 'Misalignment of the indicating device/totalizer digits'),
+(14, 'Connector and/or nut material and/or thread defects due to manufacturing'),
+(15, 'Unidentified, unreadable and/or damages of QR code sticker due to manufacturing'),
+(16, 'Sticker meter serial number differ from physical body water meter serial number');
 
 --
 -- Constraints for dumped tables
