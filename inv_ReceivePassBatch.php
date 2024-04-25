@@ -86,7 +86,7 @@ include 'navInv.php';
 			echo "<script>alert('Meter Batch Received Successfully!');</script>";
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
-			echo "<script>window.location.href='inv_ReceiveScanPassMeterQR.php';</script>";
+			echo "<script>window.location.href='inv_ReceiveScanPassBatchQR.php';</script>";
 		}
 	}
 ?>
