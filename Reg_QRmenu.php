@@ -32,25 +32,29 @@ include 'navReg.php';
 
 <div class="container text-center">
 <h4>Scan Batch QR</h4>
-  <div class="row justify-content-around mb-5">
+  <div class="row mb-4">
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="store_ReceiveOrderScanBatchQR.php">Store Arrival</a>
+      <a button type="button" class="btn btn-primary btn-lg" href=".php">Store Arrival</a>
     </div>
+    </div>
+    <div class="row mb-4">
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="store_ShipOrderForm.php">Ship Out</a>
+      <a button type="button" class="btn btn-primary btn-lg" href=".php">Ship Out</a>
     </div>
-  </div>
+    </div>
 
   <h4>Scan Meter QR</h4>
-  <div class="row justify-content-around">
+  <div class="row mb-4">
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg mb-3" href="store_assignInstallForm.php">Installation Departure</a>
+      <a button type="button" class="btn btn-primary btn-lg mb-3" href=".php">Installation Departure</a>
     </div>
   </div>  
-  <div class="row justify-content-around mb-5">
+  <div class="row mb-4">
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="RegDep_Scan_View_meter_info.php">View Meter Info</a>
     </div>
+    </div>
+    <div class="row mb-4">
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg" href="regWarrantyUpdate.php">Warranty Testing</a>
     </div>
