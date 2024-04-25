@@ -38,7 +38,10 @@ include 'navInv.php';
 		$batch_id = $_GET['Batch_ID'];
 		
 		//To check if the QR scanned is Batch QR
-		$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
+		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch 
+						INNER JOIN meter ON batch.batch_id = meter.batch_id
+						INNER JOIN movement ON batch.batch_id = movement.batch_id
+						WHERE batch.batch_id = '$batch_id'";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
@@ -60,20 +63,6 @@ include 'navInv.php';
 				$meter_model = $row["meter_model"];
 				$meter_size = $row["meter_size"];
 				$quantity = $row["quantity"];
-			}
-			
-			//To get Meter in Batch
-			$sqlMeterList = "SELECT * FROM meter WHERE batch_id = '$batch_id'";
-			$resultMeter = mysqli_query($connection, $sqlMeterList);
-			
-			//To get Tracking Info
-			$sqlTrackingInfo = "SELECT * FROM movement WHERE batch_id = '$batch_id'";
-			$resultTrack = mysqli_query($connection, $sqlTrackingInfo);
-			
-			if ($resultTrack) {
-				$row = mysqli_fetch_assoc($resultTrack);
-
-				//Fetch data from the database
 				$tracking_id = $row["tracking_id"];
 				$origin = $row["origin"];
 				$destination = $row["destination"];
@@ -90,11 +79,10 @@ include 'navInv.php';
 				//Fetch data from the database
 				$origin_name = $row["location_name"];
 			}
-			echo "<script>alert('Meter Batch Receive Successfully.');</script>";
+			echo "<script>alert('Meter Batch Received Successfully!');</script>";
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
-			echo "<script>window.location.href='inv_ReceiveScanPassBatchQR.php';</script>";
-			exit();
+			echo "<script>window.location.href='inv_ReceiveScanPassMeterQR.php';</script>";
 		}
 	}
 ?>
@@ -170,8 +158,8 @@ include 'navInv.php';
 		<?php
 			$num = 1;
 			//Reset data seek pointer to the beginning
-			mysqli_data_seek($resultMeter, 0);
-			while($rowMeter = mysqli_fetch_assoc($resultMeter)){
+			mysqli_data_seek($result, 0);
+			while($rowMeter = mysqli_fetch_assoc($result)){
 				echo 
 					'<tr>
 						<th>'.$num.'</th>
