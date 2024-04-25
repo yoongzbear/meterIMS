@@ -98,7 +98,17 @@ include 'navInv.php';
 		<label class="col-form-label">Meter Size : </label>
 	</div>
 	<div class="col-auto">
-		<input class="form-control form-control-sm" type="number" name="meter_size" min='0' required> <!--positive number validation-->
+		<select class="form-select" name="meter_size" required>
+			<option value="" disabled selected>Please Select Meter Size</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+			<option value="25">25</option>
+			<option value="40">40</option>
+			<option value="50">50</option>
+			<option value="80">80</option>
+			<option value="100">100</option>
+			<option value="150">150</option>
+		</select>
 	</div>
 </div>
 <br>
