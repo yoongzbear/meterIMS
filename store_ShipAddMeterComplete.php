@@ -41,7 +41,7 @@ include 'header.php';
 	$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch
 					INNER JOIN meter ON meter.batch_id = batch.batch_id
 					INNER JOIN movement ON movement.batch_id = batch.batch_id
-					WHERE batch_id = '$batch_id'";
+					WHERE batch.batch_id = '$batch_id'";
 	$result = mysqli_query($connection, $sqlBatchInfo);
 	
 	if ($result) {
@@ -80,6 +80,7 @@ include 'header.php';
 		//Fetch data from the database
 		$destination_name = $row["location_name"];
 	}
+	echo "<script>alert('Meter Batch Shipped Successfully!');</script>";
 ?>
 
 <div class="container mb-4">
