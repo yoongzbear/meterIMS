@@ -44,7 +44,7 @@ if(ISSET($_POST['serial_num'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meter Installation Form</title>
+    <title>Meter Test Result Form</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -61,11 +61,11 @@ if(ISSET($_POST['serial_num'])){
   <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
     <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='Meter Test Page'>Meter Test</a></li>
     <li class="breadcrumb-item"><a href="meterTest.php" title='Scan QR Page'>Scan QR - Meter Test Result Form</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Meter Test Form</li>
+    <li class="breadcrumb-item active" aria-current="page">Meter Test Result Form</li>
   </ol>
 </nav>
 
-    <div class='col align-self-center' style='width:50%;'>
+<div class='container col-xl-5'>
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
         <hr class='border border-success border-2 opacity-50'>
         <table class='table mb-4'><th colspan=2><h3><?php echo $rowMeter['serial_num'];?></h3></th>        
@@ -102,17 +102,23 @@ if(ISSET($_POST['serial_num'])){
                 <td><?php echo $rowMeter['location_name'];?></td>
             </tr></table>
 
-        <form id='meterForm' action='submitMeterTest.php' method='post'>        
+        <form id='meterForm' action='submitMeterTest.php' method='post' class="mb-4">        
         <input type='hidden' name='serial_num' value='<?php echo $serial_num;?>' readonly>
+        <div class="mb-3 row">               
         <label for='testResult'>Test Result : </label>
-        <select id='testResult' class='form-control mb-4' name='testResult' required onchange='toggleDefectField()'> <!-- Added onchange event -->
+        <div class="col-sm-10">
+        <select id='testResult' class='form-select' name='testResult' required onchange='toggleDefectField()'> <!-- Added onchange event -->
             <option value=''>Select Result</option>
             <option value='PASS'>PASS</option>
             <option value='FAIL'>FAIL</option>
         </select>
+        </div>
+        </div>
 
+        <div class="mb-3 row">               
         <label for='defect' id='defectLabel' style='display:none;'>Defect : </label> <!-- Hidden by default -->
-        <select id='defect' class='form-control mb-4' name='defect' style='display:none;'> <!-- Hidden by default -->
+        <div class="col-sm-10">
+        <select id='defect' class='form-select' name='defect' style='display:none;'> <!-- Hidden by default -->
             <option value=''>Select Defect</option>";
             <?php
                 while ($rowDefect = mysqli_fetch_assoc($resultDefect)) {
@@ -120,10 +126,11 @@ if(ISSET($_POST['serial_num'])){
                 } ?>
             <option value='0'>NOT LISTED</option>
         </select>
+        </div>
+        </div>
 
-        <input type='submit' style='width:30%;' class='btn btn-primary mb-4 btn-submit' value='Submit'>
+        <input type='submit' style='width:20%;' class='btn btn-primary btn-submit' value='Submit'>
     </form>
-</div>
 
     <script>
         function toggleDefectField() {
@@ -141,6 +148,8 @@ if(ISSET($_POST['serial_num'])){
             }
         }
       </script>
+
+</div>
 
 <footer>
 	<?php include 'footer.php';?>

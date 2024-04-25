@@ -30,7 +30,7 @@ $batch_id = $_GET['batch_id'];
     </ol>
     </nav>
 
-<div class="col align-self-center">
+<div class="col align-self-center mb-4">
 
 <form method="post" action="Insert_lab_to_inv_mov_process.php">
     <h2 class="font-monospace mb-4">This movement will be added for the tracking process : </h2>
@@ -38,7 +38,7 @@ $batch_id = $_GET['batch_id'];
     <p class="fw-bold mx-4 mb-4">Destination : Air Selangor Inv</p>
     <p class="fw-bold mx-4 mb-4">Meter Status : In Transit</p>
     <!-- Hidden input to pass batch_id -->
-    <div class="text-center mb-4">
+    <div class="text-center">
     <input type="hidden" name="batch_id" value="<?php echo htmlspecialchars($batch_id); ?>">
     <button type="submit" style="width:30%;height:30%;" class="btn btn-success" name="confirm">Confirm</button>
     <button type="button" style="width:30%;height:30%;" class="btn btn-outline-secondary" onclick="cancelForm()">Cancel</button>

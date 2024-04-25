@@ -28,15 +28,17 @@ include 'connection.php';
     </ol>
     </nav>
 
-<div class="col align-self-center">
+<div class="my-4 text-center">
 
-<h3>Send To Inventory Department</h3>
-<p class="fst-italic">Please scan the QR code on the batch to insert movement.</p>
-<canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
-<button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
-<button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
+    <h3>Send to Inventory Department</h3>
+    <p class="fst-italic">Please scan the QR code on the batch to insert movement.</p>
+    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
+    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
+    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4" hidden="">Cancel Scan</button>
 
-<div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="check_batch_exist_labTOinv.php" method="POST" style="display:none;">
+    <div class="col mt-4 text-center">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="check_batch_exist_labTOinv.php" method="POST" style="display:none;">
         <form action="check_batch_exist_labTOinv.php" id="meterForm" method="POST">
             <div class="modal-body p-4 text-center">
                 <h5 class="modal-title mb-0">Is this the right batch id?</h5>
@@ -48,15 +50,17 @@ include 'connection.php';
                 <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
             </div>
         </form>
-</div>
+    </div>
+    </div>
+    </div>
 
-<script>
-    //redirect to the meter install page if cancelled after scanning
-    document.getElementById("btn-cancel").addEventListener("click", function(event) {
-        event.preventDefault();
-        window.location.href = 'LabDep_Scan_to_Inv.php';
-    });
-</script>
+    <script>
+        //redirect to the meter install page if cancelled after scanning
+        document.getElementById("btn-cancel").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.location.href = 'LabDep_Scan_to_Inv.php';
+        });
+    </script>
 
 </div>
 

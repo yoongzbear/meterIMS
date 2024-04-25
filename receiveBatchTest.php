@@ -8,6 +8,18 @@
     <title>Receive Meter Batch</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        canvas{
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            width: 350px; 
+            height: 350px; 
+            border: 1px #000000 solid; 
+            display:block;
+        }
+    </style>
 
 </head>
 
@@ -23,49 +35,36 @@ include 'navLab.php';
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
-    <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='Meter QR Page'>Meter Test</a></li>
+    <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='Meter Test Page'>Meter Test</a></li>
     <li class="breadcrumb-item active" aria-current="page">Scan QR - Receive Batch for Warranty Test</li>
   </ol>
 </nav>
 
-<div class="col align-self-center">
+<section id="receiveBatchTest">
+        <div class="container col-lg-12 text-center mb-4" id="qrscanner">
+            <h2 class="text-center">Receive Meter Batch for Testing Form</h2>
+            <p class="text-center mb-4">Please scan the QR code on the received meter batch.</p>
+            <canvas hidden="" id="qr-canvas"></canvas>
+            <button class= "btn btn-dark" id="btn-scan-qr" type="button">Click to Scan</button>
+            <button class="btn btn-dark mt-4" id="btn-cancel-scan" type="button" hidden="">Click to Cancel Scanning</button>
+        </div>
 
-    <h3>Receive Meter Batch for Testing Form</h3>
-    <p class="fst-italic">Please scan the QR code on the received meter batch.</p>
-    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
-    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
-    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
-
-    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="submitBatchTest.php" method="post" style="display:none;">
-            <form id="meterForm" action="submitBatchTest.php" method="post">
-                <div class="modal-body p-4 text-center">
-                    <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter batch ID?</h5>
-                    <p class="mb-0">Meter Batch ID : </p>
-                    <input type="text" id="outputData" name="batch_id" readonly>
-                </div>
-                <div class="modal-footer flex-nowrap p-0">
-                    <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>
-                    <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
-                </div>
+        <div id="meterForm" class="col-lg-12 mt-5 border border-warning shadow mb-4 rounded" style="display: none; width: 50%; margin:auto;">
+            <h3 class="text-center">Please Confirm that the Batch ID is Correct.</h3>
+            <form action="submitBatchTest.php" method="post" class="text-center">
+                <label>Meter Batch ID : </label>
+                <input type="text" id="outputData" name="batch_id" readonly><br>
+                <button type="submit" class="btn btn-success m-2 pt-1 pb-1 mt-4">Mark As Receive</button>
             </form>
-    </div>
-</div>
-
-
-    <script>
-        //redirect to the meter install page if cancelled after scanning
-        document.getElementById("btn-cancel").addEventListener("click", function(event) {
-            event.preventDefault();
-            window.location.href = 'receiveBatchTest.php';
-        });
-    </script>
-
+        </div>
+        
+    </section>
+    <footer>
+        <?php 
+            include 'footer.php'; 
+        ?>
+    </footer>
     <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
-
-<footer>
-	<?php include 'footer.php';?>
-</footer>	
-
 </body>
 </html>

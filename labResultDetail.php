@@ -25,7 +25,7 @@ include 'header.php';
   <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
     <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='Meter Test Page'>Meter Test</a></li>
-    <li class="breadcrumb-item"><a href="meterTest.php" title='Scan QR Page'>Scan QR - View Meter Result</a></li>
+    <li class="breadcrumb-item"><a href="labMeterResult.php" title='Scan QR Page'>Scan QR - View Meter Result</a></li>
     <li class="breadcrumb-item"><a href="labViewMeterResult.php" title='View Meter Result Page'>View Meter Result</a></li>
     <li class="breadcrumb-item active" aria-current="page">Meter Result Detail</li>
   </ol>
@@ -39,7 +39,7 @@ $sql = "SELECT * FROM lab_result LEFT JOIN warranty_defect on lab_result.defect_
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_assoc($result);
 
-echo "<div class='col align-self-center' style='width:50%;'>
+echo "<div class='container col-xl-5'>
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
         <hr class='border border-success border-2 opacity-50'>";
         echo "<table class='table mb-4'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>

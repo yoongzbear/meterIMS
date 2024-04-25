@@ -55,7 +55,7 @@ include 'header.php';
   </ol>
 </nav>
 
-<div class='col align-self-center'>
+<div class='container col-xl-5'>
 
 <h2 class='fs-1 text-uppercase'>Meter Info</h2>
 <hr class='border border-success border-2 opacity-50'>
@@ -88,13 +88,21 @@ include 'header.php';
             <th>Region Store:</th>
             <td><?php echo $rowMeter['location_name'];?></td>
         </tr></table>
-        <form id='meterForm' action='submitMeterInstallation.php' method='post'>    
-            <input type='hidden' id='serial_num' name='serial_num' value='$serial_num'>                
-            <label for='installDate'>Installation Date : </label>
-            <input type='date' class='form-control mb-4'id='installDate' name='installDate' required>
-            <label for='installAdd'>Installation Address : </label>
-            <input type='text' class='form-control mb-4' id='installAdd' name='installAdd' required>
-            <input type='submit' style='width:20%;' class='btn btn-primary mb-4 btn-submit' value='Submit'>
+        <form id='meterForm' action='submitMeterInstallation.php' method='post' class="mb-4">    
+            <input type='hidden' id='serial_num' name='serial_num' value='$serial_num'> 
+            <div class="mb-3 row">               
+                <label for='installDate'>Installation Date : </label>
+            <div class="col-sm-10">
+                <input type='date' class='form-control'id='installDate' name='installDate' required>
+            </div>
+            </div>
+            <div class="mb-3 row">               
+                <label for='installAdd' class="col-form-label">Installation Address : </label>
+            <div class="col-sm-10">
+                <input type='text' class='form-control' id='installAdd' name='installAdd' required>
+            </div>
+            </div>
+            <input type='submit' style='width:20%;' class='btn btn-primary btn-submit' value='Submit'>
         </form>
 </div>
 

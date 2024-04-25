@@ -100,26 +100,3 @@ footer {
 .row a:hover {
     background-color: grey; 
 }
-
-.btn.btn-primary{
-    width: 60%;
-    height: 50px;
-}
-
-@media screen and (max-width: 1200px) {
-    .btn.btn-primary, .col, .featurette img, .col-6 {
-        width: 100%;
-        height: 100%;
-    }
-    
-}
-
-/*home page content*/
-@media (max-width: 576px) {
-    .featurette img, .col-6, 
-    .btn-submit {
-        width: 100%;
-        height: 100%;
-    }
-    
-}

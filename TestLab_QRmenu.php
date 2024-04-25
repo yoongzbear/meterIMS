@@ -2,7 +2,6 @@
 include 'secure_TestLab.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,29 +23,29 @@ include 'navLab.php';
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Test Lab'>Home</a></li>
+    <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Meter Test</li>
   </ol>
 </nav>
 
-<div class="container text-center">
-  <div class="row justify-content-around mb-5">
+<div class="container-sm text-center mb-4 px-5">
+  <div class="row mb-5">
     <h4>Scan Batch QR</h4>
-    <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="receiveBatchTest.php">Receive for Testing</a>
+    <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="receiveBatchTest.php">Receive for Testing</a>
       </div>
-      <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="LabDep_Scan_to_Inv.php">Send to Inventory Department</a>
+      <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="LabDep_Scan_to_Inv.php">Send to Inventory Department</a>
     </div>    
   </div>
 
-  <div class="row justify-content-around mb-5">
+  <div class="row">
     <h4>Scan Meter QR</h4>
-    <div class='col'>
-      <a button type="button" class="btn btn-primary btn-lg" href="meterTest.php">Meter Test Result Form</a>
+    <div class='col-6'>
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="meterTest.php">Meter Test Result Form</a>
       </div>
-      <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="labMeterResult.php">Meter Test Result</a>
+      <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="labMeterResult.php">Meter Test Result</a>
     </div>
   </div>
 </div>
