@@ -1,5 +1,5 @@
 <?php
-	include('secure.php');
+	include('secure_Reg.php');
 	include('connection.php');
 	$meter_type = $_POST["meter_type"];
 	$meter_model = $_POST["meter_model"];
