@@ -1,9 +1,10 @@
 <?php
 	include('secure_Reg.php');
 	include('connection.php');
-	$meter_type = $_POST["meter_type"];
-	$meter_model = $_POST["meter_model"];
-	$meter_size = $_POST["meter_size"];
+	$meter_details = explode("|", $_POST["meter_details"]);
+	$meter_type = $meter_details[0];
+	$meter_model = $meter_details[1];
+	$meter_size = $meter_details[2];
 	
 	$meterQuantity = $_POST["meterQuantity"];
 	$origin = $_POST["origin"];
