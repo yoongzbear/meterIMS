@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `useraccount` (
 --
 
 INSERT INTO `useraccount` (`username`, `password`, `name`, `emp_type`) VALUES
-('alya', 'wooahae4', 'Alya Mastura', 'region store'),
+('alya', 'nam12345', 'Alya Mastura', 'region store'),
 ('paola', 'pwr12345', 'Paola Wan', 'inventory department'),
 ('reyes', 'bing1234', 'Reyes Wong', 'contractor'),
 ('wendy', 'wlsi1234', 'Wendy Lai', 'lab tester'),
