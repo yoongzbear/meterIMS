@@ -125,5 +125,5 @@
 			}
 		?>
 	</table>
-	<button class="back" onclick="window.location.href='index.php'">Back</button>
+	<button class="back" onclick="window.location.href='inventoryDep_ShipOrderForm.php'">Back</button>
 </html>
