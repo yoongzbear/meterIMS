@@ -147,8 +147,8 @@ include 'header.php';
 							<?php
 							$currentYear = date('Y');
 
-							//Loop to generate options for past 50 years
-							for($i = $currentYear; $i >= $currentYear - 50; $i--) {
+							//Loop to generate options for past 5 years
+							for($i = $currentYear; $i >= $currentYear - 5; $i--) {
 								echo "<option value=\"$i\">$i</option>";
 							}
 							?>
