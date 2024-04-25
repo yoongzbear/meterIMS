@@ -8,23 +8,15 @@
 	$sqlUpdate = "UPDATE warranty SET warranty_status = 'REPLACED' WHERE serial_num = '$oldSerial_num'";
 	$resultUpdate = mysqli_query($connection,$sqlUpdate);
 	
-	if($resultUpdate){
-		echo "<script>alert('Meter status updated successfully!');</script>";
-	}
-	
 	//Update New Meter Status
 	$sqlUpdate = "UPDATE meter SET meter_status = 'TO BE INSTALLED' WHERE serial_num = '$serial_num'";
 	$resultUpdate = mysqli_query($connection,$sqlUpdate);
-	
-	if($resultUpdate){
-		echo "<script>alert('Meter assigned successfully!');</script>";
-	}
 	
 	//To get New Meter Info
 	$sql = "SELECT batch.*, meter.*, manufacturer.* FROM meter 
 					INNER JOIN batch ON meter.batch_id = batch.batch_id 
 					INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id
-					WHERE serial_num = '$serial_num'";
+					WHERE meter.serial_num = '$serial_num'";
 	$result = mysqli_query($connection, $sql);
 	
 	if ($result) {
@@ -120,7 +112,7 @@ include 'header.php';
 </div>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='inventoryDep_AddBatchForm.php'" title='Back To Create New Batch Page'>Back</button>
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='warranty_list.php'" title='Back To View Warranty List Page'>Back</button>
 </div>
 	
 <br>
