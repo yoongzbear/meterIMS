@@ -36,7 +36,6 @@
 				$mileage = $row["mileage"];
 				$manu_name = $row["manu_name"];
 			}
-			echo "<script>alert('Meter Assigned Successfully!');</script>";
 		}else{
 			echo "<script>alert('Invalid Meter QR. Please try again.');</script>";
 			echo "<script>window.location.href='store_assignInstallForm.php';</script>";
