@@ -90,6 +90,7 @@ include 'navInv.php';
 				//Fetch data from the database
 				$origin_name = $row["location_name"];
 			}
+			echo "<script>alert('Meter Batch Receive Successfully.');</script>";
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
 			echo "<script>window.location.href='inv_ReceiveScanPassBatchQR.php';</script>";
