@@ -17,7 +17,7 @@
 		$meter_model = $row["meter_model"];
 		$meter_size = $row["meter_size"];
 		$quantity = $row["quantity"];
-		$manu_id = $rowMeter["manu_id"];
+		$manu_id = $row["manu_id"];
 	}
 	
 	// To show the manufacturer name
