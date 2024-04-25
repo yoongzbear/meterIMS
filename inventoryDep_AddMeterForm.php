@@ -58,7 +58,7 @@ include 'header.php';
 			}
 		}
 		if (hasValue) {
-			var confirmation = confirm("You have entered data. Are you sure you want to cancel?");
+			var confirmation = confirm("Are you sure you want to discard?");
 			if (confirmation) {
 				clearInputs();
 				window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
