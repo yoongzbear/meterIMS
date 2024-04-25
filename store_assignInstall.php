@@ -22,7 +22,7 @@
 			$sql = "SELECT batch.*, meter.*, manufacturer.* FROM meter 
 							INNER JOIN batch ON meter.batch_id = batch.batch_id 
 							INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id
-							WHERE serial_num = '$serial_num'";
+							WHERE meter.serial_num = '$serial_num'";
 			$result = mysqli_query($connection, $sql);
 			
 			if ($result) {
@@ -36,6 +36,7 @@
 				$mileage = $row["mileage"];
 				$manu_name = $row["manu_name"];
 			}
+			echo "<script>alert('Meter Assigned Successfully!');</script>";
 		}else{
 			echo "<script>alert('Invalid Meter QR. Please try again.');</script>";
 			echo "<script>window.location.href='store_assignInstallForm.php';</script>";
@@ -124,7 +125,7 @@ include 'header.php';
 </div>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='inventoryDep_AddBatchForm.php'" title='Back To Create New Batch Page'>Back</button>
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_assignInstallForm.php'" title='Back To Installation Departure Page'>Back</button>
 </div>
 	
 <br>
