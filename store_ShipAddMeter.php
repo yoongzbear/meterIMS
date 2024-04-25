@@ -35,37 +35,37 @@ include 'header.php';
 <?php
     include ('connection.php');
     $newBatch_id = $_GET['Batch_ID'];
-    $serial_num = $_GET['Meter_ID'];
-    $meterQuantity = $_GET['meterQuantity'];
-	
-	//Update Old Batch meter quantity
-	$sqlUpdateBatch = "UPDATE batch SET quantity = quantity - 1 WHERE batch_id = 
-	(SELECT batch_id FROM meter WHERE serial_num = '$serial_num')";
-	$resultUpdateBatch = mysqli_query($connection, $sqlUpdateBatch);
-	
-	//Update new Batch_ID of the meter
-	$sqlUpdateMeter = "UPDATE meter SET batch_id = $newBatch_id, meter_status = 'SHIPPING' WHERE serial_num = '$serial_num'";
-	$resultUpdateMeter = mysqli_query($connection, $sqlUpdateMeter);
-	
-	//Count the number of meters in the new batch
-    $sqlCountNewBatch = "SELECT COUNT(*) AS meterCount FROM meter WHERE batch_id = $newBatch_id";
-    $resultCountNewBatch = mysqli_query($connection, $sqlCountNewBatch);
-    $row = mysqli_fetch_assoc($resultCountNewBatch);
-    $meterCount = $row['meterCount'];
-	
-	//Update the numbers of meters in new Batch
-	$sqlCountQuantity = "SELECT * FROM meter WHERE batch_id = $newBatch_id";
-    $quantityResult = mysqli_query($connection, $sqlCountQuantity);
-	if ($quantityResult){
-		$rowCount = mysqli_num_rows($quantityResult);
+		$serial_num = $_GET['Meter_ID'];
+		$meterQuantity = $_GET['meterQuantity'];
+			
+		//Update Batch meter quantity
+		$sqlUpdateBatch = "UPDATE batch SET quantity = quantity - 1 WHERE batch_id = 
+		(SELECT batch_id FROM meter WHERE serial_num = '$serial_num')";
+		$resultUpdateBatch = mysqli_query($connection, $sqlUpdateBatch);
 		
-		//Update New Batch Info with meter quantity
-		$sqlUpdateQuantity = "UPDATE `batch` SET `quantity` = '$rowCount' WHERE `batch_id` = '$newBatch_id'";
-		$resultUpdate = mysqli_query($connection, $sqlUpdateQuantity);
-	}
+		//Update Batch_ID of the meter
+		$sqlUpdateMeter = "UPDATE meter SET batch_id = $newBatch_id, meter_status = 'SHIPPING', location_id = NULL WHERE serial_num = '$serial_num'";
+		$resultUpdateMeter = mysqli_query($connection, $sqlUpdateMeter);
+		
+		//Count the number of meters in the new batch
+		$sqlCountNewBatch = "SELECT COUNT(*) AS meterCount FROM meter WHERE batch_id = $newBatch_id";
+		$resultCountNewBatch = mysqli_query($connection, $sqlCountNewBatch);
+		$row = mysqli_fetch_assoc($resultCountNewBatch);
+		$meterCount = $row['meterCount'];
+			
+		//Update the numbers of meters in new Batch
+		$sqlCountQuantity = "SELECT * FROM meter WHERE batch_id = $newBatch_id";
+		$quantityResult = mysqli_query($connection, $sqlCountQuantity);
+		if ($quantityResult){
+			$rowCount = mysqli_num_rows($quantityResult);
+			
+			//Update Batch Info with meter quantity
+			$sqlUpdateQuantity = "UPDATE `batch` SET `quantity` = '$rowCount' WHERE `batch_id` = '$newBatch_id'";
+			$resultUpdate = mysqli_query($connection, $sqlUpdateQuantity);
+		}
 
-    //Determine which button to show based on meter count
-    $showCompleteButton = ($meterCount == $meterQuantity) ? true : false;
+		//Determine which button to show based on meter count
+		$showCompleteButton = ($meterCount == $meterQuantity) ? true : false;
 ?>
 
 <script>
@@ -93,7 +93,8 @@ include 'header.php';
 <div class="container mb-4">
     <div id="success" style="display:none;">
         <h2>Meter Added Successfully</h2>
-		<?php
+		<?php	
+			echo "<script>alert('Meter Added Successfully!');</script>";
 			//To select the meter information
 			$sqlShowMeter = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
 			$resultSelect = mysqli_query($connection, $sqlShowMeter);
