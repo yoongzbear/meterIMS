@@ -101,6 +101,7 @@ include 'header.php';
 				//Fetch data from the database
 				$destination_name = $row["location_name"];
 			}
+			echo "<script>alert('Meter Batch Receive Successfully.');</script>";
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
 			echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
