@@ -31,7 +31,7 @@
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
-            window.location.href = 'store_assignInstallForm.php';
+            window.location.href = 'store_replaceMeterScanQR.php';
         });
     </script>
 
