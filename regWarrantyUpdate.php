@@ -15,6 +15,11 @@ if(ISSET($_POST['serialnum'])){
         header("Refresh:0");
         exit();
         }
+    elseif($warrantycheck['meter_status'] != 'UNINSTALLED'){
+        echo "<script>alert('Error: Meter has not been uninstalled yet.');</script>";
+        header("Refresh:0");
+        exit();
+    }
     $meterinfoquery = "SELECT batch.meter_type, batch.meter_model, batch.meter_size FROM batch, meter WHERE meter.batch_id = batch.batch_id AND meter.serial_num = '$serialnum'";
     $meterinforun = mysqli_query($connection, $meterinfoquery);
     $meterinfo = mysqli_fetch_assoc($meterinforun);
