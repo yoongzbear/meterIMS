@@ -25,6 +25,7 @@
 			$sqlUpdateQuantity = "UPDATE `batch` SET `quantity` = '$rowCount' WHERE `batch_id` = '$batch_id'";
 			$resultUpdate = mysqli_query($connection, $sqlUpdateQuantity);
 		}
+		echo "<script>alert('Meter Added Successfully!');</script>";
 	}else{
 		echo "<script>alert('Meter Already Exist. Please Try Again');</script>";
 		echo "<script>window.location.href = 'inventoryDep_AddMeterForm.php?Batch_ID=$batch_id&manu_id=$manu_id';</script>";
