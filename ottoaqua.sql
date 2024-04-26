@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2024 at 12:41 PM
+-- Generation Time: Apr 26, 2024 at 03:51 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -37,14 +37,18 @@ CREATE TABLE IF NOT EXISTS `batch` (
   `quantity` int NOT NULL,
   PRIMARY KEY (`batch_id`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `batch`
 --
 
 INSERT INTO `batch` (`batch_id`, `location_id`, `meter_type`, `meter_model`, `meter_size`, `quantity`) VALUES
-(1, 3, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 15, 10);
+(1, 1, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 0),
+(2, 4, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 3),
+(3, 3, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 2),
+(4, 3, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 2),
+(5, 2, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 0);
 
 -- --------------------------------------------------------
 
@@ -63,7 +67,23 @@ CREATE TABLE IF NOT EXISTS `lab_result` (
   PRIMARY KEY (`test_id`),
   KEY `serial_num` (`serial_num`),
   KEY `defect_id` (`defect_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `lab_result`
+--
+
+INSERT INTO `lab_result` (`test_id`, `serial_num`, `receive_date`, `test_date`, `result`, `defect_id`) VALUES
+(1, 'AIS17BA0000001', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(2, 'AIS17BA0000002', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(3, 'AIS17BA0000003', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(4, 'AIS17BA0000004', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(5, 'AIS17BA0000005', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(6, 'AIS17BA0000006', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(7, 'AIS17BA0000008', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(8, 'AIS17BA0000009', '2024-01-02', '2024-01-10', 'PASSED', NULL),
+(9, 'AIS17BA0000010', '2024-01-02', '2024-01-10', 'FAILED', 1),
+(15, 'AIS17BA0000001', '2024-04-02', '2024-04-26', 'FAILED', 3);
 
 -- --------------------------------------------------------
 
@@ -74,20 +94,20 @@ CREATE TABLE IF NOT EXISTS `lab_result` (
 DROP TABLE IF EXISTS `location`;
 CREATE TABLE IF NOT EXISTS `location` (
   `location_id` int NOT NULL AUTO_INCREMENT,
-  `location_name` varchar(20) NOT NULL,
+  `location_name` varchar(50) NOT NULL,
   `username` varchar(16) NOT NULL,
   PRIMARY KEY (`location_id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `location`
 --
 
 INSERT INTO `location` (`location_id`, `location_name`, `username`) VALUES
-(1, 'Air Selangor Inv', 'paola'),
-(2, 'Air Selangor Lab', 'wendy'),
-(3, 'Kuala Lumpur', 'yuna'),
+(1, 'Air Selangor Inventory Department', 'paola'),
+(2, 'Air Selangor Test Lab', 'wendy'),
+(3, 'Shah Alam', 'yuna'),
 (4, 'Subang Jaya', 'alya');
 
 -- --------------------------------------------------------
@@ -141,9 +161,15 @@ CREATE TABLE IF NOT EXISTS `meter` (
 --
 
 INSERT INTO `meter` (`serial_num`, `install_date`, `age`, `mileage`, `batch_id`, `meter_status`, `install_address`, `manufactured_year`, `manu_id`, `location_id`) VALUES
-('AIS17BA0000001', NULL, 6.5, 41417, 1, 'IN STORE', NULL, 2017, 1, 3),
-('AIS17BA0000002', NULL, 6.6, 5015, 1, 'IN STORE', NULL, 2017, 1, 3),
-('AIS17BA0000003', '2024-04-01', 6.5, 12127, 1, 'INSTALLED', '127, Jalan Neo, Kuala Lumpur', 2017, 1, 3);
+('AIS17BA0000001', '2024-02-10', 1.0, 12, 5, 'FAILED', '21, USJ 17/B, 44329 Subang Jaya', 2023, 2, 4),
+('AIS17BA0000002', '2024-02-10', 1.0, 14, 2, 'INSTALLED', '3, SS15/12A 31238 Subang Jaya', 2023, 2, 4),
+('AIS17BA0000003', NULL, 1.4, 123, 2, 'TO BE INSTALLED', NULL, 2023, 2, 4),
+('AIS17BA0000004', NULL, 1.3, 90, 2, 'IN STORE', NULL, 2023, 2, 4),
+('AIS17BA0000005', NULL, 1.4, 127, 4, 'IN STORE', NULL, 2023, 2, 3),
+('AIS17BA0000006', NULL, 1.7, 2345, 4, 'IN STORE', NULL, 2023, 2, 3),
+('AIS17BA0000008', NULL, 2.0, 32314, 3, 'IN STORE', NULL, 2022, 2, 3),
+('AIS17BA0000009', NULL, 1.2, 60, 3, 'IN STORE', NULL, 2023, 2, 3),
+('AIS17BA0000010', NULL, 1.6, 1332, 1, 'FAILED', NULL, 2023, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -168,7 +194,12 @@ CREATE TABLE IF NOT EXISTS `movement` (
 --
 
 INSERT INTO `movement` (`tracking_id`, `origin`, `destination`, `ship_date`, `arrival_date`, `batch_id`) VALUES
-(1, 1, 3, '2024-04-01', '2024-04-02', 1);
+(1, 1, 2, '2023-12-26', '2024-01-02', 1),
+(2, 2, 1, '2024-01-11', '2024-01-15', 1),
+(3, 1, 4, '2024-01-20', '2024-01-25', 2),
+(4, 1, 3, '2024-01-20', '2024-01-24', 3),
+(5, 4, 3, '2024-01-30', '2024-02-03', 4),
+(6, 4, 2, '2024-03-29', '2024-04-02', 5);
 
 -- --------------------------------------------------------
 
@@ -211,7 +242,14 @@ CREATE TABLE IF NOT EXISTS `warranty` (
   PRIMARY KEY (`warranty_id`),
   KEY `serial_num` (`serial_num`),
   KEY `test_id` (`test_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `warranty`
+--
+
+INSERT INTO `warranty` (`warranty_id`, `serial_num`, `warranty_status`, `test_id`) VALUES
+(1, 'AIS17BA0000001', 'REPLACED', 1);
 
 -- --------------------------------------------------------
 
@@ -224,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `warranty_defect` (
   `defect_id` int NOT NULL AUTO_INCREMENT,
   `defect` varchar(100) NOT NULL,
   PRIMARY KEY (`defect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `warranty_defect`
