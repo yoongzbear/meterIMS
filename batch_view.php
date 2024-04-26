@@ -37,12 +37,11 @@ include 'navInv.php';
   </ol>
 </nav>
 
-<label class="fs-2 font-monospace"><b>The Information About The Batch ID : </b>
+<label class="fs-2 font-monospace mb-4"><b>The Information About The Batch ID : </b>
 <?php 
 echo $batchid; 
 ?>
 </label>
-<br>
 
 <table class='table table-dark table-striped'>
 <thread>
