@@ -98,7 +98,7 @@ include 'navInv.php';
 				<td><select name="meter_details" required>
 						<option value="" disabled selected>Please Select Meter Type, Model and Size</option>
 						<?php
-						$sqlMeter = "SELECT DISTINCT meter_type, meter_model, meter_size FROM batch";
+						$sqlMeter = "SELECT DISTINCT meter_type, meter_model, meter_size FROM batch WHERE location_id = 1";
 						$resultMeter = mysqli_query($connection, $sqlMeter);
 						while ($rowMeter = mysqli_fetch_assoc($resultMeter)) {
 							$meterType = $rowMeter['meter_type'];
