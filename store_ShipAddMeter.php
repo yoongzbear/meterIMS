@@ -44,7 +44,7 @@ include 'header.php';
 		$resultUpdateBatch = mysqli_query($connection, $sqlUpdateBatch);
 		
 		//Update Batch_ID of the meter
-		$sqlUpdateMeter = "UPDATE meter SET batch_id = $newBatch_id, meter_status = 'SHIPPING', location_id = NULL WHERE serial_num = '$serial_num'";
+		$sqlUpdateMeter = "UPDATE meter SET batch_id = $newBatch_id, meter_status = 'IN TRANSIT', location_id = NULL WHERE serial_num = '$serial_num'";
 		$resultUpdateMeter = mysqli_query($connection, $sqlUpdateMeter);
 		
 		//Count the number of meters in the new batch
