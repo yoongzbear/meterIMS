@@ -54,7 +54,7 @@ include 'navInv.php';
                     <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>
                     <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
                 </div>
-            </form>
+        </form>
     </div>
     </div>
     </div>
@@ -65,7 +65,7 @@ include 'navInv.php';
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
-            window.location.href = 'InvDep_Scan_View_meter_info.php';
+            window.location.href = 'InvDep_Scan_view_meter_info.php';
         });
     </script>
 
