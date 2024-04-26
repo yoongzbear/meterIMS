@@ -89,7 +89,7 @@ include 'header.php';
             <td><?php echo $rowMeter['location_name'];?></td>
         </tr></table>
         <form id='meterForm' action='submitMeterInstallation.php' method='post' class="mb-4">    
-            <input type='hidden' id='serial_num' name='serial_num' value='$serial_num'> 
+        <input type='hidden' id='serial_num' name='serial_num' value='<?php echo $serial_num;?>'> 
             <div class="mb-3 row">               
                 <label for='installDate'>Installation Date : </label>
             <div class="col-sm-10">
