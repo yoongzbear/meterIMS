@@ -32,16 +32,14 @@ function updateWarrantyStatus($serial_num, $testResult, $defect, $test_id) {
 if ($testResult == 'FAIL') {
     $sqlBatch = "UPDATE batch INNER JOIN meter ON batch.batch_id = meter.batch_id SET batch.quantity = batch.quantity - 1, meter.meter_status = 'FAILED' WHERE meter.serial_num = '$serial_num'";
     if ($defect != '0') {
-        $sqlLab = "UPDATE lab_result SET defect_id = '$defect', test_date = CURDATE(), result = 'FAIL' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
+        $sqlLab = "UPDATE lab_result SET defect_id = '$defect', test_date = CURDATE(), result = 'FAILED' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
     } else {
-        $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'FAIL' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
+        $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'FAILED' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
     }
 } else {
     $sqlBatch = "UPDATE batch INNER JOIN meter ON batch.batch_id = meter.batch_id SET meter.meter_status = 'TESTED' WHERE meter.serial_num = '$serial_num'";
-    $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'PASS' WHERE serial_num = '$serial_num' AND test_date IS NULL;"; 
+    $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'PASSED' WHERE serial_num = '$serial_num' AND test_date IS NULL;"; 
 }
-
-//$sqlMeterUpdate = "UPDATE meter SET install_date = NULL WHERE serial_num = '$serial_num'";
 
 //sql to see if got warranty or not
 $sqlWarrantyView = "SELECT * FROM warranty WHERE serial_num = '$serial_num'";
