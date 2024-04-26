@@ -1,6 +1,6 @@
-<!--<?php
-    include ('secure_Inv.php');
-	?>-->
+<?php
+include ('secure_Inv.php');
+?>
 	
 	<!DOCTYPE html>
 	<html lang="en">
@@ -90,9 +90,10 @@
 	
 	
 	<!--To show if the meter is added succesfully-->
-	<div class="col align-self-center">
+	<div class="col align-self-center mb-4">
 		<div id="success" style="display:none;">
 			<h2>Meter Added Successfully!</h2>
+			<hr>
 			<?php
 				echo "<script>alert('Meter Added Successfully!');</script>";
 				
@@ -120,7 +121,7 @@
 					$manu_name = $rowManu["manu_name"];
 				}
 			?>
-			<table class="table mb-4">
+			<table class="table table-borderless">
 				<tr colspan = "2">
 					<td>
 						<div id="qrcode">

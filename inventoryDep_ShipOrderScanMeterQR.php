@@ -25,22 +25,24 @@ include 'header.php';
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
-    <li class="breadcrumb-item"><a href="inventoryDep_ShipOrderForm.php" title='Ship Out Form Page'>Ship Out Form</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+    <li class="breadcrumb-item active" aria-current="page">QR Code</li>
+	<li class="breadcrumb-item active" aria-current="page">Ship Out Form</li>
 	<li class="breadcrumb-item active" aria-current="page">Scan QR - Meter Shipping Form</li>
 
   </ol>
 </nav>
 
-<div class="col align-self-center">
+<div class="my-4 text-center">
 
     <h3>Meter Shipping Form</h3>
     <p class="fst-italic">Please scan the QR code on the water meter</p>
     <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
     <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
-    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4">Cancel Scan</button>
+    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4" hidden="">Cancel Scan</button>
 
+    <div class="col mt-4 text-center">
+    <div class="modal-dialog" role="document">
     <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="inv_ShipMeterCheckQR.php" method="get" style="display:none;">
         <form id="meterForm" action="inv_ShipMeterCheckQR.php" method="get">
                 <div class="modal-body p-4 text-center">
@@ -58,10 +60,8 @@ include 'header.php';
                 </div>
             </form>
     </div>
-</div>
-
-<div class="mb-4 d-grid gap-2 col-6 mx-auto" style="width:10%;">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='inventoryDep_ShipOrderForm.php'" title='Back To Ship Out Form Page'>Back</button>
+    </div>
+    </div>
 </div>
 
     <script>

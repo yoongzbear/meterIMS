@@ -24,7 +24,7 @@ include 'navInv.php';
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+    <li class="breadcrumb-item"><a href="Inv_QRmenu.php" title='QRcode Page'>QR Code</a></li>
 	<li class="breadcrumb-item"><a href="inv_ReceiveScanPassMeterQR.php" title='Scan QR Page'>Scan QR - Batch Receiving Form</a></li>
 	<li class="breadcrumb-item active" aria-current="page">Batch Receiving Form</li>
 
@@ -92,7 +92,7 @@ include 'navInv.php';
 ?>
 
 	<!--Show Current Batch Info-->
-	<div class="col align-self-center">
+	<div class='container col-xl-5'>
 
 	<h3>Batch Meter Information</h3>
 	<table class="table mb-4">

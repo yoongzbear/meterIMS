@@ -1,5 +1,5 @@
 <?php
-	include('secure.php');
+	include('secure_Inv.php');
 	include('connection.php');
 	$batch_id = $_GET['Batch_ID'];
 
@@ -49,11 +49,33 @@
 	echo "<script>alert('Meter Batch Shipped Successfully!');</script>";
 ?>
 
-<html>
-	<head><title>Meter Shipping</title></head>
-	<!--Show Current Batch Info-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Shipping</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+<?php 
+include 'header.php';
+?>
+
+</header>
+
+<div class="container">
+    <div class="row mb-4 align-items-start">
+	<div class='col'>
+
+<!--Show Current Batch Info-->
 	<h3>Batch Meter Information</h3>
-	<table>
+	<hr>
+	<table class="table">
 		<tr colspan = "2">
 			<td>
 				<div id="qrcode">
@@ -64,51 +86,61 @@
 			</td>
 		</tr>
 		<tr>
-			<td>Meter Type</td>
+			<th>Meter Type:</th>
 			<td><?php echo $meter_type; ?></td>
 		</tr>
 		<tr>
-			<td>Meter Model</td>
+			<th>Meter Model:</th>
 			<td><?php echo $meter_model; ?></td>
 		</tr>
 		<tr>
-			<td>Meter Size</td>
+			<th>Meter Size:</th>
 			<td><?php echo $meter_size; ?></td>
 		</tr>
 		<tr>
 			<!--Show Current Total Meter for Current Batch-->
-			<td>Meter Quantity</td>
+			<th>Meter Quantity:</th>
 			<td><?php echo $quantity; ?></td>
 		</tr>
 	</table>
+	</div>
+	</div>
 
+	<div class='row mb-4 align-items-start'>
+	<div class='col'>
 	<!--Show Shipping Info-->
 	<h3>Shipping Information</h3>
-	<table>
+	<hr>
+	<table class="table">
 		<tr>
-			<td>Tracking ID</td>
+			<th>Tracking ID</th>
 			<td><?php echo $tracking_id; ?></td>
 		</tr>
 		<tr>
-			<td>Origin</td>
+			<th>Origin</th>
 			<td><?php echo $origin_name; ?></td>
 		</tr>
 		<tr>
-			<td>Destination</td>
+			<th>Destination</th>
 			<td><?php echo $destination_name; ?></td>
 		</tr>
 		<tr>
-			<td>Ship Date</td>
+			<th>Ship Date</th>
 			<td><?php echo $ship_date; ?></td>
 		</tr>
 	</table>
+	</div>
+	</div>
 
+
+	<div class='row mb-4 align-items-start'>
+	<div class='col'>
 	<!--Show Meter List for the Batch-->
 	<h3>List of Meters in the batch</h3>
 	<table>
 		<tr>
-			<td>No.</td>
-			<td>Meter ID</td>
+			<th>No.</th>
+			<th>Meter ID</th>
 		</tr>
 
 		<?php
@@ -118,12 +150,26 @@
 			while($rowMeter = mysqli_fetch_assoc($result)){
 				echo 
 					'<tr>
-						<td>'.$num.'</td>
+						<th>'.$num.'</th>
 						<td>'.$rowMeter["serial_num"].'</td>
 					</tr>';
 				$num++;
 			}
 		?>
 	</table>
-	<button class="back" onclick="window.location.href='inventoryDep_ShipOrderForm.php'">Back</button>
+	</div>
+	</div>
+
+</div>
+
+<div class="d-grid gap-2 col-6 mx-auto mb-4">
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='inventoryDep_ShipOrderForm.php'" title='Back To Create New Batch Page'>Complete</button>
+</div>
+	
+</body>
+
+<footer>
+	<?php include 'footer.php';?>
+</footer>	
+
 </html>

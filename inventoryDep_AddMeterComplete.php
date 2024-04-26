@@ -140,12 +140,10 @@ include 'header.php';
 	</div>
 </div>
 
-<div class="d-grid gap-2 col-6 mx-auto">
+<div class="d-grid gap-2 col-6 mx-auto mb-4">
 	<button class="back btn btn-dark" type="button" onclick="window.location.href='inventoryDep_AddBatchForm.php'" title='Back To Create New Batch Page'>Complete</button>
 </div>
 	
-<br>
-
 </body>
 
 <footer>
