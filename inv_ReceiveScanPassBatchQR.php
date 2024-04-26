@@ -41,7 +41,7 @@ include 'navInv.php';
 
     <div class="col mt-4 text-center">
     <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="inv_ReceivePassBatch.php" method="get" style="display:none;">
+    <div class="modal-content rounded-3 shadow" id="meterForm" action="inv_ReceivePassBatch.php" method="get" style="display:none;">
         <form id="meterSubmitForm" action="inv_ReceivePassBatch.php" method="get">
             <div class="modal-body p-4 text-center">
                 <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right Batch ID?</h5>

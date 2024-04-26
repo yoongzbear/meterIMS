@@ -38,7 +38,7 @@ include 'connection.php';
 
     <div class="col mt-4 text-center">
     <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="check_batch_exist_labTOinv.php" method="POST" style="display:none;">
+    <div class="modal-content rounded-3 shadow" id="meterForm" action="check_batch_exist_labTOinv.php" method="POST" style="display:none;">
         <form action="check_batch_exist_labTOinv.php" id="meterForm" method="POST">
             <div class="modal-body p-4 text-center">
                 <h5 class="modal-title mb-0">Is this the right batch id?</h5>
