@@ -38,8 +38,8 @@ include 'header.php';
     <h3>Meter Shipping Form</h3>
     <p class="fst-italic">Please scan the QR code on the water meter</p>
     <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
-    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
-    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4" hidden="">Cancel Scan</button>
+    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark">Scan QR</button>
+    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark" hidden="">Cancel Scan</button>
 
     <div class="col mt-4 text-center">
     <div class="modal-dialog" role="document">
