@@ -80,7 +80,7 @@ echo "<div class='container col-xl-5'>
 ?>
 
 <div class="d-grid col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='labViewMeterResult.php'" title='Back To View Meter Result'>Back</button>
+<button class="back btn btn-dark" type="button" onclick="window.location.href='invViewMeterResult.php?serial_num=<?php echo $row['serial_num'];?>'" title='Back To View Meter Result'>Back</button>
 </div>
 
 <footer>
