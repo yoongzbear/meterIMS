@@ -73,7 +73,7 @@ include 'navInv.php';
 
 <form action="inventoryDep_AddBatch.php" method="post">
 
-<div class="row g-3 align-items-center">
+<div class="row g-3 align-items-center mb-4">
 	<div class="col-auto">
 		<label class="col-form-label">Meter Type : </label>
 	</div>
@@ -81,9 +81,8 @@ include 'navInv.php';
 		<input class="form-control form-control-sm" type="text" name="meter_type" required>
 	</div>
 </div>
-<br>
 
-<div class="row g-3 align-items-center">
+<div class="row g-3 align-items-center mb-4">
 	<div class="col-auto">
 		<label class="col-form-label">Meter Model : </label>
 	</div>
@@ -91,9 +90,8 @@ include 'navInv.php';
 		<input class="form-control form-control-sm" type="text" name="meter_model" required>
 	</div>
 </div>
-<br>
 
-<div class="row g-3 align-items-center">
+<div class="row g-3 align-items-center mb-4">
 	<div class="col-auto">
 		<label class="col-form-label">Meter Size : </label>
 	</div>
@@ -111,9 +109,8 @@ include 'navInv.php';
 		</select>
 	</div>
 </div>
-<br>
 		
-<div class="row g-3 align-items-center">
+<div class="row g-3 align-items-center mb-4">
 	<div class="col-auto">
 		<label class="col-form-label">Manufacturer Name : </label>
 	</div>
@@ -133,7 +130,6 @@ include 'navInv.php';
 				
 				
 					
-<br>				
 		<button onclick="confirmation();" type="submit" class="btn btn-success">Add Meter</button>
 	</form>
 </div>
