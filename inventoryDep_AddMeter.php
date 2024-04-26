@@ -8,20 +8,27 @@
     $manufactured_year = $_GET['manufactured_year'];
     $manu_id = $_GET['manu_id'];
 
-
-    $sqlMeter = "INSERT INTO meter (serial_num, age, mileage, batch_id, meter_status, manufactured_year, manu_id)
-                VALUES ('$serial_num', '$age', '$mileage', '$batch_id', 'IN STORE', '$manufactured_year', '$manu_id')";
-    $result = mysqli_query($connection, $sqlMeter);
-	
-	// Count the number of records in the meter table with the given batch_id
-    $sqlCountQuantity = "SELECT * FROM meter WHERE batch_id = $batch_id";
-    $quantityResult = mysqli_query($connection, $sqlCountQuantity);
-	if ($quantityResult){
-		$rowCount = mysqli_num_rows($quantityResult);
+	//Check if the meter serial number exists
+	$sqlMeterExist = "SELECT * FROM meter WHERE serial_num = '$Meter_ID'";
+	if(mysqli_query($connection,$sqlMeterExist)>0){
+		$sqlMeter = "INSERT INTO meter (serial_num, age, mileage, batch_id, meter_status, manufactured_year, manu_id)
+					VALUES ('$serial_num', '$age', '$mileage', '$batch_id', 'IN STORE', '$manufactured_year', '$manu_id')";
+		$result = mysqli_query($connection, $sqlMeter);
 		
-		//Update Batch Info with meter quantity
-		$sqlUpdateQuantity = "UPDATE `batch` SET `quantity` = '$rowCount' WHERE `batch_id` = '$batch_id'";
-		$resultUpdate = mysqli_query($connection, $sqlUpdateQuantity);
+		// Count the number of records in the meter table with the given batch_id
+		$sqlCountQuantity = "SELECT * FROM meter WHERE batch_id = $batch_id";
+		$quantityResult = mysqli_query($connection, $sqlCountQuantity);
+		if ($quantityResult){
+			$rowCount = mysqli_num_rows($quantityResult);
+			
+			//Update Batch Info with meter quantity
+			$sqlUpdateQuantity = "UPDATE `batch` SET `quantity` = '$rowCount' WHERE `batch_id` = '$batch_id'";
+			$resultUpdate = mysqli_query($connection, $sqlUpdateQuantity);
+		}
+	}else{
+		echo "<script>alert('Meter Already Exist. Please Try Again');</script>";
+		echo "<script>window.location.href = 'inventoryDep_AddMeterForm.php?Batch_ID=$batch_id&manu_id=$manu_id';</script>";
+		exit();
 	}
 ?>
 
