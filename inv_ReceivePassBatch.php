@@ -41,7 +41,8 @@ include 'navInv.php';
 		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch 
 						INNER JOIN meter ON batch.batch_id = meter.batch_id
 						INNER JOIN movement ON batch.batch_id = movement.batch_id
-						WHERE batch.batch_id = '$batch_id'";
+						INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num
+						WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
@@ -52,7 +53,10 @@ include 'navInv.php';
 			$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
 			
 			//Update Meter Location
-			$sqlMeterLocation = "UPDATE meter SET meter_status = 'IN STOCK' WHERE batch_id = '$batch_id'";
+			$sqlMeterLocation = "UPDATE meter 
+								JOIN lab_result ON meter.serial_num = lab_result.serial_num
+								SET meter.meter_status = 'IN STOCK' 
+								WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
 			$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
 			
 			//Update Tracking Info
