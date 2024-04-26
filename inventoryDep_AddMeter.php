@@ -11,8 +11,8 @@
 	//Check if the meter serial number exists
 	$sqlMeterExist = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
 	if(mysqli_query($connection,$sqlMeterExist)>0){
-		$sqlMeter = "INSERT INTO meter (serial_num, age, mileage, batch_id, meter_status, manufactured_year, manu_id, location_id)
-					VALUES ('$serial_num', '$age', '$mileage', '$batch_id', 'TO BE TESTED', '$manufactured_year', '$manu_id', 1)";
+		$sqlMeter = "INSERT INTO meter (serial_num, age, mileage, batch_id, meter_status, manufactured_year, manu_id)
+					VALUES ('$serial_num', '$age', '$mileage', '$batch_id', 'TO BE TESTED', '$manufactured_year', '$manu_id')";
 		$result = mysqli_query($connection, $sqlMeter);
 		
 		// Count the number of records in the meter table with the given batch_id
