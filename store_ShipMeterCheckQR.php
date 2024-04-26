@@ -14,7 +14,7 @@ if(isset($_GET['Meter_ID'])) {
     // Check if the query returned any rows
     if(mysqli_num_rows($result) > 0) {
         //To check if the meter scanned exist in the batch
-        $sqlMeterExist = "SELECT * FROM meter WHERE serial_num = '$serial_num' AND batch_id = '$batch_id'";
+        $sqlMeterExist = "SELECT * FROM meter WHERE serial_num != '$serial_num' AND batch_id != '$batch_id'";
         $resultMeterExist = mysqli_query($connection, $sqlMeterExist);
         if(mysqli_num_rows($resultMeterExist) > 0) {            // serial num exists
             header("Location:store_ShipAddMeter.php?Meter_ID=$serial_num&Batch_ID=$batch_id&meterQuantity=$meterQuantity");
