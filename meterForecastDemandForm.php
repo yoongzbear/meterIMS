@@ -16,10 +16,16 @@
 			<tr>
 				<td>Forecast Year</td>
 				<td>
-					<select name="year" id="year" required>
-						<option value="" disabled selected>Select Year for Meter Forecast</option>
-						<option value="2025">2025</option>
-						<option value="2026">2026</option>
+					<select class="form-control" name="year" id="year" required>
+						<option value="" disabled selected>Please Select Meter Forecast Year</option>
+							<?php
+							$currentYear = date('Y');
+
+							//Loop to generate options for next 2 years
+							for($i = $currentYear + 1; $i <= $currentYear + 2; $i++) {
+								echo "<option value=\"$i\">$i</option>";
+							}
+							?>
 					</select>
 				</td>
 			</tr>
