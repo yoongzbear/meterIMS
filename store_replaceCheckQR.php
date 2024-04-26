@@ -21,12 +21,12 @@ if(isset($_GET['Meter_ID'])) {
     // Check if the query returned any rows
     if(mysqli_num_rows($resultNew) > 0 && mysqli_num_rows($resultOld) > 0) {
         // serial num exists
-		$rowNew = mysqli_fetch_assoc($result);
+		$rowNew = mysqli_fetch_assoc($resultNew);
 		$newMeter_type = $rowNew['meter_type'];
 		$newMeter_model = $rowNew['meter_model'];
 		$newMeter_size = $rowNew['meter_size'];
 		
-		$rowOld = mysqli_fetch_assoc($result);
+		$rowOld = mysqli_fetch_assoc($resultOld);
 		$oldMeter_type = $rowOld['meter_type'];
 		$oldMeter_model = $rowOld['meter_model'];
 		$oldMeter_size = $rowOld['meter_size'];
