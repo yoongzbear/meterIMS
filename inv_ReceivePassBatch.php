@@ -42,7 +42,7 @@ include 'navInv.php';
 						INNER JOIN meter ON batch.batch_id = meter.batch_id
 						INNER JOIN movement ON batch.batch_id = movement.batch_id
 						INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num
-						WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
+						WHERE batch.batch_id = '$batch_id' AND meter.meter_status != 'FAILED' AND movement.origin=2;";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
