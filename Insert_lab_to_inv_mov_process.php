@@ -28,7 +28,7 @@ if(isset($_POST['confirm']) && isset($_POST['batch_id'])) {
     
     
     // Prepare the SQL statement for updating meter table
-    $sql2 = "UPDATE meter SET meter_status = 'IN TRANSIT' WHERE batch_id = ?";
+    $sql2 = "UPDATE meter SET meter_status = 'IN TRANSIT' WHERE batch_id = ? AND meter_status != 'FAILED'";
     
     // Prepare the statement
     $stmt2 = mysqli_prepare($connection, $sql2);
