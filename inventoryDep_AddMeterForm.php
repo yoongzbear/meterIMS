@@ -58,7 +58,7 @@ include 'header.php';
 			}
 		}
 		if (hasValue) {
-			var confirmation = confirm("You have entered data. Are you sure you want to cancel?");
+			var confirmation = confirm("Are you sure you want to cancel?");
 			if (confirmation) {
 				clearInputs();
 				window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
@@ -147,8 +147,8 @@ include 'header.php';
 							<?php
 							$currentYear = date('Y');
 
-							//Loop to generate options for past 50 years
-							for($i = $currentYear; $i >= $currentYear - 50; $i--) {
+							//Loop to generate options for past 5 years
+							for($i = $currentYear; $i >= $currentYear - 5; $i--) {
 								echo "<option value=\"$i\">$i</option>";
 							}
 							?>
