@@ -144,6 +144,7 @@ include 'header.php';
 					<td>Manufactured Year:</td>
 					<td>
 						<select class="form-control" name="manufactured_year" required>
+							<option value="" disabled selected>Please Select Manufactured Year</option>
 							<?php
 							$currentYear = date('Y');
 
