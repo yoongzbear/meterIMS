@@ -52,7 +52,7 @@ include 'navInv.php';
 			$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
 			
 			//Update Meter Location
-			$sqlMeterLocation = "UPDATE meter SET location_id = 1, meter_status = 'IN STOCK' WHERE batch_id = '$batch_id'";
+			$sqlMeterLocation = "UPDATE meter SET meter_status = 'IN STOCK' WHERE batch_id = '$batch_id'";
 			$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
 			
 			//Update Tracking Info
