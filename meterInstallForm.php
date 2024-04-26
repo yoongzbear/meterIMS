@@ -93,7 +93,7 @@ include 'header.php';
             <div class="mb-3 row">               
                 <label for='installDate'>Installation Date : </label>
             <div class="col-sm-10">
-                <input type='date' class='form-control'id='installDate' name='installDate' required>
+                <p name='installDate'><?php echo date('Y-m-d'); ?></p>
             </div>
             </div>
             <div class="mb-3 row">               
