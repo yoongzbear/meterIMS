@@ -28,34 +28,34 @@ include 'navInv.php';
   </ol>
 </nav>
 
-<div class="container text-center">
+<div class="container-sm text-center mb-4 px-5">
   <div class="row mb-5">
     <h4>Generate QR</h4>
-    <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
+    <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
       </div>
-    <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="inv_ReceiveScanPassBatchQR.php">Receive Passed Batch</a>
+    <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="inv_ReceiveScanPassBatchQR.php">Receive Passed Batch</a>
     </div>    
   </div>
 
   <div class="row mb-5">
     <h4>Scan Batch QR</h4>
-    <div class='col'>
-      <a button type="button" class="btn btn-primary btn-lg mb-3" href="invInitialTest.php">Initial Ship Out To Lab</a>
+    <div class='col-6'>
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="invInitialTest.php">Initial Ship Out To Lab</a>
       </div>    
-      <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="inventoryDep_ShipOrderForm.php">Ship Out</a>
+      <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="inventoryDep_ShipOrderForm.php">Ship Out</a>
     </div>
   </div>
 
-  <div class="row mb-5">
+  <div class="row">
     <h4>Scan Meter QR</h4>
-    <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg mb-3" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
+    <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
       </div>    
-      <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="invMeterResult.php">View Meter Result</a>
+      <div class="col-6">
+      <a button type="button" class="btn btn-primary btn-lg d-block" href="invMeterResult.php">View Meter Result</a>
     </div>    
   </div>
 </div>

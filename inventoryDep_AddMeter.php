@@ -9,8 +9,8 @@
     $manu_id = $_GET['manu_id'];
 
 
-    $sqlMeter = "INSERT INTO meter (serial_num, age, mileage, batch_id, meter_status, manufactured_year, manu_id, location_id)
-                VALUES ('$serial_num', '$age', '$mileage', '$batch_id', 'NOT TESTED', '$manufactured_year', '$manu_id', 1)";
+    $sqlMeter = "INSERT INTO meter (serial_num, age, mileage, batch_id, meter_status, manufactured_year, manu_id)
+                VALUES ('$serial_num', '$age', '$mileage', '$batch_id', 'IN STORE', '$manufactured_year', '$manu_id')";
     $result = mysqli_query($connection, $sqlMeter);
 	
 	// Count the number of records in the meter table with the given batch_id
@@ -23,7 +23,6 @@
 		$sqlUpdateQuantity = "UPDATE `batch` SET `quantity` = '$rowCount' WHERE `batch_id` = '$batch_id'";
 		$resultUpdate = mysqli_query($connection, $sqlUpdateQuantity);
 	}
-	echo "<script>alert('Meter Added Successfully!');</script>";
 ?>
 
 
@@ -60,9 +59,10 @@ include 'header.php';
 
 
 <!--To show if the meter is added succesfully-->
-<div class="col align-self-center">
+<div class="col align-self-center mb-4">
     <div id="success" style="display:none;">
         <h3>Meter Added Successfully</h3>
+		<hr>
 		<?php
 			//To select the meter information
 			$sqlShowMeter = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
@@ -100,27 +100,27 @@ include 'header.php';
 				</td>
 			</tr>
 			<tr>
-				<th scope="row">Meter Serial Number</th>
+				<th scope="row">Meter Serial Number:</th>
 				<td><?php echo $serial_num; ?></td>
 			</tr>
 			
 			<tr>
-				<th scope="row">Age</th>
+				<th scope="row">Age:</th>
 				<td><?php echo $age; ?></td>
 			</tr>
 			
 			<tr>
-				<th scope="row">Mileage</th>
+				<th scope="row">Mileage:</th>
 				<td><?php echo $mileage; ?></td>
 			</tr>
 			
 			<tr>
-				<th scope="row">Manufacturer Name</th>
+				<th scope="row">Manufacturer Name:</th>
 				<td><?php echo $manu_name; ?></td>
 			</tr>
 			
 			<tr>
-				<th scope="row">Manufactured Year</th>
+				<th scope="row">Manufactured Year:</th>
 				<td><?php echo $manufactured_year; ?></td>
 			</tr>
 		</table>

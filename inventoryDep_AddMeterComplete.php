@@ -53,7 +53,7 @@ include 'header.php';
 
 <div class="container">
       <div class="row align-items-start">
-        <div class="col">
+        <div class="col mb-4">
 
 	<!--Show Current Batch Info-->
 	<h3>Current Batch Information</h3>
@@ -71,39 +71,39 @@ include 'header.php';
 
 		<thread>
 		<tr>
-			<th scope="row">Meter Type</th>
+			<th scope="row">Meter Type:</th>
 			<td><?php echo $meter_type; ?></td>
 		</tr>
 		</thread>
 		<thread>
 		<tr>
-			<th scope="row">Meter Model</th>
+			<th scope="row">Meter Model:</th>
 			<td><?php echo $meter_model; ?></td>
 		</tr>
 		</thread>
 		<thread>
 		<tr>
-			<th scope="row">Meter Size</th>
+			<th scope="row">Meter Size:</th>
 			<td><?php echo $meter_size; ?></td>
 		</tr>
 		</thread>
 		<thread>
 		<tr>
 			<!--Show Current Total Meter for Current Batch-->
-			<th scope="row">Meter Quantity</th>
+			<th scope="row">Meter Quantity:</th>
 			<td><?php echo $quantity; ?></td>
 		</tr>
 		</thread>
 		<thread>
 		<tr>
-			<th scope="row">Manufacturer</th>
+			<th scope="row">Manufacturer:</th>
 			<td><?php echo $manu_name; ?></td>
 		</tr>
 		</thread>
 	</table>
 	</div>
 
-	<div class='col'>
+	<div class='col mb-4'>
 	<!--Show Meter List for the Batch-->
 	<h3>List of Meters in the batch</h3>
 	<hr>

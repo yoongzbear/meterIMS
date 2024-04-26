@@ -58,7 +58,7 @@ include 'header.php';
 			}
 		}
 		if (hasValue) {
-			var confirmation = confirm("Are you sure you want to discard?");
+			var confirmation = confirm("You have entered data. Are you sure you want to cancel?");
 			if (confirmation) {
 				clearInputs();
 				window.location.href = 'inventoryDep_AddMeterComplete.php?Batch_ID=<?php echo $batch_id; ?>';
@@ -81,7 +81,7 @@ include 'header.php';
 		
 		<div class="container">
       <div class="row align-items-start">
-        <div class="col">
+        <div class="col mb-4">
 		
 		<h3>Current Batch Information</h3>
 		<hr>
@@ -116,7 +116,7 @@ include 'header.php';
 		</table>
 		</div>
         
-		<div class="col">
+		<div class="col mb-4">
         
 		<h3>Add Meter Information</h3>
 		<hr>
@@ -126,29 +126,29 @@ include 'header.php';
 				<input type="hidden" name="batch_id" value="<?php echo $batch_id;?>">
 				<input type="hidden" name="manu_id" value="<?php echo $manu_id;?>">
 				<tr class="table-primary">
-					<td>Meter Serial Number</td>
+					<td>Meter Serial Number:</td>
 					<td><input class="form-control form-control-sm" type="text" name="Meter_ID" placeholder="AIS17BA00XXXXX" required></td>
 				</tr>
 				
 				<tr class="table-primary">
-					<td>Age</td>
+					<td>Age:</td>
 					<td><input class="form-control form-control-sm" type="number" onchange="setNumberDecimal" name="age" step="0.1" min="0" placeholder="0.0" required></td>
 				</tr>
 				
 				<tr class="table-primary">
-					<td>Mileage</td>
+					<td>Mileage:</td>
 					<td><input class="form-control form-control-sm" type="number" name="mileage" min="1" required></td>
 				</tr>
 				
 				<tr class="table-primary">
-					<td>Manufactured Year</td>
+					<td>Manufactured Year:</td>
 					<td>
 						<select class="form-control" name="manufactured_year" required>
 							<?php
 							$currentYear = date('Y');
 
-							//Loop to generate options for past 5 years
-							for($i = $currentYear; $i >= $currentYear - 5; $i--) {
+							//Loop to generate options for past 50 years
+							for($i = $currentYear; $i >= $currentYear - 50; $i--) {
 								echo "<option value=\"$i\">$i</option>";
 							}
 							?>
@@ -156,7 +156,6 @@ include 'header.php';
 					</td> 
 				</tr>
 			</table>
-			<br>
 			<div class="buttons float-end">
 				<button type="submit" class="btn btn-success">Add Meter</button>
 				<?php if ($meterCount > 0) { ?>
