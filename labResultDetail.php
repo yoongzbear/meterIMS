@@ -55,27 +55,27 @@ echo "<div class='container col-xl-5'>
                 } else {
                     echo "<td>" . $row['test_date'] . "</td>";
                 }
-            echo "</tr>
-            <tr>
-                <th>Result:</th>";
-                if ($row['result'] == 'PASS') {
-                    echo "<td style='color: green;'>" . $row['result'] . "</td>";
-                } else if ($row['result'] == 'FAIL') {
-                    echo "<td style='color: red;'>" . $row['result'] . "</td>";
+                echo "</tr>
+                <tr>
+                    <th>Result:</th>";
+                    if ($row['result'] == 'PASSED') {
+                        echo "<td style='color: green;'>" . $row['result'] . "</td>";
+                    } else if ($row['result'] == 'FAILED') {
+                        echo "<td style='color: red;'>" . $row['result'] . "</td>";
+                    } else {
+                        echo "<td>NOT TESTED</td>";
+                    }
+                echo "</tr>
+                ";
+            if ($row['result'] == 'FAILED') {
+                echo "<tr>
+                    <th>Defect: </th>";
+                if ($row['defect_id'] != NULL) {
+                    echo "<td>" . $row['defect'] . "</td></tr>";
                 } else {
-                    echo "<td>NOT TESTED</td>";
+                    echo "<td>NOT LISTED</td></tr>";
                 }
-            echo "</tr>
-            ";
-        if ($row['result'] == 'FAIL') {
-            echo "<tr>
-                <th>Defect: </th>";
-            if ($row['defect_id'] != NULL) {
-                echo "<td>" . $row['defect'] . "</td></tr>";
-            } else {
-                echo "<td>NOT LISTED</td></tr>";
             }
-        }
         echo "</table></div>";
 ?>
 
