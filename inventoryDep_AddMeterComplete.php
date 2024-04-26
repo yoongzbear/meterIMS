@@ -68,7 +68,12 @@ include 'header.php';
 				</div>
 			</td>
 		</tr>
-
+		<thread>
+		<tr>
+			<th scope="row">Batch ID:</th>
+			<td><?php echo $batch_id; ?></td>
+		</tr>
+		</thread>
 		<thread>
 		<tr>
 			<th scope="row">Meter Type:</th>
