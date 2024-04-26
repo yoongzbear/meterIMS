@@ -11,6 +11,7 @@ include 'connection.php';
     <title>OTTO Aqua</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -121,8 +122,9 @@ include 'navInv.php';
     }
 </script>
 
-    <div class="row mb-4">
-    <table id="list" class="table table-striped table-info mx-4">
+<div class="row mb-4">
+        <div class="table-responsive">
+        <table id="list" class="table table-striped table-info">
         <thread>
         <tr class="table-primary" scope="col">
             <th>No.</th>
@@ -186,7 +188,8 @@ include 'navInv.php';
         }
         ?>
 
-    </table>
+        </table>
+        </div>
     </div>
     </div>
 
