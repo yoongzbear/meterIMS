@@ -138,7 +138,7 @@ include 'navInv.php';
 		</tr>
 		<tr>
 			<th>Origin</th>
-			<td><?php echo $origin_name; ?></td>
+			<td>Air Selangor Lab</td>
 		</tr>
 		<tr>
 			<th>Destination</th>
