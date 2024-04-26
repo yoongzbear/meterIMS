@@ -57,7 +57,7 @@ include 'navReg.php';
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
-            window.location.href = 'store_ReceiveOrderScanMeterQR.php';
+            window.location.href = 'store_ReceiveOrderScanBatchQR.php';
         });
     </script>
 
