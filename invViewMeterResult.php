@@ -124,7 +124,7 @@ include 'navInv.php';
     ?>
 
 <div class="d-grid gap-2 col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='invMeterResult.php'" title='Back To Scan QR Page'>Back</button>
+<button class="back btn btn-dark" type="button" onclick="invViewMeterResult.php?serial_num=<?php echo $row['serial_num'];?>'" title='Back To Scan QR Page'>Back</button>
 </div>
 
 </div>
