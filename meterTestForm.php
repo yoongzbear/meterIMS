@@ -96,10 +96,6 @@ if(ISSET($_POST['serial_num'])){
             <tr>
                 <th>Status:</th>
                 <td><?php echo $rowMeter['meter_status'];?></td>
-            </tr>
-            <tr>
-                <th>Region Store:</th>
-                <td><?php echo $rowMeter['location_name'];?></td>
             </tr></table>
 
         <form id='meterForm' action='submitMeterTest.php' method='post' class="mb-4">        
