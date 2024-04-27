@@ -137,6 +137,10 @@ include 'navInv.php';
 	</table>
 	</div>
 
+<div class="d-grid col-6 mx-auto mb-4">
+<button class="back btn btn-dark" type="button" onclick="window.location.href='meterForecastDemandForm.php'" title='Back To Scan QR'>Back</button>
+</div>
+
 <footer>
     <?php include "footer.php"?>
 </footer>
