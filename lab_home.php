@@ -31,7 +31,7 @@ include 'navLab.php';
 </nav>
 
 <div class="container text-center mb-4">
-  <h2 class="display-2">Welcome <?php echo $name ;?>!</h2>
+  <h2 class="display-2">Welcome <?php echo $name; ?>!</h2>
 </div>
 
 <div class="container-fluid mb-2">
@@ -54,7 +54,7 @@ include 'navLab.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">Register meters received for testing</h2>
       <p class="lead">Scan the batch's QR code received from Inventory Department or Region Store to register the meters for testing.</p>
-      <p>Quick access to receive meters for testing <a href="receiveBatchTest.php">here</a>.</p>
+      <p>Quick access to <a href="receiveBatchTest.php">receive meters for testing</a>.</p>
     </div>
       <div class="col-md-5">
         <img src="imgs/create-a-qr-code.png" width="100%" height="100%">
@@ -67,7 +67,7 @@ include 'navLab.php';
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">Ship out meter batches</h2>
         <p class="lead">Scan the batch's QR code to record the batch movement to Inventory Department with passed meters only.</p>
-        <p>Quick access to ship out meters to Inventory Department <a href="">here</a>.</p>
+        <p>Quick access to <a href="LabDep_Scan_to_Inv.php">ship out meters to Inventory Department</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">
@@ -80,7 +80,7 @@ include 'navLab.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">Insert meter's test result</h2>
         <p class="lead">Scan meter's QR code to enter its lab test result.</p>
-        <p>Quick access to meter's test result form <a href="">here</a>.</p>
+        <p>Quick access to <a href="meterTest.php">meter's test result form</a>.</p>
     </div>
     <div class="col-md-5">
       <img src="imgs/testing-meters.jpg" width="100%" height="100%">
@@ -93,7 +93,7 @@ include 'navLab.php';
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">View meter's past test lab results</h2>
         <p class="lead">Scan meter's QR code to view the details of meter's test lab results.</p>
-        <p>Quick access to meter's test results <a href="">here</a>.</p>
+        <p>Quick access to <a href="labMeterResult.php">meter's test results</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/scan-qr.jpg" width="100%" height="100%">

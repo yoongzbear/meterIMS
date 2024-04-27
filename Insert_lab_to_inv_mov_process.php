@@ -44,11 +44,11 @@ if(isset($_POST['confirm']) && isset($_POST['batch_id'])) {
     if(mysqli_stmt_affected_rows($stmt1) > 0 && mysqli_stmt_affected_rows($stmt2) > 0) {
         // Both operations successful, commit the transaction
         mysqli_commit($connection);
-        echo '<script>alert("Batch movement and meter status update successful."); window.location.href = "TestLab_QRmenu.php";</script>';
+        echo '<script>alert("Batch movement and meter status update successful."); window.location.href = "LabDep_Scan_to_Inv.php";</script>';
     } else {
         // Rollback the transaction if any statement fails
         mysqli_rollback($connection);
-        echo '<script>alert("Error: Failed to update meter status and insert movement table because the status is already in transit."); window.location.href = "TestLab_QRmenu.php";</script>';
+        echo '<script>alert("Error: Failed to update meter status and insert movement table because the status is already in transit."); window.location.href = "LabDep_Scan_to_Inv.php";</script>';
     }
 
     // Close the statements
@@ -56,6 +56,6 @@ if(isset($_POST['confirm']) && isset($_POST['batch_id'])) {
     mysqli_stmt_close($stmt2);
     
 } else {
-    echo'<script>alert("Form submission error."); window.location.href = "TestLab_QRmenu.php";</script>';
+    echo'<script>alert("Form submission error."); window.location.href = "LabDep_Scan_to_Inv.php";</script>';
 }
 ?>
