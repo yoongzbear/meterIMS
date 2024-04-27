@@ -59,7 +59,7 @@ include 'navInv.php';
                 Each row should represent a record for each month, and the columns must be organized as follows:			
 			</p>
 			<thead>
-			<tr class="align-middle">
+			<tr>
 				<th>Month</th>
 				<th>Year</th>
 				<th>Faulty Program</th>
