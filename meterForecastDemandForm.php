@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td colspan="6" style="font-weight: normal;">
-					Please ensure that your CSV file follows the correct format for inserting data set.
+					Please ensure that your CSV file follows the correct format for inserting data set. <br>
 					Each row should represent a record for each month, and the columns must be organized as follows:
 				</td>
 			</tr>
@@ -66,8 +66,13 @@
 				<td>29650</td>
 			</tr>
 			<tr>
+				<td colspan="6" style="font-weight: normal;">
+					Note: Please include at least 12 rows of data for training.
+				</td>
+			</tr>
+			<tr>
 				<td colspan="6">
-					<a id="downloadLink" href="meterdemandsample.csv" download="SampleFile" onclick="downloadSampleTemplate()">Download our sample template for reference.</a>
+					<a id="downloadLink" href="meterdemandsample.csv" download="SampleFile">Download our sample template for reference.</a>
 				</td>
 			</tr>
 		</table>
@@ -76,7 +81,9 @@
 </div>
 <script>
     function downloadSampleTemplate() {
-        var downloadLink = document.getElementById('downloadLink');
+        var downloadLink = document.createElement('a');
+        downloadLink.href = 'meterdemandsample.csv';
+        downloadLink.download = 'SampleFile';
         downloadLink.click();
     }
 
