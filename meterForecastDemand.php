@@ -1,6 +1,34 @@
 <?php
 	//include('secure.php');
 	//include('connection.php');
+	function isValidCsvFormat($filePath) {
+		$file = fopen($filePath, 'r');
+		if (!$file) {
+			return false;
+		}
+
+		$expectedHeaders = ['Month', 'Year', 'Faulty Program', 'Meter Complaint', 'Meter Leak', 'Total'];
+		$headers = fgetcsv($file);
+		/*if (count($headers) !== count($expectedHeaders) || array_diff($headers, $expectedHeaders)) {
+			//fclose($file);
+			return false;
+		}*/
+
+		$numRows = 0; // Initialize the row counter
+		while (($row = fgetcsv($file)) !== false) {
+			if (count($row) !== count($expectedHeaders) || !is_numeric($row[0]) || !is_numeric($row[1]) || !is_numeric($row[2]) || !is_numeric($row[3]) || !is_numeric($row[4]) || !is_numeric($row[5])) {
+				fclose($file);
+				return false;
+			}
+			$numRows++; // Increment the row counter
+		}
+
+		fclose($file);
+
+		// Check if the number of rows is 13
+		return $numRows === 13;
+	}
+
 	
 	if (isset($_POST["upload"])) {
 		$year = $_POST["year"];
@@ -13,15 +41,24 @@
 		}
 		
 		if (move_uploaded_file($_FILES["dataset"]["tmp_name"], $targetFile)) {
-            $output = exec("python demandForecasting.py $year");
-			
-			//Split the values two three categories
-			$split = explode(",", $output);
-			$faulty_program = array_slice($split, 0, 12);
-			$meter_complaints = array_slice($split, 12, 23);
-			$meter_leaks = array_slice($split, 24, 35);
+			if (!isValidCsvFormat($targetFile)) {
+				echo "<script>alert('Please follow the dataset format as the sample template given.');</script>";
+				echo "<script>window.location.href='meterForecastDemandForm.php';</script>";
+				exit();
+			}else{
+				$output = exec("python demandForecasting.py $year");
+				
+				//Split the values to three categories
+				$split = explode(",", $output);
+				$faulty_program = array_slice($split, 0, 12);
+				$meter_complaints = array_slice($split, 12, 23);
+				$meter_leaks = array_slice($split, 24, 35);
+				echo "<script>alert('File Uploaded Successfully!');</script>";
+			}
 		} else {
-			echo "Sorry, there was an error uploading your file.";
+			echo "<script>alert('Sorry, there was an error uploading your file. Please try again.');</script>";
+			echo "<script>window.location.href='meterForecastDemandForm.php';</script>";
+			exit();
 		}
 	}
 ?>
@@ -55,6 +92,7 @@ include 'navInv.php';
 </nav>
 
 <body>
+	<h3>Meter Forecast Demand for <?php echo $year; ?></h3>
 	<table>
 		<tr>
 			<th>Month</th>
