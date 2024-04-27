@@ -1,6 +1,6 @@
 <?php
-	//include('secure.php');
-	//include('connection.php');
+	include('secure_Inv.php');
+	include('connection.php');
 	function isValidCsvFormat($filePath) {
 		$file = fopen($filePath, 'r');
 		if (!$file) {
@@ -85,15 +85,17 @@ include 'navInv.php';
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-		<li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Receive Meter</li>
-
+		<li class="breadcrumb-item"><a href="meterForecastDemandForm.php" title='Meter Forecast Page'>Meter Forecast</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Meter Forecast (Uploaded)</li>
 	</ol>
 </nav>
 
 <body>
+
+<div class="container-fluid mb-4">
 	<h3>Meter Forecast Demand for <?php echo $year; ?></h3>
-	<table>
+	<table class="table table-bordered border-dark">
+		<thead>
 		<tr>
 			<th>Month</th>
 			<th>Faulty Program</th>
@@ -101,7 +103,9 @@ include 'navInv.php';
 			<th>Meter Leaks</th>
 			<th>Total Meter Demand</th>
 		</tr>
+		</thead>
 		
+		<tbody>
 		<?php
 			for($i=1;$i<=12;$i++){
 				//Show Months Name
@@ -129,6 +133,13 @@ include 'navInv.php';
 					</tr>";
 			}
 		?>
+		</tbody>
 	</table>
+	</div>
+
+<footer>
+    <?php include "footer.php"?>
+</footer>
+
 </body>
 </html>
