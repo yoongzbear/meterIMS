@@ -54,7 +54,7 @@ include 'navCon.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">Install meters at premises</h2>
       <p class="lead">Scan the installed meter's QR code and fill in the installation proof form.</p>
-      <p>Quick access to meter installation form <a href="meterInstall.php">here</a>.</p>
+      <p>Quick access to <a href="meterInstall.php">meter installation form</a>.</p>
     </div>
       <div class="col-md-5">
         <img src="imgs/meter-install.jpg" width="100%" height="100%">
@@ -67,7 +67,7 @@ include 'navCon.php';
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">Uninstall meters for warranty testing</h2>
         <p class="lead">Scan the uninstalled meter's QR code and fill in the uninstallation form.</p>
-        <p>Quick access to meter uninstallation form <a href="conMeterUninstall.php">here</a>.</p>
+        <p>Quick access to <a href="conMeterUninstall.php">meter uninstallation form</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/meter-uninstall.jpg" width="100%" height="100%">

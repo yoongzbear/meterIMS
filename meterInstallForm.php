@@ -4,7 +4,7 @@ include 'connection.php';
 if(ISSET($_POST['serial_num'])){
     $serial_num = $_POST['serial_num'];
     try{
-        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num';";
+        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num' AND meter_status = 'TO BE INSTALLED';";
         $resultMeter = mysqli_query($connection, $sqlMeter);
         $rowMeter = mysqli_fetch_assoc($resultMeter);
         if (mysqli_num_rows($resultMeter) == 0) {
@@ -23,8 +23,7 @@ if(ISSET($_POST['serial_num'])){
         </script>";
         exit();
     }
-}
-?>
+} ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,19 +38,15 @@ if(ISSET($_POST['serial_num'])){
 <body>
 
 <header>
-<?php 
-include 'header.php';
-?>
-
+<?php include 'header.php'; ?>
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="con_home.php" title='Home Page - Contractor'>Home</a></li>
-    <li class="breadcrumb-item"><a href="con_QRmenu.php" title='QR Page'>QR Code</a></li>
+    <li class="breadcrumb-item"><a href="con_QRmenu.php" title='QR Code Menu'>QR Code</a></li>
     <li class="breadcrumb-item"><a href="meterInstall.php" title='Scan QR Page'>Scan QR - Meter Installation</a></li>
     <li class="breadcrumb-item active" aria-current="page">Meter Install Form</li>
-
   </ol>
 </nav>
 
@@ -89,7 +84,7 @@ include 'header.php';
             <td><?php echo $rowMeter['location_name'];?></td>
         </tr></table>
         <form id='meterForm' action='submitMeterInstallation.php' method='post' class="mb-4">    
-        <input type='hidden' id='serial_num' name='serial_num' value='<?php echo $serial_num;?>'> 
+            <input type='hidden' id='serial_num' name='serial_num' value='<?php echo $serial_num;?>'> 
             <div class="mb-3 row">               
                 <label for='installDate'>Installation Date : </label>
             <div class="col-sm-10">
@@ -111,5 +106,4 @@ include 'header.php';
 </footer>
 
 </body>
-
 </html>

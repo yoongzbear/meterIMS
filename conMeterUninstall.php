@@ -4,7 +4,7 @@ include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
     try{
-        $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
+        $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum' AND meter_status = 'INSTALLED'";
         $statuscheckrun = mysqli_query($connection, $statuscheckquery);
         $statuscheckrow = mysqli_fetch_assoc($statuscheckrun);
         if(mysqli_num_rows($statuscheckrun) == 0){
@@ -30,8 +30,8 @@ if(ISSET($_POST['serialnum'])){
         header("Refresh:0");
         exit();
     }
-}
-?>
+} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
