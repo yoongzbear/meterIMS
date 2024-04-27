@@ -8,6 +8,11 @@
     <title>OTTO Aqua</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .btn.btn-primary.btn-lg{
+        width:50%;
+      }
+    </style>
 
 </head>
 
@@ -24,25 +29,24 @@ include 'navReg.php';
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Scan QRcode</li>
-
   </ol>
 </nav>
 
-<div class="container text-center">
+<div class="container text-center mb-4 px-5">
   <h4>Scan Batch QR</h4>
   <div class="row mb-4">
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="store_ReceiveOrderScanBatchQR.php">Store Arrival</a>
+        <a button type="button" class="btn btn-primary btn-lg" href="store_ReceiveOrderScanBatchQR.php">Store Arrival</a>
     </div>
   </div>
   <div class="row mb-4">
     <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="store_ShipOrderForm.php">Ship Out</a>
+        <a button type="button" class="btn btn-primary btn-lg" href="store_ShipOrderForm.php">Ship Out</a>
     </div>
   </div>
 
-  <h4>Scan Meter QR</h4>
   <div class="row mb-4">
+  <h4>Scan Meter QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg mb-3" href="store_assignInstallForm.php">Installation Departure</a>
     </div>

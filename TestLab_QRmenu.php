@@ -8,6 +8,12 @@
     <title>OTTO Aqua</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .btn.btn-primary.btn-lg{
+        height:100%;
+      }
+    </style>
+
 </head>
 
 <body>
