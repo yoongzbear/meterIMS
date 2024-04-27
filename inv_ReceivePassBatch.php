@@ -99,6 +99,7 @@ include 'navInv.php';
 	<div class='container col-xl-5'>
 
 	<h3>Batch Meter Information</h3>
+	<hr>
 	<table class="table mb-4">
 		<tr colspan = "2">
 			<td>
