@@ -25,8 +25,8 @@
 
 		fclose($file);
 
-		// Check if the number of rows is 13
-		return $numRows === 13;
+		// Check if the number of rows is at least 12
+		return $numRows >= 12;
 	}
 
 	
