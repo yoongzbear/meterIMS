@@ -32,12 +32,12 @@ include 'navLab.php';
     <h3>Meter Test Result Form</h3>
     <p class="fst-italic">Please scan the QR code on the water meter to enter the test result.</p>
     <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
-    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark mb-4">Scan QR</button>
-    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark mb-4" hidden="">Cancel Scan</button>
+    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark">Scan QR</button>
+    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark" hidden="">Cancel Scan</button>
 
     <div class="col mt-4 text-center">
     <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-3 shadow mb-4" id="meterForm" action="meterTestForm.php" method="post" style="display:none;">
+    <div class="modal-content rounded-3 shadow" id="meterForm" action="meterTestForm.php" method="post" style="display:none;">
         <form id="meterForm" action="meterTestForm.php" method="post">
             <div class="modal-body p-4 text-center">
                 <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter serial number?</h5>

@@ -137,7 +137,8 @@ include 'header.php';
 	<div class='col'>
 	<!--Show Meter List for the Batch-->
 	<h3>List of Meters in the batch</h3>
-	<table>
+	<hr>
+	<table class="table">
 		<tr>
 			<th>No.</th>
 			<th>Meter ID</th>

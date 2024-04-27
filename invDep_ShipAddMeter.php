@@ -22,10 +22,10 @@ include ('secure_Inv.php');
 	
 	<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
 	  <ol class="breadcrumb">
-	  <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-		<li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
-		<li class="breadcrumb-item"><a href="inventoryDep_ShipOrderForm.php" title='Ship Out Form Page'>Ship Out Form</a></li>
-		<li class="breadcrumb-item"><a href="inventoryDep_ShipOrderScanMeterQR.php" title='Scan QR Page'>Scan QR - Meter Shipping Form</a></li>
+	  	<li class="breadcrumb-item active" aria-current="page">Home</li>
+		<li class="breadcrumb-item active" aria-current="page">QR Code</li>
+		<li class="breadcrumb-item active" aria-current="page">Ship Out Form</li>
+		<li class="breadcrumb-item active" aria-current="page">Scan QR - Meter Shipping Form</li>
 		<li class="breadcrumb-item active" aria-current="page">Meter Shipping</li>
 	
 	  </ol>

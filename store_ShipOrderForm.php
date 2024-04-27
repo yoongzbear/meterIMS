@@ -101,63 +101,82 @@ ENDIF
     }
 </script>
 
-<div class="col align-self-center mb-4">
+<div class='container col-xl-6 mb-4'>
     <h3 class="header">Ship Meter Batch</h3>
-	<hr class="border border-success border-2 opacity-50">
+	<hr>
 	<form class="form" action="store_ShipAddBatch.php" method="post" name="shipOrderForm">
+	<div class="row g-3 align-items-center mb-4">
+	<div class="col-4">
+		<label>Meter Details:</label>
+	</div>
+	<div class="col-8">
+		<select name="meter_details" class="form-select" required>
+			<option value="" disabled selected>Please Select Meter Type, Model and Size</option>
+				<?php
+					$sqlMeter = "SELECT DISTINCT meter_type, meter_model, meter_size FROM batch WHERE location_id = $location_id";
+					$resultMeter = mysqli_query($connection, $sqlMeter);
+					while ($rowMeter = mysqli_fetch_assoc($resultMeter)) {
+					$meterType = $rowMeter['meter_type'];
+					$meterModel = $rowMeter['meter_model'];
+					$meterSize = $rowMeter['meter_size'];
+					echo "<option value='$meterType|$meterModel|$meterSize'>$meterType, $meterModel, $meterSize</option>";
+					}
+				?>
+		</select>
+	</div>
+	</div>
 
-        <table class="table table-borderless mb-4">
-			<tr>
-				<td>Meter Details</td>
-				<td><select name="meter_details" required>
-						<option value="" disabled selected>Please Select Meter Type, Model and Size</option>
-						<?php
-						$sqlMeter = "SELECT DISTINCT meter_type, meter_model, meter_size FROM batch WHERE location_id = $location_id";
-						$resultMeter = mysqli_query($connection, $sqlMeter);
-						while ($rowMeter = mysqli_fetch_assoc($resultMeter)) {
-							$meterType = $rowMeter['meter_type'];
-							$meterModel = $rowMeter['meter_model'];
-							$meterSize = $rowMeter['meter_size'];
-							echo "<option value='$meterType|$meterModel|$meterSize'>$meterType, $meterModel, $meterSize</option>";
-						}
-						?>
-					</select>
-				</td>
-			</tr>
-			
-			<!--Shipping details-->
-			<input class="form-control" type="hidden" name="origin" value="<?php echo $location_id; ?>" readonly>
-            <tr>
-                <th>Number of Meters Needed:</th>
-                <td><input class="form-control" type="number" name="meterQuantity" required></td>
-            </tr>
-			<tr>
-                <th>Origin:</th>
-                <td><?php echo $storeName ;?></td>
-            </tr>
-			<tr>
-                <th>Destination:</th>
-                <td>
-					<select class="form-select" name="destination" required>
-						<option value="" disabled selected>Please Select Destination Region Store</option>
-						<?php
-							$sqlStore="SELECT * FROM location WHERE location_id != 1 AND location_id != 2 AND location_id != '$location_id'";
-							$data = mysqli_query($connection,$sqlStore);
-							while($store = mysqli_fetch_array($data)){
-								echo "<option value='$store[location_id]'>$store[location_name]</option>";
-							}
-						?>
-					</select>
-				</td>
-            </tr>
-			<tr>
-				<th>Ship Out Date:</th>
-				<td><input class="form-control" type="date" name="ship_date" placeholder="<?php echo $current_date; ?>" value="<?php echo $current_date; ?>" readonly></td> <!--validate date-->
-			</tr>
-        </table>
-		<button class="submit btn btn-outline-success mb-4" onclick="submitForm();" type="button">Scan Meter</button>
-		<!--After submit, show confirm msg, start scanning, buttons-->
+	<!--Shipping details-->
+	<input class="form-control" type="hidden" name="origin" value="<?php echo $location_id; ?>" readonly>
+	<div class="row g-3 align-items-center mb-4">
+	<div class="col-4">
+		<label>Number of Meters Needed:</label>
+	</div>
+	<div class="col-8">
+		<input class="form-control" type="number" name="meterQuantity" required>
+	</div>
+	</div>
+
+	<div class="row g-3 align-items-center mb-4">
+	<div class="col-4">
+		<label>Origin:</label>
+	</div>
+	<div class="col-8">
+		<?php echo $storeName ;?>
+	</div>
+	</div>
+	
+	<div class="row g-3 align-items-center mb-4">
+	<div class="col-4">
+		<label>Destination:</label>
+	</div>
+	<div class="col-8">
+			<select class="form-select" name="destination" required>
+				<option value="" disabled selected>Please Select Destination Region Store</option>
+				<?php
+					$sqlStore="SELECT * FROM location WHERE location_id != 1 AND location_id != 2 AND location_id != '$location_id'";
+					$data = mysqli_query($connection,$sqlStore);
+					while($store = mysqli_fetch_array($data)){
+						echo "<option value='$store[location_id]'>$store[location_name]</option>";
+					}
+				?>
+			</select>
+	</div>
+	</div>
+
+	<div class="row g-3 align-items-center mb-4">
+	<div class="col-4">
+		<label>Ship Out Date:</label>
+	</div>
+	<div class="col-8">
+		<input class="form-control" type="date" name="ship_date" placeholder="<?php echo $current_date; ?>" value="<?php echo $current_date; ?>" readonly></td> <!--validate date-->
+	</div>
+	</div>
+
+	<button class="submit btn btn-success" onclick="submitForm();" type="button">Scan Meter</button>
+	<!--After submit, show confirm msg, start scanning, buttons-->
     </form>
+
 </div>
 
 <footer>

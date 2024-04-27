@@ -1,5 +1,5 @@
 <?php
-	//include('secure_Inv.php');
+	include('secure_Reg.php');
 	include('connection.php');
 	if(isset($_GET['Meter_ID'])){
 		$serial_num = $_GET['Meter_ID'];
@@ -63,14 +63,13 @@ include 'header.php';
 </header>
 
 
-<div class="container">
-    <div class="row align-items-start">
-        <div class="col">
 
+<div class='container col-xl-5 mb-4'>
+
+<h2 class='fs-1 text-uppercase'>Meter Information</h2>
+<hr class='border border-success border-2 opacity-50'>
 	<!--Meter Info-->
-	<h3>Meter Information</h3>
-	<hr>
-	<table class="table table-secondary">
+	<table class="table">
 		<tr class="table" colspan = "2">
 			<td>
 				<div id="qrcode">
@@ -81,58 +80,43 @@ include 'header.php';
 			</td>
 		</tr>
 
-		<thread>
 		<tr>
-			<th scope="row">Meter Type</th>
+			<th scope="row">Meter Type:</th>
 			<td><?php echo $meter_type; ?></td>
 		</tr>
-		</thread>
-		<thread>
 		<tr>
-			<th scope="row">Meter Model</th>
+			<th scope="row">Meter Model:</th>
 			<td><?php echo $meter_model; ?></td>
 		</tr>
-		</thread>
-		<thread>
 		<tr>
-			<th scope="row">Meter Size</th>
+			<th scope="row">Meter Size:</th>
 			<td><?php echo $meter_size; ?></td>
 		</tr>
-		</thread>
-		<thread>
 		<tr>
-			<th scope="row">Age</th>
+			<th scope="row">Age:</th>
 			<td><?php echo $age; ?></td>
 		</tr>
-		</thread>
-		<thread>
 		<tr>
-			<th scope="row">Mileage</th>
+			<th scope="row">Mileage:</th>
 			<td><?php echo $mileage; ?></td>
 		</tr>
-		</thread>
-		<thread>
 		<tr>
-			<th scope="row">Manufacturer</th>
+			<th scope="row">Manufacturer:</th>
 			<td><?php echo $manu_name; ?></td>
 		</tr>
 		</thread>
 	</table>
-	</div>
 
-	</div>
-</div>
 
 <div class="d-grid gap-2 col-6 mx-auto">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_assignInstallForm.php'" title='Back To Installation Departure Page'>Back</button>
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_assignInstallForm.php'" title='Back To Installation Page'>Back</button>
 </div>
-	
-<br>
 
-</body>
+</div>
 
 <footer>
-	<?php include 'footer.php';?>
-</footer>	
+    <?php include "footer.php"?>
+</footer>
 
+</body>
 </html>

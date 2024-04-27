@@ -23,12 +23,11 @@ include 'header.php';
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
   <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
-	<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
-    <li class="breadcrumb-item"><a href="store_ShipOrderForm.php" title='Scan QRcode Page'>Ship Out - Ship Meter Batch</a></li>
-	<li class="breadcrumb-item"><a href="store_ShipOrderScanMeter.php" title='Scan QRcode Page'>Scan QR Page - Meter Shipping Form</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Meter Shipping</li>
-
+  	<li class="breadcrumb-item active" aria-current="page">Home</li>
+    <li class="breadcrumb-item active" aria-current="page">Scan QRcode</li>
+    <li class="breadcrumb-item active" aria-current="page">Ship Out - Ship Meter Batch</li>
+    <li class="breadcrumb-item active" aria-current="page">Scan QR Page - Meter Shipping Form</li>
+    <li class="breadcrumb-item active" aria-current="page">Meter Added</li>
   </ol>
 </nav>
 
@@ -90,9 +89,10 @@ include 'header.php';
 </script>
 
 <!--To show if the meter is added succesfully-->
-<div class="container mb-4">
+<div class="col align-self-center mb-4">
     <div id="success" style="display:none;">
-        <h2>Meter Added Successfully</h2>
+        <h3>Meter Added Successfully</h3>
+		<hr>
 		<?php	
 			echo "<script>alert('Meter Added Successfully!');</script>";
 			//To select the meter information
@@ -119,7 +119,7 @@ include 'header.php';
 				$manu_name = $rowManu["manu_name"];
 			}
 		?>
-		<table class="table mb-4">
+		<table class="table table-borderless">
 			<tr colspan = "2">
 				<td>
 					<div id="qrcode">
@@ -140,7 +140,7 @@ include 'header.php';
 			</tr>
 			
 			<tr>
-				<th>Mileage</th>
+				<th>Mileage:</th>
 				<td><?php echo $mileage; ?></td>
 			</tr>
 			
@@ -175,6 +175,8 @@ include 'header.php';
         echo "<script>document.getElementById('fail').style.display = 'block';</script>";
     }
 ?>
+
+</body>
 
 <footer>
 	<?php include 'footer.php';?>

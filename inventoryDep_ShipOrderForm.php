@@ -86,7 +86,7 @@ include 'navInv.php';
     }
 </script>
 
-<div class='container col-xl-5 mb-4'>
+<div class='container col-xl-6 mb-4'>
 <h3>Ship Meter Batch</h3>
 <hr>
 	<form class="form" action="invDep_ShipAddBatch.php" method="post" name="shipOrderForm">

@@ -23,7 +23,7 @@ include 'header.php';
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
     <li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page - Region Store'>Scan QRcode</a></li>
-	<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page - Region Store'>Scan QR (Store Arrival) - Meter Receiving Form</a></li>
+	<li class="breadcrumb-item"><a href="store_ReceiveOrderScanBatchQR.php" title='Scan QRcode Page - Region Store'>Scan QR (Store Arrival) - Meter Receiving Form</a></li>
 	<li class="breadcrumb-item active" aria-current="page">Meter Receiving Form</li>
 
   </ol>
@@ -102,9 +102,12 @@ include 'header.php';
 		}
 	}
 ?>
-<div class="container mb-4">
+
+<div class='container col-xl-5'>
 	<!--Show Current Batch Info-->
-	<h3>Batch Meter Information</h3>
+	<h2 class='fs-1 text-uppercase'>Batch Meter Information</h2>
+    <hr class='border border-success border-2 opacity-50'>
+
 	<table class="table mb-4">
 		<tr colspan = "2">
 			<td>
@@ -116,55 +119,57 @@ include 'header.php';
 			</td>
 		</tr>
 		<tr>
-			<th>Meter Type</th>
+			<th>Meter Type:</th>
 			<td><?php echo $meter_type; ?></td>
 		</tr>
 		<tr>
-			<th>Meter Model</th>
+			<th>Meter Model:</th>
 			<td><?php echo $meter_model; ?></td>
 		</tr>
 		<tr>
-			<th>Meter Size</th>
+			<th>Meter Size:</th>
 			<td><?php echo $meter_size; ?></td>
 		</tr>
 		<tr>
 			<!--Show Current Total Meter for Current Batch-->
-			<th>Meter Quantity</th>
+			<th>Meter Quantity:</th>
 			<td><?php echo $quantity; ?></td>
 		</tr>
 	</table>
+	<hr>
 	
 	<!--Show Shipping Info-->
 	<h3>Shipping Information</h3>
 	<table class="table mb-4">
 		<tr>
-			<th>Tracking ID</th>
+			<th>Tracking ID:</th>
 			<td><?php echo $tracking_id; ?></td>
 		</tr>
 		<tr>
-			<th>Origin</th>
+			<th>Origin:</th>
 			<td><?php echo $origin_name; ?></td>
 		</tr>
 		<tr>
-			<th>Destination</th>
+			<th>Destination:</th>
 			<td><?php echo $destination_name; ?></td>
 		</tr>
 		<tr>
-			<th>Ship Date</th>
+			<th>Ship Date:</th>
 			<td><?php echo $ship_date; ?></td>
 		</tr>
 		<tr>
-			<th>Arrival Date</th>
+			<th>Arrival Date:</th>
 			<td><?php echo $current_date; ?></td>
 		</tr>
 	</table>
-	
+	<hr>
+
 	<!--Show Meter List for the Batch-->
 	<h3>List of Meters in the batch</h3>
 	<table class="table mb-4">
 		<tr>
 			<th>No.</th>
-			<td>Meter ID</td>
+			<th>Meter ID</th>
 		</tr>
 		
 		<?php
@@ -182,10 +187,10 @@ include 'header.php';
 		?>
 	</table>
 
-	<div class="mb-4 d-grid gap-2 col-6 mx-auto">
-		<button class="back btn btn-dark" type="button" onclick="window.location.href='store_ReceiveOrderScanBatchQR.php'" title='Back To Scan QR'>Complete</button>
-	</div>
+</div>
 
+<div class="d-grid col-6 mx-auto mb-4">
+<button class="back btn btn-dark" type="button" onclick="window.location.href='store_ReceiveOrderScanBatchQR.php'" title='Back To Scan QR'>Back</button>
 </div>
 
 <footer>

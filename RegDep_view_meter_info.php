@@ -1,5 +1,35 @@
 <?php
-include ('secure_Reg.php'); 
+include 'secure_Reg.php';
+include 'connection.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Meter Info</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<header>
+    <?php 
+        include 'header.php'; 
+        include 'navReg.php';
+    ?>
+</header>
+
+<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
+        <li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
+        <li class="breadcrumb-item"><a href="RegDep_Scan_View_meter_info.php" title='Scan QR Page'>Scan QR - View Meter Info</a></li>
+        <li class="breadcrumb-item active" aria-current="page">View Meter Info</li>
+    </ol>
+</nav>
+
+<?php
 include('connection.php');
 
         //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
@@ -29,11 +59,11 @@ include('connection.php');
         }
         ?>
 
-
+<div class="col align-self-center">
 
     <?php
         //type, model, size, age, mileage, manufacturer, manu year, status, install date, install address, location of store
-        echo "<div class='col align-self-center'>
+        echo "
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
         <hr class='border border-success border-2 opacity-50'>";
         echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>
@@ -82,15 +112,25 @@ include('connection.php');
         if ($row['install_date'] != NULL) {
             //if the meter is installed
             echo "<tr>
-                <td>Install Date:</td>
+                <th>Install Date:</th>
                 <td>" . $row['install_date'] . "</td>
             </tr>
             <tr>
-                <td>Install Address:</td>
+                <th>Install Address:</th>
                 <td>" . $row['install_address'] . "</td>
             </tr>";}
-        echo "</table></div>";
+        echo "</table>";
     ?>
+<div class="d-grid gap-2 col-6 mx-auto mb-4">
+<button class="back btn btn-dark" type="button" onclick="window.location.href='RegDep_Scan_View_meter_info.php'" title='Back To Scan QR Page'>Back</button>
+</div>
 
-<button type="button" onclick="window.location.href='RegDep_Scan_View_meter_info.php'">Back</button>
+</div>
 
+<footer>
+	<?php include 'footer.php';?>
+</footer>	
+
+</body>
+
+</html>

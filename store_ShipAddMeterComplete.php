@@ -21,18 +21,6 @@ include 'header.php';
 
 </header>
 
-<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
-	<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
-    <li class="breadcrumb-item"><a href="store_ShipOrderForm.php" title='Scan QRcode Page'>Ship Out - Ship Meter Batch</a></li>
-	<li class="breadcrumb-item"><a href="store_ShipOrderScanMeter.php" title='Scan QRcode Page'>Scan QR Page - Meter Shipping Form</a></li>
-	<li class="breadcrumb-item"><a href="store_ShipAddMeter.php" title='Scan QRcode Page'>Meter Shipping</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Meter Shipping Complete</li>
-
-  </ol>
-</nav>
-
 <?php
 	include('connection.php');
 	$batch_id = $_GET['Batch_ID'];
@@ -83,11 +71,15 @@ include 'header.php';
 	echo "<script>alert('Meter Batch Shipped Successfully!');</script>";
 ?>
 
-<div class="container mb-4">
+<div class="container">
+    <div class="row mb-4 align-items-start">
+	<div class='col'>
+
 
 <!--Show Current Batch Info-->
 	<h3>Batch Meter Information</h3>
-	<table class="table mb-4">
+	<hr>
+	<table class="table">
 		<tr colspan = "2">
 			<td>
 				<div id="qrcode">
@@ -98,49 +90,60 @@ include 'header.php';
 			</td>
 		</tr>
 		<tr>
-			<th>Meter Type</th>
+			<th>Meter Type:</th>
 			<td><?php echo $meter_type; ?></td>
 		</tr>
 		<tr>
-			<th>Meter Model</th>
+			<th>Meter Model:</th>
 			<td><?php echo $meter_model; ?></td>
 		</tr>
 		<tr>
-			<th>Meter Size</th>
+			<th>Meter Size:</th>
 			<td><?php echo $meter_size; ?></td>
 		</tr>
 		<tr>
 			<!--Show Current Total Meter for Current Batch-->
-			<th>Meter Quantity</th>
+			<th>Meter Quantity;</th>
 			<td><?php echo $quantity; ?></td>
 		</tr>
 	</table>
 	<hr>
+	</div>
+	</div>
 
+	<div class='row mb-4 align-items-start'>
+	<div class='col'>
 	<!--Show Shipping Info-->
 	<h3>Shipping Information</h3>
-	<table class="table mb-4">
+	<hr>
+	<table class="table">
 		<tr>
-			<th>Tracking ID</th>
+			<th>Tracking ID:</th>
 			<td><?php echo $tracking_id; ?></td>
 		</tr>
 		<tr>
-			<th>Origin</th>
+			<th>Origin:</th>
 			<td><?php echo $origin_name; ?></td>
 		</tr>
 		<tr>
-			<th>Destination</th>
+			<th>Destination:</th>
 			<td><?php echo $destination_name; ?></td>
 		</tr>
 		<tr>
-			<th>Ship Date</th>
+			<th>Ship Date:</th>
 			<td><?php echo $ship_date; ?></td>
 		</tr>
 	</table>
-	<hr>
+	</div>
+	</div>
+
+
+	<div class='row mb-4 align-items-start'>
+	<div class='col'>
 
 	<!--Show Meter List for the Batch-->
 	<h3>List of Meters in the batch</h3>
+	<hr>
 	<table class="table mb-4">
 		<tr>
 			<th>No.</th>
@@ -161,10 +164,13 @@ include 'header.php';
 			}
 		?>
 	</table>
+	</div>
+	</div>
+
 </div>
 
-<div class="mb-4 d-grid gap-2 col-6 mx-auto">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_ShipOrderForm.php'" title='Back To Ship Meter Batch Page'>Complete</button>
+<div class="d-grid gap-2 col-6 mx-auto mb-4">
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_ShipOrderForm.php'" title='Back To Create New Batch Page'>Complete</button>
 </div>
 	
 
