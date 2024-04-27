@@ -28,3 +28,14 @@ Password: yhms1234
 5. Contractor
 Username: reyes
 Password: bing1234
+
+How to set up meter demand forecast:
+1. In httpd.conf file in WAMP or XAMPP, paste these two lines at the end of the file and restart the server.
+AddHandler cgi-script .py
+ScriptInterpreterSource Registry-Strict
+2. Change the first line in demandForecasting.py to the path of Python exe file. Ex: #C:\Users\name\AppData\Local\Programs\Python\Python312\python.exe
+3. Open Terminal on your device and enter the following commands to install dependencies for the file:
+pip install pandas
+pip install scikit-learn
+
+In case of any issues encountered while using the system, you may contact masturaalya02@gmail.com (Alya). Thank you!
