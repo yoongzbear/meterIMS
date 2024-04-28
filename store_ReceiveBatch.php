@@ -107,7 +107,7 @@ include 'header.php';
 				echo $location_id;
 				//echo $resultBatchExist;
 			}else{
-				echo "<script>alert('Batch is received. Please try again.');</script>";
+				echo "<script>alert('Batch is received or does associated to this store. Please try again.');</script>";
 				echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
 			}
 		}else{
