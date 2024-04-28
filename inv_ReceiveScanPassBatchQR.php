@@ -63,7 +63,7 @@ include 'navInv.php';
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
-            window.location.href = 'inv_ReceiveScanPassBatchrQR.php';
+            window.location.href = 'inv_ReceiveScanPassBatchQR.php';
         });
     </script>
 
