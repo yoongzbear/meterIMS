@@ -12,9 +12,12 @@
 
 		global $headers; //Define $headers as a global variable
 		$headers = fgetcsv($file);
-		if (count($headers) !== count($expectedHeaders)) {
+		$headers[0] = preg_replace('/\x{FEFF}/u', '', $headers[0]);
+		if (count($headers) !== count($expectedHeaders) || array_diff($headers,$expectedHeaders)) {
 			return false;
 		}
+		
+		
 
 		$numRows = 1; //Initialize the row counter
 		while (($row = fgetcsv($file)) !== false) {
