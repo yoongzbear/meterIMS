@@ -24,7 +24,6 @@ include 'navInv.php';
     <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
     <li class="breadcrumb-item"><a href="Inv_QRmenu.php" title='QRcode Page'>QR Code</a></li>
 	<li class="breadcrumb-item active" aria-current="page">Scan QR - View Meter Result</li>
-
   </ol>
 </nav>
 
@@ -64,7 +63,6 @@ include 'navInv.php';
 
     <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
-
 </div>
 
 <footer>

@@ -111,9 +111,9 @@ include 'navInv.php';
                 <td>NOT TESTED</td>';
             } else {
                 echo '<td>'.$rowTest['test_date'].'</td>';            
-                if ($rowTest['result'] == 'PASS') {
+                if ($rowTest['result'] == 'PASSED') {
                     echo "<td style='color: green;'>" . $rowTest['result'] . "</td>";
-                } else if ($rowTest['result'] == 'FAIL') {
+                } else if ($rowTest['result'] == 'FAILED') {
                     echo "<td style='color: red;'>" . $rowTest['result'] . "</td>";
                 }
             }
