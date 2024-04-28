@@ -86,33 +86,45 @@ echo $batchid;
 </table>
 <hr class="border border-danger border-2 opacity-50">
 
-<table class="table table-dark table-striped-columns">
-    <thread>
-    <tr>
-    <th scope="col">No</th>
-    <th scope="col">Serial Number</th>
-    <th scope="col">Meter Status</th>
-    <th scope="col">Meter Detail</th>
-    </tr>
-    </thread>
-
 <?php
+
+
 $sql2 = "SELECT serial_num, meter_status FROM meter WHERE batch_id=$batchid";
 $result2 = mysqli_query($connection, $sql2);
-$num=1;  
-while ($row2 = mysqli_fetch_array($result2)) {
-    echo '
-    <thread>
-    <tr>
-        <th scope="row">' . $num . '</th>
-        <td>' . $row2["serial_num"] . '</td>
-        <td>' . $row2["meter_status"] . '</td>
-        <td class="serial_num"><a href="meterInfo.php?serial_num=' .$row2["serial_num"]. '"><button class="btn btn-info btn-sm">Meter Detail</button></a></td>
-    </tr></thread>';
-    $num++;
-}
+
+// Check if there are any records returned
+if (mysqli_num_rows($result2) > 0) {
 ?>
+<table class="table table-dark table-striped-columns">
+    <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Serial Number</th>
+            <th scope="col">Meter Status</th>
+            <th scope="col">Meter Detail</th>
+        </tr>
+    </thead>
+
+    <?php
+    $num = 1;
+    while ($row2 = mysqli_fetch_array($result2)) {
+        echo '
+        <tbody>
+            <tr>
+                <th scope="row">' . $num . '</th>
+                <td>' . $row2["serial_num"] . '</td>
+                <td>' . $row2["meter_status"] . '</td>
+                <td class="serial_num"><a href="meterInfo.php?serial_num=' . $row2["serial_num"] . '"><button class="btn btn-info btn-sm">Meter Detail</button></a></td>
+            </tr>
+        </tbody>';
+        $num++;
+    }
+    ?>
 </table>
+
+<?php
+} 
+?>
 
 <br>
 <div class="d-grid gap-2 col-6 mx-auto">
