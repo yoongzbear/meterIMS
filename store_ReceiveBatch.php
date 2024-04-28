@@ -104,8 +104,6 @@ include 'header.php';
 					$destination_name = $row["location_name"];
 				}
 				echo "<script>alert('Meter Batch Receive Successfully.');</script>";
-				echo $location_id;
-				//echo $resultBatchExist;
 			}else{
 				echo "<script>alert('Batch is received or does associated to this store. Please try again.');</script>";
 				echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
