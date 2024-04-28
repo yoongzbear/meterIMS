@@ -188,8 +188,8 @@ include 'header.php';
 		<?php
 			$num = 1;
 			//Reset data seek pointer to the beginning
-			mysqli_data_seek($result, 0);
-			while($rowMeter = mysqli_fetch_assoc($result)){
+			mysqli_data_seek($resultInfo, 0);
+			while($rowMeter = mysqli_fetch_assoc($resultInfo)){
 				echo 
 					'<tr>
 						<th>'.$num.'</th>
