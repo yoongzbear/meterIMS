@@ -42,52 +42,59 @@ include 'navInv.php';
 						INNER JOIN meter ON batch.batch_id = meter.batch_id
 						INNER JOIN movement ON batch.batch_id = movement.batch_id
 						INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num
-						WHERE batch.batch_id = '$batch_id' AND meter.meter_status != 'FAILED' AND movement.origin=2;";
+						WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
-			$current_date = date('Y-m-d');
-	
-			//Update Batch Location
-			$sqlBatchLocation = "UPDATE batch SET location_id = 1 WHERE batch_id = '$batch_id'";
-			$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
-			
-			//Update Meter Location
-			$sqlMeterLocation = "UPDATE meter 
-								JOIN lab_result ON meter.serial_num = lab_result.serial_num
-								SET meter.meter_status = 'IN STOCK' 
-								WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
-			$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
-			
-			//Update Tracking Info
-			$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
-			$resultTrack = mysqli_query($connection, $sqlTrack);
-			
-			if ($result) {
-				$row = mysqli_fetch_assoc($result);
+			$sqlBatchExist = "SELECT * FROM batch WHERE batch_id = '$batch_id' AND location_id != 1";
+			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
+			if(mysqli_num_rows($resultBatchExist)>0){
+				$current_date = date('Y-m-d');
+		
+				//Update Batch Location
+				$sqlBatchLocation = "UPDATE batch SET location_id = 1 WHERE batch_id = '$batch_id'";
+				$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
+				
+				//Update Meter Location
+				$sqlMeterLocation = "UPDATE meter 
+									JOIN lab_result ON meter.serial_num = lab_result.serial_num
+									SET meter.meter_status = 'IN STOCK' 
+									WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
+				$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
+				
+				//Update Tracking Info
+				$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
+				$resultTrack = mysqli_query($connection, $sqlTrack);
+				
+				if ($result) {
+					$row = mysqli_fetch_assoc($result);
 
-				// Fetch data from the database
-				$meter_type = $row["meter_type"];
-				$meter_model = $row["meter_model"];
-				$meter_size = $row["meter_size"];
-				$quantity = $row["quantity"];
-				$tracking_id = $row["tracking_id"];
-				$origin = $row["origin"];
-				$destination = $row["destination"];
-				$ship_date = $row["ship_date"];
-			}
-			
-			//Select origin location name
-			$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
-			$resultOrigin = mysqli_query($connection, $sqlOriginName);
-			
-			if ($resultOrigin) {
-				$row = mysqli_fetch_assoc($resultOrigin);
+					// Fetch data from the database
+					$meter_type = $row["meter_type"];
+					$meter_model = $row["meter_model"];
+					$meter_size = $row["meter_size"];
+					$quantity = $row["quantity"];
+					$tracking_id = $row["tracking_id"];
+					$origin = $row["origin"];
+					$destination = $row["destination"];
+					$ship_date = $row["ship_date"];
+				}
+				
+				//Select origin location name
+				$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
+				$resultOrigin = mysqli_query($connection, $sqlOriginName);
+				
+				if ($resultOrigin) {
+					$row = mysqli_fetch_assoc($resultOrigin);
 
-				//Fetch data from the database
-				$origin_name = $row["location_name"];
+					//Fetch data from the database
+					$origin_name = $row["location_name"];
+				}
+				echo "<script>alert('Meter Batch Received Successfully!');</script>";
+			}else{
+				echo "<script>alert('Batch is received. Please try again.');</script>";
+				echo "<script>window.location.href='inv_ReceiveScanPassBatchQR.php';</script>";
 			}
-			echo "<script>alert('Meter Batch Received Successfully!');</script>";
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
 			echo "<script>window.location.href='inv_ReceiveScanPassBatchQR.php';</script>";
