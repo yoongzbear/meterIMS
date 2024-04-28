@@ -54,12 +54,12 @@ $num = 1;
     <tbody class="table-group-divider">
     <?php while ($row = mysqli_fetch_array($result)) : ?>
         <tr>
-            <td><?php echo $num++; ?></td>
+            <th><?php echo $num++; ?></th>
             <td><?php echo $row["meter_type"]; ?></td>
             <td><?php echo $row["meter_size"]; ?></td>
             <td><?php echo $row["meter_model"]; ?></td>
             <td><?php echo $row["install_address"]; ?></td>
-            <td><button onclick="window.location.href= 'store_replaceMeterScanQR.php?serial_num=<?php echo $row['serial_num']; ?>';">Install New Meter</button></td>
+            <td><button class="btn btn-sm btn-info" onclick="window.location.href= 'store_replaceMeterScanQR.php?serial_num=<?php echo $row['serial_num']; ?>';">Install New Meter</button></td>
         </tr>
     <?php endwhile; ?>
     </tbody>
