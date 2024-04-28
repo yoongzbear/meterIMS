@@ -6,7 +6,6 @@
 	function isValidCsvFormat($filePath) {
 		global $expectedHeaders; //Access the global $expectedHeaders variable
 		$file = fopen($filePath, 'r');
-		echo "File Path: " . $filePath . "<br>";
 		if (!$file) {
 			return false;
 		}
@@ -14,7 +13,6 @@
 		global $headers; //Define $headers as a global variable
 		$headers = fgetcsv($file);
 		if (count($headers) !== count($expectedHeaders)) {
-			//fclose($file);
 			return false;
 		}
 
