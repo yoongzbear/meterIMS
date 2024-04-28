@@ -27,7 +27,7 @@ include 'connection.php';
     </ol>
 </nav>
 
-<div class="my-4 text-center">
+<div class='container col-xl-5'>
     <h3>Batch QR:</h3>
 <div id="qrcode">
 <script src="qrcode.js"></script>
