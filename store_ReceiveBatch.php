@@ -37,64 +37,75 @@ include 'header.php';
 		$batch_id = $_GET['Batch_ID'];
 		
 		//To check if the QR scanned is Batch QR
-		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch
-						INNER JOIN meter ON batch.batch_id = meter.batch_id
-						INNER JOIN movement ON batch.batch_id = movement.batch_id
-						WHERE batch.batch_id = '$batch_id'";
+		$sqlBatchInfo = "SELECT * FROM batch WHERE batch_id = '$batch_id'";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
-			$current_date = date('Y-m-d');
-	
-			//Update Batch Location
-			$sqlBatchLocation = "UPDATE batch SET location_id = '$location_id' WHERE batch_id = '$batch_id'";
-			$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
+			$sqlBatchExist = "SELECT * FROM batch WHERE batch_id = '$batch_id' AND location_id != '$location_id'";
+			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
+			if(mysqli_num_rows($resultBatchExist)>0){
+				$current_date = date('Y-m-d');
+		
+				//Update Batch Location
+				$sqlBatchLocation = "UPDATE batch SET location_id = '$location_id' WHERE batch_id = '$batch_id'";
+				$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
 
-			//Update Meter Location
-			$sqlMeterLocation = "UPDATE meter SET location_id = '$location_id', meter_status = 'IN STORE' WHERE batch_id = '$batch_id'";
-			$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
-			
-			//Update Tracking Info
-			$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
-			$resultTrack = mysqli_query($connection, $sqlTrack);
-			
-			//To get Batch Info
-			if ($result) {
-				$row = mysqli_fetch_assoc($result);
+				//Update Meter Location
+				$sqlMeterLocation = "UPDATE meter SET location_id = '$location_id', meter_status = 'IN STORE' WHERE batch_id = '$batch_id'";
+				$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
+				
+				//Update Tracking Info
+				$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
+				$resultTrack = mysqli_query($connection, $sqlTrack);
+				
+				//To get info for batch, meter and Tracking
+				$sqlInfo = "SELECT batch.*, meter.*, movement.* FROM batch
+							INNER JOIN meter ON batch.batch_id = meter.batch_id
+							INNER JOIN movement ON batch.batch_id = movement.batch_id
+							WHERE batch.batch_id = '$batch_id'";
+				$resultInfo = mysqli_query($connection, $sqlInfo);			
+				
+				//To get Batch Info
+				if ($resultInfo) {
+					$row = mysqli_fetch_assoc($resultInfo);
 
-				// Fetch data from the database
-				$meter_type = $row["meter_type"];
-				$meter_model = $row["meter_model"];
-				$meter_size = $row["meter_size"];
-				$quantity = $row["quantity"];
-				$tracking_id = $row["tracking_id"];
-				$origin = $row["origin"];
-				$destination = $row["destination"];
-				$ship_date = $row["ship_date"];
+					// Fetch data from the database
+					$meter_type = $row["meter_type"];
+					$meter_model = $row["meter_model"];
+					$meter_size = $row["meter_size"];
+					$quantity = $row["quantity"];
+					$tracking_id = $row["tracking_id"];
+					$origin = $row["origin"];
+					$destination = $row["destination"];
+					$ship_date = $row["ship_date"];
+				}
+				
+				//Select origin location name
+				$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
+				$resultOrigin = mysqli_query($connection, $sqlOriginName);
+				
+				if ($resultOrigin) {
+					$row = mysqli_fetch_assoc($resultOrigin);
+
+					//Fetch data from the database
+					$origin_name = $row["location_name"];
+				}
+				
+				//Select destination location name
+				$sqlDestinationName = "SELECT location_name FROM location WHERE location_id = '$destination'";
+				$resultDestination = mysqli_query($connection, $sqlDestinationName);
+				
+				if ($resultDestination) {
+					$row = mysqli_fetch_assoc($resultDestination);
+
+					//Fetch data from the database
+					$destination_name = $row["location_name"];
+				}
+				echo "<script>alert('Meter Batch Receive Successfully.');</script>";
+			}else{
+				echo "<script>alert('Batch is received. Please try again.');</script>";
+				echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
 			}
-			
-			//Select origin location name
-			$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
-			$resultOrigin = mysqli_query($connection, $sqlOriginName);
-			
-			if ($resultOrigin) {
-				$row = mysqli_fetch_assoc($resultOrigin);
-
-				//Fetch data from the database
-				$origin_name = $row["location_name"];
-			}
-			
-			//Select destination location name
-			$sqlDestinationName = "SELECT location_name FROM location WHERE location_id = '$destination'";
-			$resultDestination = mysqli_query($connection, $sqlDestinationName);
-			
-			if ($resultDestination) {
-				$row = mysqli_fetch_assoc($resultDestination);
-
-				//Fetch data from the database
-				$destination_name = $row["location_name"];
-			}
-			echo "<script>alert('Meter Batch Receive Successfully.');</script>";
 		}else{
 			echo "<script>alert('Invalid Batch QR. Please try again.');</script>";
 			echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
