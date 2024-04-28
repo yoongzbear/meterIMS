@@ -41,7 +41,9 @@ include 'header.php';
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
-			$sqlBatchExist = "SELECT * FROM batch WHERE batch_id = '$batch_id' AND location_id != '$location_id'";
+			$sqlBatchExist = "SELECT batch.*, movement.* FROM batch
+							JOIN movement ON batch.batch_id = movement.batch_id
+							WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.destination = '$location_id'";
 			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
 			if(mysqli_num_rows($resultBatchExist)>0){
 				$current_date = date('Y-m-d');
@@ -102,6 +104,8 @@ include 'header.php';
 					$destination_name = $row["location_name"];
 				}
 				echo "<script>alert('Meter Batch Receive Successfully.');</script>";
+				echo $location_id;
+				//echo $resultBatchExist;
 			}else{
 				echo "<script>alert('Batch is received. Please try again.');</script>";
 				echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
