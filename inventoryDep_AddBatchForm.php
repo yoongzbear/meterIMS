@@ -1,27 +1,4 @@
 <?php
-/* 
-Enter meter info (after they receive the meter) (paola)
-
-get id from qr
-
-IF action = generateQr: //from vendors
-	GENERATE qrBatch; //generate during shipping
-	SET numMeter = 0;
-
-	//assume 1 box/batch can only hv 50 meters	//button (continue?)
-	WHILE button completed not clicked: 
-		GENERATE qrMeter;
-		form to insert meter info
-		//assign in database
-		SET qrBatch = qrBatch; 
-	END WHILE
-	
-	SHOW summary of the meter for this batch - not sure
-ENDIF
-
-quantity use count from batch id
-*/
-
 	include ('connection.php');
 	include 'secure_Inv.php';
 ?>
