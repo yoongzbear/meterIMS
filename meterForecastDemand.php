@@ -1,31 +1,35 @@
 <?php
 	include('secure_Inv.php');
 	include('connection.php');
+	$expectedHeaders = array('Month', 'Year', 'Faulty Program', 'Meter Complaint', 'Meter Leak', 'Total');
+	
 	function isValidCsvFormat($filePath) {
+		global $expectedHeaders; //Access the global $expectedHeaders variable
 		$file = fopen($filePath, 'r');
+		echo "File Path: " . $filePath . "<br>";
 		if (!$file) {
 			return false;
 		}
 
-		$expectedHeaders = ['Month', 'Year', 'Faulty Program', 'Meter Complaint', 'Meter Leak', 'Total'];
+		global $headers; //Define $headers as a global variable
 		$headers = fgetcsv($file);
-		/*if (count($headers) !== count($expectedHeaders) || array_diff($headers, $expectedHeaders)) {
+		if (count($headers) !== count($expectedHeaders)) {
 			//fclose($file);
 			return false;
-		}*/
+		}
 
-		$numRows = 0; // Initialize the row counter
+		$numRows = 1; //Initialize the row counter
 		while (($row = fgetcsv($file)) !== false) {
 			if (count($row) !== count($expectedHeaders) || !is_numeric($row[0]) || !is_numeric($row[1]) || !is_numeric($row[2]) || !is_numeric($row[3]) || !is_numeric($row[4]) || !is_numeric($row[5])) {
 				fclose($file);
 				return false;
 			}
-			$numRows++; // Increment the row counter
+			$numRows++; 
 		}
 
 		fclose($file);
 
-		// Check if the number of rows is at least 12
+		// Check if the number of rows is at least 12 rows
 		return $numRows >= 12;
 	}
 
@@ -62,7 +66,6 @@
 		}
 	}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
