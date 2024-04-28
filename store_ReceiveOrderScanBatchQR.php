@@ -38,8 +38,8 @@ include 'navReg.php';
 
     <div class="col mt-4 text-center">
     <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-3 shadow" id="meterForm" action="store_ReceiveBatch.php" method="post" style="display:none;">
-            <form id="meterSubmitForm" action="store_ReceiveBatch.php" method="post">
+    <div class="modal-content rounded-3 shadow" id="meterForm" action="store_ReceiveBatch.php" method="get" style="display:none;">
+            <form id="meterSubmitForm" action="store_ReceiveBatch.php" method="get">
                 <div class="modal-body p-4 text-center">
                     <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right Batch ID?</h5>
                     <p class="mb-0">Batch ID : </p>
