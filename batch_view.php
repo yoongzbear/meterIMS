@@ -89,7 +89,10 @@ echo $batchid;
 <?php
 
 
-$sql2 = "SELECT serial_num, meter_status FROM meter WHERE batch_id=$batchid";
+$sql2 = "SELECT serial_num, meter_status 
+         FROM meter 
+         JOIN batch ON meter.batch_id = batch.batch_id 
+         WHERE batch.batch_id = $batchid AND batch.quantity != 0";
 $result2 = mysqli_query($connection, $sql2);
 
 // Check if there are any records returned
