@@ -1,25 +1,4 @@
-<?php /* 
--	Inventory department, region store: 
-scan batch ship out, write which store its going to 
-– once batch id is determined, generate qr code (paola)
-
-IF action = shipOrder:
-	//INPUT meter to buy/needed;
-	INPUT totalOrdernumber; 
-	INPUT shipping details; (date to send, origin, destination, description, ...)
-	button
-	GENERATE qrBatch
-	
-	FOR orderNum < (totalOrdernumber):
-		SCAN qrMeter;
-	ENDFOR
-	
-	SHOW receipt/summary; //maybe can have a confirmation msg/allow them edit after this
-ENDIF
-*/
-
-
-// generate qr
+<?php 
 	include 'secure_Inv.php';
 	include ('connection.php');
 	$current_date = date('Y-m-d');
@@ -161,7 +140,6 @@ include 'navInv.php';
 		</div>
 
 		<button class="submit btn btn-outline-success mb-4" onclick="submitForm();" type="button">Scan Meter</button>
-		<!--After submit, show confirm msg, start scanning, buttons-->
     </form>
 
 </div>
