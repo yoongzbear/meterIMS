@@ -39,9 +39,15 @@ include 'navInv.php';
 			<label class="col-sm-2 col-form-label fw-bold">Forecast Year</label>
 			<div class="col-sm-10">
 				<select class="form-select" name="year" id="year" required>
-					<option value="" disabled selected>Select Year for Meter Forecast</option>
-					<option value="2025">2025</option>
-					<option value="2026">2026</option>
+					<option value="" disabled selected>Please Select Meter Forecast Year</option>
+						<?php
+						$currentYear = date('Y');
+
+						//Loop to generate options for next 2 years
+						for($i = $currentYear + 1; $i <= $currentYear + 2; $i++) {
+							echo "<option value=\"$i\">$i</option>";
+						}
+						?>
 				</select>
 			</div>
 		</div>
