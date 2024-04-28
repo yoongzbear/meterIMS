@@ -1,4 +1,4 @@
-  <?php
+<?php
     include('connection.php');
     session_start();
 
@@ -53,7 +53,7 @@
     } else {
           // User does not exist, show error message
           echo "<script>
-                  alert('The username and the password is not match. Pleas try again');
+                  alert('The username and the password does not match. Please try again');
                   window.location='login.php';
                 </script>";
           exit();

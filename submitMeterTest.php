@@ -28,7 +28,7 @@ function updateWarrantyStatus($serial_num, $testResult, $defect, $test_id) {
         mysqli_query($connection, $sqlUpdateWarranty);
     } 
 }
-//if fail, update meter.batch id to null and minus 1 from the batch quantity
+//if fail, minus 1 from the batch quantity
 if ($testResult == 'FAIL') {
     $sqlBatch = "UPDATE batch INNER JOIN meter ON batch.batch_id = meter.batch_id SET batch.quantity = batch.quantity - 1, meter.meter_status = 'FAILED' WHERE meter.serial_num = '$serial_num'";
     if ($defect != '0') {
