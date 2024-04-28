@@ -29,13 +29,14 @@ include 'connection.php';
 
 <div class="my-4 text-center">
     <h3>Batch QR:</h3>
-<div id="qrcode"></div>
+<div id="qrcode">
 <script src="qrcode.js"></script>
 <script src="qrGeneratorBatch.js"></script>
 <script>
     makeCode();
     print();
 </script>
+</div>
 
 </div>
 
