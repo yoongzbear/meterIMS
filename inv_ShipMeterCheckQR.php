@@ -20,11 +20,11 @@ if(isset($_GET['Meter_ID'])) {
             header("Location:invDep_ShipAddMeter.php?Meter_ID=$serial_num&Batch_ID=$batch_id&meterQuantity=$meterQuantity");
             exit();
         } else {
-            echo '<script>alert("Meter have been scanned. Please try again with other meter."); window.location.href = "inv_ShipOrderScanMeterQR.php?Batch_ID='.$batch_id.'&meterQuantity='.$meterQuantity.'";</script>';
+            echo '<script>alert("Meter have been scanned. Please try again with other meter."); window.location.href = "inventoryDep_ShipOrderScanMeterQR.php?Batch_ID='.$batch_id.'&meterQuantity='.$meterQuantity.'";</script>';
         }
     } else {
         // serial num does not exist
-        echo '<script>alert("Serial number does not exist. Please try again."); window.location.href = "inv_ShipOrderScanMeterQR.php?Batch_ID='.$batch_id.'&meterQuantity='.$meterQuantity.'";</script>';
+        echo '<script>alert("Serial number does not exist. Please try again."); window.location.href = "inventoryDep_ShipOrderScanMeterQR.php?Batch_ID='.$batch_id.'&meterQuantity='.$meterQuantity.'";</script>';
     }
 }
 ?>
