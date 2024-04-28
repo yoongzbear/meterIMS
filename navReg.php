@@ -6,8 +6,8 @@
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="reg_home.php" class="nav-link">Home</a></li>
         <li><a href="Reg_QRmenu.php" class="nav-link">QR Code</a></li>
-        <li><a href="regInvLevel.php" class="nav-link">View Inventory Level</a></li>
-        <li><a href="warranty_list.php" class="nav-link">View Meter Warranty</a></li>
+        <li><a href="regInvLevel.php" class="nav-link">Inventory Level</a></li>
+        <li><a href="warranty_list.php" class="nav-link">Meter Warranty</a></li>
         
       </ul>
 

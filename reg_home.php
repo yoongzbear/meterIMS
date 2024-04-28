@@ -61,7 +61,7 @@ include 'navReg.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">Receive meter batch after arrival</h2>
       <p class="lead">Scan the batch's QR code received to record the meters at <?php echo $row['location_name'];?> Region Store.</p>
-      <p>Quick access to receive meters <a href="store_ReceiveOrderScanBatchQR.php">here</a>.</p>
+      <p>Quick access to <a href="store_ReceiveOrderScanBatchQR.php">receive meters</a>.</p>
     </div>
       <div class="col-md-5">
         <img src="imgs/scan-delivery-box.jpg" width="100%" height="100%">
@@ -74,8 +74,8 @@ include 'navReg.php';
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">Record meter's departure from region store</h2>
         <p class="lead">Scan the meter's QR code to record the meter departure for installation at premises and for warranty testing.</p>
-        <p>Quick access to send out meter for installation <a href="store_assignInstallForm">here</a>.</p>
-        <p>Quick access to send out meter for warranty testing <a href="regWarrantyUpdate.php">here</a>.</p>
+        <p>Quick access to <a href="store_assignInstallForm.php">send out meter for installation</a>.</p>
+        <p>Quick access to <a href="regWarrantyUpdate.php">send out meter for warranty testing</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/scan-qr2.jpg" width="100%" height="100%">
@@ -88,7 +88,7 @@ include 'navReg.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">Ship meters out</h2>
         <p class="lead">Insert meters' shipping information to other Region Stores or Inventory Department.</p>
-        <p>Quick access to ship out meter form <a href="store_ShipOrderForm">here</a>.</p>
+        <p>Quick access to <a href="store_ShipOrderForm.php">ship out meter form</a>.</p>
     </div>
     <div class="col-md-5">
       <img src="imgs/ship-box.jpg" width="100%" height="100%">
@@ -101,7 +101,7 @@ include 'navReg.php';
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">View meter inventory level</h2>
         <p class="lead">Check the meter inventory level at <?php echo $row['location_name'];?> Region Store. Meter models that needs to be ordered urgently are flagged.</p>
-        <p>Quick access to meter inventory level list <a href="regInvLevel.php">here</a>.</p>
+        <p>Quick access to <a href="regInvLevel.php">meter inventory level list</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/demand-forecast.png" width="100%" height="100%">
@@ -114,7 +114,7 @@ include 'navReg.php';
     <div class="col-md-7">
       <h2 class="featurette-heading fw-normal lh-1">View meter warranty list</h2>
         <p class="lead">View the required meter replacement for old meters with claimable warranty. Scan the new meter's QR code for replacement.</p>
-        <p>Quick access to meter warranty list <a href="warranty_list.php">here</a>.</p>
+        <p>Quick access to <a href="warranty_list.php">meter warranty list</a>.</p>
     </div>
     <div class="col-md-5">
       <img src="imgs/water-meter.jpg" width="100%" height="100%">
@@ -127,7 +127,7 @@ include 'navReg.php';
     <div class="col-md-7 order-md-2">
       <h2 class="featurette-heading fw-normal lh-1">View water meter information</h2>
         <p class="lead">Scan meter's QR code to view their information.</p>
-        <p>Quick access to view meter's information <a href="RegDep_Scan_View_meter_info.php">here</a>.</p>
+        <p>Quick access to <a href="RegDep_Scan_View_meter_info.php">view meter's information</a>.</p>
     </div>
     <div class="col-md-5 order-md-1">
       <img src="imgs/scan-qr.jpg" width="100%" height="100%">
