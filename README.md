@@ -37,5 +37,6 @@ ScriptInterpreterSource Registry-Strict
 3. Open Terminal on your device and enter the following commands to install dependencies for the file:
 pip install pandas
 pip install scikit-learn
+4. Download the sample file to view the format of the dataset before uploading.
 
 In case of any issues encountered while using the system, you may contact masturaalya02@gmail.com (Alya). Thank you!
