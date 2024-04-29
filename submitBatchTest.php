@@ -36,5 +36,4 @@ if(ISSET($_POST['batch_id'])){
         </script>";
         exit();
     }
-}
-?>
+} ?>

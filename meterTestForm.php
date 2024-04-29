@@ -46,11 +46,9 @@ if(ISSET($_POST['serial_num'])){
     <title>Meter Test Result Form</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
 <body>
-
 <header>
 <?php include 'header.php';?>
 </header>

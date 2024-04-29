@@ -3,6 +3,7 @@ include ('secure_Inv.php');
 include ('connection.php');
 
 $batchid = $_GET["batch_id"];
+//get batch information
 $sql = "SELECT batch.*, location.* FROM batch
         JOIN location ON batch.location_id = location.location_id
         WHERE batch.batch_id = $batchid";
@@ -26,7 +27,6 @@ $row = mysqli_fetch_array($result);
 include 'header.php';
 include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -38,9 +38,7 @@ include 'navInv.php';
 </nav>
 
 <label class="fs-2 font-monospace mb-4"><b>The Information About The Batch ID : </b>
-<?php 
-echo $batchid; 
-?>
+<?php echo $batchid; ?>
 </label>
 
 <table class='table table-dark table-striped'>
@@ -70,14 +68,12 @@ echo $batchid;
     </tr>
     </thread>
     <thread>
-
     <tr>
         <th scope="row">Meter Size</th>
         <td><?php echo $row["meter_size"]; ?></td>
     </tr>
     </thread>
     <thread>
-
     <tr>
         <th scope="row">Quantity</th>
         <td><?php echo $row["quantity"]; ?></td>
@@ -87,15 +83,14 @@ echo $batchid;
 <hr class="border border-danger border-2 opacity-50">
 
 <?php
-
-
+//get meter information
 $sql2 = "SELECT serial_num, meter_status 
          FROM meter 
          JOIN batch ON meter.batch_id = batch.batch_id 
          WHERE batch.batch_id = $batchid AND batch.quantity != 0";
 $result2 = mysqli_query($connection, $sql2);
 
-// Check if there are any records returned
+//Check if there are any records returned
 if (mysqli_num_rows($result2) > 0) {
 ?>
 <table class="table table-dark table-striped-columns">
@@ -122,11 +117,8 @@ if (mysqli_num_rows($result2) > 0) {
         </tbody>';
         $num++;
     }
-    ?>
-</table>
-
-<?php
-} 
+    echo '</table>';
+}
 ?>
 
 <br>

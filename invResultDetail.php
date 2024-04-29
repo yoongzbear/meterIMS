@@ -32,6 +32,7 @@ include 'navInv.php';
 include 'connection.php';
 
 $test_id = $_GET['test_id'];
+//get defect and test information
 $sql = "SELECT * FROM lab_result LEFT JOIN warranty_defect on lab_result.defect_id = warranty_defect.defect_id WHERE lab_result.test_id = '$test_id';";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_assoc($result);
@@ -61,8 +62,7 @@ echo "<div class='col align-self-center' style='width:50%;'>
                 } else {
                     echo "<td>NOT TESTED</td>";
                 }
-            echo "</tr>
-            ";
+            echo "</tr>";
         if ($row['result'] == 'FAILED') {
             echo "<tr>
                 <th>Defect: </th>";

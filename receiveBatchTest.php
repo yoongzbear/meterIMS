@@ -20,7 +20,6 @@
             display:block;
         }
     </style>
-
 </head>
 
 <body>
@@ -58,11 +57,11 @@ include 'navLab.php';
         </div>
         
     </section>
+
     <footer>
-        <?php 
-            include 'footer.php'; 
-        ?>
+        <?php include 'footer.php'; ?>
     </footer>
+    
     <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
 </body>

@@ -27,7 +27,6 @@ include 'navLab.php';
 </nav>
 
 <div class="my-4 text-center">
-
     <h3>View Meter Result</h3>
     <p class="fst-italic">Please scan the QR code on the meter.</p>
     <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>

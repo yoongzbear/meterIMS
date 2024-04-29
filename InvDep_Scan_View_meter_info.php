@@ -1,7 +1,6 @@
 <?php 
 include ('secure_Inv.php'); 
 include('connection.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +19,6 @@ include('connection.php');
 include 'header.php';
 include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -28,10 +26,8 @@ include 'navInv.php';
     <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
     <li class="breadcrumb-item"><a href="Inv_QRmenu.php" title='QRcode Page'>QR Code</a></li>
 	<li class="breadcrumb-item active" aria-current="page">Scan QR - View Meter Info</li>
-
   </ol>
 </nav>
-
 
 <div class="my-4 text-center">
 
@@ -61,7 +57,6 @@ include 'navInv.php';
 </div>
 
     <script>
-
         //redirect to the meter install page if cancelled after scanning
         document.getElementById("btn-cancel").addEventListener("click", function(event) {
             event.preventDefault();
@@ -77,6 +72,4 @@ include 'navInv.php';
 </footer>	
 
 </body>
-
 </html>
-

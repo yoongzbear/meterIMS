@@ -4,8 +4,10 @@ include 'connection.php';
 if(ISSET($_POST['batchID'])){
     $batchID = $_POST['batchID'];
     try{
+    //insert into movement table        
     $movementquery = "INSERT INTO movement VALUES (DEFAULT, 1, 2, (CURRENT_DATE), NULL, $batchID)";
     $movementrun = mysqli_query($connection, $movementquery);
+    //update meter status
     $update_status= "UPDATE meter SET meter_status = 'IN TRANSIT' WHERE batch_id =$batchID";
     $update_status_run= mysqli_query($connection,$update_status);
     if($movementrun && $update_status_run){
@@ -23,6 +25,7 @@ if(ISSET($_POST['batchID'])){
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +47,7 @@ if(ISSET($_POST['batchID'])){
         }
     </style>
 </head>
+
 <body>
     <header>
         <?php 
@@ -51,6 +55,7 @@ if(ISSET($_POST['batchID'])){
             include 'navInv.php';
         ?>
     </header>
+
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
@@ -58,6 +63,7 @@ if(ISSET($_POST['batchID'])){
     <li class="breadcrumb-item active" aria-current="page">Scan QR - Initial Ship Out To Lab</li>
     </ol>
     </nav>
+
     <section id="meteruninstall">
         <div class="container col-lg-12 text-center mb-4" id="qrscanner">
             <h2 class="text-center">Send Batch to Lab</h2>
@@ -75,11 +81,11 @@ if(ISSET($_POST['batchID'])){
             </form>
         </div>
     </section>
+
     <footer>
-        <?php 
-            include 'footer.php'; 
-        ?>
+        <?php include 'footer.php'; ?>
     </footer>
+
     <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
 </body>

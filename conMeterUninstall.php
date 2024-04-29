@@ -4,6 +4,7 @@ include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
     try{
+        //check if meter is installed
         $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum' AND meter_status = 'INSTALLED'";
         $statuscheckrun = mysqli_query($connection, $statuscheckquery);
         $statuscheckrow = mysqli_fetch_assoc($statuscheckrun);
@@ -15,6 +16,7 @@ if(ISSET($_POST['serialnum'])){
             header("Refresh:0");
             exit();
         }
+        //update meter status
         $meterinfoquery = "UPDATE meter SET meter_status = 'UNINSTALLED' WHERE serial_num = '$serialnum'";
         $meterinforun = mysqli_query($connection, $meterinfoquery);
         if($meterinforun){
@@ -53,6 +55,7 @@ if(ISSET($_POST['serialnum'])){
         }
     </style>
 </head>
+
 <body>
     <header>
         <?php 
@@ -60,6 +63,7 @@ if(ISSET($_POST['serialnum'])){
             include 'navCon.php';
         ?>
     </header>
+
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="con_home.php" title='Home Page - Contractor'>Home</a></li>
@@ -67,6 +71,7 @@ if(ISSET($_POST['serialnum'])){
         <li class="breadcrumb-item active" aria-current="page">Scan QR - Meter Uninstallation</li>
     </ol>
     </nav>
+
     <section id="meteruninstall">
         <div class="container col-lg-12 text-center mb-4" id="qrscanner">
             <h2 class="text-center">Meter Uninstallation</h2>
@@ -86,11 +91,13 @@ if(ISSET($_POST['serialnum'])){
         </div>
         
     </section>
+
     <footer>
         <?php 
             include 'footer.php'; 
         ?>
     </footer>
+
     <script src="qrPacked.js"></script>
     <script src="qrReader.js"></script>
 </body>

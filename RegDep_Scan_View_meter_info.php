@@ -2,6 +2,7 @@
 include 'secure_Reg.php';
 include 'connection.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +11,8 @@ include 'connection.php';
     <title>View Meter Info</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
+
 <body>
     <header>
         <?php 
@@ -26,7 +27,6 @@ include 'connection.php';
         <li class="breadcrumb-item active" aria-current="page">View Meter Info</li>
     </ol>
     </nav>
-
 
 <div class="my-4 text-center">
 
@@ -73,5 +73,3 @@ include 'connection.php';
 
 </body>
 </html>
-
-

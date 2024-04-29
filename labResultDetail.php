@@ -29,6 +29,7 @@
 include 'connection.php';
 
 $test_id = $_GET['test_id'];
+//get lab result and defect information
 $sql = "SELECT * FROM lab_result LEFT JOIN warranty_defect on lab_result.defect_id = warranty_defect.defect_id WHERE lab_result.test_id = '$test_id';";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_assoc($result);
@@ -36,8 +37,7 @@ $row = mysqli_fetch_assoc($result);
 echo "<div class='container col-xl-5'>
         <h2 class='fs-1 text-uppercase'>Meter Result Detail</h2>
         <hr class='border border-success border-2 opacity-50'>";
-        echo "<table class='table mb-4'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>
-        
+        echo "<table class='table mb-4'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>        
             <tr>
                 <th>Receive Date:</th>
                 <td>" . $row['receive_date'] . "</td>
@@ -59,8 +59,7 @@ echo "<div class='container col-xl-5'>
                 } else {
                     echo "<td>NOT TESTED</td>";
                 }
-            echo "</tr>
-            ";
+            echo "</tr>";
         if ($row['result'] == 'FAILED') {
             echo "<tr>
                 <th>Defect: </th>";

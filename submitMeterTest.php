@@ -9,6 +9,7 @@ if ($testResult == 'FAIL') {
     $defect = NULL;
 }
 
+//get meter info
 $sqlMeter = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
 $resultMeter = mysqli_query($connection, $sqlMeter);
 $rowMeter = mysqli_fetch_assoc($resultMeter);
@@ -16,10 +17,13 @@ $rowMeter = mysqli_fetch_assoc($resultMeter);
 //function to update warranty status
 function updateWarrantyStatus($serial_num, $testResult, $defect, $test_id) {
     include('connection.php');
+    //get received year, warranty and lab result information
     $sqlWarranty = "SELECT *, YEAR(lab_result.receive_date) AS receive_year FROM warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num INNER JOIN meter ON warranty.serial_num = meter.serial_num WHERE warranty.serial_num = '$serial_num'";
     $resultWarranty = mysqli_query($connection, $sqlWarranty);
     if ($rowWarranty = mysqli_fetch_assoc($resultWarranty)) {
+        //year difference = received year - manufactured year
         $yearDiff = $rowWarranty['receive_year'] - $rowWarranty['manufactured_year']; 
+        //sql to update warranty status
         if ($testResult == 'FAIL' && $defect != '0' && $yearDiff <= 3) {
             $sqlUpdateWarranty = "UPDATE warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num SET lab_result.test_date = CURDATE(), warranty.warranty_status = 'CAN CLAIM', warranty.test_id = '$test_id' WHERE warranty.warranty_id = ( SELECT warranty_id FROM ( SELECT warranty.warranty_id FROM warranty INNER JOIN lab_result ON warranty.serial_num = lab_result.serial_num WHERE warranty.serial_num = '$serial_num' ORDER BY lab_result.receive_date DESC, warranty.warranty_id DESC LIMIT 1 ) AS subquery );";            
         } else {
@@ -30,7 +34,9 @@ function updateWarrantyStatus($serial_num, $testResult, $defect, $test_id) {
 }
 //if fail, minus 1 from the batch quantity
 if ($testResult == 'FAIL') {
+    //sql update batch
     $sqlBatch = "UPDATE batch INNER JOIN meter ON batch.batch_id = meter.batch_id SET batch.quantity = batch.quantity - 1, meter.meter_status = 'FAILED' WHERE meter.serial_num = '$serial_num'";
+    //sql update lab result
     if ($defect != '0') {
         $sqlLab = "UPDATE lab_result SET defect_id = '$defect', test_date = CURDATE(), result = 'FAILED' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
     } else {
@@ -47,7 +53,7 @@ $resultWarrantyView = mysqli_query($connection, $sqlWarrantyView);
 $rowWarrantyView = mysqli_fetch_assoc($resultWarrantyView);
 
 if (mysqli_query($connection, $sqlLab)) {
-    // Retrieve the last inserted ID
+    //Retrieve the last inserted ID
     $sqlGetTestId = "SELECT test_id FROM lab_result WHERE serial_num = '$serial_num' ORDER BY test_date DESC LIMIT 1";
     $getTest_Id = mysqli_query($connection, $sqlGetTestId);
     $rowTest_Id = mysqli_fetch_assoc($getTest_Id);
@@ -62,5 +68,4 @@ if (mysqli_query($connection, $sqlLab)) {
     echo "<script>alert('Meter test result failed to submit, try again.');
     window.location.href='meterTest.php';
     </script>";
-}
-?>
+} ?>

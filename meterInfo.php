@@ -1,14 +1,13 @@
 <?php
         include ('secure_Inv.php');
         include('connection.php');
-        //for testing purpose, serial num: AIS17BA0000001, AIS17BA0000003
         $serial_num = $_GET['serial_num'];
+        //get meter information
         $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
-
         $batch_id = $row['batch_id'];
-
+        //get location information
         $sql1 = "SELECT meter.location_id, location.location_name FROM meter JOIN location ON meter.location_id = location.location_id WHERE serial_num = '$serial_num'";
         $result1 = mysqli_query($connection, $sql1);
         
@@ -25,8 +24,7 @@
         } else {
             // Handle query execution error
             echo "Error: " . mysqli_error($connection);
-        }
-        ?>
+        } ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,12 +38,10 @@
 
 <body>
 <header>
-
 <?php 
 include 'header.php';
 include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -60,12 +56,10 @@ include 'navInv.php';
 <div class="col align-self-center">
 
     <?php
-        //type, model, size, age, mileage, manufacturer, manu year, status, install date, install address, location of store
         echo "
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
         <hr class='border border-success border-2 opacity-50'>";
-        echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>
-        
+        echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>        
             <tr>
                 <th>Type:</th>
                 <td>" . $row['meter_type'] . "</td>

@@ -4,6 +4,7 @@ include 'secure_Inv.php';
 if(ISSET($_GET['serial_num'])){
     $serial_num = $_GET['serial_num'];
     try{
+        //get meter info
         $sql = "SELECT * FROM meter LEFT JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id WHERE serial_num = '$serial_num'";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
@@ -42,7 +43,6 @@ if(ISSET($_GET['serial_num'])){
 include 'header.php';
 include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -51,10 +51,8 @@ include 'navInv.php';
     <li class="breadcrumb-item"><a href="Inv_QRmenu.php" title='QRcode Page'>QR Code</a></li>
     <li class="breadcrumb-item"><a href="invMeterResult.php" title='QRcode Page'>Scan QR - View Meter Result</a></li>
     <li class="breadcrumb-item active" aria-current="page">View Meter Result</li>
-
   </ol>
 </nav>
-
 
 <div class='container col-xl-5'>
         <h2 class='fs-1 text-uppercase'>Meter Info</h2>
@@ -95,14 +93,12 @@ include 'navInv.php';
         </table>
 <hr>
 <h3>Test Results</h3>
-
         <table class="table mb-4">
             <tr><th>No</th>
             <th>Test Date</th>
             <th>Result</th>
             <th>Result Detail</th></tr>
-        <?php
-        
+        <?php        
         while($rowTest = mysqli_fetch_array($resultTest)) {
             echo '<tr>
                 <th>'.$num.'</th>';

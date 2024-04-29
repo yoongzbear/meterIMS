@@ -16,9 +16,7 @@
 		if (count($headers) !== count($expectedHeaders) || array_diff($headers,$expectedHeaders)) {
 			return false;
 		}
-		
-		
-
+				
 		$numRows = 1; //Initialize the row counter
 		while (($row = fgetcsv($file)) !== false) {
 			if (count($row) !== count($expectedHeaders) || !is_numeric($row[0]) || !is_numeric($row[1]) || !is_numeric($row[2]) || !is_numeric($row[3]) || !is_numeric($row[4]) || !is_numeric($row[5])) {
@@ -33,7 +31,6 @@
 		// Check if the number of rows is at least 12 rows
 		return $numRows >= 12;
 	}
-
 	
 	if (isset($_POST["upload"])) {
 		$year = $_POST["year"];
@@ -67,14 +64,15 @@
 		}
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>OTTO Aqua</title>
-	<link href="styles.css" rel="stylesheet">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTTO Aqua</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -98,49 +96,49 @@ include 'navInv.php';
 	<h3>Meter Forecast Demand for <?php echo $year; ?></h3>
 	<table class="table table-bordered border-dark">
 		<thead>
-			<tr>
-				<th>Month</th>
-				<th>Faulty Program</th>
-				<th>Meter Complaint</th>
-				<th>Meter Leaks</th>
-				<th>Total Meter Demand</th>
-			</tr>
+		<tr>
+			<th>Month</th>
+			<th>Faulty Program</th>
+			<th>Meter Complaint</th>
+			<th>Meter Leaks</th>
+			<th>Total Meter Demand</th>
+		</tr>
 		</thead>
 		
 		<tbody>
-			<?php
-				for($i=1;$i<=12;$i++){
-					//Show Months Name
-					echo "<tr>
+		<?php
+			for($i=1;$i<=12;$i++){
+				//Show Months Name
+				echo "<tr>
+						<td>";
+								echo date('F', mktime(0,0,0,$i,1));
+				echo		"</td>
+				
 							<td>";
-									echo date('F', mktime(0,0,0,$i,1));
-					echo		"</td>
-					
-								<td>";
-									echo intval($faulty_program[$i-1]);
-					echo		"</td>
-								
-								<td>";
-									echo intval($meter_complaints[$i-1]);
-					echo		"</td>
-								
-								<td>";
-									echo intval($meter_leaks[$i-1]);
-					echo		"</td>
-								
-								<td>";
-									$total = $faulty_program[$i-1]+$meter_complaints[$i-1]+$meter_leaks[$i-1];
-									echo $total;
-					echo		"</td>
-						</tr>";
-				}
-			?>
+								echo intval($faulty_program[$i-1]);
+				echo		"</td>
+							
+							<td>";
+								echo intval($meter_complaints[$i-1]);
+				echo		"</td>
+							
+							<td>";
+								echo intval($meter_leaks[$i-1]);
+				echo		"</td>
+							
+							<td>";
+								$total = $faulty_program[$i-1]+$meter_complaints[$i-1]+$meter_leaks[$i-1];
+								echo $total;
+				echo		"</td>
+					</tr>";
+			}
+		?>
 		</tbody>
 	</table>
-</div>
+	</div>
 
 <div class="d-grid col-6 mx-auto mb-4">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='meterForecastDemandForm.php'" title='Back To Scan QR'>Back</button>
+<button class="back btn btn-dark" type="button" onclick="window.location.href='meterForecastDemandForm.php'" title='Back To Scan QR'>Back</button>
 </div>
 
 <footer>

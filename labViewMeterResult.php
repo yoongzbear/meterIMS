@@ -4,6 +4,7 @@ include('connection.php');
 if(ISSET($_GET['serial_num'])){
     $serial_num = $_GET['serial_num'];
     try{
+        //get meter information
         $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id WHERE serial_num = '$serial_num'";
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);

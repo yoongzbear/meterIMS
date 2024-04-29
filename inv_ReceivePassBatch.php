@@ -1,33 +1,30 @@
-<?php 
-	include ('secure_Inv.php'); 
-?>
+<?php include ('secure_Inv.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Meter Receiving</title>
-	<link href="styles.css" rel="stylesheet">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Receiving</title>
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
 <header>
 <?php 
-	include 'header.php';
-	include 'navInv.php';
+include 'header.php';
+include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-		<li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
-		<li class="breadcrumb-item"><a href="inv_ReceiveScanPassMeterQR.php" title='Scan QR Page'>Scan QR - Batch Receiving Form</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Batch Receiving Form</li>
-	</ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+	<li class="breadcrumb-item"><a href="inv_ReceiveScanPassMeterQR.php" title='Scan QR Page'>Scan QR - Batch Receiving Form</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Batch Receiving Form</li>
+  </ol>
 </nav>
 
 <?php
@@ -37,14 +34,11 @@
 		$batch_id = $_GET['Batch_ID'];
 		
 		//To check if the QR scanned is Batch QR
-		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch 
-				INNER JOIN meter ON batch.batch_id = meter.batch_id
-				INNER JOIN movement ON batch.batch_id = movement.batch_id
-				INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num
-				WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED' AND movement.destination = 1";
+		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch INNER JOIN meter ON batch.batch_id = meter.batch_id INNER JOIN movement ON batch.batch_id = movement.batch_id INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED' AND movement.destination = 1";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
+			//Check if the batch is already received
 			$sqlBatchExist = "SELECT * FROM batch WHERE batch_id = '$batch_id' AND location_id != 1";
 			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
 			if(mysqli_num_rows($resultBatchExist)>0){
@@ -56,9 +50,9 @@
 				
 				//Update Meter Location
 				$sqlMeterLocation = "UPDATE meter 
-							JOIN lab_result ON meter.serial_num = lab_result.serial_num
-							SET meter.meter_status = 'IN STOCK' 
-							WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
+									JOIN lab_result ON meter.serial_num = lab_result.serial_num
+									SET meter.meter_status = 'IN STOCK' 
+									WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
 				$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
 				
 				//Update Tracking Info
@@ -195,5 +189,4 @@
 </footer>	
 
 </body>
-
 </html>

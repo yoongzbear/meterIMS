@@ -11,17 +11,14 @@ include 'connection.php';
     <title>OTTO Aqua</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
 <body>
 <header>
-
 <?php 
 include 'header.php';
 include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -56,52 +53,49 @@ include 'navInv.php';
         <div class='col-sm-6 col-lg-8'>
         <!-- Input field for user's search query -->
         <input class="form-control" style="width:60%;" type="search" onkeyup="search_trac()" id="searchbar" name="search" placeholder="Search..." disabled>
-        </div>
-    
+        </div>    
     </div>
 
 <script>
-
-    // Function to enable/disable search input based on dropdown selection
+    //Function to enable/disable search input based on dropdown selection
     function enableSearch() {
         let dropdown = document.getElementById('searchOptions');
         let input = document.getElementById('searchbar');
-
        
         if (dropdown.value !== "") {
             input.disabled = false;
-            input.focus(); // Set focus to the input field for user convenience
+            input.focus(); //Set focus to the input field for user convenience
         } else {
             input.disabled = true;
         }
     }
 
-    // Function to perform search based on user input
+    //Function to perform search based on user input
     function search_trac() {
         let input = document.getElementById('searchbar').value.toLowerCase();
         let option = document.getElementById('searchOptions').value;
 
-        // Get all table rows
+        //Get all table rows
         let rows = document.querySelectorAll('.track');
 
-        // Loop through each table row
+        //Loop through each table row
         rows.forEach(row => {
             let cellText = '';
-            // Check if a valid option is selected from dropdown
+            //Check if a valid option is selected from dropdown
             if(option !== '') {
-                // If yes, find the text content of the cell in the corresponding column
+                //If yes, find the text content of the cell in the corresponding column
                 cellText = row.querySelector('td:nth-child(' + (getColumnIndex(option) + 1) + ')');
                 if(cellText){
                     cellText = cellText.innerText.toLowerCase(); // Convert to lowercase for case-insensitive matching
                 }
             }
-            // Determine whether to display or hide the row based on search criteria
+            //Determine whether to display or hide the row based on search criteria
             let display = (option === '' || (cellText && cellText.includes(input))) ? '' : 'none';
             row.style.display = display;
         });
     }
 
-    // Function to map dropdown option to corresponding table column index
+    //Function to map dropdown option to corresponding table column index
     function getColumnIndex(option) {
         switch(option) {
             case 'batch':
@@ -141,31 +135,27 @@ include 'navInv.php';
         <?php
         $sql = "SELECT * FROM movement";
         $result = mysqli_query($connection, $sql);
-        $num = 1;
-
-        
+        $num = 1;        
 
         while ($row = mysqli_fetch_array($result)) {
-
             $batch_id = $row["batch_id"];
             $origin = $row["origin"];
             $destination = $row["destination"];
             $arrival_date = $row["arrival_date"];
 
-            // Fetch region for origin
+            //Fetch region for origin
             $sql2 = "SELECT * FROM location WHERE location_id = '$origin'";
             $result2 = mysqli_query($connection, $sql2);
             $row2 = mysqli_fetch_array($result2);
             $origin_region = $row2 ? $row2["location_name"] : "";
 
-            // Fetch region for destination
+            //Fetch region for destination
             $sql3 = "SELECT * FROM location WHERE location_id = '$destination'";
             $result3 = mysqli_query($connection, $sql3);
             $row3 = mysqli_fetch_array($result3);
             $destination_region = $row3 ? $row3["location_name"] : "";
 
-            echo '
-            <thread>
+            echo '<thread>
             <tr class="track">
                 <th scope="row">' . $num . '</th>
                 <td>' . $row["batch_id"] . '</td>
@@ -180,14 +170,11 @@ include 'navInv.php';
                     echo 'In transit';
                 }
                 
-                echo '</td>
-            
+                echo '</td>            
                 <td class="batchID"><a href="batch_view.php?batch_id=' . $batch_id . '"><button class="btn btn-info btn-sm">Batch Detail</button></a></td>
             </tr></thread>';
             $num++;
-        }
-        ?>
-
+        } ?>
         </table>
         </div>
     </div>
@@ -198,5 +185,4 @@ include 'navInv.php';
 </footer>	
 
 </body>
-
 </html>

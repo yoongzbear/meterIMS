@@ -4,6 +4,7 @@ include 'connection.php';
 if(ISSET($_POST['serial_num'])){
     $serial_num = $_POST['serial_num'];
     try{
+        //check if meter is out for installation
         $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num' AND meter_status = 'TO BE INSTALLED';";
         $resultMeter = mysqli_query($connection, $sqlMeter);
         $rowMeter = mysqli_fetch_assoc($resultMeter);
@@ -33,7 +34,6 @@ if(ISSET($_POST['serial_num'])){
     <title>Meter Installation Form</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 <body>
 

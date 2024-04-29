@@ -1,12 +1,14 @@
 <?php
     include 'secure_Reg.php';
     include 'connection.php';
+    //get region store location of the user
     $locationquery = "SELECT location_id, location_name FROM location WHERE username = '$_SESSION[username]'";
     $result = mysqli_query($connection, $locationquery);
     $locationarray = mysqli_fetch_array($result);
     $location = $locationarray['location_name'];
     $locationid = $locationarray['location_id'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +18,7 @@
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <header>
         <?php 
@@ -23,12 +26,14 @@
             include 'navReg.php';
         ?>
     </header>
+
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Inventory Level</li>
     </ol>
     </nav>
+
     <section id="InvTable" class="mb-4">
         <div id="container" style="width:50%; margin:auto;">
         <div class="col-lg-12 mt-4 text-center">
@@ -63,8 +68,7 @@
                                 <td>$size</td>
                                 <td id='$size'>$usablemeters</td>
                             </tr>";
-                    }
-                ?>
+                    } ?>
             </table>
             <details>
             <summary><strong>Legend</strong></summary>
@@ -74,9 +78,7 @@
         </div>
     </section>
     <footer>
-        <?php 
-            include 'footer.php'; 
-        ?>
+        <?php include 'footer.php'; ?>
     </footer>
     <script>
             const minStock = [38066,72,75,36,50,27,52,35];
