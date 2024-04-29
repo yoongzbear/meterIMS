@@ -66,43 +66,31 @@
 						</div>
 					</td>
 				</tr>
-				<thread>
-					<tr>
-						<th scope="row">Batch ID:</th>
-						<td><?php echo $batch_id; ?></td>
-					</tr>
-				</thread>
-				<thread>
-					<tr>
-						<th scope="row">Meter Type:</th>
-						<td><?php echo $meter_type; ?></td>
-					</tr>
-				</thread>
-				<thread>
-					<tr>
-						<th scope="row">Meter Model:</th>
-						<td><?php echo $meter_model; ?></td>
-					</tr>
-				</thread>
-				<thread>
-					<tr>
-						<th scope="row">Meter Size:</th>
-						<td><?php echo $meter_size; ?></td>
-					</tr>
-				</thread>
-				<thread>
-					<tr>
-						<!--Show Current Total Meter for Current Batch-->
-						<th scope="row">Meter Quantity:</th>
-						<td><?php echo $quantity; ?></td>
-					</tr>
-				</thread>
-				<thread>
-					<tr>
-						<th scope="row">Manufacturer:</th>
-						<td><?php echo $manu_name; ?></td>
-					</tr>
-				</thread>
+				<tr>
+					<th scope="row">Batch ID:</th>
+					<td><?php echo $batch_id; ?></td>
+				</tr>
+				<tr>
+					<th scope="row">Meter Type:</th>
+					<td><?php echo $meter_type; ?></td>
+				</tr>
+				<tr>
+					<th scope="row">Meter Model:</th>
+					<td><?php echo $meter_model; ?></td>
+				</tr>
+				<tr>
+					<th scope="row">Meter Size:</th>
+					<td><?php echo $meter_size; ?></td>
+				</tr>
+				<tr>
+					<!--Show Current Total Meter for Current Batch-->
+					<th scope="row">Meter Quantity:</th>
+					<td><?php echo $quantity; ?></td>
+				</tr>
+				<tr>
+					<th scope="row">Manufacturer:</th>
+					<td><?php echo $manu_name; ?></td>
+				</tr>
 			</table>
 		</div>
 		
@@ -112,12 +100,10 @@
 			<hr>
 			
 			<table class="table table-secondary">
-				<thread>
-					<tr class="table-light">
-						<th scope="col">No.</th>
-						<th scope="col">Meter ID</th>
-					</tr>
-				</thread>
+				<tr class="table-light">
+					<th scope="col">No.</th>
+					<th scope="col">Meter ID</th>
+				</tr>
 				
 				<?php
 					$num = 1;
@@ -125,10 +111,10 @@
 					mysqli_data_seek($result, 0);
 					while($rowMeter = mysqli_fetch_assoc($result)){
 						echo 
-							'<thread><tr>
+							'<tr>
 								<th scope="row">'.$num.'</th>
 								<td>'.$rowMeter["serial_num"].'</td>
-							</tr></thread>'
+							</tr>'
 							;
 						$num++;
 					}
