@@ -39,4 +39,5 @@ pip install pandas
 pip install scikit-learn
 4. Download the sample file to view the format of the dataset before uploading.
 
+Note: Please include all image files (.jpg, .png) into a folder named "imgs"
 In case of any issues encountered while using the system, you may contact masturaalya02@gmail.com (Alya). Thank you!
