@@ -5,8 +5,8 @@
 	
 	//To get Batch and Meter Info
 	$sqlBatchInfo = "SELECT batch.*, meter.* FROM batch 
-					INNER JOIN meter ON batch.batch_id = meter.batch_id
-					WHERE batch.batch_id = '$batch_id'";
+			INNER JOIN meter ON batch.batch_id = meter.batch_id
+			WHERE batch.batch_id = '$batch_id'";
 	$result = mysqli_query($connection, $sqlBatchInfo);
 	
 	if ($result) {
@@ -21,122 +21,120 @@
 	}
 	
 	// To show the manufacturer name
-    $sqlShowManuName = "SELECT * FROM manufacturer WHERE manu_id = '$manu_id'";
-    $resultSelectManu = mysqli_query($connection, $sqlShowManuName);
-    if ($resultSelectManu) {
-        $rowManu = mysqli_fetch_assoc($resultSelectManu);
-
-        // Fetch data from the database
-        $manu_name = $rowManu["manu_name"];
-    }
+	$sqlShowManuName = "SELECT * FROM manufacturer WHERE manu_id = '$manu_id'";
+	$resultSelectManu = mysqli_query($connection, $sqlShowManuName);
+	if ($resultSelectManu) {
+		$rowManu = mysqli_fetch_assoc($resultSelectManu);
+	
+		// Fetch data from the database
+		$manu_name = $rowManu["manu_name"];
+	}
 	echo "<script>alert('Batch Created Successfully!');</script>";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTTO Aqua</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OTTO Aqua</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
 <header>
 <?php 
-include 'header.php';
+	include 'header.php';
 ?>
-
 </header>
 
-
 <div class="container">
-      <div class="row align-items-start">
-        <div class="col mb-4">
-
-	<!--Show Current Batch Info-->
-	<h3>Current Batch Information</h3>
-	<hr>
-	<table class="table table-secondary">
-		<tr class="table" colspan = "2">
-			<td>
-				<div id="qrcode">
-					<script src = "qrcode.js"></script>
-					<script src = "qrGeneratorBatch.js"></script>
-					<script>makeCode(); </script>
-				</div>
-			</td>
-		</tr>
-		<thread>
-		<tr>
-			<th scope="row">Batch ID:</th>
-			<td><?php echo $batch_id; ?></td>
-		</tr>
-		</thread>
-		<thread>
-		<tr>
-			<th scope="row">Meter Type:</th>
-			<td><?php echo $meter_type; ?></td>
-		</tr>
-		</thread>
-		<thread>
-		<tr>
-			<th scope="row">Meter Model:</th>
-			<td><?php echo $meter_model; ?></td>
-		</tr>
-		</thread>
-		<thread>
-		<tr>
-			<th scope="row">Meter Size:</th>
-			<td><?php echo $meter_size; ?></td>
-		</tr>
-		</thread>
-		<thread>
-		<tr>
-			<!--Show Current Total Meter for Current Batch-->
-			<th scope="row">Meter Quantity:</th>
-			<td><?php echo $quantity; ?></td>
-		</tr>
-		</thread>
-		<thread>
-		<tr>
-			<th scope="row">Manufacturer:</th>
-			<td><?php echo $manu_name; ?></td>
-		</tr>
-		</thread>
-	</table>
-	</div>
-
-	<div class='col mb-4'>
-	<!--Show Meter List for the Batch-->
-	<h3>List of Meters in the batch</h3>
-	<hr>
-
-	<table class="table table-secondary">
-		<thread>
-		<tr class="table-light">
-			<th scope="col">No.</th>
-			<th scope="col">Meter ID</th>
-		</tr>
-		</thread>
+	<div class="row align-items-start">
+		<div class="col mb-4">
 		
-		<?php
-			$num = 1;
-			//Reset data seek pointer to the beginning
-			mysqli_data_seek($result, 0);
-			while($rowMeter = mysqli_fetch_assoc($result)){
-				echo 
-					'<thread><tr>
-						<th scope="row">'.$num.'</th>
-						<td>'.$rowMeter["serial_num"].'</td>
-					</tr></thread>'
-					;
-				$num++;
-			}
-		?>
-	</table>
-	</div>
+			<!--Show Current Batch Info-->
+			<h3>Current Batch Information</h3>
+			<hr>
+			<table class="table table-secondary">
+				<tr class="table" colspan = "2">
+					<td>
+						<div id="qrcode">
+							<script src = "qrcode.js"></script>
+							<script src = "qrGeneratorBatch.js"></script>
+							<script>makeCode(); </script>
+						</div>
+					</td>
+				</tr>
+				<thread>
+					<tr>
+						<th scope="row">Batch ID:</th>
+						<td><?php echo $batch_id; ?></td>
+					</tr>
+				</thread>
+				<thread>
+					<tr>
+						<th scope="row">Meter Type:</th>
+						<td><?php echo $meter_type; ?></td>
+					</tr>
+				</thread>
+				<thread>
+					<tr>
+						<th scope="row">Meter Model:</th>
+						<td><?php echo $meter_model; ?></td>
+					</tr>
+				</thread>
+				<thread>
+					<tr>
+						<th scope="row">Meter Size:</th>
+						<td><?php echo $meter_size; ?></td>
+					</tr>
+				</thread>
+				<thread>
+					<tr>
+						<!--Show Current Total Meter for Current Batch-->
+						<th scope="row">Meter Quantity:</th>
+						<td><?php echo $quantity; ?></td>
+					</tr>
+				</thread>
+				<thread>
+					<tr>
+						<th scope="row">Manufacturer:</th>
+						<td><?php echo $manu_name; ?></td>
+					</tr>
+				</thread>
+			</table>
+		</div>
+		
+		<div class='col mb-4'>
+			<!--Show Meter List for the Batch-->
+			<h3>List of Meters in the batch</h3>
+			<hr>
+			
+			<table class="table table-secondary">
+				<thread>
+					<tr class="table-light">
+						<th scope="col">No.</th>
+						<th scope="col">Meter ID</th>
+					</tr>
+				</thread>
+				
+				<?php
+					$num = 1;
+					//Reset data seek pointer to the beginning
+					mysqli_data_seek($result, 0);
+					while($rowMeter = mysqli_fetch_assoc($result)){
+						echo 
+							'<thread><tr>
+								<th scope="row">'.$num.'</th>
+								<td>'.$rowMeter["serial_num"].'</td>
+							</tr></thread>'
+							;
+						$num++;
+					}
+				?>
+			</table>
+		</div>
 	</div>
 </div>
 
