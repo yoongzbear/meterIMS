@@ -14,9 +14,9 @@
 	
 	//To get New Meter Info
 	$sql = "SELECT batch.*, meter.*, manufacturer.* FROM meter 
-					INNER JOIN batch ON meter.batch_id = batch.batch_id 
-					INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id
-					WHERE meter.serial_num = '$serial_num'";
+		INNER JOIN batch ON meter.batch_id = batch.batch_id 
+		INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id
+		WHERE meter.serial_num = '$serial_num'";
 	$result = mysqli_query($connection, $sql);
 	
 	if ($result) {
@@ -35,11 +35,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTTO Aqua</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OTTO Aqua</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -47,15 +47,13 @@
 <?php 
 include 'header.php';
 ?>
-
 </header>
 
 
 <div class='container col-xl-5 mb-4'>
-
 	<!--Meter Info-->
 	<h2 class='fs-1 text-uppercase'>Meter Information</h2>
-    <hr>
+    	<hr>
 	<table class="table">
 		<tr colspan = "2">
 			<td>
@@ -66,7 +64,6 @@ include 'header.php';
 				</div>
 			</td>
 		</tr>
-
 		<tr>
 			<th scope="row">Meter Type:</th>
 			<td><?php echo $meter_type; ?></td>
@@ -93,12 +90,10 @@ include 'header.php';
 		</tr>
 	</table>
 
-<div class="d-grid gap-2 col-6 mx-auto">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='warranty_list.php'" title='Back To View Warranty List Page'>Back</button>
+	<div class="d-grid gap-2 col-6 mx-auto">
+		<button class="back btn btn-dark" type="button" onclick="window.location.href='warranty_list.php'" title='Back To View Warranty List Page'>Back</button>
+	</div>
 </div>
-
-</div>
-
 <footer>
 	<?php include 'footer.php';?>
 </footer>	
