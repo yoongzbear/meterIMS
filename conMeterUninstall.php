@@ -26,7 +26,7 @@ if(ISSET($_POST['serialnum'])){
             echo "<script>alert('Failed to uninstall meter!');</script>";
             header("Refresh:0");
         }
-}
+    }
     catch(Exception $e){
         echo "<script>alert('Error: Invalid Serial Number. Please try again.');</script>";
         header("Refresh:0");
@@ -88,14 +88,11 @@ if(ISSET($_POST['serialnum'])){
                 <input type="text" id="outputData" name="serialnum" placeholder="Serial Number" required readonly><br>
                 <button type="submit" class="btn btn-success m-2 pt-1 pb-1 mt-4">Mark As Uninstalled</button>
             </form>
-        </div>
-        
+        </div>        
     </section>
 
     <footer>
-        <?php 
-            include 'footer.php'; 
-        ?>
+        <?php include 'footer.php'; ?>
     </footer>
 
     <script src="qrPacked.js"></script>

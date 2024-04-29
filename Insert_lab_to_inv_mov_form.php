@@ -17,6 +17,7 @@ $batch_id = $_GET['batch_id'];
     <header>
         <?php include 'header.php'; ?>
     </header>
+    
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
@@ -27,26 +28,24 @@ $batch_id = $_GET['batch_id'];
     </nav>
 
 <div class="col align-self-center mb-4">
-<form method="post" action="Insert_lab_to_inv_mov_process.php">
-    <h2 class="font-monospace mb-4">This movement will be added for the tracking process : </h2>
-    <p class="fw-bold mx-4 mb-4">Origin : Air Selangor Lab</p>
-    <p class="fw-bold mx-4 mb-4">Destination : Air Selangor Inv</p>
-    <p class="fw-bold mx-4 mb-4">Meter Status : In Transit</p>
-    <!-- Hidden input to pass batch_id -->
-    <div class="text-center">
-    <input type="hidden" name="batch_id" value="<?php echo htmlspecialchars($batch_id); ?>">
-    <button type="submit" style="width:30%;height:30%;" class="btn btn-success" name="confirm">Confirm</button>
-    <button type="button" style="width:30%;height:30%;" class="btn btn-outline-secondary" onclick="cancelForm()">Cancel</button>
-    </div>
-</form>
+    <form method="post" action="Insert_lab_to_inv_mov_process.php">
+        <h2 class="font-monospace mb-4">This movement will be added for the tracking process : </h2>
+        <p class="fw-bold mx-4 mb-4">Origin : Air Selangor Lab</p>
+        <p class="fw-bold mx-4 mb-4">Destination : Air Selangor Inv</p>
+        <p class="fw-bold mx-4 mb-4">Meter Status : In Transit</p>
+        <!-- Hidden input to pass batch_id -->
+        <div class="text-center">
+            <input type="hidden" name="batch_id" value="<?php echo htmlspecialchars($batch_id); ?>">
+            <button type="submit" style="width:30%;height:30%;" class="btn btn-success" name="confirm">Confirm</button>
+            <button type="button" style="width:30%;height:30%;" class="btn btn-outline-secondary" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
 
-<script>
-    function cancelForm() {
-        window.location.href = "LabDep_Scan_to_Inv.php";
-    }
-</script>
-</form>
-
+    <script>
+        function cancelForm() {
+            window.location.href = "LabDep_Scan_to_Inv.php";
+        }
+    </script>
 </div>
 
 <footer>

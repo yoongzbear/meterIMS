@@ -57,5 +57,4 @@ if(isset($_POST['confirm']) && isset($_POST['batch_id'])) {
     
 } else {
     echo'<script>alert("Form submission error."); window.location.href = "LabDep_Scan_to_Inv.php";</script>';
-}
-?>
+} ?>

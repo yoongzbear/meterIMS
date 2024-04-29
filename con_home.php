@@ -1,7 +1,7 @@
 <?php 
-include 'secure_Con.php';
-include 'connection.php';
-$name = $_SESSION['name'];
+  include 'secure_Con.php';
+  include 'connection.php';
+  $name = $_SESSION['name'];
 ?>
 
 <!DOCTYPE html>
@@ -17,10 +17,10 @@ $name = $_SESSION['name'];
 
 <body>
 <header>
-<?php 
-include 'header.php';
-include 'navCon.php';
-?>
+  <?php 
+    include 'header.php';
+    include 'navCon.php';
+  ?>
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -56,9 +56,9 @@ include 'navCon.php';
       <p class="lead">Scan the installed meter's QR code and fill in the installation proof form.</p>
       <p>Quick access to <a href="meterInstall.php">meter installation form</a>.</p>
     </div>
-      <div class="col-md-5">
-        <img src="imgs/meter-install.jpg" width="100%" height="100%">
-      </div>
+    <div class="col-md-5">
+      <img src="imgs/meter-install.jpg" width="100%" height="100%">
+    </div>
   </div>
 
 <hr class="featurette-divider">

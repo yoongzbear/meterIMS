@@ -17,10 +17,10 @@
 
 <body>
 <header>
-<?php 
-include 'header.php';
-include 'navCon.php';
-?>
+  <?php 
+    include 'header.php';
+    include 'navCon.php';
+  ?>
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -34,13 +34,13 @@ include 'navCon.php';
     <h4>Scan Meter QR</h4>
     <div class="row mb-5">
       <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="meterInstall.php">Meter Installation</a>
-    </div>    
+        <a button type="button" class="btn btn-primary btn-lg" href="meterInstall.php">Meter Installation</a>
+      </div>    
     </div>
     <div class='row'>
-    <div class="col">
-      <a button type="button" class="btn btn-primary btn-lg" href="conMeterUninstall.php">Meter Uninstallation</a>
-    </div>
+      <div class="col">
+        <a button type="button" class="btn btn-primary btn-lg" href="conMeterUninstall.php">Meter Uninstallation</a>
+      </div>
     </div>
 </div>
 
