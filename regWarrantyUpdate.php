@@ -4,6 +4,7 @@ include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
     try{
+    //get meter status and check if meter is uninstalled        
     $warrantycheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
     $warrantycheckrun = mysqli_query($connection, $warrantycheckquery);
     $warrantycheck = mysqli_fetch_assoc($warrantycheckrun);
@@ -20,6 +21,7 @@ if(ISSET($_POST['serialnum'])){
         header("Refresh:0");
         exit();
     }
+    //get meter info
     $meterinfoquery = "SELECT batch.meter_type, batch.meter_model, batch.meter_size FROM batch, meter WHERE meter.batch_id = batch.batch_id AND meter.serial_num = '$serialnum'";
     $meterinforun = mysqli_query($connection, $meterinfoquery);
     $meterinfo = mysqli_fetch_assoc($meterinforun);
@@ -29,6 +31,7 @@ if(ISSET($_POST['serialnum'])){
         header("Refresh:0");
         exit();
     }
+    
     $locationquery = "SELECT location_id FROM `location` WHERE username = '$_SESSION[username]'";
     $locationrun = mysqli_query($connection, $locationquery);
     $location = mysqli_fetch_assoc($locationrun);
