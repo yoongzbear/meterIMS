@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meter Receiving</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Meter Receiving</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -19,12 +19,12 @@ include 'navInv.php';
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-    <li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
-	<li class="breadcrumb-item"><a href="inv_ReceiveScanPassMeterQR.php" title='Scan QR Page'>Scan QR - Batch Receiving Form</a></li>
-	<li class="breadcrumb-item active" aria-current="page">Batch Receiving Form</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+		<li class="breadcrumb-item"><a href="inv_QRmenu.php" title='QRcode Page'>QRcode</a></li>
+		<li class="breadcrumb-item"><a href="inv_ReceiveScanPassMeterQR.php" title='Scan QR Page'>Scan QR - Batch Receiving Form</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Batch Receiving Form</li>
+	</ol>
 </nav>
 
 <?php
@@ -50,9 +50,9 @@ include 'navInv.php';
 				
 				//Update Meter Location
 				$sqlMeterLocation = "UPDATE meter 
-									JOIN lab_result ON meter.serial_num = lab_result.serial_num
-									SET meter.meter_status = 'IN STOCK' 
-									WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
+							JOIN lab_result ON meter.serial_num = lab_result.serial_num
+							SET meter.meter_status = 'IN STOCK' 
+							WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
 				$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
 				
 				//Update Tracking Info
@@ -178,10 +178,9 @@ include 'navInv.php';
 		?>
 	</table>
 
-<div class="d-grid gap-2 col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='inv_ReceiveScanPassBatchQR.php'" title='Back To Scan QR'>Back</button>
-</div>
-
+	<div class="d-grid gap-2 col-6 mx-auto mb-4">
+		<button class="back btn btn-dark" type="button" onclick="window.location.href='inv_ReceiveScanPassBatchQR.php'" title='Back To Scan QR'>Back</button>
+	</div>
 </div>
 
 <footer>
