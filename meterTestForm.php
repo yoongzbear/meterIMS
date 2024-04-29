@@ -54,12 +54,12 @@ if(ISSET($_POST['serial_num'])){
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
-    <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='QR Code Menu'>QR Code</a></li>
-    <li class="breadcrumb-item"><a href="meterTest.php" title='Scan QR Page'>Scan QR - Meter Test Result Form</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Meter Test Result Form</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
+		<li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='QR Code Menu'>QR Code</a></li>
+		<li class="breadcrumb-item"><a href="meterTest.php" title='Scan QR Page'>Scan QR - Meter Test Result Form</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Meter Test Result Form</li>
+	</ol>
 </nav>
 
 <div class='container col-xl-5'>
@@ -96,34 +96,34 @@ if(ISSET($_POST['serial_num'])){
             </tr></table>
 
         <form id='meterForm' action='submitMeterTest.php' method='post' class="mb-4">        
-        <input type='hidden' name='serial_num' value='<?php echo $serial_num;?>' readonly>
-        <div class="mb-3 row">               
-        <label for='testResult'>Test Result : </label>
-        <div class="col-sm-10">
-        <select id='testResult' class='form-select' name='testResult' required onchange='toggleDefectField()'> <!-- Added onchange event -->
-            <option value=''>Select Result</option>
-            <option value='PASS'>PASS</option>
-            <option value='FAIL'>FAIL</option>
-        </select>
-        </div>
-        </div>
-
-        <div class="mb-3 row">               
-        <label for='defect' id='defectLabel' style='display:none;'>Defect : </label> <!-- Hidden by default -->
-        <div class="col-sm-10">
-        <select id='defect' class='form-select' name='defect' style='display:none;'> <!-- Hidden by default -->
-            <option value=''>Select Defect</option>";
-            <?php
-                while ($rowDefect = mysqli_fetch_assoc($resultDefect)) {
-                    echo "<option value='" . $rowDefect['defect_id'] . "'>" . $rowDefect['defect'] . "</option>";
-                } ?>
-            <option value='0'>NOT LISTED</option>
-        </select>
-        </div>
-        </div>
-
-        <input type='submit' style='width:20%;' class='btn btn-primary btn-submit' value='Submit'>
-    </form>
+	        <input type='hidden' name='serial_num' value='<?php echo $serial_num;?>' readonly>
+	        <div class="mb-3 row">               
+		        <label for='testResult'>Test Result : </label>
+		        <div class="col-sm-10">
+			        <select id='testResult' class='form-select' name='testResult' required onchange='toggleDefectField()'> <!-- Added onchange event -->
+			            <option value=''>Select Result</option>
+			            <option value='PASS'>PASS</option>
+			            <option value='FAIL'>FAIL</option>
+			        </select>
+		        </div>
+	        </div>
+	
+	        <div class="mb-3 row">               
+	        	<label for='defect' id='defectLabel' style='display:none;'>Defect : </label> <!-- Hidden by default -->
+		        <div class="col-sm-10">
+			        <select id='defect' class='form-select' name='defect' style='display:none;'> <!-- Hidden by default -->
+			            <option value=''>Select Defect</option>";
+			            <?php
+			                while ($rowDefect = mysqli_fetch_assoc($resultDefect)) {
+			                    echo "<option value='" . $rowDefect['defect_id'] . "'>" . $rowDefect['defect'] . "</option>";
+			                } ?>
+			            <option value='0'>NOT LISTED</option>
+			        </select>
+		        </div>
+	        </div>
+	
+	        <input type='submit' style='width:20%;' class='btn btn-primary btn-submit' value='Submit'>
+    	</form>
 
     <script>
         function toggleDefectField() {
