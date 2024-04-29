@@ -33,8 +33,8 @@ include 'connection.php';
 <script src="qrcode.js"></script>
 <script src="qrGeneratorBatch.js"></script>
 <script>
-    makeCode();
-    print();
+    makeCode(); //calling function from js to generate QR code
+    print(); //invoke browser print function
 </script>
 </div>
 
