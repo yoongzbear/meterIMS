@@ -28,16 +28,15 @@ include 'connection.php';
 </nav>
 
 <div class="col align-self-center mb-4">
-    <h3>Batch QR:</h3>
-<div id="qrcode">
-<script src="qrcode.js"></script>
-<script src="qrGeneratorBatch.js"></script>
-<script>
-    makeCode(); //calling function from js to generate QR code
-    print(); //invoke browser print function
-</script>
-</div>
-
+	<h3>Batch QR:</h3>
+	<div id="qrcode">
+		<script src="qrcode.js"></script>
+		<script src="qrGeneratorBatch.js"></script>
+		<script>
+		    makeCode(); //calling function from js to generate QR code
+		    print(); //invoke browser print function
+		</script>
+	</div>
 </div>
 
 <footer>
