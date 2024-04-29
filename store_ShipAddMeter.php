@@ -173,11 +173,8 @@ include 'header.php';
 	echo "<script>document.getElementById('fail').style.display = 'block';</script>";
     }
 ?>
-
-</body>
-
 <footer>
 	<?php include 'footer.php';?>
-</footer>	
-
+</footer>
+</body>	
 </html>
