@@ -38,7 +38,7 @@ include 'header.php';
 		
 	//Update Batch meter quantity
 	$sqlUpdateBatch = "UPDATE batch SET quantity = quantity - 1 WHERE batch_id = 
-	(SELECT batch_id FROM meter WHERE serial_num = '$serial_num')";
+				(SELECT batch_id FROM meter WHERE serial_num = '$serial_num')";
 	$resultUpdateBatch = mysqli_query($connection, $sqlUpdateBatch);
 	
 	//Update Batch_ID of the meter
