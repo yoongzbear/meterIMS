@@ -71,10 +71,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTTO Aqua</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OTTO Aqua</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -83,7 +83,6 @@
 include 'header.php';
 include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -95,54 +94,53 @@ include 'navInv.php';
 </nav>
 
 <body>
-
 <div class="container-fluid mb-4">
 	<h3>Meter Forecast Demand for <?php echo $year; ?></h3>
 	<table class="table table-bordered border-dark">
 		<thead>
-		<tr>
-			<th>Month</th>
-			<th>Faulty Program</th>
-			<th>Meter Complaint</th>
-			<th>Meter Leaks</th>
-			<th>Total Meter Demand</th>
-		</tr>
+			<tr>
+				<th>Month</th>
+				<th>Faulty Program</th>
+				<th>Meter Complaint</th>
+				<th>Meter Leaks</th>
+				<th>Total Meter Demand</th>
+			</tr>
 		</thead>
 		
 		<tbody>
-		<?php
-			for($i=1;$i<=12;$i++){
-				//Show Months Name
-				echo "<tr>
-						<td>";
-								echo date('F', mktime(0,0,0,$i,1));
-				echo		"</td>
-				
+			<?php
+				for($i=1;$i<=12;$i++){
+					//Show Months Name
+					echo "<tr>
 							<td>";
-								echo intval($faulty_program[$i-1]);
-				echo		"</td>
-							
-							<td>";
-								echo intval($meter_complaints[$i-1]);
-				echo		"</td>
-							
-							<td>";
-								echo intval($meter_leaks[$i-1]);
-				echo		"</td>
-							
-							<td>";
-								$total = $faulty_program[$i-1]+$meter_complaints[$i-1]+$meter_leaks[$i-1];
-								echo $total;
-				echo		"</td>
-					</tr>";
-			}
-		?>
+									echo date('F', mktime(0,0,0,$i,1));
+					echo		"</td>
+					
+								<td>";
+									echo intval($faulty_program[$i-1]);
+					echo		"</td>
+								
+								<td>";
+									echo intval($meter_complaints[$i-1]);
+					echo		"</td>
+								
+								<td>";
+									echo intval($meter_leaks[$i-1]);
+					echo		"</td>
+								
+								<td>";
+									$total = $faulty_program[$i-1]+$meter_complaints[$i-1]+$meter_leaks[$i-1];
+									echo $total;
+					echo		"</td>
+						</tr>";
+				}
+			?>
 		</tbody>
 	</table>
-	</div>
+</div>
 
 <div class="d-grid col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='meterForecastDemandForm.php'" title='Back To Scan QR'>Back</button>
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='meterForecastDemandForm.php'" title='Back To Scan QR'>Back</button>
 </div>
 
 <footer>
