@@ -1,6 +1,4 @@
-<?php 
-include ('secure_Reg.php'); 
-?>
+<?php include ('secure_Reg.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,13 +8,11 @@ include ('secure_Reg.php');
     <title>Meter Receiving</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
 <body>
 <header>
-<?php 
-include 'header.php';
-?>
-
+<?php include 'header.php'; ?>
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -25,7 +21,6 @@ include 'header.php';
     <li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page - Region Store'>Scan QRcode</a></li>
 	<li class="breadcrumb-item"><a href="store_ReceiveOrderScanBatchQR.php" title='Scan QRcode Page - Region Store'>Scan QR (Store Arrival) - Meter Receiving Form</a></li>
 	<li class="breadcrumb-item active" aria-current="page">Meter Receiving Form</li>
-
   </ol>
 </nav>
 
@@ -41,9 +36,8 @@ include 'header.php';
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
-			$sqlBatchExist = "SELECT batch.*, movement.* FROM batch
-							JOIN movement ON batch.batch_id = movement.batch_id
-							WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.destination = '$location_id'";
+			//Check if the batch is exists
+			$sqlBatchExist = "SELECT batch.*, movement.* FROM batch JOIN movement ON batch.batch_id = movement.batch_id WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.destination = '$location_id'";
 			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
 			if(mysqli_num_rows($resultBatchExist)>0){
 				$current_date = date('Y-m-d');
@@ -61,10 +55,7 @@ include 'header.php';
 				$resultTrack = mysqli_query($connection, $sqlTrack);
 				
 				//To get info for batch, meter and Tracking
-				$sqlInfo = "SELECT batch.*, meter.*, movement.* FROM batch
-							INNER JOIN meter ON batch.batch_id = meter.batch_id
-							INNER JOIN movement ON batch.batch_id = movement.batch_id
-							WHERE batch.batch_id = '$batch_id'";
+				$sqlInfo = "SELECT batch.*, meter.*, movement.* FROM batch INNER JOIN meter ON batch.batch_id = meter.batch_id INNER JOIN movement ON batch.batch_id = movement.batch_id WHERE batch.batch_id = '$batch_id'";
 				$resultInfo = mysqli_query($connection, $sqlInfo);			
 				
 				//To get Batch Info
@@ -211,5 +202,4 @@ include 'header.php';
 </footer>	
 
 </body>
-
 </html>

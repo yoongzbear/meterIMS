@@ -8,8 +8,7 @@
 		$sqlMeterInfo = "SELECT * FROM meter WHERE serial_num = '$serial_num'";
 		$result = mysqli_query($connection, $sqlMeterInfo);
 		
-		if(mysqli_num_rows($result)>0){
-			
+		if(mysqli_num_rows($result)>0){			
 			//Update Meter Status
 			$sqlUpdate = "UPDATE meter SET meter_status = 'TO BE INSTALLED' WHERE serial_num = '$serial_num'";
 			$resultUpdate = mysqli_query($connection,$sqlUpdate);
@@ -19,10 +18,7 @@
 			}
 			
 			//To get Meter in Batch
-			$sql = "SELECT batch.*, meter.*, manufacturer.* FROM meter 
-							INNER JOIN batch ON meter.batch_id = batch.batch_id 
-							INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id
-							WHERE meter.serial_num = '$serial_num'";
+			$sql = "SELECT batch.*, meter.*, manufacturer.* FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id WHERE meter.serial_num = '$serial_num'";
 			$result = mysqli_query($connection, $sql);
 			
 			if ($result) {
@@ -56,13 +52,8 @@
 
 <body>
 <header>
-<?php 
-include 'header.php';
-?>
-
+<?php include 'header.php'; ?>
 </header>
-
-
 
 <div class='container col-xl-5 mb-4'>
 
@@ -79,7 +70,6 @@ include 'header.php';
 				</div>
 			</td>
 		</tr>
-
 		<tr>
 			<th scope="row">Meter Type:</th>
 			<td><?php echo $meter_type; ?></td>
@@ -106,7 +96,6 @@ include 'header.php';
 		</tr>
 		</thread>
 	</table>
-
 
 <div class="d-grid gap-2 col-6 mx-auto">
 	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_assignInstallForm.php'" title='Back To Installation Page'>Back</button>

@@ -9,8 +9,8 @@
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
 <header>
 <?php 
 include 'header.php';
@@ -23,7 +23,6 @@ include 'navReg.php';
   <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
     <li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page - Region Store'>Scan QRcode</a></li>
     <li class="breadcrumb-item active" aria-current="page">Scan QR - Meter Assigning</li>
-
   </ol>
 </nav>
 
