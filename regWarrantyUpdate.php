@@ -4,27 +4,27 @@ include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
     try{
-    //get meter status and check if meter entered is valid, then check if meter is uninstalled       
-    $warrantycheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
-    $warrantycheckrun = mysqli_query($connection, $warrantycheckquery);
-    $warrantycheck = mysqli_fetch_assoc($warrantycheckrun);
-    if(mysqli_num_rows($warrantycheckrun) == 0){
-        throw new Exception();
-    }
-    if($warrantycheck['meter_status'] == 'SENT FOR WARRANTY'){
-        echo "<script>alert('Error: Meter has already been sent for warranty.');</script>";
-        header("Refresh:0");
-        exit();
+        //get meter status and check if meter entered is valid, then check if meter is uninstalled       
+        $warrantycheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
+        $warrantycheckrun = mysqli_query($connection, $warrantycheckquery);
+        $warrantycheck = mysqli_fetch_assoc($warrantycheckrun);
+        if(mysqli_num_rows($warrantycheckrun) == 0){
+            throw new Exception();
         }
-    elseif($warrantycheck['meter_status'] != 'UNINSTALLED'){
-        echo "<script>alert('Error: Meter has not been uninstalled yet.');</script>";
-        header("Refresh:0");
-        exit();
-    }
-    //get meter info
-    $meterinfoquery = "SELECT batch.meter_type, batch.meter_model, batch.meter_size FROM batch, meter WHERE meter.batch_id = batch.batch_id AND meter.serial_num = '$serialnum'";
-    $meterinforun = mysqli_query($connection, $meterinfoquery);
-    $meterinfo = mysqli_fetch_assoc($meterinforun);
+        if($warrantycheck['meter_status'] == 'SENT FOR WARRANTY'){
+            echo "<script>alert('Error: Meter has already been sent for warranty.');</script>";
+            header("Refresh:0");
+            exit();
+            }
+        elseif($warrantycheck['meter_status'] != 'UNINSTALLED'){
+            echo "<script>alert('Error: Meter has not been uninstalled yet.');</script>";
+            header("Refresh:0");
+            exit();
+        }
+        //get meter info
+        $meterinfoquery = "SELECT batch.meter_type, batch.meter_model, batch.meter_size FROM batch, meter WHERE meter.batch_id = batch.batch_id AND meter.serial_num = '$serialnum'";
+        $meterinforun = mysqli_query($connection, $meterinfoquery);
+        $meterinfo = mysqli_fetch_assoc($meterinforun);
     }
     catch(Exception $e){
         echo "<script>alert('Error: Invalid Serial Number. Please try again.');</script>";
@@ -102,11 +102,11 @@ if(ISSET($_POST['serialnum'])){
         ?>
 </header>
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-<ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
-<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
-<li class="breadcrumb-item active" aria-current="page">Warranty Update</li>
-</ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
+        <li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Warranty Update</li>
+    </ol>
 </nav>
 <section id="warrentyupdate">
         <div class="container col-lg-12 text-center mb-4" id="qrscanner">
