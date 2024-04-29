@@ -7,10 +7,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTTO Aqua</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OTTO Aqua</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -19,7 +19,6 @@
 include 'header.php';
 include 'navInv.php';
 ?>
-
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -27,7 +26,6 @@ include 'navInv.php';
 		<li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
 		<li class="breadcrumb-item"><a href="Inv_QRmenu.php" title='QRcode Page'>QR Code</a></li>
 		<li class="breadcrumb-item active" aria-current="page">Receive Meter</li>
-
 	</ol>
 </nav>
 
@@ -43,70 +41,69 @@ include 'navInv.php';
 </script>
 
 <html>
+	
 <!--Form to insert details of the meters in batch-->
 <div class='container col-xl-5 mb-4'>
-<h3>Create New Batch</h3>
+	<h3>Create New Batch</h3>
+	
 	<hr>
-
-<form action="inventoryDep_AddBatch.php" method="post">
-
-<div class="row g-3 align-items-center mb-4">
-	<div class="col-auto">
-		<label class="col-form-label">Meter Type : </label>
-	</div>
-	<div class="col-auto">
-		<input class="form-control form-control-sm" type="text" name="meter_type" required>
-	</div>
-</div>
-
-<div class="row g-3 align-items-center mb-4">
-	<div class="col-auto">
-		<label class="col-form-label">Meter Model : </label>
-	</div>
-	<div class="col-auto">
-		<input class="form-control form-control-sm" type="text" name="meter_model" required>
-	</div>
-</div>
-
-<div class="row g-3 align-items-center mb-4">
-	<div class="col-auto">
-		<label class="col-form-label">Meter Size : </label>
-	</div>
-	<div class="col-auto">
-		<select class="form-select" name="meter_size" required>
-			<option value="" disabled selected>Please Select Meter Size</option>
-			<option value="15">15</option>
-			<option value="20">20</option>
-			<option value="25">25</option>
-			<option value="40">40</option>
-			<option value="50">50</option>
-			<option value="80">80</option>
-			<option value="100">100</option>
-			<option value="150">150</option>
-		</select>
-	</div>
-</div>
+	
+	<form action="inventoryDep_AddBatch.php" method="post">
+		<div class="row g-3 align-items-center mb-4">
+			<div class="col-auto">
+				<label class="col-form-label">Meter Type : </label>
+			</div>
+			<div class="col-auto">
+				<input class="form-control form-control-sm" type="text" name="meter_type" required>
+			</div>
+		</div>
 		
-<div class="row g-3 align-items-center mb-4">
-	<div class="col-auto">
-		<label class="col-form-label">Manufacturer Name : </label>
-	</div>
-	<div class="col-auto">
-		<select class="form-select" name="manu_id">
-		<option value="" disabled selected>Please Select Manufacturer</option>
-			<?php
-				$sqlManu="SELECT * FROM manufacturer";
-				$data = mysqli_query($connection,$sqlManu);
-				while($manu = mysqli_fetch_array($data)){
-				echo "<option value='$manu[manu_id]'>$manu[manu_name]</option>";
-				}
-			?>
-		</select>
-	</div>
-</div>
+		<div class="row g-3 align-items-center mb-4">
+			<div class="col-auto">
+				<label class="col-form-label">Meter Model : </label>
+			</div>
+			<div class="col-auto">
+				<input class="form-control form-control-sm" type="text" name="meter_model" required>
+			</div>
+		</div>
+		
+		<div class="row g-3 align-items-center mb-4">
+			<div class="col-auto">
+				<label class="col-form-label">Meter Size : </label>
+			</div>
+			<div class="col-auto">
+				<select class="form-select" name="meter_size" required>
+					<option value="" disabled selected>Please Select Meter Size</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="25">25</option>
+					<option value="40">40</option>
+					<option value="50">50</option>
+					<option value="80">80</option>
+					<option value="100">100</option>
+					<option value="150">150</option>
+				</select>
+			</div>
+		</div>
 				
-				
-					
+		<div class="row g-3 align-items-center mb-4">
+			<div class="col-auto">
+				<label class="col-form-label">Manufacturer Name : </label>
+			</div>
+			<div class="col-auto">
+				<select class="form-select" name="manu_id">
+				<option value="" disabled selected>Please Select Manufacturer</option>
+					<?php
+						$sqlManu="SELECT * FROM manufacturer";
+						$data = mysqli_query($connection,$sqlManu);
+						while($manu = mysqli_fetch_array($data)){
+							echo "<option value='$manu[manu_id]'>$manu[manu_name]</option>";
+						}
+					?>
+				</select>
+			</div>
+		</div>
+						
 		<button onclick="confirmation();" type="submit" class="btn btn-success">Add Meter</button>
 	</form>
 </div>
