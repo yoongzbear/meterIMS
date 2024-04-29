@@ -29,156 +29,156 @@ include 'navInv.php';
 </nav>
 
 <div class="container">
-    <div class="row mb-4">
-        <div class="col-6 col-lg-4">
-
-        <!-- Dropdown list for search options -->
-        <div class="form-floating">
-            <select class="form-select" id="searchOptions" onchange="enableSearch()">
-            <!-- Placeholder option -->
-            <option value="" disabled selected>Please select</option>
-            <!-- Options for search criteria -->
-            <option value="batch">Batch</option>
-            <option value="origin">Origin</option>
-            <option value="destination">Destination</option>
-            <option value="shipOutDate">Ship Out Date</option>
-            <option value="arrivalDate">Arrival Date</option>
-            <option value="status">Status</option>
-            </select>
-            <label for="searchbar">Search with select :</label>
-  
-        </div>
-        </div>
-
-        <div class='col-sm-6 col-lg-8'>
-        <!-- Input field for user's search query -->
-        <input class="form-control" style="width:60%;" type="search" onkeyup="search_trac()" id="searchbar" name="search" placeholder="Search..." disabled>
-        </div>    
-    </div>
-
-<script>
-    //Function to enable/disable search input based on dropdown selection
-    function enableSearch() {
-        let dropdown = document.getElementById('searchOptions');
-        let input = document.getElementById('searchbar');
-       
-        if (dropdown.value !== "") {
-            input.disabled = false;
-            input.focus(); //Set focus to the input field for user convenience
-        } else {
-            input.disabled = true;
-        }
-    }
-
-    //Function to perform search based on user input
-    function search_trac() {
-        let input = document.getElementById('searchbar').value.toLowerCase();
-        let option = document.getElementById('searchOptions').value;
-
-        //Get all table rows
-        let rows = document.querySelectorAll('.track');
-
-        //Loop through each table row
-        rows.forEach(row => {
-            let cellText = '';
-            //Check if a valid option is selected from dropdown
-            if(option !== '') {
-                //If yes, find the text content of the cell in the corresponding column
-                cellText = row.querySelector('td:nth-child(' + (getColumnIndex(option) + 1) + ')');
-                if(cellText){
-                    cellText = cellText.innerText.toLowerCase(); // Convert to lowercase for case-insensitive matching
-                }
-            }
-            //Determine whether to display or hide the row based on search criteria
-            let display = (option === '' || (cellText && cellText.includes(input))) ? '' : 'none';
-            row.style.display = display;
-        });
-    }
-
-    //Function to map dropdown option to corresponding table column index
-    function getColumnIndex(option) {
-        switch(option) {
-            case 'batch':
-                return 1;
-            case 'origin':
-                return 2;
-            case 'destination':
-                return 3;
-            case 'shipOutDate':
-                return 4; 
-            case 'arrivalDate':
-                return 5; 
-            case 'status':
-                return 6; 
-            default:
-                return 1; 
-        }
-    }
-</script>
-
-<div class="row mb-4">
-        <div class="table-responsive">
-        <table id="list" class="table table-striped table-info">
-        <thread>
-        <tr class="table-primary" scope="col">
-            <th>No.</th>
-            <th>Batch ID</th>
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Date Ship Out</th>
-            <th>Date Arrived</th>
-            <th>Status</th>
-            <th>Batch Detail</th>
-        </tr>
-        </thread>
-
-        <?php
-        $sql = "SELECT * FROM movement";
-        $result = mysqli_query($connection, $sql);
-        $num = 1;        
-
-        while ($row = mysqli_fetch_array($result)) {
-            $batch_id = $row["batch_id"];
-            $origin = $row["origin"];
-            $destination = $row["destination"];
-            $arrival_date = $row["arrival_date"];
-
-            //Fetch region for origin
-            $sql2 = "SELECT * FROM location WHERE location_id = '$origin'";
-            $result2 = mysqli_query($connection, $sql2);
-            $row2 = mysqli_fetch_array($result2);
-            $origin_region = $row2 ? $row2["location_name"] : "";
-
-            //Fetch region for destination
-            $sql3 = "SELECT * FROM location WHERE location_id = '$destination'";
-            $result3 = mysqli_query($connection, $sql3);
-            $row3 = mysqli_fetch_array($result3);
-            $destination_region = $row3 ? $row3["location_name"] : "";
-
-            echo '<thread>
-            <tr class="track">
-                <th scope="row">' . $num . '</th>
-                <td>' . $row["batch_id"] . '</td>
-                <td>' . $origin_region . '</td>
-                <td>' . $destination_region . '</td>
-                <td>' . $row["ship_date"] . '</td>
-                <td>' . $row["arrival_date"] . '</td>
-                <td>';
-                if ($arrival_date != '0000-00-00' && !is_null($arrival_date)) {
-                    echo 'Arrived';
-                } else {
-                    echo 'In transit';
-                }
-                
-                echo '</td>            
-                <td class="batchID"><a href="batch_view.php?batch_id=' . $batch_id . '"><button class="btn btn-info btn-sm">Batch Detail</button></a></td>
-            </tr></thread>';
-            $num++;
-        } ?>
-        </table>
-        </div>
-    </div>
-    </div>
+	<div class="row mb-4">
+		<div class="col-6 col-lg-4">
+			<!-- Dropdown list for search options -->
+			<div class="form-floating">
+				<select class="form-select" id="searchOptions" onchange="enableSearch()">
+					<!-- Placeholder option -->
+					<option value="" disabled selected>Please select</option>
+					<!-- Options for search criteria -->
+					<option value="batch">Batch</option>
+					<option value="origin">Origin</option>
+					<option value="destination">Destination</option>
+					<option value="shipOutDate">Ship Out Date</option>
+					<option value="arrivalDate">Arrival Date</option>
+					<option value="status">Status</option>
+				</select>
+				<label for="searchbar">Search with select :</label>
+			</div>
+		</div>
+		
+		<div class='col-sm-6 col-lg-8'>
+			<!-- Input field for user's search query -->
+			<input class="form-control" style="width:60%;" type="search" onkeyup="search_trac()" id="searchbar" name="search" placeholder="Search..." disabled>
+		</div>    
+	</div>
+	<script>
+		//Function to enable/disable search input based on dropdown selection
+		function enableSearch() {
+			let dropdown = document.getElementById('searchOptions');
+			let input = document.getElementById('searchbar');
+			
+			if (dropdown.value !== "") {
+				input.disabled = false;
+				input.focus(); //Set focus to the input field for user convenience
+			} else {
+				input.disabled = true;
+			}
+		}
+		
+		//Function to perform search based on user input
+		function search_trac() {
+			let input = document.getElementById('searchbar').value.toLowerCase();
+			let option = document.getElementById('searchOptions').value;
+			
+			//Get all table rows
+			let rows = document.querySelectorAll('.track');
+			
+			//Loop through each table row
+			rows.forEach(row => {
+				let cellText = '';
+				//Check if a valid option is selected from dropdown
+				if(option !== '') {
+					//If yes, find the text content of the cell in the corresponding column
+					cellText = row.querySelector('td:nth-child(' + (getColumnIndex(option) + 1) + ')');
+					if(cellText){
+						cellText = cellText.innerText.toLowerCase(); // Convert to lowercase for case-insensitive matching
+					}
+				}
+				//Determine whether to display or hide the row based on search criteria
+				let display = (option === '' || (cellText && cellText.includes(input))) ? '' : 'none';
+				row.style.display = display;
+			});
+		}
+		
+		//Function to map dropdown option to corresponding table column index
+		function getColumnIndex(option) {
+			switch(option) {
+				case 'batch':
+					return 1;
+				case 'origin':
+					return 2;
+				case 'destination':
+					return 3;
+				case 'shipOutDate':
+					return 4; 
+				case 'arrivalDate':
+					return 5; 
+				case 'status':
+					return 6; 
+				default:
+					return 1; 
+			}
+		}
+	</script>
+		
+	<div class="row mb-4">
+		<div class="table-responsive">
+			<table id="list" class="table table-striped table-info">
+				<tr class="table-primary" scope="col">
+					<th>No.</th>
+					<th>Batch ID</th>
+					<th>Origin</th>
+					<th>Destination</th>
+					<th>Date Ship Out</th>
+					<th>Date Arrived</th>
+					<th>Status</th>
+					<th>Batch Detail</th>
+				</tr>
+			
+				<?php
+					$sql = "SELECT * FROM movement";
+					$result = mysqli_query($connection, $sql);
+					$num = 1;        
+					
+					while ($row = mysqli_fetch_array($result)) {
+						$batch_id = $row["batch_id"];
+						$origin = $row["origin"];
+						$destination = $row["destination"];
+						$arrival_date = $row["arrival_date"];
+						
+						//Fetch region for origin
+						$sql2 = "SELECT * FROM location WHERE location_id = '$origin'";
+						$result2 = mysqli_query($connection, $sql2);
+						$row2 = mysqli_fetch_array($result2);
+						$origin_region = $row2 ? $row2["location_name"] : "";
+						
+						//Fetch region for destination
+						$sql3 = "SELECT * FROM location WHERE location_id = '$destination'";
+						$result3 = mysqli_query($connection, $sql3);
+						$row3 = mysqli_fetch_array($result3);
+						$destination_region = $row3 ? $row3["location_name"] : "";
+						
+						echo '
+							<tr class="track">
+							<th scope="row">' . $num . '</th>
+							<td>' . $row["batch_id"] . '</td>
+							<td>' . $origin_region . '</td>
+							<td>' . $destination_region . '</td>
+							<td>' . $row["ship_date"] . '</td>
+							<td>' . $row["arrival_date"] . '</td>
+							<td>';
+						if ($arrival_date != '0000-00-00' && !is_null($arrival_date)) {
+							echo 'Arrived';
+						} else {
+							echo 'In transit';
+						}
+						
+						echo '</td>            
+							<td class="batchID">
+	      							<a href="batch_view.php?batch_id=' . $batch_id . '">
+	      								<button class="btn btn-info btn-sm">Batch Detail</button>
+		      						</a>
+		     					</td>
+						</tr>';
+						$num++;
+					} 
+				?>
+			</table>
+		</div>
+	</div>
+</div>
 
 <footer>
 	<?php include 'footer.php';?>
