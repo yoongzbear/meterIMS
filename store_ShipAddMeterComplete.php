@@ -167,12 +167,9 @@ include 'header.php';
 <div class="d-grid gap-2 col-6 mx-auto mb-4">
 	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_ShipOrderForm.php'" title='Back To Create New Batch Page'>Complete</button>
 </div>
-	
-
-</body>
-
 <footer>
 	<?php include 'footer.php';?>
-</footer>	
-
+</footer>
+</body>
+	
 </html>
