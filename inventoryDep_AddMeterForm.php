@@ -28,11 +28,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTTO Aqua</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OTTO Aqua</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -77,100 +77,97 @@ include 'header.php';
 </script>
 
 <html>
-		<!--Show Current Batch Info-->
-		
-		<div class="container">
-      <div class="row align-items-start">
-        <div class="col mb-4">
-		
-		<h3>Current Batch Information</h3>
-		<hr>
-
-		<table class="table table-borderless">
-			<tr colspan = "2">
-				<td>
-					<div id="qrcode">
-						<script src = "qrcode.js"></script>
-						<script src = "qrGeneratorBatch.js"></script>
-						<script>makeCode(); </script>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">Meter Type</th>
-				<td><?php echo $meter_type; ?></td>
-			</tr>
-			<tr>
-				<th scope="row">Meter Model</th>
-				<td><?php echo $meter_model; ?></td>
-			</tr>
-			<tr>
-				<th scope="row">Meter Size</th>
-				<td><?php echo $meter_size; ?></td>
-			</tr>
-			<tr>
-				<!--Show Current Total Meter for Current Batch-->
-				<th scope="row">Current Meter Quantity</th>
-				<td><?php echo $quantity; ?></td>
-			</tr>
-		</table>
-		</div>
-        
+<!--Show Current Batch Info-->
+<div class="container">
+	<div class="row align-items-start">
 		<div class="col mb-4">
-        
-		<h3>Add Meter Information</h3>
-		<hr>
-
-		<form action="inventoryDep_AddMeter.php" method="get">
+			<h3>Current Batch Information</h3>
+				
+			<hr>
+			
 			<table class="table table-borderless">
-				<input type="hidden" name="batch_id" value="<?php echo $batch_id;?>">
-				<input type="hidden" name="manu_id" value="<?php echo $manu_id;?>">
-				<tr class="table-primary">
-					<td>Meter Serial Number:</td>
-					<td><input class="form-control form-control-sm" type="text" name="Meter_ID" placeholder="AIS17BA00XXXXX" required></td>
-				</tr>
-				
-				<tr class="table-primary">
-					<td>Age:</td>
-					<td><input class="form-control form-control-sm" type="number" onchange="setNumberDecimal" name="age" step="0.1" min="0" placeholder="0.0" required></td>
-				</tr>
-				
-				<tr class="table-primary">
-					<td>Mileage:</td>
-					<td><input class="form-control form-control-sm" type="number" name="mileage" min="1" required></td>
-				</tr>
-				
-				<tr class="table-primary">
-					<td>Manufactured Year:</td>
+				<tr colspan = "2">
 					<td>
-						<select class="form-control" name="manufactured_year" required>
-							<option value="" disabled selected>Please Select Manufactured Year</option>
-							<?php
-							$currentYear = date('Y');
-
-							//Loop to generate options for past 5 years
-							for($i = $currentYear; $i >= $currentYear - 5; $i--) {
-								echo "<option value=\"$i\">$i</option>";
-							}
-							?>
-						</select>
-					</td> 
+						<div id="qrcode">
+							<script src = "qrcode.js"></script>
+							<script src = "qrGeneratorBatch.js"></script>
+							<script>makeCode(); </script>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">Meter Type</th>
+					<td><?php echo $meter_type; ?></td>
+				</tr>
+				<tr>
+					<th scope="row">Meter Model</th>
+					<td><?php echo $meter_model; ?></td>
+				</tr>
+				<tr>
+					<th scope="row">Meter Size</th>
+					<td><?php echo $meter_size; ?></td>
+				</tr>
+				<tr>
+					<!--Show Current Total Meter for Current Batch-->
+					<th scope="row">Current Meter Quantity</th>
+					<td><?php echo $quantity; ?></td>
 				</tr>
 			</table>
-			<div class="buttons float-end">
-				<button type="submit" class="btn btn-success">Add Meter</button>
-				<?php if ($meterCount > 0) { ?>
-					<button type="button" class="btn btn-outline-secondary" onclick="confirmCancel();">Cancel</button>
-				<?php } else { ?>
-					<button type="button" class="btn btn-outline-secondary" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
-				<?php } ?>
-			</div>
-			
-		</form>
-
 		</div>
-      </div>
-    </div>
+			
+		<div class="col mb-4">
+		
+			<h3>Add Meter Information</h3>
+			<hr>
+			
+			<form action="inventoryDep_AddMeter.php" method="get">
+				<table class="table table-borderless">
+					<input type="hidden" name="batch_id" value="<?php echo $batch_id;?>">
+					<input type="hidden" name="manu_id" value="<?php echo $manu_id;?>">
+					<tr class="table-primary">
+						<td>Meter Serial Number:</td>
+						<td><input class="form-control form-control-sm" type="text" name="Meter_ID" placeholder="AIS17BA00XXXXX" required></td>
+					</tr>
+					
+					<tr class="table-primary">
+						<td>Age:</td>
+						<td><input class="form-control form-control-sm" type="number" onchange="setNumberDecimal" name="age" step="0.1" min="0" placeholder="0.0" required></td>
+					</tr>
+					
+					<tr class="table-primary">
+						<td>Mileage:</td>
+						<td><input class="form-control form-control-sm" type="number" name="mileage" min="1" required></td>
+					</tr>
+					
+					<tr class="table-primary">
+						<td>Manufactured Year:</td>
+						<td>
+							<select class="form-control" name="manufactured_year" required>
+								<option value="" disabled selected>Please Select Manufactured Year</option>
+								<?php
+									$currentYear = date('Y');
+				
+									//Loop to generate options for past 5 years
+									for($i = $currentYear; $i >= $currentYear - 5; $i--) {
+										echo "<option value=\"$i\">$i</option>";
+									}
+								?>
+							</select>
+						</td> 
+					</tr>
+				</table>
+				<div class="buttons float-end">
+					<button type="submit" class="btn btn-success">Add Meter</button>
+					<?php if ($meterCount > 0) { ?>
+						<button type="button" class="btn btn-outline-secondary" onclick="confirmCancel();">Cancel</button>
+					<?php } else { ?>
+						<button type="button" class="btn btn-outline-secondary" onclick="alert('Please add at least one meter before canceling.');">Cancel</button>
+					<?php } ?>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 </body>
 
