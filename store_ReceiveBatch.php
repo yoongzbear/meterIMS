@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meter Receiving</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Meter Receiving</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,12 +16,12 @@
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
-    <li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page - Region Store'>Scan QRcode</a></li>
-	<li class="breadcrumb-item"><a href="store_ReceiveOrderScanBatchQR.php" title='Scan QRcode Page - Region Store'>Scan QR (Store Arrival) - Meter Receiving Form</a></li>
-	<li class="breadcrumb-item active" aria-current="page">Meter Receiving Form</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
+		<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page - Region Store'>Scan QRcode</a></li>
+		<li class="breadcrumb-item"><a href="store_ReceiveOrderScanBatchQR.php" title='Scan QRcode Page - Region Store'>Scan QR (Store Arrival) - Meter Receiving Form</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Meter Receiving Form</li>
+	</ol>
 </nav>
 
 <?php
@@ -37,7 +37,9 @@
 		
 		if(mysqli_num_rows($result)>0){
 			//Check if the batch is exists
-			$sqlBatchExist = "SELECT batch.*, movement.* FROM batch JOIN movement ON batch.batch_id = movement.batch_id WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.destination = '$location_id'";
+			$sqlBatchExist = "SELECT batch.*, movement.* FROM batch 
+   					JOIN movement ON batch.batch_id = movement.batch_id 
+					WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.destination = '$location_id'";
 			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
 			if(mysqli_num_rows($resultBatchExist)>0){
 				$current_date = date('Y-m-d');
@@ -55,7 +57,10 @@
 				$resultTrack = mysqli_query($connection, $sqlTrack);
 				
 				//To get info for batch, meter and Tracking
-				$sqlInfo = "SELECT batch.*, meter.*, movement.* FROM batch INNER JOIN meter ON batch.batch_id = meter.batch_id INNER JOIN movement ON batch.batch_id = movement.batch_id WHERE batch.batch_id = '$batch_id'";
+				$sqlInfo = "SELECT batch.*, meter.*, movement.* FROM batch
+    					INNER JOIN meter ON batch.batch_id = meter.batch_id 
+	 				INNER JOIN movement ON batch.batch_id = movement.batch_id 
+	 				WHERE batch.batch_id = '$batch_id'";
 				$resultInfo = mysqli_query($connection, $sqlInfo);			
 				
 				//To get Batch Info
@@ -110,8 +115,8 @@
 <div class='container col-xl-5'>
 	<!--Show Current Batch Info-->
 	<h2 class='fs-1 text-uppercase'>Batch Meter Information</h2>
-    <hr class='border border-success border-2 opacity-50'>
-
+	<hr class='border border-success border-2 opacity-50'>
+	
 	<table class="table mb-4">
 		<tr colspan = "2">
 			<td>
@@ -140,6 +145,7 @@
 			<td><?php echo $quantity; ?></td>
 		</tr>
 	</table>
+	
 	<hr>
 	
 	<!--Show Shipping Info-->
@@ -166,8 +172,9 @@
 			<td><?php echo $current_date; ?></td>
 		</tr>
 	</table>
+	
 	<hr>
-
+	
 	<!--Show Meter List for the Batch-->
 	<h3>List of Meters in the batch</h3>
 	<table class="table mb-4">
@@ -175,7 +182,6 @@
 			<th>No.</th>
 			<th>Meter ID</th>
 		</tr>
-		
 		<?php
 			$num = 1;
 			//Reset data seek pointer to the beginning
@@ -190,11 +196,10 @@
 			}
 		?>
 	</table>
-
 </div>
 
 <div class="d-grid col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='store_ReceiveOrderScanBatchQR.php'" title='Back To Scan QR'>Back</button>
+	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_ReceiveOrderScanBatchQR.php'" title='Back To Scan QR'>Back</button>
 </div>
 
 <footer>
