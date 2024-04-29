@@ -37,26 +37,26 @@ if(ISSET($_GET['serial_num'])){
 </head>
 
 <body>
-<header>
-<?php include 'header.php'; ?>
-</header>
+    <header>
+        <?php include 'header.php'; ?>
+    </header>
 
-<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-  <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
-    <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='QR Code Menu'>QR Code</a></li>
-    <li class="breadcrumb-item"><a href="labMeterResult.php" title='Scan QR Page'>Scan QR - View Meter Result</a></li>
-    <li class="breadcrumb-item active" aria-current="page">View Meter Result</li>
-  </ol>
-</nav>
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
+            <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='QR Code Menu'>QR Code</a></li>
+            <li class="breadcrumb-item"><a href="labMeterResult.php" title='Scan QR Page'>Scan QR - View Meter Result</a></li>
+            <li class="breadcrumb-item active" aria-current="page">View Meter Result</li>
+        </ol>
+    </nav>
 
-<div class='container col-xl-5'>
+    <div class='container col-xl-5'>
         <h2 class='fs-1 text-uppercase'>Meter Result</h2>
         <hr class='border border-success border-2 opacity-50'>
         <table class='table mb-4'><th colspan=2><h3><?php echo $row['serial_num'];?></h3></th>
             <tr>
                 <th>Type:</th>
-                <td><?php echo $row['meter_type'];?></td>
+                    <td><?php echo $row['meter_type'];?></td>
             </tr>
             <tr>
                 <th>Model:</th>
@@ -87,43 +87,42 @@ if(ISSET($_GET['serial_num'])){
                 <td><?php echo $row['meter_status'];?></td>
             </tr>
         </table>
-<hr>
-<h3>Test Results</h3>
-        <table class="table mb-4">
-            <tr><th>No.</th>
-            <th>Test Date</th>
-            <th>Result</th>
-            <th>Result Detail</th></tr>
-        <?php
-        
-        while($rowTest = mysqli_fetch_array($resultTest)) {
-            echo '<tr>
-                <th>'.$num.'</th>';
-            if ($rowTest['result'] == NULL) {
-                echo '<td>N/A</td>
-                <td>NOT TESTED</td>';
-            } else {
-                echo '<td>'.$rowTest['test_date'].'</td>';            
-                if ($rowTest['result'] == 'PASSED') {
-                    echo "<td style='color: green;'>" . $rowTest['result'] . "</td>";
-                } else if ($rowTest['result'] == 'FAILED') {
-                    echo "<td style='color: red;'>" . $rowTest['result'] . "</td>";
-                }
-            }
-            echo '<td class="serial_num"><a href="labResultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
-            $num++;
-        }
-        echo "</table>";
-    ?>
-</div>
+        <hr>
+        <h3>Test Results</h3>
+            <table class="table mb-4">
+                <tr><th>No.</th>
+                <th>Test Date</th>
+                <th>Result</th>
+                <th>Result Detail</th></tr>
+                <?php                
+                    while($rowTest = mysqli_fetch_array($resultTest)) {
+                        echo '<tr>
+                            <th>'.$num.'</th>';
+                        if ($rowTest['result'] == NULL) {
+                            echo '<td>N/A</td>
+                            <td>NOT TESTED</td>';
+                        } else {
+                            echo '<td>'.$rowTest['test_date'].'</td>';            
+                            if ($rowTest['result'] == 'PASSED') {
+                                echo "<td style='color: green;'>" . $rowTest['result'] . "</td>";
+                            } else if ($rowTest['result'] == 'FAILED') {
+                                echo "<td style='color: red;'>" . $rowTest['result'] . "</td>";
+                            }
+                        }
+                        echo '<td class="serial_num"><a href="labResultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
+                        $num++;
+                    }
+                ?>
+            </table>
+    </div>
 
-<div class="d-grid col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='labMeterResult.php'" title='Back To Scan QR'>Back</button>
-</div>
+    <div class="d-grid col-6 mx-auto mb-4">
+        <button class="back btn btn-dark" type="button" onclick="window.location.href='labMeterResult.php'" title='Back To Scan QR'>Back</button>
+    </div>
 
-<footer>
-	<?php include 'footer.php';?>
-</footer>
+    <footer>
+        <?php include 'footer.php';?>
+    </footer>
 
 </body>
 </html>

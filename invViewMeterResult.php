@@ -38,11 +38,10 @@ if(ISSET($_GET['serial_num'])){
 
 <body>
 <header>
-
-<?php 
-include 'header.php';
-include 'navInv.php';
-?>
+    <?php 
+        include 'header.php';
+        include 'navInv.php';
+    ?>
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -55,73 +54,73 @@ include 'navInv.php';
 </nav>
 
 <div class='container col-xl-5'>
-        <h2 class='fs-1 text-uppercase'>Meter Info</h2>
-        <hr class='border border-success border-2 opacity-50'>
-        <table class='table mb-4'><th colspan=2><h3><?php echo $row['serial_num'];?></h3></th>
-            <tr>
-                <th>Type:</th>
-                <td><?php echo $row['meter_type'];?></td>
-            </tr>
-            <tr>
-                <th>Model:</th>
-                <td><?php echo $row['meter_model'];?></td>
-            </tr>
-            <tr>
-                <th>Size:</th>
-                <td><?php echo $row['meter_size'];?></td>
-            </tr>
-            <tr>
-                <th>Age:</th>
-                <td><?php echo $row['age'];?></td>
-            </tr>
-            <tr>
-                <th>Mileage:</th>
-                <td><?php echo $row['mileage'];?></td>
-            </tr>
-            <tr>
-                <th>Manufacturer:</th>
-                <td><?php echo $row['manu_name'];?></td>
-            </tr>
-            <tr>
-                <th>Manufacture Year:</th>
-                <td><?php echo $row['manufactured_year'];?></td>
-            </tr>
-            <tr>
-                <th>Status:</th>
-                <td><?php echo $row['meter_status'];?></td>
-            </tr>
-        </table>
-<hr>
-<h3>Test Results</h3>
-        <table class="table mb-4">
-            <tr><th>No</th>
-            <th>Test Date</th>
-            <th>Result</th>
-            <th>Result Detail</th></tr>
+    <h2 class='fs-1 text-uppercase'>Meter Info</h2>
+    <hr class='border border-success border-2 opacity-50'>
+    <table class='table mb-4'><th colspan=2><h3><?php echo $row['serial_num'];?></h3></th>
+        <tr>
+            <th>Type:</th>
+            <td><?php echo $row['meter_type'];?></td>
+        </tr>
+        <tr>
+            <th>Model:</th>
+            <td><?php echo $row['meter_model'];?></td>
+        </tr>
+        <tr>
+            <th>Size:</th>
+            <td><?php echo $row['meter_size'];?></td>
+        </tr>
+        <tr>
+            <th>Age:</th>
+            <td><?php echo $row['age'];?></td>
+        </tr>
+        <tr>
+            <th>Mileage:</th>
+            <td><?php echo $row['mileage'];?></td>
+        </tr>
+        <tr>
+            <th>Manufacturer:</th>
+            <td><?php echo $row['manu_name'];?></td>
+        </tr>
+        <tr>
+            <th>Manufacture Year:</th>
+            <td><?php echo $row['manufactured_year'];?></td>
+        </tr>
+        <tr>
+            <th>Status:</th>
+            <td><?php echo $row['meter_status'];?></td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Test Results</h3>
+    <table class="table mb-4">
+        <tr><th>No</th>
+        <th>Test Date</th>
+        <th>Result</th>
+        <th>Result Detail</th></tr>
         <?php        
-        while($rowTest = mysqli_fetch_array($resultTest)) {
-            echo '<tr>
-                <th>'.$num.'</th>';
-            if ($rowTest['result'] == NULL) {
-                echo '<td>N/A</td>
-                <td>NOT TESTED</td>';
-            } else {
-                echo '<td>'.$rowTest['test_date'].'</td>';            
-                if ($rowTest['result'] == 'PASSED') {
-                    echo "<td style='color: green;'>" . $rowTest['result'] . "</td>";
-                } else if ($rowTest['result'] == 'FAILED') {
-                    echo "<td style='color: red;'>" . $rowTest['result'] . "</td>";
+            while($rowTest = mysqli_fetch_array($resultTest)) {
+                echo '<tr>
+                    <th>'.$num.'</th>';
+                if ($rowTest['result'] == NULL) {
+                    echo '<td>N/A</td>
+                    <td>NOT TESTED</td>';
+                } else {
+                    echo '<td>'.$rowTest['test_date'].'</td>';            
+                    if ($rowTest['result'] == 'PASSED') {
+                        echo "<td style='color: green;'>" . $rowTest['result'] . "</td>";
+                    } else if ($rowTest['result'] == 'FAILED') {
+                        echo "<td style='color: red;'>" . $rowTest['result'] . "</td>";
+                    }
                 }
+                echo '<td class="serial_num"><a href="invResultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
+                $num++;
             }
-            echo '<td class="serial_num"><a href="invResultDetail.php?test_id=' .$rowTest["test_id"]. '"><button class="btn btn-info btn-sm">Detail</button></a></td></tr>';
-            $num++;
-        }
         echo "</table>";
-    ?>
+        ?>
 
-<div class="d-grid gap-2 col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='invMeterResult.php'" title='Back To Scan QR Page'>Back</button>
-</div>
+    <div class="d-grid gap-2 col-6 mx-auto mb-4">
+        <button class="back btn btn-dark" type="button" onclick="window.location.href='invMeterResult.php'" title='Back To Scan QR Page'>Back</button>
+    </div>
 
 </div>
 

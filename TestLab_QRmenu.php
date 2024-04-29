@@ -17,10 +17,10 @@
 
 <body>
 <header>
-<?php 
-include 'header.php';
-include 'navLab.php';
-?>
+  <?php 
+    include 'header.php';
+    include 'navLab.php';
+  ?>
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -32,7 +32,7 @@ include 'navLab.php';
 
 <div class="container-sm text-center mb-4 px-5">
   <div class="row mb-5">
-    <h4>Scan Batch QR</h4>
+    <h4>Batch QR</h4>
     <div class="col-6">
       <a button type="button" class="btn btn-primary btn-lg d-block" href="receiveBatchTest.php">Receive for Testing</a>
       </div>
@@ -42,7 +42,7 @@ include 'navLab.php';
   </div>
 
   <div class="row">
-    <h4>Scan Meter QR</h4>
+    <h4>Meter QR</h4>
     <div class='col-6'>
       <a button type="button" class="btn btn-primary btn-lg d-block" href="meterTest.php">Meter Test Result Form</a>
       </div>

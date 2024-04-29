@@ -4,27 +4,26 @@ include 'connection.php';
 if(ISSET($_POST['batchID'])){
     $batchID = $_POST['batchID'];
     try{
-    //insert batch into movement table        
-    $movementquery = "INSERT INTO movement VALUES (DEFAULT, 1, 2, (CURRENT_DATE), NULL, $batchID)";
-    $movementrun = mysqli_query($connection, $movementquery);
-    //update meter status
-    $update_status= "UPDATE meter SET meter_status = 'IN TRANSIT' WHERE batch_id =$batchID";
-    $update_status_run= mysqli_query($connection,$update_status);
-    if($movementrun && $update_status_run){
-        echo "<script>alert('Batch sent to lab successfully!');</script>";
-        header("Refresh:0");
-    } else {
-        echo "<script>alert('Failed to send batch to lab!');</script>";
-        header("Refresh:0");
+        //insert batch into movement table        
+        $movementquery = "INSERT INTO movement VALUES (DEFAULT, 1, 2, (CURRENT_DATE), NULL, $batchID)";
+        $movementrun = mysqli_query($connection, $movementquery);
+        //update meter status
+        $update_status= "UPDATE meter SET meter_status = 'IN TRANSIT' WHERE batch_id =$batchID";
+        $update_status_run= mysqli_query($connection,$update_status);
+        if($movementrun && $update_status_run){
+            echo "<script>alert('Batch sent to lab successfully!');</script>";
+            header("Refresh:0");
+        } else {
+            echo "<script>alert('Failed to send batch to lab!');</script>";
+            header("Refresh:0");
+        }
     }
-}
     catch(Exception $e){
         echo "<script>alert('Error: Invalid Batch ID. Please try again.');</script>";
         header("Refresh:0");
         exit();
     }
-}
-?>
+} ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,11 +56,11 @@ if(ISSET($_POST['batchID'])){
     </header>
 
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-    <li class="breadcrumb-item"><a href="Inv_QRmenu.php" title='QRcode Page'>QR Code</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Scan QR - Initial Ship Out To Lab</li>
-    </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+            <li class="breadcrumb-item"><a href="Inv_QRmenu.php" title='QRcode Page'>QR Code</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Scan QR - Initial Ship Out To Lab</li>
+        </ol>
     </nav>
 
     <section id="meteruninstall">

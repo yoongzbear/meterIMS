@@ -32,7 +32,7 @@
 
 <div class="container-sm text-center mb-4 px-5">
   <div class="row mb-5">
-    <h4>Generate QR</h4>
+    <h4>Batch QR</h4>
     <div class="col-6">
       <a button type="button" class="btn btn-primary btn-lg d-block" href="inventoryDep_AddBatchForm.php">Receive Meter</a>
       </div>
@@ -42,7 +42,6 @@
   </div>
 
   <div class="row mb-5">
-    <h4>Scan Batch QR</h4>
     <div class='col-6'>
       <a button type="button" class="btn btn-primary btn-lg d-block" href="invInitialTest.php">Initial Ship Out To Lab</a>
       </div>    
@@ -52,7 +51,7 @@
   </div>
 
   <div class="row">
-    <h4>Scan Meter QR</h4>
+    <h4>Meter QR</h4>
     <div class="col-6">
       <a button type="button" class="btn btn-primary btn-lg d-block" href="InvDep_Scan_View_meter_info.php">View Meter Info</a>
       </div>    

@@ -1,6 +1,6 @@
 <?php
-include 'secure_TestLab.php';
-include 'connection.php';
+    include 'secure_TestLab.php';
+    include 'connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@ include 'connection.php';
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <header>
         <?php 
@@ -28,30 +29,30 @@ include 'connection.php';
     </ol>
     </nav>
 
-<div class="my-4 text-center">
-    <h3>Send to Inventory Department</h3>
-    <p class="fst-italic">Please scan the QR code on the batch to insert movement.</p>
-    <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
-    <button type="button" id="btn-scan-qr" class="btn btn-light text-dark">Scan QR</button>
-    <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark" hidden="">Cancel Scan</button>
+    <div class="my-4 text-center">
+        <h3>Send to Inventory Department</h3>
+        <p class="fst-italic">Please scan the QR code on the batch to insert movement.</p>
+        <canvas id="qr-canvas" width="300" height="300" style="border:1px solid #000000;"></canvas><br>
+        <button type="button" id="btn-scan-qr" class="btn btn-light text-dark">Scan QR</button>
+        <button type="button" id="btn-cancel-scan" class="btn btn-light text-dark" hidden="">Cancel Scan</button>
 
-    <div class="col mt-4 text-center">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-3 shadow" id="meterForm" action="check_batch_exist_labTOinv.php" method="POST" style="display:none;">
-        <form action="check_batch_exist_labTOinv.php" id="meterForm" method="POST">
-            <div class="modal-body p-4 text-center">
-                <h5 class="modal-title mb-0">Is this the right batch id?</h5>
-                <p class="mb-0">Batch ID : </p>
-                <input type="text" id="outputData" name="batch_id" readonly>
+        <div class="col mt-4 text-center">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content rounded-3 shadow" id="meterForm" action="check_batch_exist_labTOinv.php" method="POST" style="display:none;">
+                    <form action="check_batch_exist_labTOinv.php" id="meterForm" method="POST">
+                        <div class="modal-body p-4 text-center">
+                            <h5 class="modal-title mb-0">Is this the right batch id?</h5>
+                            <p class="mb-0">Batch ID : </p>
+                            <input type="text" id="outputData" name="batch_id" readonly>
+                        </div>
+                        <div class="modal-footer flex-nowrap p-0">
+                            <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                            <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="modal-footer flex-nowrap p-0">
-                <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"><strong>Yes</strong></button>
-                <button type="button" id="btn-cancel" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal">No</button>
-            </div>
-        </form>
-    </div>
-    </div>
-    </div>
+        </div>
 
     <script>
         //redirect to the meter install page if cancelled after scanning

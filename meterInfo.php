@@ -1,30 +1,30 @@
 <?php
-        include ('secure_Inv.php');
-        include('connection.php');
-        $serial_num = $_GET['serial_num'];
-        //get meter information
-        $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
-        $result = mysqli_query($connection, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $batch_id = $row['batch_id'];
-        //get location information
-        $sql1 = "SELECT meter.location_id, location.location_name FROM meter JOIN location ON meter.location_id = location.location_id WHERE serial_num = '$serial_num'";
-        $result1 = mysqli_query($connection, $sql1);
+    include ('secure_Inv.php');
+    include('connection.php');
+    $serial_num = $_GET['serial_num'];
+    //get meter information
+    $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $batch_id = $row['batch_id'];
+    //get location information
+    $sql1 = "SELECT meter.location_id, location.location_name FROM meter JOIN location ON meter.location_id = location.location_id WHERE serial_num = '$serial_num'";
+    $result1 = mysqli_query($connection, $sql1);
         
-        // Check if any result is returned
-        if ($result1) {
-            $row1 = mysqli_fetch_assoc($result1);
-            if ($row1 !== null) {
-                // Location information is available
-                $location_name = $row1['location_name'];
-            } else {
-                // No location information available
-                $location_name = "The meter hasn't been assigned to a region store";
-            }
+    // Check if any result is returned
+    if ($result1) {
+        $row1 = mysqli_fetch_assoc($result1);
+        if ($row1 !== null) {
+            // Location information is available
+            $location_name = $row1['location_name'];
         } else {
-            // Handle query execution error
-            echo "Error: " . mysqli_error($connection);
-        } ?>
+            // No location information available
+            $location_name = "The meter hasn't been assigned to a region store";
+        }
+    } else {
+        // Handle query execution error
+        echo "Error: " . mysqli_error($connection);
+    } ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,92 +37,91 @@
 </head>
 
 <body>
-<header>
-<?php 
-include 'header.php';
-include 'navInv.php';
-?>
-</header>
+    <header>
+        <?php 
+            include 'header.php';
+            include 'navInv.php';
+        ?>
+    </header>
 
-<nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
-    <li class="breadcrumb-item"><a href="mov_track_view.php" title='Meter Tracking Page'>Meter Tracking</a></li>
-    <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Batch Detail Page'>Batch Detail</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Meter Info</li>
-  </ol>
-</nav>
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
+            <li class="breadcrumb-item"><a href="mov_track_view.php" title='Meter Tracking Page'>Meter Tracking</a></li>
+            <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Batch Detail Page'>Batch Detail</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Meter Info</li>
+        </ol>
+    </nav>
 
-<div class="col align-self-center">
+    <div class="col align-self-center">
+        <?php
+            echo "
+            <h2 class='fs-1 text-uppercase'>Meter Info</h2>
+            <hr class='border border-success border-2 opacity-50'>";
+            echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>        
+                <tr>
+                    <th>Type:</th>
+                    <td>" . $row['meter_type'] . "</td>
+                </tr>
+                <tr>
+                    <th>Model:</th>
+                    <td>" . $row['meter_model'] . "</td>
+                </tr>
+                <tr>
+                    <th>Size:</th>
+                    <td>" . $row['meter_size'] . "</td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td>" . $row['age'] . "</td>
+                </tr>
+                <tr>
+                    <th>Mileage:</th>
+                    <td>" . $row['mileage'] . "</td>
+                </tr>
+                <tr>
+                    <th>Manufacturer:</th>
+                    <td>" . $row['manu_name'] . "</td>
+                </tr>
+                <tr>
+                    <th>Manufacture Year:</th>
+                    <td>" . $row['manufactured_year'] . "</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td>" . $row['meter_status'] . "</td>
+                </tr>
+                <tr>
+                    <th>Location:</th>
+                    <td>" . $row['location_name'] . "</td>
+                </tr>
+                <tr>
+                    <th>Assigned Region Store:</th>
+                    <td>" . $location_name. "</td>
+                </tr>
+                ";
+            if ($row['install_date'] != NULL) {
+                //if the meter is installed
+                echo "<tr>
+                    <th>Install Date:</th>
+                    <td>" . $row['install_date'] . "</td>
+                </tr>
+                <tr>
+                    <th>Install Address:</th>
+                    <td>" . $row['install_address'] . "</td>
+                </tr>";}
+            echo "</table>";
+        ?>
+        
+        <div class="d-grid gap-2 col-6 mx-auto mb-4">
+            <button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?batch_id=<?= $batch_id; ?>'" title='Back To Batch Detail'>Back</button>
+        </div>
 
-    <?php
-        echo "
-        <h2 class='fs-1 text-uppercase'>Meter Info</h2>
-        <hr class='border border-success border-2 opacity-50'>";
-        echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>        
-            <tr>
-                <th>Type:</th>
-                <td>" . $row['meter_type'] . "</td>
-            </tr>
-            <tr>
-                <th>Model:</th>
-                <td>" . $row['meter_model'] . "</td>
-            </tr>
-            <tr>
-                <th>Size:</th>
-                <td>" . $row['meter_size'] . "</td>
-            </tr>
-            <tr>
-                <th>Age:</th>
-                <td>" . $row['age'] . "</td>
-            </tr>
-            <tr>
-                <th>Mileage:</th>
-                <td>" . $row['mileage'] . "</td>
-            </tr>
-            <tr>
-                <th>Manufacturer:</th>
-                <td>" . $row['manu_name'] . "</td>
-            </tr>
-            <tr>
-                <th>Manufacture Year:</th>
-                <td>" . $row['manufactured_year'] . "</td>
-            </tr>
-            <tr>
-                <th>Status:</th>
-                <td>" . $row['meter_status'] . "</td>
-            </tr>
-            <tr>
-                <th>Location:</th>
-                <td>" . $row['location_name'] . "</td>
-            </tr>
-            <tr>
-                <th>Assigned Region Store:</th>
-                <td>" . $location_name. "</td>
-            </tr>
-            ";
-        if ($row['install_date'] != NULL) {
-            //if the meter is installed
-            echo "<tr>
-                <th>Install Date:</th>
-                <td>" . $row['install_date'] . "</td>
-            </tr>
-            <tr>
-                <th>Install Address:</th>
-                <td>" . $row['install_address'] . "</td>
-            </tr>";}
-        echo "</table>";
-    ?>
-    
-<div class="d-grid gap-2 col-6 mx-auto mb-4">
-<button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?batch_id=<?= $batch_id; ?>'" title='Back To Batch Detail'>Back</button>
-</div>
+    </div>
 
-</div>
-
-<footer>
-    <?php include "footer.php"?>
-</footer>
+    <footer>
+        <?php include "footer.php"?>
+    </footer>
 
 </body>
 </html>

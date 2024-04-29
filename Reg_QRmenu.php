@@ -18,10 +18,10 @@
 
 <body>
 <header>
-<?php 
-include 'header.php'; 
-include 'navReg.php';
-?>
+  <?php 
+    include 'header.php'; 
+    include 'navReg.php';
+  ?>
 </header>
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -32,20 +32,20 @@ include 'navReg.php';
 </nav>
 
 <div class="container text-center mb-4 px-5">
-  <h4>Scan Batch QR</h4>
+  <h4>Batch QR</h4>
+  <div class="row mb-4">
+    <div class="col">
+        <a button type="button" class="btn btn-primary btn-lg" href="store_ShipOrderForm.php">Store Arrival</a>
+    </div>
+  </div>
   <div class="row mb-4">
     <div class="col">
         <a button type="button" class="btn btn-primary btn-lg" href="store_ReceiveOrderScanBatchQR.php">Store Arrival</a>
     </div>
   </div>
-  <div class="row mb-4">
-    <div class="col">
-        <a button type="button" class="btn btn-primary btn-lg" href="store_ShipOrderForm.php">Ship Out</a>
-    </div>
-  </div>
 
   <div class="row mb-4">
-  <h4>Scan Meter QR</h4>
+  <h4>Meter QR</h4>
     <div class="col">
       <a button type="button" class="btn btn-primary btn-lg mb-3" href="store_assignInstallForm.php">Installation Departure</a>
     </div>

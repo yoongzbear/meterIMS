@@ -31,7 +31,7 @@
 </nav>
 
 <div class="container text-center mb-4 px-6">
-    <h4>Scan Meter QR</h4>
+    <h4>Meter QR</h4>
     <div class="row mb-5">
       <div class="col">
         <a button type="button" class="btn btn-primary btn-lg" href="meterInstall.php">Meter Installation</a>
