@@ -4,7 +4,7 @@ include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
     try{
-        //check if meter is installed
+        //check if meter is installed and exists
         $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum' AND meter_status = 'INSTALLED'";
         $statuscheckrun = mysqli_query($connection, $statuscheckquery);
         $statuscheckrow = mysqli_fetch_assoc($statuscheckrun);

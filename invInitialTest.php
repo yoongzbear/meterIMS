@@ -4,7 +4,7 @@ include 'connection.php';
 if(ISSET($_POST['batchID'])){
     $batchID = $_POST['batchID'];
     try{
-    //insert into movement table        
+    //insert batch into movement table        
     $movementquery = "INSERT INTO movement VALUES (DEFAULT, 1, 2, (CURRENT_DATE), NULL, $batchID)";
     $movementrun = mysqli_query($connection, $movementquery);
     //update meter status

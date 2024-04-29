@@ -47,7 +47,8 @@
                     <th>Quantity</th>
                 </tr>
                 <?php
-                    $batchmetersizes = [15,20,25,40,50,80,100,150];
+                    $batchmetersizes = [15,20,25,40,50,80,100,150]; //predefined meter sizes
+                    //calculate usable meters for each size, then print in table
                     foreach($batchmetersizes as $size) {
                         $unusablemeter = 0;
                         $batchquery = "SELECT batch_id FROM batch WHERE location_id = '$locationid' AND meter_size = '$size'";
@@ -81,6 +82,7 @@
         <?php include 'footer.php'; ?>
     </footer>
     <script>
+        //highlight low stock meters
             const minStock = [38066,72,75,36,50,27,52,35];
             const size = [15,20,25,40,50,80,100,150];
             for(let i=0; i<size.length; i++){
