@@ -43,11 +43,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTTO Aqua</title>
-    <link href="styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OTTO Aqua</title>
+	<link href="styles.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -56,51 +56,47 @@
 </header>
 
 <div class='container col-xl-5 mb-4'>
-
-<h2 class='fs-1 text-uppercase'>Meter Information</h2>
-<hr class='border border-success border-2 opacity-50'>
-	<!--Meter Info-->
-	<table class="table">
-		<tr class="table" colspan = "2">
-			<td>
-				<div id="qrcode">
-					<script src = "qrcode.js"></script>
-					<script src = "qrGeneratorMeter.js"></script>
-					<script>makeCode(); </script>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row">Meter Type:</th>
-			<td><?php echo $meter_type; ?></td>
-		</tr>
-		<tr>
-			<th scope="row">Meter Model:</th>
-			<td><?php echo $meter_model; ?></td>
-		</tr>
-		<tr>
-			<th scope="row">Meter Size:</th>
-			<td><?php echo $meter_size; ?></td>
-		</tr>
-		<tr>
-			<th scope="row">Age:</th>
-			<td><?php echo $age; ?></td>
-		</tr>
-		<tr>
-			<th scope="row">Mileage:</th>
-			<td><?php echo $mileage; ?></td>
-		</tr>
-		<tr>
-			<th scope="row">Manufacturer:</th>
-			<td><?php echo $manu_name; ?></td>
-		</tr>
-		</thread>
-	</table>
-
-<div class="d-grid gap-2 col-6 mx-auto">
-	<button class="back btn btn-dark" type="button" onclick="window.location.href='store_assignInstallForm.php'" title='Back To Installation Page'>Back</button>
-</div>
-
+	<h2 class='fs-1 text-uppercase'>Meter Information</h2>
+	<hr class='border border-success border-2 opacity-50'>
+		<!--Meter Info-->
+		<table class="table">
+			<tr class="table" colspan = "2">
+				<td>
+					<div id="qrcode">
+						<script src = "qrcode.js"></script>
+						<script src = "qrGeneratorMeter.js"></script>
+						<script>makeCode(); </script>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">Meter Type:</th>
+				<td><?php echo $meter_type; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Meter Model:</th>
+				<td><?php echo $meter_model; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Meter Size:</th>
+				<td><?php echo $meter_size; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Age:</th>
+				<td><?php echo $age; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Mileage:</th>
+				<td><?php echo $mileage; ?></td>
+			</tr>
+			<tr>
+				<th scope="row">Manufacturer:</th>
+				<td><?php echo $manu_name; ?></td>
+			</tr>
+		</table>
+	<div class="d-grid gap-2 col-6 mx-auto">
+		<button class="back btn btn-dark" type="button" onclick="window.location.href='store_assignInstallForm.php'" title='Back To Installation Page'>Back</button>
+	</div>
 </div>
 
 <footer>
