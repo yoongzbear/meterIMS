@@ -11,12 +11,6 @@ if(ISSET($_POST['serial_num'])){
         if (mysqli_num_rows($resultMeter) == 0) {
             throw new Exception();
         }
-        if ($rowMeter['meter_status'] == 'INSTALLED') {
-            echo "<script>alert('Meter is already installed! You are not allowed to fill in the form for an installed meter.');
-            window.location.href='meterInstall.php';
-            </script>";
-            exit();
-        }
 }
     catch(Exception $e){
         echo "<script>alert('Error: Invalid Serial Number. Please try again.');
