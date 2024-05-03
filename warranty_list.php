@@ -51,7 +51,7 @@ $num = 1;
     </thead>
 
     <tbody class="table-group-divider">
-    <?php while ($row = mysqli_fetch_array($result)) : ?>
+    <?php while ($row = mysqli_fetch_array($result)) { ?>
         <tr>
             <th><?php echo $num++; ?></th>
             <td><?php echo $row["meter_type"]; ?></td>
@@ -60,7 +60,7 @@ $num = 1;
             <td><?php echo $row["install_address"]; ?></td>
             <td><button class="btn btn-sm btn-info" onclick="window.location.href= 'store_replaceMeterScanQR.php?serial_num=<?php echo $row['serial_num']; ?>';">Install New Meter</button></td>
         </tr>
-    <?php endwhile; ?>
+    <?php } ?>
     </tbody>
 </table>
 
