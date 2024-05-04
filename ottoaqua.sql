@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 26, 2024 at 03:51 PM
+-- Generation Time: May 04, 2024 at 04:32 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -30,25 +30,47 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `batch`;
 CREATE TABLE IF NOT EXISTS `batch` (
   `batch_id` int NOT NULL AUTO_INCREMENT,
-  `location_id` int NOT NULL,
   `meter_type` varchar(100) NOT NULL,
   `meter_model` varchar(100) NOT NULL,
   `meter_size` int NOT NULL,
   `quantity` int NOT NULL,
-  PRIMARY KEY (`batch_id`),
-  KEY `location_id` (`location_id`)
+  PRIMARY KEY (`batch_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `batch`
 --
 
-INSERT INTO `batch` (`batch_id`, `location_id`, `meter_type`, `meter_model`, `meter_size`, `quantity`) VALUES
-(1, 1, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 0),
-(2, 4, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 3),
-(3, 3, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 2),
-(4, 3, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 2),
-(5, 2, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 0);
+INSERT INTO `batch` (`batch_id`, `meter_type`, `meter_model`, `meter_size`, `quantity`) VALUES
+(1, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 0),
+(2, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 3),
+(3, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 2),
+(4, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 2),
+(5, 'Mechanical Meter - Brass Body & Piston Volumetric Type', 'PSM Volumetric 15mm', 20, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inbound`
+--
+
+DROP TABLE IF EXISTS `inbound`;
+CREATE TABLE IF NOT EXISTS `inbound` (
+  `inbound_id` int NOT NULL AUTO_INCREMENT,
+  `location_id` int NOT NULL,
+  PRIMARY KEY (`inbound_id`),
+  KEY `location_id` (`location_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `inbound`
+--
+
+INSERT INTO `inbound` (`inbound_id`, `location_id`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
 
 -- --------------------------------------------------------
 
@@ -67,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `lab_result` (
   PRIMARY KEY (`test_id`),
   KEY `serial_num` (`serial_num`),
   KEY `defect_id` (`defect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `lab_result`
@@ -95,20 +117,18 @@ DROP TABLE IF EXISTS `location`;
 CREATE TABLE IF NOT EXISTS `location` (
   `location_id` int NOT NULL AUTO_INCREMENT,
   `location_name` varchar(50) NOT NULL,
-  `username` varchar(16) NOT NULL,
-  PRIMARY KEY (`location_id`),
-  KEY `username` (`username`)
+  PRIMARY KEY (`location_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `location`
 --
 
-INSERT INTO `location` (`location_id`, `location_name`, `username`) VALUES
-(1, 'Air Selangor Inventory Department', 'paola'),
-(2, 'Air Selangor Test Lab', 'wendy'),
-(3, 'Shah Alam', 'yuna'),
-(4, 'Subang Jaya', 'alya');
+INSERT INTO `location` (`location_id`, `location_name`) VALUES
+(1, 'Air Selangor Inventory Department'),
+(2, 'Air Selangor Test Lab'),
+(3, 'Shah Alam'),
+(4, 'Subang Jaya');
 
 -- --------------------------------------------------------
 
@@ -152,8 +172,8 @@ CREATE TABLE IF NOT EXISTS `meter` (
   `location_id` int DEFAULT NULL,
   PRIMARY KEY (`serial_num`),
   KEY `location_id` (`location_id`),
-  KEY `batch_id` (`batch_id`),
-  KEY `manu_id` (`manu_id`)
+  KEY `manu_id` (`manu_id`),
+  KEY `batch_id` (`batch_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -180,12 +200,14 @@ INSERT INTO `meter` (`serial_num`, `install_date`, `age`, `mileage`, `batch_id`,
 DROP TABLE IF EXISTS `movement`;
 CREATE TABLE IF NOT EXISTS `movement` (
   `tracking_id` int NOT NULL AUTO_INCREMENT,
-  `origin` int NOT NULL,
-  `destination` int NOT NULL,
+  `outbound_id` int NOT NULL,
+  `inbound_id` int NOT NULL,
   `ship_date` date NOT NULL,
   `arrival_date` date DEFAULT NULL,
   `batch_id` int NOT NULL,
   PRIMARY KEY (`tracking_id`),
+  KEY `outbound_id` (`outbound_id`),
+  KEY `inbound_id` (`inbound_id`),
   KEY `batch_id` (`batch_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -193,13 +215,37 @@ CREATE TABLE IF NOT EXISTS `movement` (
 -- Dumping data for table `movement`
 --
 
-INSERT INTO `movement` (`tracking_id`, `origin`, `destination`, `ship_date`, `arrival_date`, `batch_id`) VALUES
+INSERT INTO `movement` (`tracking_id`, `outbound_id`, `inbound_id`, `ship_date`, `arrival_date`, `batch_id`) VALUES
 (1, 1, 2, '2023-12-26', '2024-01-02', 1),
 (2, 2, 1, '2024-01-11', '2024-01-15', 1),
 (3, 1, 4, '2024-01-20', '2024-01-25', 2),
 (4, 1, 3, '2024-01-20', '2024-01-24', 3),
 (5, 4, 3, '2024-01-30', '2024-02-03', 4),
 (6, 4, 2, '2024-03-29', '2024-04-02', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `outbound`
+--
+
+DROP TABLE IF EXISTS `outbound`;
+CREATE TABLE IF NOT EXISTS `outbound` (
+  `outbound_id` int NOT NULL AUTO_INCREMENT,
+  `location_id` int NOT NULL,
+  PRIMARY KEY (`outbound_id`),
+  KEY `location_id` (`location_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `outbound`
+--
+
+INSERT INTO `outbound` (`outbound_id`, `location_id`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
 
 -- --------------------------------------------------------
 
@@ -213,19 +259,21 @@ CREATE TABLE IF NOT EXISTS `useraccount` (
   `password` varchar(16) NOT NULL,
   `name` varchar(50) NOT NULL,
   `emp_type` varchar(25) NOT NULL,
-  PRIMARY KEY (`username`)
+  `location_id` int DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  KEY `location_id` (`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `useraccount`
 --
 
-INSERT INTO `useraccount` (`username`, `password`, `name`, `emp_type`) VALUES
-('alya', 'nam12345', 'Alya Mastura', 'region store'),
-('paola', 'pwr12345', 'Paola Wan', 'inventory department'),
-('reyes', 'bing1234', 'Reyes Wong', 'contractor'),
-('wendy', 'wlsi1234', 'Wendy Lai', 'lab tester'),
-('yuna', 'yhms1234', 'Yuna Hee', 'region store');
+INSERT INTO `useraccount` (`username`, `password`, `name`, `emp_type`, `location_id`) VALUES
+('alya', 'nam12345', 'Alya Mastura', 'region store', 4),
+('paola', 'pwr12345', 'Paola Wan', 'inventory department', 1),
+('reyes', 'bing1234', 'Reyes Wong', 'contractor', NULL),
+('wendy', 'wlsi1234', 'Wendy Lai', 'lab tester', 2),
+('yuna', 'yhms1234', 'Yuna Hee', 'region store', 3);
 
 -- --------------------------------------------------------
 
@@ -236,11 +284,9 @@ INSERT INTO `useraccount` (`username`, `password`, `name`, `emp_type`) VALUES
 DROP TABLE IF EXISTS `warranty`;
 CREATE TABLE IF NOT EXISTS `warranty` (
   `warranty_id` int NOT NULL AUTO_INCREMENT,
-  `serial_num` varchar(15) NOT NULL,
   `warranty_status` varchar(12) DEFAULT NULL,
   `test_id` int DEFAULT NULL,
   PRIMARY KEY (`warranty_id`),
-  KEY `serial_num` (`serial_num`),
   KEY `test_id` (`test_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -248,8 +294,8 @@ CREATE TABLE IF NOT EXISTS `warranty` (
 -- Dumping data for table `warranty`
 --
 
-INSERT INTO `warranty` (`warranty_id`, `serial_num`, `warranty_status`, `test_id`) VALUES
-(1, 'AIS17BA0000001', 'REPLACED', 1);
+INSERT INTO `warranty` (`warranty_id`, `warranty_status`, `test_id`) VALUES
+(1, 'CAN CLAIM', 1);
 
 -- --------------------------------------------------------
 
@@ -290,10 +336,10 @@ INSERT INTO `warranty_defect` (`defect_id`, `defect`) VALUES
 --
 
 --
--- Constraints for table `batch`
+-- Constraints for table `inbound`
 --
-ALTER TABLE `batch`
-  ADD CONSTRAINT `batch_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`);
+ALTER TABLE `inbound`
+  ADD CONSTRAINT `inbound_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`);
 
 --
 -- Constraints for table `lab_result`
@@ -303,31 +349,38 @@ ALTER TABLE `lab_result`
   ADD CONSTRAINT `lab_result_ibfk_2` FOREIGN KEY (`defect_id`) REFERENCES `warranty_defect` (`defect_id`);
 
 --
--- Constraints for table `location`
---
-ALTER TABLE `location`
-  ADD CONSTRAINT `location_ibfk_1` FOREIGN KEY (`username`) REFERENCES `useraccount` (`username`);
-
---
 -- Constraints for table `meter`
 --
 ALTER TABLE `meter`
-  ADD CONSTRAINT `meter_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`),
-  ADD CONSTRAINT `meter_ibfk_3` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
-  ADD CONSTRAINT `meter_ibfk_4` FOREIGN KEY (`manu_id`) REFERENCES `manufacturer` (`manu_id`);
+  ADD CONSTRAINT `meter_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`),
+  ADD CONSTRAINT `meter_ibfk_2` FOREIGN KEY (`manu_id`) REFERENCES `manufacturer` (`manu_id`),
+  ADD CONSTRAINT `meter_ibfk_3` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`);
 
 --
 -- Constraints for table `movement`
 --
 ALTER TABLE `movement`
-  ADD CONSTRAINT `movement_ibfk_1` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`);
+  ADD CONSTRAINT `movement_ibfk_1` FOREIGN KEY (`outbound_id`) REFERENCES `outbound` (`outbound_id`),
+  ADD CONSTRAINT `movement_ibfk_2` FOREIGN KEY (`inbound_id`) REFERENCES `inbound` (`inbound_id`),
+  ADD CONSTRAINT `movement_ibfk_3` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`);
+
+--
+-- Constraints for table `outbound`
+--
+ALTER TABLE `outbound`
+  ADD CONSTRAINT `outbound_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`);
+
+--
+-- Constraints for table `useraccount`
+--
+ALTER TABLE `useraccount`
+  ADD CONSTRAINT `useraccount_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`);
 
 --
 -- Constraints for table `warranty`
 --
 ALTER TABLE `warranty`
-  ADD CONSTRAINT `warranty_ibfk_1` FOREIGN KEY (`serial_num`) REFERENCES `meter` (`serial_num`),
-  ADD CONSTRAINT `warranty_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `lab_result` (`test_id`);
+  ADD CONSTRAINT `warranty_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `lab_result` (`test_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
