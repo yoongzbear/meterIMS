@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `lab_result`;
 CREATE TABLE IF NOT EXISTS `lab_result` (
   `test_id` int NOT NULL AUTO_INCREMENT,
   `serial_num` varchar(15) NOT NULL,
-  `receive_date` date NOT NULL,
+  `receive_date` date DEFAULT NULL,
   `test_date` date DEFAULT NULL,
   `result` varchar(6) DEFAULT NULL,
   `defect_id` int DEFAULT NULL,
@@ -285,7 +285,7 @@ DROP TABLE IF EXISTS `warranty`;
 CREATE TABLE IF NOT EXISTS `warranty` (
   `warranty_id` int NOT NULL AUTO_INCREMENT,
   `warranty_status` varchar(12) DEFAULT NULL,
-  `test_id` int DEFAULT NULL,
+  `test_id` int NOT NULL,
   PRIMARY KEY (`warranty_id`),
   KEY `test_id` (`test_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
