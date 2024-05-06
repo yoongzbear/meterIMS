@@ -2,7 +2,7 @@
     include 'secure_Reg.php';
     include 'connection.php';
     //get region store location of the user
-    $locationquery = "SELECT location_id, location_name FROM location WHERE username = '$_SESSION[username]'";
+    $locationquery = "SELECT location.location_id, location.location_name FROM location RIGHT JOIN useraccount ON useraccount.location_id = location.location_id WHERE username = '$_SESSION[username]'";
     $result = mysqli_query($connection, $locationquery);
     $locationarray = mysqli_fetch_array($result);
     $location = $locationarray['location_name'];
@@ -50,24 +50,11 @@
                     $batchmetersizes = [15,20,25,40,50,80,100,150]; //predefined meter sizes
                     //calculate usable meters for each size, then print in table
                     foreach($batchmetersizes as $size) {
-                        $unusablemeter = 0;
-                        $batchquery = "SELECT batch_id FROM batch WHERE location_id = '$locationid' AND meter_size = '$size'";
-                        $batchresult = mysqli_query($connection, $batchquery);
-                        $batch = mysqli_fetch_all($batchresult, MYSQLI_ASSOC);
-                        $metersizeresult = mysqli_query($connection,"SELECT SUM(quantity) FROM batch WHERE location_id = '$locationid' AND meter_size = '$size'");
-                        $metersize = mysqli_fetch_array($metersizeresult);
-                        $totalmeters = $metersize['SUM(quantity)'];
-                        foreach ($batch as $batchid) {
-                            $batchid = $batchid['batch_id'];
-                            $meterquery = "SELECT COUNT(serial_num) FROM meter WHERE batch_id = '$batchid' AND meter_status != 'IN STORE'";
-                            $meterresult = mysqli_query($connection, $meterquery);
-                            $meterquantity = mysqli_fetch_array($meterresult);
-                            $unusablemeter += $meterquantity['COUNT(serial_num)'];
-                        }
-                        $usablemeters = $totalmeters - $unusablemeter;
+                        $meterquery =  "SELECT COUNT(meter.serial_num) AS totalmeters FROM meter JOIN batch ON meter.batch_id = batch.batch_id WHERE batch.meter_size = '$size' AND meter.location_id = '$locationid' AND meter.meter_status = 'IN STORE';";
+                        $meterassoc = mysqli_fetch_assoc(mysqli_query($connection, $meterquery));
                         echo "<tr>
                                 <td>$size</td>
-                                <td id='$size'>$usablemeters</td>
+                                <td id='$size'>$meterassoc[totalmeters]</td>
                             </tr>";
                     } ?>
             </table>
