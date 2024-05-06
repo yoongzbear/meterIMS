@@ -1,5 +1,8 @@
 <?php
-include 'secure_Reg.php';
+// include 'secure_Reg.php';
+// testing
+session_start();
+$_SESSION['username'] = 'alya';
 include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
@@ -33,7 +36,7 @@ if(ISSET($_POST['serialnum'])){
     }
     
     //get location id of logged in user
-    $locationquery = "SELECT location_id FROM `location` WHERE username = '$_SESSION[username]'";
+    $locationquery = "SELECT location.location_id FROM location RIGHT JOIN useraccount ON useraccount.location_id = location.location_id WHERE username = '$_SESSION[username]'";
     $locationrun = mysqli_query($connection, $locationquery);
     $location = mysqli_fetch_assoc($locationrun);
 
@@ -42,7 +45,7 @@ if(ISSET($_POST['serialnum'])){
     $updatedmeterquantityrun = mysqli_query($connection, $updatedmeterquantity);
 
     //insert new batch for warranty claim
-    $batchquery = "INSERT INTO batch VALUES (DEFAULT, '$location[location_id]', '$meterinfo[meter_type]', '$meterinfo[meter_model]', '$meterinfo[meter_size]', 1)";
+    $batchquery = "INSERT INTO batch VALUES (DEFAULT, '$meterinfo[meter_type]', '$meterinfo[meter_model]', '$meterinfo[meter_size]', 1)";
     $batchresult = mysqli_query($connection, $batchquery);
 
     //get batch id of new batch
@@ -54,16 +57,23 @@ if(ISSET($_POST['serialnum'])){
     $meterquery = "UPDATE meter SET meter_status = 'SENT FOR WARRANTY', batch_id = $batchid[batch_id] WHERE serial_num = '$serialnum'";
     $meterresult = mysqli_query($connection, $meterquery);
 
+    //insert test record
+    $testquery = "INSERT INTO lab_result VALUES (DEFAULT, '$serialnum', NULL, NULL, NULL, NULL)";
+    $testrun = mysqli_query($connection, $testquery);
+    $testidquery = "SELECT test_id FROM lab_result WHERE serial_num = '$serialnum' ORDER BY test_id DESC LIMIT 1";
+    $testidassoc = mysqli_fetch_assoc(mysqli_query($connection, $testidquery));
+    $testid = $testidassoc['test_id'];
+
     //insert movement and warranty records
     $movementquery = "INSERT INTO movement VALUES (DEFAULT, $location[location_id], 2, (CURRENT_DATE), NULL, $batchid[batch_id])";
-    $warrantyquery = "INSERT INTO warranty VALUES (DEFAULT, '$serialnum', NULL, NULL)";
+    $warrantyquery = "INSERT INTO warranty VALUES (DEFAULT, NULL, '$testid')";
 
     //running movement and warranty queries
     $movementrun = mysqli_query($connection, $movementquery);
     $warrantyrun = mysqli_query($connection, $warrantyquery);
     
     //check if all queries are successful, then print new batch QR if successful
-    if($batchresult && $meterresult && $movementquery){
+    if($batchresult && $testrun && $movementrun && $warrantyrun){
         echo "<script>alert('Meter sent to lab successfully! You will be redirected to another window to print the new Batch QR for warranty claim.');</script>";
         echo "<script>window.open('regWarrantyBatchID.php?Batch_ID=$batchid[batch_id]')</script>";
         header("Refresh:250");
