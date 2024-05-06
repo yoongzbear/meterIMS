@@ -49,7 +49,7 @@ include 'navLab.php';
 
         <div id="meterForm" class="col-lg-12 mt-5 border border-warning shadow mb-4 rounded" style="display: none; width: 50%; margin:auto;">
             <h3 class="text-center">Please Confirm that the Batch ID is Correct.</h3>
-            <form action="submitBatchTest.php" method="post" class="text-center">
+            <form action="submitBatchTest.php" method="get" class="text-center">
                 <label>Meter Batch ID : </label>
                 <input type="text" id="outputData" name="batch_id" readonly><br>
                 <button type="submit" class="btn btn-success m-2 pt-1 pb-1 mt-4">Mark As Receive</button>
