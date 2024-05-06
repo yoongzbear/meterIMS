@@ -1,8 +1,5 @@
 <?php
-// include 'secure_Reg.php';
-// testing
-session_start();
-$_SESSION['username'] = 'alya';
+include 'secure_Reg.php';
 include 'connection.php';
 if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
