@@ -1,11 +1,11 @@
 <?php 
 include 'secure_Con.php';
 include 'connection.php';
-if(ISSET($_POST['serial_num'])){
-    $serial_num = $_POST['serial_num'];
+if(ISSET($_GET['serial_num'])){
+    $serial_num = $_GET['serial_num'];
     try{
         //check if meter is out for installation
-        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num' AND meter_status = 'TO BE INSTALLED';";
+        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN movement ON batch.batch_id = movement.batch_id INNER JOIN inbound ON movement.inbound_id = inbound.inbound_id INNER JOIN location ON location.location_id = inbound.location_id WHERE serial_num = '$serial_num' AND meter_status = 'TO BE INSTALLED';";
         $resultMeter = mysqli_query($connection, $sqlMeter);
         $rowMeter = mysqli_fetch_assoc($resultMeter);
         if (mysqli_num_rows($resultMeter) == 0) {
@@ -77,7 +77,7 @@ if(ISSET($_POST['serial_num'])){
                 <td><?php echo $rowMeter['location_name'];?></td>
             </tr>
         </table>
-        <form id='meterForm' action='submitMeterInstallation.php' method='post' class="mb-4">    
+        <form id='meterForm' action='submitMeterInstallation.php' method='get' class="mb-4">    
             <input type='hidden' id='serial_num' name='serial_num' value='<?php echo $serial_num;?>'> 
             <div class="mb-3 row">               
                 <label for='installDate'>Installation Date : </label>
@@ -85,10 +85,23 @@ if(ISSET($_POST['serial_num'])){
                     <p name='installDate'><?php echo date('Y-m-d'); ?></p>
                 </div>
             </div>
-            <div class="mb-3 row">               
-                <label for='installAdd' class="col-form-label">Installation Address : </label>
+            <h5>Installation Address:</h5>
+            <div class="mb-3 row">
+                <label for="address" class="col-form-label">Street/Block Address:</label>
                 <div class="col-sm-10">
-                    <input type='text' class='form-control' id='installAdd' name='installAdd' required>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" required>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="postcode" class="col-form-label">Postcode:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="postcode" name="postcode" pattern="\d{5}" placeholder="Enter 5-digit Postcode" required>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="city" class="col-form-label">City:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="Enter City Name" required>
                 </div>
             </div>
             <input type='submit' style='width:20%;' class='btn btn-primary btn-submit' value='Submit'>

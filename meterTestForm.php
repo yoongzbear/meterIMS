@@ -1,7 +1,7 @@
 <?php include 'secure_TestLab.php'; 
 include('connection.php');
-if(ISSET($_POST['serial_num'])){
-    $serial_num = $_POST['serial_num'];
+if(ISSET($_GET['serial_num'])){
+    $serial_num = $_GET['serial_num'];
     try{
         //sql to check if meter is received for testing (already created record for testing)
         $sqlLab = "SELECT * FROM lab_result WHERE serial_num = '$serial_num' AND test_date IS NULL";
@@ -12,7 +12,7 @@ if(ISSET($_POST['serial_num'])){
         $resultFail = mysqli_query($connection, $sqlFail);
 
         //sql to get meter info
-        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
+        $sqlMeter = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id WHERE serial_num = '$serial_num'";
         $resultMeter = mysqli_query($connection, $sqlMeter);
         $rowMeter = mysqli_fetch_assoc($resultMeter);
 
@@ -95,7 +95,7 @@ if(ISSET($_POST['serial_num'])){
                 <td><?php echo $rowMeter['meter_status'];?></td>
             </tr></table>
 
-        <form id='meterForm' action='submitMeterTest.php' method='post' class="mb-4">        
+        <form id='meterForm' action='submitMeterTest.php' method='get' class="mb-4">        
 	        <input type='hidden' name='serial_num' value='<?php echo $serial_num;?>' readonly>
 	        <div class="mb-3 row">               
 		        <label for='testResult'>Test Result : </label>

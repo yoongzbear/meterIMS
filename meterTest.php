@@ -36,8 +36,8 @@
 
         <div class="col mt-4 text-center">
             <div class="modal-dialog" role="document">
-                <div class="modal-content rounded-3 shadow" id="meterForm" action="meterTestForm.php" method="post" style="display:none;">
-                    <form id="meterForm" action="meterTestForm.php" method="post">
+                <div class="modal-content rounded-3 shadow" id="meterForm" action="meterTestForm.php" method="get" style="display:none;">
+                    <form id="meterForm" action="meterTestForm.php" method="get">
                         <div class="modal-body p-4 text-center">
                             <h5 class="modal-title mb-0" id="meterFormLabel">Is this the right meter serial number?</h5>
                             <p class="mb-0">Meter Serial Number : </p>
