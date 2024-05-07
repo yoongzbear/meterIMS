@@ -43,7 +43,7 @@ if ($testResult == 'FAIL') {
         $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'FAILED' WHERE serial_num = '$serial_num' AND test_date IS NULL;";
     }
 } else {
-    $sqlBatch = "UPDATE batch INNER JOIN meter ON batch.batch_id = meter.batch_id SET meter.meter_status = 'TESTED' WHERE meter.serial_num = '$serial_num'";
+    $sqlBatch = "UPDATE meter SET meter_status = 'TESTED' WHERE serial_num = '$serial_num'";
     $sqlLab = "UPDATE lab_result SET test_date = CURDATE(), result = 'PASSED' WHERE serial_num = '$serial_num' AND test_date IS NULL;"; 
 }
 

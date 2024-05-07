@@ -9,12 +9,6 @@
       $sql = "SELECT * FROM useraccount WHERE useraccount.username = '$username' AND useraccount.password = '$password'";
       $result = mysqli_query($connection, $sql);
 
-      //for region store's location_id
-      $sql2 = "SELECT location.location_id FROM location, useraccount WHERE useraccount.username = location.username AND useraccount.username = '$username' AND useraccount.emp_type ='region store' ";
-      $result2 = mysqli_query($connection, $sql2);
-      $row2 = mysqli_fetch_assoc($result2);
-      $_SESSION['locationID'] =$row2['location_id'];
-
       //Check if there is a matching user
       if(mysqli_num_rows($result) == 1) {
         //Fetch user information
@@ -22,6 +16,7 @@
         $_SESSION['username'] = $username;
         $_SESSION['emp_type'] = $row['emp_type'];
         $_SESSION['name'] = $row['name'];
+        $_SESSION['locationID']= $row['location_id'];
 
         //Determine the home page based on emp_type
         if ($_SESSION['emp_type'] == 'region store') {

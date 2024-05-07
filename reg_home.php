@@ -5,7 +5,7 @@ $name = $_SESSION['name'];
 $username = $_SESSION['username'];
 
 //sql to get region store of the user
-$sql = "SELECT location_name FROM location WHERE username = '$username'";
+$sql = "SELECT location_name FROM location INNER JOIN useraccount ON useraccount.location_id = location.location_id WHERE username = '$username'";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_assoc($result);
 ?>

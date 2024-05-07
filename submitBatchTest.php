@@ -12,7 +12,7 @@ if(ISSET($_GET['batch_id'])){
         }
         
         //check if got warranty or not (if test id already created for the meter, then got warranty)
-        $sqlCheckWarranty = "SELECT * FROM lab_result WHERE serial_num IN (SELECT serial_num FROM meter WHERE batch_id = '$batch_id');";
+        $sqlCheckWarranty = "SELECT * FROM lab_result WHERE serial_num IN (SELECT serial_num FROM meter WHERE batch_id = '$batch_id' AND meter_status = 'SENT FOR WARRANTY' AND test_date IS NULL);";
         $resultCheckWarranty = mysqli_query($connection, $sqlCheckWarranty);
 
         if (mysqli_num_rows($resultCheckWarranty) > 0) {
