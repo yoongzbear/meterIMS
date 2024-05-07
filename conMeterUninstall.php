@@ -5,7 +5,7 @@ if(ISSET($_POST['serialnum'])){
     $serialnum = $_POST['serialnum'];
     try{
         //check if meter is installed and exists
-        $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum' AND meter_status = 'INSTALLED'";
+        $statuscheckquery = "SELECT meter_status FROM meter WHERE serial_num = '$serialnum'";
         $statuscheckrun = mysqli_query($connection, $statuscheckquery);
         $statuscheckrow = mysqli_fetch_assoc($statuscheckrun);
         if(mysqli_num_rows($statuscheckrun) == 0){
