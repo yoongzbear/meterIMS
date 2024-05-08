@@ -50,7 +50,7 @@
                 <?php
                     $batchmetersizes = [15,20,25,40,50,80,100,150]; //predefined meter sizes
                     $minstock = [38066,72,75,36,50,27,52,35]; //predefined minimum stock level for each size
-                    $int = 0;
+                    $int = 0; //int for minstock index
                     //calculate usable meters for each size, then print in table
                     foreach($batchmetersizes as $size) {
                         $meterquery =  "SELECT COUNT(meter.serial_num) AS totalmeters FROM meter JOIN batch ON meter.batch_id = batch.batch_id WHERE batch.meter_size = '$size' AND meter.location_id = '$locationid' AND meter.meter_status = 'IN STORE';";
