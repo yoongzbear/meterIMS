@@ -44,18 +44,23 @@
             <table class="table table-bordered">
                 <tr>
                     <th>Meter Size (mm)</th>
-                    <th>Quantity</th>
+                    <th>Minimum Stock</th>
+                    <th>Current Quantity</th>
                 </tr>
                 <?php
                     $batchmetersizes = [15,20,25,40,50,80,100,150]; //predefined meter sizes
+                    $minstock = [38066,72,75,36,50,27,52,35]; //predefined minimum stock level for each size
+                    $int = 0;
                     //calculate usable meters for each size, then print in table
                     foreach($batchmetersizes as $size) {
                         $meterquery =  "SELECT COUNT(meter.serial_num) AS totalmeters FROM meter JOIN batch ON meter.batch_id = batch.batch_id WHERE batch.meter_size = '$size' AND meter.location_id = '$locationid' AND meter.meter_status = 'IN STORE';";
                         $meterassoc = mysqli_fetch_assoc(mysqli_query($connection, $meterquery));
                         echo "<tr>
                                 <td>$size</td>
+                                <td>$minstock[$int]</td>
                                 <td id='$size'>$meterassoc[totalmeters]</td>
                             </tr>";
+                        $int++;
                     } ?>
             </table>
             <details>
