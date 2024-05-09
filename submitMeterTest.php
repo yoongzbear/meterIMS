@@ -52,11 +52,10 @@ $sqlWarrantyView = "SELECT * FROM warranty INNER JOIN lab_result ON warranty.tes
 $resultWarrantyView = mysqli_query($connection, $sqlWarrantyView);
 $rowWarrantyView = mysqli_fetch_assoc($resultWarrantyView);
 
-if (mysqli_query($connection, $sqlLab)) {
+if (mysqli_query($connection, $sqlLab) && mysqli_query($connection, $sqlMeter)) {
     if (mysqli_num_rows($resultWarrantyView) > 0) {
         updateWarrantyStatus($serial_num, $testResult, $defect);
-    }
-    mysqli_query($connection, $sqlMeter);
+    }    
     echo "<script>alert('Meter test result submitted successfully!');
     window.location.href='meterTest.php';
     </script>";
