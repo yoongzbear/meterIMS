@@ -128,14 +128,14 @@ include 'navInv.php';
 				</tr>
 			
 				<?php
-					$sql = "SELECT * FROM movement";
+					$sql = "SELECT movement.*, inbound.*, outbound.* FROM inbound JOIN movement ON inbound.inbound_id = movement.inbound_id JOIN outbound ON movement.outbound_id = outbound.outbound_id";
 					$result = mysqli_query($connection, $sql);
 					$num = 1;        
 					
 					while ($row = mysqli_fetch_array($result)) {
 						$batch_id = $row["batch_id"];
-						$origin = $row["origin"];
-						$destination = $row["destination"];
+						$origin = $row["outbound_id"];
+						$destination = $row["inbound_id"];
 						$arrival_date = $row["arrival_date"];
 						
 						//Fetch region for origin
