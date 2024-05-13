@@ -18,7 +18,7 @@ if(isset($_POST['confirm']) && isset($_POST['batch_id'])) {
     mysqli_begin_transaction($connection);
 
     //Prepare the SQL statement for movement table
-    $sql1 = "INSERT INTO movement (origin, destination, ship_date, batch_id) VALUES (?, ?, ?, ?)";
+    $sql1 = "INSERT INTO movement (outbound_id, inbound_id, ship_date, batch_id) VALUES (?, ?, ?, ?)";
     
     //Prepare the statement
     $stmt1 = mysqli_prepare($connection, $sql1);
@@ -26,7 +26,13 @@ if(isset($_POST['confirm']) && isset($_POST['batch_id'])) {
     //Bind parameters
     mysqli_stmt_bind_param($stmt1, "iisi", $origin, $destination, $date, $batch_id);
     
-    
+    // Execute the statement and check for errors
+    if (!mysqli_stmt_execute($stmt1)) {
+        // Rollback the transaction if an error occurs
+        mysqli_rollback($connection);
+        die('Error executing: ' . mysqli_error($connection));
+    }
+
     //Prepare the SQL statement for updating meter table
     $sql2 = "UPDATE meter SET meter_status = 'IN TRANSIT' WHERE batch_id = ? AND meter_status != 'FAILED'";
     
@@ -36,22 +42,18 @@ if(isset($_POST['confirm']) && isset($_POST['batch_id'])) {
     //Bind parameters
     mysqli_stmt_bind_param($stmt2, "i", $batch_id);
     
-    //Execute both statements
-    mysqli_stmt_execute($stmt1);
-    mysqli_stmt_execute($stmt2);
-    
-    //Check if both statements were successful
-    if(mysqli_stmt_affected_rows($stmt1) > 0 && mysqli_stmt_affected_rows($stmt2) > 0) {
-        //Both operations successful, commit the transaction
-        mysqli_commit($connection);
-        echo '<script>alert("Batch movement and meter status update successful."); window.location.href = "LabDep_Scan_to_Inv.php";</script>';
-    } else {
-        //Rollback the transaction if any statement fails
+    // Execute the statement and check for errors
+    if (!mysqli_stmt_execute($stmt2)) {
+        // Rollback the transaction if an error occurs
         mysqli_rollback($connection);
-        echo '<script>alert("Error: Failed to update meter status and insert movement table because the status is already in transit."); window.location.href = "LabDep_Scan_to_Inv.php";</script>';
+        die('Error executing statement 2: ' . mysqli_error($connection));
     }
 
-    //Close the statements
+    // Commit the transaction if both statements are successful
+    mysqli_commit($connection);
+    echo '<script>alert("Batch movement and meter status update successful."); window.location.href = "LabDep_Scan_to_Inv.php";</script>';
+
+    // Close the statements
     mysqli_stmt_close($stmt1);
     mysqli_stmt_close($stmt2);
     

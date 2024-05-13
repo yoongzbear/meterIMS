@@ -3,20 +3,24 @@
     include('connection.php');
     $serial_num = $_GET['serial_num'];
     //get meter information
-    $sql = "SELECT * FROM meter INNER JOIN batch ON meter.batch_id = batch.batch_id INNER JOIN manufacturer ON meter.manu_id = manufacturer.manu_id INNER JOIN location ON batch.location_id = location.location_id WHERE serial_num = '$serial_num'";
-    $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_assoc($result);
-    $batch_id = $row['batch_id'];
+    $sql_info="SELECT manufacturer.*, meter.*, batch.* FROM manufacturer JOIN meter ON manufacturer.manu_id = meter.manu_id JOIN batch ON meter.batch_id =batch.batch_id WHERE serial_num = '$serial_num'";
+    $result_info = mysqli_query($connection, $sql_info);
+    $row_info = mysqli_fetch_assoc($result_info);
+
+    $batch_id = $row_info['batch_id'];
     //get location information
-    $sql1 = "SELECT meter.location_id, location.location_name FROM meter JOIN location ON meter.location_id = location.location_id WHERE serial_num = '$serial_num'";
-    $result1 = mysqli_query($connection, $sql1);
-        
+    $sql_location = "SELECT movement.* , inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
+    $result_location = mysqli_query($connection, $sql_location);
+    $row_location = mysqli_fetch_assoc($result_location); 
+    
+    $sql_reg ="SELECT meter.*, location.* FROM meter JOIN location ON meter.location_id = location.location_id WHERE meter.serial_num = '$serial_num'";
+    $result_reg = mysqli_query($connection, $sql_reg);
     // Check if any result is returned
-    if ($result1) {
-        $row1 = mysqli_fetch_assoc($result1);
-        if ($row1 !== null) {
+    if ($result_reg) {
+        $row_reg = mysqli_fetch_assoc($result_reg);
+        if ($row_reg !== null) {
             // Location information is available
-            $location_name = $row1['location_name'];
+            $location_name = $row_reg['location_name'];
         } else {
             // No location information available
             $location_name = "The meter hasn't been assigned to a region store";
@@ -58,57 +62,57 @@
             echo "
             <h2 class='fs-1 text-uppercase'>Meter Info</h2>
             <hr class='border border-success border-2 opacity-50'>";
-            echo "<table class='table'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>        
+            echo "<table class='table'><th colspan=2><h3>" . $row_info['serial_num'] . "</h3></th>        
                 <tr>
                     <th>Type:</th>
-                    <td>" . $row['meter_type'] . "</td>
+                    <td>" . $row_info['meter_type'] . "</td>
                 </tr>
                 <tr>
                     <th>Model:</th>
-                    <td>" . $row['meter_model'] . "</td>
+                    <td>" . $row_info['meter_model'] . "</td>
                 </tr>
                 <tr>
                     <th>Size:</th>
-                    <td>" . $row['meter_size'] . "</td>
+                    <td>" . $row_info['meter_size'] . "</td>
                 </tr>
                 <tr>
                     <th>Age:</th>
-                    <td>" . $row['age'] . "</td>
+                    <td>" . $row_info['age'] . "</td>
                 </tr>
                 <tr>
                     <th>Mileage:</th>
-                    <td>" . $row['mileage'] . "</td>
+                    <td>" . $row_info['mileage'] . "</td>
                 </tr>
                 <tr>
                     <th>Manufacturer:</th>
-                    <td>" . $row['manu_name'] . "</td>
+                    <td>" . $row_info['manu_name'] . "</td>
                 </tr>
                 <tr>
                     <th>Manufacture Year:</th>
-                    <td>" . $row['manufactured_year'] . "</td>
+                    <td>" . $row_info['manufactured_year'] . "</td>
                 </tr>
                 <tr>
                     <th>Status:</th>
-                    <td>" . $row['meter_status'] . "</td>
+                    <td>" . $row_info['meter_status'] . "</td>
                 </tr>
                 <tr>
                     <th>Location:</th>
-                    <td>" . $row['location_name'] . "</td>
+                    <td>" . $row_location['location_name'] . "</td>
                 </tr>
                 <tr>
                     <th>Assigned Region Store:</th>
                     <td>" . $location_name. "</td>
                 </tr>
                 ";
-            if ($row['install_date'] != NULL) {
+            if ($row_info['install_date'] != NULL) {
                 //if the meter is installed
                 echo "<tr>
                     <th>Install Date:</th>
-                    <td>" . $row['install_date'] . "</td>
+                    <td>" . $row_info['install_date'] . "</td>
                 </tr>
                 <tr>
                     <th>Install Address:</th>
-                    <td>" . $row['install_address'] . "</td>
+                    <td>" . $row_info['install_address'] . "</td>
                 </tr>";}
             echo "</table>";
         ?>

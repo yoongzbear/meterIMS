@@ -4,9 +4,11 @@
 
     $batchid = $_GET["batch_id"];
     //get batch information
-    $sql = "SELECT batch.*, location.* FROM batch JOIN location ON batch.location_id = location.location_id WHERE batch.batch_id = $batchid";
-    $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_array($result);
+
+    $sql_In = "SELECT batch.*, movement.*, meter.*, inbound.*, location.* FROM meter JOIN batch ON meter.batch_id = batch.batch_id JOIN movement ON batch.batch_id = movement.batch_id JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE batch.batch_id = '$batchid' AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
+    $result_In = mysqli_query($connection, $sql_In);
+    $row_In = mysqli_fetch_array($result_In);
+
 ?>
 !
 <!DOCTYPE html>
@@ -44,23 +46,23 @@
         </tr>
         <tr>
             <th scope="row">Location</th>
-            <td><?php echo $row["location_name"]; ?></td>
+            <td><?php echo $row_In["location_name"]; ?></td>
         </tr>
         <tr>
             <th scope="row">Meter Type</th>
-            <td><?php echo $row["meter_type"]; ?></td>
+            <td><?php echo $row_In["meter_type"]; ?></td>
         </tr>
         <tr>
             <th scope="row">Meter Model</th>
-            <td><?php echo $row["meter_model"]; ?></td>
+            <td><?php echo $row_In["meter_model"]; ?></td>
         </tr>
         <tr>
             <th scope="row">Meter Size</th>
-            <td><?php echo $row["meter_size"]; ?></td>
+            <td><?php echo $row_In["meter_size"]; ?></td>
         </tr>
         <tr>
             <th scope="row">Quantity</th>
-            <td><?php echo $row["quantity"]; ?></td>
+            <td><?php echo $row_In["quantity"]; ?></td>
         </tr>
     </table>
     <hr class="border border-danger border-2 opacity-50">

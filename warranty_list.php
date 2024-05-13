@@ -2,9 +2,9 @@
 include ('secure_Reg.php');
 include ('connection.php');
 $locationID = $_SESSION['locationID'];
-$sql = "SELECT warranty.*, meter.*, batch.* FROM warranty
-        JOIN meter ON warranty.serial_num = meter.serial_num
-        JOIN batch ON meter.batch_id = batch.batch_id
+$sql = "SELECT warranty.*, lab_result.*,meter.*FROM warranty
+        JOIN lab_result ON warranty.test_id = lab_result.test_id
+        JOIN meter ON lab_result.serial_num= meter.serial_num
         WHERE warranty_status = 'CAN CLAIM' AND meter.location_id= $locationID";
 
 $result = mysqli_query($connection, $sql);
