@@ -54,7 +54,7 @@ if(ISSET($_GET['serial_num'])){
 </nav>
 
 <div class='container col-xl-5'>
-    <h2 class='fs-1 text-uppercase'>Meter Info</h2>
+    <h2 class='fs-1 text-uppercase'>Meter Result</h2>
     <hr class='border border-success border-2 opacity-50'>
     <table class='table mb-4'><th colspan=2><h3><?php echo $row['serial_num'];?></h3></th>
         <tr>
