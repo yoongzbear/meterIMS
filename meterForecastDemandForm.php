@@ -30,7 +30,7 @@
 	</nav>
 
 	<div class="container-fluid mb-4">
-		<h3 class="display-4 mb-4">Meter Forcasting</h3>
+		<h3 class="display-4 mb-4">Meter Forecasting</h3>
 		<form action="meterForecastDemand.php" method="post" name="upload_excel" enctype="multipart/form-data" class="form">
 			<div class="row mb-3">
 				<label class="col-sm-2 col-form-label fw-bold">Forecast Year</label>
