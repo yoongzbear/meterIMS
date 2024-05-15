@@ -38,7 +38,7 @@
     $row = mysqli_fetch_assoc($result);
 
     echo "<div class='col align-self-center' style='width:50%;'>
-            <h2 class='fs-1 text-uppercase'>Meter Info</h2>
+            <h2 class='fs-1 text-uppercase'>Meter Result</h2>
             <hr class='border border-success border-2 opacity-50'>";
             echo "<table class='table mb-4'><th colspan=2><h3>" . $row['serial_num'] . "</h3></th>        
                 <tr>
