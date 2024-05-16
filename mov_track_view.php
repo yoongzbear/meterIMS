@@ -37,7 +37,6 @@ include 'navInv.php';
 					<!-- Placeholder option -->
 					<option value="" disabled selected>Please select</option>
 					<!-- Options for search criteria -->
-					<option value="batch">Batch</option>
 					<option value="origin">Origin</option>
 					<option value="destination">Destination</option>
 					<option value="shipOutDate">Ship Out Date</option>
@@ -95,18 +94,16 @@ include 'navInv.php';
 		//Function to map dropdown option to corresponding table column index
 		function getColumnIndex(option) {
 			switch(option) {
-				case 'batch':
-					return 1;
 				case 'origin':
-					return 2;
+					return 1;
 				case 'destination':
-					return 3;
+					return 2;
 				case 'shipOutDate':
-					return 4; 
+					return 3; 
 				case 'arrivalDate':
-					return 5; 
+					return 4; 
 				case 'status':
-					return 6; 
+					return 5; 
 				default:
 					return 1; 
 			}
@@ -118,7 +115,6 @@ include 'navInv.php';
 			<table id="list" class="table table-striped table-info">
 				<tr class="table-primary" scope="col">
 					<th>No.</th>
-					<th>Batch ID</th>
 					<th>Origin</th>
 					<th>Destination</th>
 					<th>Date Ship Out</th>
@@ -153,7 +149,6 @@ include 'navInv.php';
 						echo '
 							<tr class="track">
 							<th scope="row">' . $num . '</th>
-							<td>' . $row["batch_id"] . '</td>
 							<td>' . $origin_region . '</td>
 							<td>' . $destination_region . '</td>
 							<td>' . $row["ship_date"] . '</td>
@@ -167,7 +162,7 @@ include 'navInv.php';
 						
 						echo '</td>            
 							<td class="batchID">
-	      							<a href="batch_view.php?batch_id=' . $batch_id . '">
+	      							<a href="batch_view.php?Batch_ID='. $batch_id .'">
 	      								<button class="btn btn-info btn-sm">Batch Detail</button>
 		      						</a>
 		     					</td>
