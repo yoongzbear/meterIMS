@@ -1,7 +1,7 @@
 <?php
     include ('secure_Inv.php');
     include('connection.php');
-    $serial_num = $_GET['serial_num'];
+    $serial_num = $_GET['Meter_ID'];
     //get meter information
     $sql_info="SELECT manufacturer.*, meter.*, batch.* FROM manufacturer JOIN meter ON manufacturer.manu_id = meter.manu_id JOIN batch ON meter.batch_id =batch.batch_id WHERE serial_num = '$serial_num'";
     $result_info = mysqli_query($connection, $sql_info);
@@ -63,6 +63,13 @@
             <h2 class='fs-1 text-uppercase'>Meter Info</h2>
             <hr class='border border-success border-2 opacity-50'>";
             echo "<table class='table'><th colspan=2><h3>" . $row_info['serial_num'] . "</h3></th>        
+                <tr>
+                    <div id='qrcode'>
+                        <script src = 'qrcode.js'></script>
+                        <script src = 'qrGeneratorMeter.js'></script>
+                        <script>makeCode(); </script>
+                    </div>
+                </tr>
                 <tr>
                     <th>Type:</th>
                     <td>" . $row_info['meter_type'] . "</td>

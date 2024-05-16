@@ -93,7 +93,7 @@
                             <th scope="row">' . $num . '</th>
                             <td>' . $row2["serial_num"] . '</td>
                             <td>' . $row2["meter_status"] . '</td>
-                            <td class="serial_num"><a href="meterInfo.php?serial_num=' . $row2["serial_num"] . '"><button class="btn btn-info btn-sm">Meter Detail</button></a></td>
+                            <td class="serial_num"><a href="meterInfo.php?Meter_ID=' . $row2["serial_num"] . '"><button class="btn btn-info btn-sm">Meter Detail</button></a></td>
                         </tr>
                     </tbody>';
                     $num++;
