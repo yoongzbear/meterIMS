@@ -2,7 +2,7 @@
     include ('secure_Inv.php');
     include ('connection.php');
 
-    $batchid = $_GET["batch_id"];
+    $batchid = $_GET["Batch_ID"];
     //get batch information
 
     $sql_In = "SELECT batch.*, movement.*, meter.*, inbound.*, location.* FROM meter JOIN batch ON meter.batch_id = batch.batch_id JOIN movement ON batch.batch_id = movement.batch_id JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE batch.batch_id = '$batchid' AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
@@ -36,9 +36,15 @@
             <li class="breadcrumb-item active" aria-current="page">Batch Detail</li>
         </ol>
     </nav>
-
+    <center>
     <label class="fs-2 font-monospace mb-4"><b>The Information About The Batch ID : </b><?php echo $batchid; ?></label>
-
+    <div id='qrcode'>
+        <script src = 'qrcode.js'></script>
+        <script src = 'qrGeneratorBatch.js'></script>
+        <script>makeCode(); </script>
+    </div>
+    </center>
+    <br>
     <table class='table table-dark table-striped'>
         <tr>
             <th scope="col">Infomation</th>
