@@ -34,19 +34,19 @@ include 'navInv.php';
 		$batch_id = $_GET['Batch_ID'];
 		
 		//To check if the QR scanned is Batch QR
-		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch INNER JOIN meter ON batch.batch_id = meter.batch_id INNER JOIN movement ON batch.batch_id = movement.batch_id INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED' AND movement.inbound_id = 1";
+		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch 
+				INNER JOIN meter ON batch.batch_id = meter.batch_id 
+				INNER JOIN movement ON batch.batch_id = movement.batch_id 
+				INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num 
+				WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED' AND movement.inbound_id = 1";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
 			//Check if the batch is already received
-			$sqlBatchExist = "SELECT * FROM batch WHERE batch_id = '$batch_id' AND location_id != 1";
+			$sqlBatchExist = "SELECT * FROM movement WHERE batch_id = '$batch_id' AND arrival_date IS NULL AND inbound_id = 1";
 			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
 			if(mysqli_num_rows($resultBatchExist)>0){
 				$current_date = date('Y-m-d');
-		
-				//Update Batch Location
-				$sqlBatchLocation = "UPDATE batch SET location_id = 1 WHERE batch_id = '$batch_id'";
-				$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
 				
 				//Update Meter Location
 				$sqlMeterLocation = "UPDATE meter 
@@ -56,7 +56,7 @@ include 'navInv.php';
 				$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
 				
 				//Update Tracking Info
-				$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
+				$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id' AND arrival_date IS NULL AND inbound_id = 1";
 				$resultTrack = mysqli_query($connection, $sqlTrack);
 				
 				if ($result) {
