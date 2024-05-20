@@ -20,7 +20,7 @@
 		$batch_id = mysqli_insert_id($connection);
 		
 		//Insert tracking details
-		$sqlTracking = "INSERT INTO movement (outbound, inbound, ship_date, batch_id) VALUES
+		$sqlTracking = "INSERT INTO movement (outbound_id, inbound_id, ship_date, batch_id) VALUES
 				('$outbound_id', '$inbound_id', '$ship_date', '$batch_id')";
 		$resultTrack = mysqli_query($connection, $sqlTracking);
 		echo "<script>window.location.href = 'store_ShipOrderScanMeterQR.php?Batch_ID=$batch_id&meterQuantity=$meterQuantity';</script>"; 
