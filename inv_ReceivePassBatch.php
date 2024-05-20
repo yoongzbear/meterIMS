@@ -34,7 +34,7 @@ include 'navInv.php';
 		$batch_id = $_GET['Batch_ID'];
 		
 		//To check if the QR scanned is Batch QR
-		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch INNER JOIN meter ON batch.batch_id = meter.batch_id INNER JOIN movement ON batch.batch_id = movement.batch_id INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED' AND movement.destination = 1";
+		$sqlBatchInfo = "SELECT batch.*, meter.*, movement.* FROM batch INNER JOIN meter ON batch.batch_id = meter.batch_id INNER JOIN movement ON batch.batch_id = movement.batch_id INNER JOIN lab_result ON meter.serial_num = lab_result.serial_num WHERE batch.batch_id = '$batch_id' AND lab_result.result != 'FAILED' AND movement.inbound_id = 1";
 		$result = mysqli_query($connection, $sqlBatchInfo);
 		
 		if(mysqli_num_rows($result)>0){
