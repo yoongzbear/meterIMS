@@ -42,11 +42,11 @@ include 'navInv.php';
 
 		//Get the values of shipping details fields
 		var meterQuantity = document.forms["shipOrderForm"]["meterQuantity"].value;
-		var destination = document.forms["shipOrderForm"]["destination"].value;
+		var inbound_id = document.forms["shipOrderForm"]["inbound_id"].value;
 		var shipDate = document.forms["shipOrderForm"]["ship_date"].value;
 
 		//Check if all required fields are filled
-		if (meterDetails == "" || meterQuantity == "" || destination == "" || shipDate == "") {
+		if (meterDetails == "" || meterQuantity == "" || inbound_id == "" || shipDate == "") {
 			alert("Please fill in all fields.");
 			return false; 
 		}
@@ -112,7 +112,7 @@ include 'navInv.php';
 				<label>Destination :</label>
 			</div>
 			<div class="col-6 mb-4">
-				<select class="form-select" name="destination" required>
+				<select class="form-select" name="inbound_id" required>
 					<option class="form-select" value="" disabled selected>Please Select Destination Region Store</option>
 						<?php
 							$sqlStore="SELECT * FROM location WHERE location_id != 1 AND location_id != 2";
