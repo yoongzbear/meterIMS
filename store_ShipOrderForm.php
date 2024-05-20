@@ -22,9 +22,9 @@ include 'navReg.php';
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
 	<ol class="breadcrumb">
-	<li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
-	<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
-	<li class="breadcrumb-item active" aria-current="page">Ship Out - Ship Meter Batch</li>
+		<li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
+		<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Ship Out - Ship Meter Batch</li>
 	</ol>
 </nav>
 
@@ -55,11 +55,11 @@ include 'navReg.php';
 		
 		//Get the values of shipping details fields
 		var meterQuantity = document.forms["shipOrderForm"]["meterQuantity"].value;
-		var destination = document.forms["shipOrderForm"]["destination"].value;
+		var inbound_id = document.forms["shipOrderForm"]["inbound_id"].value;
 		var shipDate = document.forms["shipOrderForm"]["ship_date"].value;
 		
 		//Check if all required fields are filled
-		if (meterDetails == "" || meterQuantity == "" || destination == "" || shipDate == "") {
+		if (meterDetails == "" || meterQuantity == "" || inbound_id == "" || shipDate == "") {
 			alert("Please fill in all fields.");
 			return false; 
 		}
@@ -127,7 +127,7 @@ include 'navReg.php';
 				<label>Destination:</label>
 			</div>
 			<div class="col-8">
-				<select class="form-select" name="destination" required>
+				<select class="form-select" name="inbound_id" required>
 					<option value="" disabled selected>Please Select Destination Region Store</option>
 					<?php
 						$sqlStore="SELECT * FROM location WHERE location_id != 1 AND location_id != 2 AND location_id != '$location_id'";
