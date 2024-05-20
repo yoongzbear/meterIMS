@@ -7,7 +7,7 @@
 	$meter_size = $meter_details[2];
 	
 	$meterQuantity = $_POST["meterQuantity"];
-	$destination = $_POST["destination"];
+	$inbound_id = $_POST["inbound_id"];
 	$ship_date = $_POST["ship_date"];
 	
 	//Insert meter batch info
@@ -19,8 +19,8 @@
 		$batch_id = mysqli_insert_id($connection);
 		
 		//Insert tracking details
-		$sqlTracking = "INSERT INTO movement (origin, destination, ship_date, batch_id) VALUES
-				(1, '$destination', '$ship_date', '$batch_id')";
+		$sqlTracking = "INSERT INTO movement (outbound_id, inbound_id, ship_date, batch_id) VALUES
+				(1, '$inbound_id', '$ship_date', '$batch_id')";
 		$resultTrack = mysqli_query($connection, $sqlTracking);
 		echo "<script>window.location.href = 'inventoryDep_ShipOrderScanMeterQR.php?Batch_ID=$batch_id&meterQuantity=$meterQuantity';</script>"; 
 	} else {
