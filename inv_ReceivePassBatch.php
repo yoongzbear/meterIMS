@@ -53,7 +53,7 @@ include 'navInv.php';
 							JOIN lab_result ON meter.serial_num = lab_result.serial_num
 							SET meter.meter_status = 'IN STOCK' 
 							WHERE meter.batch_id = '$batch_id' AND lab_result.result != 'FAILED'";
-				$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
+				$resultMovement = mysqli_query($connection, $sqlMeterLocation);
 				
 				//Update Tracking Info
 				$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id' AND arrival_date IS NULL AND inbound_id = 1";
