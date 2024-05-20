@@ -39,18 +39,14 @@
 			//Check if the batch is exists
 			$sqlBatchExist = "SELECT batch.*, movement.* FROM batch 
    					JOIN movement ON batch.batch_id = movement.batch_id 
-					WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.inbound_id = '$location_id'";
+					WHERE batch.batch_id = '$batch_id' AND movement.arrival_date IS NULL AND movement.inbound_id = '$location_id'";
 			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
 			if(mysqli_num_rows($resultBatchExist)>0){
 				$current_date = date('Y-m-d');
-		
-				//Update Batch Location
-				$sqlBatchLocation = "UPDATE batch SET location_id = '$location_id' WHERE batch_id = '$batch_id'";
-				$resultMovement1 = mysqli_query($connection, $sqlBatchLocation);
 
 				//Update Meter Location
 				$sqlMeterLocation = "UPDATE meter SET location_id = '$location_id', meter_status = 'IN STORE' WHERE batch_id = '$batch_id'";
-				$resultMovement2 = mysqli_query($connection, $sqlMeterLocation);
+				$resultMovement = mysqli_query($connection, $sqlMeterLocation);
 				
 				//Update Tracking Info
 				$sqlTrack = "UPDATE movement SET arrival_date = '$current_date' WHERE batch_id = '$batch_id'";
