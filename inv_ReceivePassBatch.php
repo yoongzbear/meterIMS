@@ -75,7 +75,7 @@ include 'navInv.php';
 				//Select origin location name
 				$sqlOriginName = "SELECT location.location_name FROM location 
 						INNER JOIN outbound ON location.location_id = outbound.location_id 
-						WHERE outbound_id = '$outbound_id'";
+						WHERE outbound.outbound_id = '$outbound_id'";
 				$resultOrigin = mysqli_query($connection, $sqlOriginName);
 				
 				if ($resultOrigin) {
