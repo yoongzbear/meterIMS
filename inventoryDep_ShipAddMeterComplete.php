@@ -20,13 +20,15 @@
 		$quantity = $row["quantity"];
 		$manu_id = $row["manu_id"];
 		$tracking_id = $row["tracking_id"];
-		$origin = $row["origin"];
-		$destination = $row["destination"];
+		$outbound_id = $row["outbound_id"];
+		$inbound_id = $row["inbound_id"];
 		$ship_date = $row["ship_date"];
 	}
 
 	//Select origin location name
-	$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
+	$sqlOriginName = "SELECT location.location_name FROM location 
+			INNER JOIN outbound ON location.location_id = outbound.location_id 
+			WHERE outbound_id = '$outbound_id''";
 	$resultOrigin = mysqli_query($connection, $sqlOriginName);
 
 	if ($resultOrigin) {
@@ -37,7 +39,9 @@
 	}
 
 	//Select destination location name
-	$sqlDestinationName = "SELECT location_name FROM location WHERE location_id = '$destination'";
+	$sqlDestinationName = "SELECT location.location_name FROM location 
+				INNER JOIN inbound ON location.location_id = inbound.location_id 
+				WHERE inbound_id = '$inbound_id'";
 	$resultDestination = mysqli_query($connection, $sqlDestinationName);
 
 	if ($resultDestination) {
