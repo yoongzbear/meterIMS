@@ -22,9 +22,9 @@ include 'navReg.php';
 
 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
-		<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Ship Out - Ship Meter Batch</li>
+	<li class="breadcrumb-item"><a href="reg_home.php" title='Home Page - Region Store'>Home</a></li>
+	<li class="breadcrumb-item"><a href="reg_QRmenu.php" title='Scan QRcode Page'>Scan QRcode</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Ship Out - Ship Meter Batch</li>
 	</ol>
 </nav>
 
@@ -103,7 +103,7 @@ include 'navReg.php';
 		</div>
 			
 		<!--Shipping details-->
-		<input class="form-control" type="hidden" name="origin" value="<?php echo $location_id; ?>" readonly>
+		<input class="form-control" type="hidden" name="outbound_id" value="<?php echo $location_id; ?>" readonly>
 		<div class="row g-3 align-items-center mb-4">
 			<div class="col-4">
 				<label>Number of Meters Needed:</label>
