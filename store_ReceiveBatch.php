@@ -39,7 +39,7 @@
 			//Check if the batch is exists
 			$sqlBatchExist = "SELECT batch.*, movement.* FROM batch 
    					JOIN movement ON batch.batch_id = movement.batch_id 
-					WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.destination = '$location_id'";
+					WHERE batch.batch_id = '$batch_id' AND batch.location_id != '$location_id' AND movement.inbound_id = '$location_id'";
 			$resultBatchExist = mysqli_query($connection, $sqlBatchExist);
 			if(mysqli_num_rows($resultBatchExist)>0){
 				$current_date = date('Y-m-d');
@@ -58,9 +58,9 @@
 				
 				//To get info for batch, meter and Tracking
 				$sqlInfo = "SELECT batch.*, meter.*, movement.* FROM batch
-    					INNER JOIN meter ON batch.batch_id = meter.batch_id 
-	 				INNER JOIN movement ON batch.batch_id = movement.batch_id 
-	 				WHERE batch.batch_id = '$batch_id'";
+					INNER JOIN meter ON batch.batch_id = meter.batch_id 
+					INNER JOIN movement ON batch.batch_id = movement.batch_id 
+					WHERE batch.batch_id = '$batch_id'";
 				$resultInfo = mysqli_query($connection, $sqlInfo);			
 				
 				//To get Batch Info
@@ -73,13 +73,15 @@
 					$meter_size = $row["meter_size"];
 					$quantity = $row["quantity"];
 					$tracking_id = $row["tracking_id"];
-					$origin = $row["origin"];
-					$destination = $row["destination"];
+					$outbound_id = $row["outbound_id"];
+					$inbound_id = $row["inbound_id"];
 					$ship_date = $row["ship_date"];
 				}
 				
 				//Select origin location name
-				$sqlOriginName = "SELECT location_name FROM location WHERE location_id = '$origin'";
+				$sqlOriginName = "SELECT location.location_name FROM location 
+						INNER JOIN outbound ON location.location_id = outbound.location_id 
+						WHERE outbound_id = '$outbound_id'";
 				$resultOrigin = mysqli_query($connection, $sqlOriginName);
 				
 				if ($resultOrigin) {
@@ -90,7 +92,9 @@
 				}
 				
 				//Select destination location name
-				$sqlDestinationName = "SELECT location_name FROM location WHERE location_id = '$destination'";
+				$sqlDestinationName = "SELECT location.location_name FROM location 
+							INNER JOIN inbound ON location.location_id = inbound.location_id 
+							WHERE inbound_id = '$inbound_id'";
 				$resultDestination = mysqli_query($connection, $sqlDestinationName);
 				
 				if ($resultDestination) {
