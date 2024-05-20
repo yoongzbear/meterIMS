@@ -9,8 +9,8 @@
         $manu_id = $_POST["manu_id"];
         
         //Insert meter batch info
-        $sqlBatch = "INSERT INTO batch (location_id, meter_type, meter_model, meter_size) 
-                     VALUES (1, '$meter_type', '$meter_model', '$meter_size')";
+        $sqlBatch = "INSERT INTO batch (meter_type, meter_model, meter_size) 
+                     VALUES ('$meter_type', '$meter_model', '$meter_size')";
         
         $result = mysqli_query($connection, $sqlBatch);
         
