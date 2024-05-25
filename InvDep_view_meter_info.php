@@ -9,16 +9,16 @@
 
     $batch_id = $row_info['batch_id'];
     //get location information
-    $sql_location = "SELECT movement.* , inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
+    $sql_location = "SELECT movement.inbound_id ,movement.batch_id,movement.arrival_date, inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
     $result_location = mysqli_query($connection, $sql_location);
     $row_location = mysqli_fetch_assoc($result_location); 
     
-    // Check if any records are returned
-    if (mysqli_num_rows($result_location) > 0) {
-        $row_location = mysqli_fetch_assoc($result_location);
+    // Check if the query returns any results
+    if (mysqli_num_rows($result_location) < 0) {
+        $current_location = $row_location['location_name']; // Assuming location_name is a column in the location table
     } else {
-        // Handle the case where no records are found
-        $row_location ["location_name"]= "Air Selangor Inventory department"; 
+        // No records found, set location_name to default value
+        $current_location = "Air Selangor Inventory Department";
     }
 
     $sql_reg ="SELECT meter.*, location.* FROM meter JOIN location ON meter.location_id = location.location_id WHERE meter.serial_num = '$serial_num'";
@@ -103,7 +103,7 @@
             </tr>
             <tr>
                 <th>Location:</th>
-                <td>" . $row_location['location_name'] . "</td>
+                <td>" . $current_location . "</td>
             </tr>
             <tr>
                 <th>Assigned Region Store:</th>
