@@ -11,11 +11,15 @@
     //get location information
     $sql_location = "SELECT movement.inbound_id ,movement.batch_id,movement.arrival_date, inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
     $result_location = mysqli_query($connection, $sql_location);
-    $row_location = mysqli_fetch_assoc($result_location); 
     
-    // Check if the query returns any results
-    if (mysqli_num_rows($result_location) < 0) {
-        $current_location = $row_location['location_name']; // Assuming location_name is a column in the location table
+    // Check if the query returns any results and meter status
+    if (mysqli_num_rows($result_location) > 0) {
+        $row_location = mysqli_fetch_assoc($result_location);
+        if ($row_info['meter_status'] == "INSTALLED") {
+            $current_location = $row_info['install_address'];
+        } else {
+            $current_location = $row_location['location_name']; 
+        }
     } else {
         // No records found, set location_name to default value
         $current_location = "Air Selangor Inventory Department";
