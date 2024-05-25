@@ -13,6 +13,14 @@
     $result_location = mysqli_query($connection, $sql_location);
     $row_location = mysqli_fetch_assoc($result_location); 
     
+    // Check if any records are returned
+    if (mysqli_num_rows($result_location) > 0) {
+        $row_location = mysqli_fetch_assoc($result_location);
+    } else {
+        // Handle the case where no records are found
+        $row_location ["location_name"]= "Air Selangor Inventory department"; 
+    }
+
     $sql_reg ="SELECT meter.*, location.* FROM meter JOIN location ON meter.location_id = location.location_id WHERE meter.serial_num = '$serial_num'";
     $result_reg = mysqli_query($connection, $sql_reg);
     // Check if any result is returned
