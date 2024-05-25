@@ -39,10 +39,23 @@ include 'connection.php';
 
     $batch_id = $row_info['batch_id'];
     //get location information
-    $sql_location = "SELECT movement.* , inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
+    $sql_location = "SELECT movement.inbound_id ,movement.batch_id,movement.arrival_date, inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
     $result_location = mysqli_query($connection, $sql_location);
-    $row_location = mysqli_fetch_assoc($result_location); 
-    
+
+    // Check if the query returns any results and meter status
+    if (mysqli_num_rows($result_location) > 0) {
+        $row_location = mysqli_fetch_assoc($result_location);
+        if ($row_info['meter_status'] == "INSTALLED") {
+            $current_location = $row_info['install_address'];
+        } else {
+            $current_location = $row_location['location_name']; 
+        }
+    } else {
+        // No records found, set location_name to default value
+        $current_location = "Air Selangor Inventory Department";
+    }
+
+
     $sql_reg ="SELECT meter.*, location.* FROM meter JOIN location ON meter.location_id = location.location_id WHERE meter.serial_num = '$serial_num'";
     $result_reg = mysqli_query($connection, $sql_reg);
     // Check if any result is returned
@@ -100,7 +113,7 @@ include 'connection.php';
             </tr>
             <tr>
                 <th>Location:</th>
-                <td>" . $row_location['location_name'] . "</td>
+                <td>" . $current_location . "</td>
             </tr>
             <tr>
                 <th>Assigned Region Store:</th>
