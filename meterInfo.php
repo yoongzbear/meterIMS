@@ -1,6 +1,7 @@
 <?php
     include ('secure_Inv.php');
     include('connection.php');
+    $trackid= $_GET['tracking_id'];
     $serial_num = $_GET['Meter_ID'];
     //get meter information
     $sql_info="SELECT manufacturer.*, meter.*, batch.* FROM manufacturer JOIN meter ON manufacturer.manu_id = meter.manu_id JOIN batch ON meter.batch_id =batch.batch_id WHERE serial_num = '$serial_num'";
@@ -20,9 +21,6 @@
         } else {
             $current_location = $row_location['location_name']; 
         }
-    } else {
-        // No records found, set location_name to default value
-        $current_location = "Air Selangor Inventory Department";
     }
 
 
@@ -65,7 +63,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="inv_mag_home.php" title='Home Page - Inventory Management Department'>Home</a></li>
             <li class="breadcrumb-item"><a href="mov_track_view.php" title='Meter Tracking Page'>Meter Tracking</a></li>
-            <li class="breadcrumb-item "><a href="batch_view.php?batch_id=<?= $batch_id; ?>" title='Batch Detail Page'>Batch Detail</a></li>
+            <li class="breadcrumb-item "><a href="batch_view.php?Batch_ID=<?= $batch_id; ?>&tracking_id=<?= $trackid; ?>" title='Batch Detail Page'>Batch Detail</a></li>
             <li class="breadcrumb-item active" aria-current="page">Meter Info</li>
         </ol>
     </nav>
@@ -138,7 +136,7 @@
         ?>
         
         <div class="d-grid gap-2 col-6 mx-auto mb-4">
-            <button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?Batch_ID=<?= $batch_id; ?>'" title='Back To Batch Detail'>Back</button>
+            <button class="back btn btn-dark" type="button" onclick="window.location.href='batch_view.php?Batch_ID=<?= $batch_id; ?>&tracking_id=<?= $trackid; ?>'" title='Back To Batch Detail'>Back</button>
         </div>
 
     </div>
