@@ -27,7 +27,7 @@ function updateWarrantyStatus($serial_num, $testResult, $defect) {
         if ($testResult == 'FAIL' && $defect != '0' && $yearDiff <= 3) {
             $sqlUpdateWarranty = "UPDATE warranty INNER JOIN lab_result ON warranty.test_id = lab_result.test_id SET warranty.warranty_status = 'CAN CLAIM' WHERE warranty.warranty_id = ( SELECT warranty_id FROM ( SELECT warranty.warranty_id FROM warranty INNER JOIN lab_result ON warranty.test_id = lab_result.test_id WHERE lab_result.serial_num = '$serial_num') AS subquery );";            
         } else {
-            "UPDATE warranty INNER JOIN lab_result ON warranty.test_id = lab_result.test_id SET warranty.warranty_status = 'CANNOT CLAIM' WHERE warranty.warranty_id = ( SELECT warranty_id FROM ( SELECT warranty.warranty_id FROM warranty INNER JOIN lab_result ON warranty.test_id = lab_result.test_id WHERE lab_result.serial_num = '$serial_num') AS subquery );";           
+            $sqlUpdateWarranty = "UPDATE warranty INNER JOIN lab_result ON warranty.test_id = lab_result.test_id SET warranty.warranty_status = 'CANNOT CLAIM' WHERE warranty.warranty_id = ( SELECT warranty_id FROM ( SELECT warranty.warranty_id FROM warranty INNER JOIN lab_result ON warranty.test_id = lab_result.test_id WHERE lab_result.serial_num = '$serial_num') AS subquery );";           
         }
         mysqli_query($connection, $sqlUpdateWarranty);
     } 

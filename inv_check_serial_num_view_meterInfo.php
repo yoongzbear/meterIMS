@@ -16,6 +16,6 @@ if(isset($_POST['serial_num'])) {
         exit();
     } else {
         //serial num does not exist
-        echo '<script>alert("Serial number not exist. Please try again."); window.location.href = "InvDep_Scan_View_meter_info.php";</script>';
+        echo '<script>alert("Serial number does not exist. Please try again."); window.location.href = "InvDep_Scan_View_meter_info.php";</script>';
     }
 } ?>
