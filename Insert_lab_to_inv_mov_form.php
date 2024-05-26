@@ -23,7 +23,7 @@ $batch_id = $_GET['batch_id'];
         <li class="breadcrumb-item"><a href="lab_home.php" title='Home Page - Test Lab'>Home</a></li>
         <li class="breadcrumb-item"><a href="TestLab_QRmenu.php" title='QR Code Menu'>QR Code</a></li>
         <li class="breadcrumb-item"><a href="LabDep_Scan_to_Inv.php" title='Scan QR Page'>Scan QR - Send To Inventory Department</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Comfirmation For Send To Inventory Department</li>
+        <li class="breadcrumb-item active" aria-current="page">Confirmation For Send To Inventory Department</li>
     </ol>
     </nav>
 
