@@ -33,6 +33,7 @@ $batch_id = $_GET['batch_id'];
         <p class="fw-bold mx-4 mb-4">Origin : Air Selangor Lab</p>
         <p class="fw-bold mx-4 mb-4">Destination : Air Selangor Inventory Department</p>
         <p class="fw-bold mx-4 mb-4">Meter Status : In Transit</p>
+                <p class="fw-bold mx-4 mb-4">The new batch will be created for the passed meter, the failed meter will be using the old batch</p>
         <!-- Hidden input to pass batch_id -->
         <div class="text-center">
             <input type="hidden" name="batch_id" value="<?php echo htmlspecialchars($batch_id); ?>">
