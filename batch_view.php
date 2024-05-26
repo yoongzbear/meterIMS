@@ -3,14 +3,14 @@
     include ('connection.php');
 
     $batchid = $_GET["Batch_ID"];
+    $tracking_id =$_GET["tracking_id"];
     //get batch information
 
-    $sql_In = "SELECT batch.*, movement.*, meter.*, inbound.*, location.* FROM meter JOIN batch ON meter.batch_id = batch.batch_id JOIN movement ON batch.batch_id = movement.batch_id JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE batch.batch_id = '$batchid' AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
+    $sql_In = "SELECT batch.*, movement.*, inbound.*, location.* FROM batch JOIN movement ON batch.batch_id = movement.batch_id JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE batch.batch_id = '$batchid' AND movement.tracking_id ='$tracking_id'";
     $result_In = mysqli_query($connection, $sql_In);
     $row_In = mysqli_fetch_array($result_In);
-
 ?>
-!
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,7 +99,7 @@
                             <th scope="row">' . $num . '</th>
                             <td>' . $row2["serial_num"] . '</td>
                             <td>' . $row2["meter_status"] . '</td>
-                            <td class="serial_num"><a href="meterInfo.php?Meter_ID=' . $row2["serial_num"] . '"><button class="btn btn-info btn-sm">Meter Detail</button></a></td>
+                            <td class="serial_num"> <a href="meterInfo.php?Meter_ID=' . $row2["serial_num"] . '&tracking_id=' . $tracking_id . '"><button class="btn btn-info btn-sm">Meter Detail</button></a></td>
                         </tr>
                     </tbody>';
                     $num++;
