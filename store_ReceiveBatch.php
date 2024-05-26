@@ -101,7 +101,7 @@
 				}
 				echo "<script>alert('Meter Batch Receive Successfully.');</script>";
 			}else{
-				echo "<script>alert('Batch is received or does associated to this store. Please try again.');</script>";
+				echo "<script>alert('Batch is received or it is not associated with this store. Please try again.');</script>";
 				echo "<script>window.location.href='store_ReceiveOrderScanBatchQR.php';</script>";
 			}
 		}else{
