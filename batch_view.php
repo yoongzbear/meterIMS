@@ -5,11 +5,34 @@
     $batchid = $_GET["Batch_ID"];
     $tracking_id =$_GET["tracking_id"];
     //get batch information
-
     $sql_In = "SELECT batch.*, movement.*, inbound.*, location.* FROM batch JOIN movement ON batch.batch_id = movement.batch_id JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE batch.batch_id = '$batchid' AND movement.tracking_id ='$tracking_id'";
     $result_In = mysqli_query($connection, $sql_In);
     $row_In = mysqli_fetch_array($result_In);
-?>
+
+    $current_location = '';
+    if ($row_In) {
+        // Check if arrival_date is null
+        if (is_null($row_In['arrival_date'])) {
+            // Get the location name for the outbound_id
+            $outbound_id = $row_In['outbound_id'];
+            $sql_outbound_location = "SELECT location.location_name 
+                                    FROM location 
+                                    JOIN outbound ON outbound.location_id = location.location_id 
+                                    WHERE outbound.outbound_id = $outbound_id";
+            $result_outbound_location = mysqli_query($connection, $sql_outbound_location);
+            
+            if ($result_outbound_location && mysqli_num_rows($result_outbound_location) > 0) {
+                $row_outbound_location = mysqli_fetch_assoc($result_outbound_location);
+                $current_location = $row_outbound_location['location_name'];
+            } else {
+                $current_location = 'Location not found';
+            }
+        } else {
+            // Use the location name for the inbound_id
+            $current_location = $row_In['location_name'];
+        }
+    }
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +75,7 @@
         </tr>
         <tr>
             <th scope="row">Location</th>
-            <td><?php echo $row_In["location_name"]; ?></td>
+            <td><?php echo $current_location; ?></td>
         </tr>
         <tr>
             <th scope="row">Meter Type</th>
