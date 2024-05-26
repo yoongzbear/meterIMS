@@ -10,16 +10,36 @@
 
     $batch_id = $row_info['batch_id'];
     //get location information
-    $sql_location = "SELECT movement.* , inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id AND movement.arrival_date IS NOT NULL ORDER BY movement.tracking_id DESC LIMIT 1";
+    $sql_location = "SELECT movement.* , inbound.*, location.* FROM movement JOIN inbound ON movement.inbound_id = inbound.inbound_id JOIN location ON inbound.location_id = location.location_id WHERE movement.batch_id = $batch_id ORDER BY movement.tracking_id DESC LIMIT 1";
     $result_location = mysqli_query($connection, $sql_location);
     
     // Check if the query returns any results and meter status
     if (mysqli_num_rows($result_location) > 0) {
         $row_location = mysqli_fetch_assoc($result_location);
+        
         if ($row_info['meter_status'] == "INSTALLED") {
             $current_location = $row_info['install_address'];
         } else {
-            $current_location = $row_location['location_name']; 
+            // Check if arrival_date is null
+            if (is_null($row_location['arrival_date'])) {
+                // Get the location name for the outbound_id
+                $outbound_id = $row_location['outbound_id'];
+                $sql_outbound_location = "SELECT location.location_name 
+                                        FROM location 
+                                        JOIN outbound ON outbound.location_id = location.location_id 
+                                        WHERE outbound.outbound_id = $outbound_id";
+                $result_outbound_location = mysqli_query($connection, $sql_outbound_location);
+                
+                if (mysqli_num_rows($result_outbound_location) > 0) {
+                    $row_outbound_location = mysqli_fetch_assoc($result_outbound_location);
+                    $current_location = $row_outbound_location['location_name'];
+                } else {
+                    $current_location = 'Location not found';
+                }
+            } else {
+                // Set the location name for the inbound_id
+                $current_location = $row_location['location_name'];
+            }
         }
     }
 
