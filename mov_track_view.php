@@ -133,6 +133,7 @@ include 'navInv.php';
 						$origin = $row["outbound_id"];
 						$destination = $row["inbound_id"];
 						$arrival_date = $row["arrival_date"];
+						$tracking_id =$row["tracking_id"];
 						
 						//Fetch region for origin
 						$sql2 = "SELECT * FROM location WHERE location_id = '$origin'";
@@ -162,7 +163,7 @@ include 'navInv.php';
 						
 						echo '</td>            
 							<td class="batchID">
-	      							<a href="batch_view.php?Batch_ID='. $batch_id .'">
+	      							<a href="batch_view.php?Batch_ID='. $batch_id .'&tracking_id='.$tracking_id.'">
 	      								<button class="btn btn-info btn-sm">Batch Detail</button>
 		      						</a>
 		     					</td>
