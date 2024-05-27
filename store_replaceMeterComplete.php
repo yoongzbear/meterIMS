@@ -5,7 +5,11 @@
 	$oldSerial_num = $_GET['oldSerial_num'];
 	
 	//Update Old Meter Warranty Status
-	$sqlUpdate = "UPDATE warranty SET warranty_status = 'REPLACED' WHERE serial_num = '$oldSerial_num'";
+	$sqlUpdate = "UPDATE warranty 
+			INNER JOIN lab_result ON 
+			lab_result.test_id = warranty.test_id
+			SET warranty_status = 'REPLACED' 
+			WHERE lab_result.serial_num = '$oldSerial_num'";
 	$resultUpdate = mysqli_query($connection,$sqlUpdate);
 	
 	//Update New Meter Status
