@@ -30,10 +30,10 @@ $batch_id = $_GET['batch_id'];
 <div class="col align-self-center mb-4">
     <form method="post" action="Insert_lab_to_inv_mov_process.php">
         <h2 class="font-monospace mb-4">This movement will be added for the tracking process : </h2>
-        <p class="fw-bold mx-4 mb-4">Origin : Air Selangor Lab</p>
-        <p class="fw-bold mx-4 mb-4">Destination : Air Selangor Inventory Department</p>
-        <p class="fw-bold mx-4 mb-4">Meter Status : In Transit</p>
-                <p class="fw-bold mx-4 mb-4">The new batch will be created for the passed meter, the failed meter will be using the old batch</p>
+        <p class="fw-bold mx-4 mb-4">Origin: Air Selangor Lab</p>
+        <p class="fw-bold mx-4 mb-4">Destination: Air Selangor Inventory Department</p>
+        <p class="fw-bold mx-4 mb-4">Meter Status: In Transit</p>
+                <p class="fw-bold mx-4 mb-4">A new batch will be created to store the passed meters whereas the failed meters will be stored in the old batch.</p>
         <!-- Hidden input to pass batch_id -->
         <div class="text-center">
             <input type="hidden" name="batch_id" value="<?php echo htmlspecialchars($batch_id); ?>">
