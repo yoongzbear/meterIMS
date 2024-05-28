@@ -87,9 +87,11 @@ if (isset($_POST['confirm']) && isset($_POST['batch_id'])) {
 
     // Commit the transaction if all statements are successful
     mysqli_commit($connection);
-    echo "<script>alert('Batch, batch movement, and meter status are updated successfully! You will be redirected to another window to print the new Batch QR for passed meters.');</script>";
-    echo "<script>window.open('NewBatch_forPassBatch.php?Batch_ID=$new_batch_id')</script>";
-    header("Refresh:250");
+    echo "<script>
+    alert('Batch, batch movement, and meter status are updated successfully! You will be redirected to another window to print the new Batch QR for passed meters.');
+    window.open('NewBatch_forPassBatch.php?Batch_ID=$new_batch_id');
+    window.location.href = 'LabDep_Scan_to_Inv.php';
+    </script>";
 
     // Close the statements
     mysqli_stmt_close($stmt1);
