@@ -32,8 +32,8 @@
 			$oldMeter_size = $rowOld['meter_size'];
 			
 			if ($newMeter_type == $oldMeter_type && $newMeter_model == $oldMeter_model && $newMeter_size == $oldMeter_size) {
-				echo '<script>alert("New meter scanned for replacement.");</script>';
-				header("Location:store_replaceMeterComplete.php?Meter_ID=$serial_num&oldSerial_num=$oldSerial_num");
+				echo '<script>alert("New meter for warranty replacement scanned successfully.");</script>';
+				echo '<script>window.location.href = "store_replaceMeterComplete.php?Meter_ID='.$serial_num.'&oldSerial_num='.$oldSerial_num.'";</script>';
 				exit();
 			} else {
 				echo '<script>alert("The meter type, model, or size do not match the old meter."); window.location.href = "store_replaceMeterScanQR.php?serial_num='.$oldSerial_num.'";</script>';
